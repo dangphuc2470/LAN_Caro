@@ -80,7 +80,7 @@ namespace LAN_Caro
             if (countVertical(x, y) >= 4 || countHorizontal(x, y) >= 4 || countMainDiag(x, y) >= 4 || countSubDiag(x, y) >= 4)
                 MessageBox.Show("WIN");
 
-            switchPlayer();
+            //switchPlayer();
            
         }
 
