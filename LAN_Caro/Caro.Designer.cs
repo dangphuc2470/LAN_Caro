@@ -30,6 +30,7 @@
         {
             pnTable = new Lab_3.Addon_Round_Panel();
             button1 = new Button();
+            button2 = new Button();
             SuspendLayout();
             // 
             // pnTable
@@ -53,16 +54,28 @@
             button1.TabIndex = 1;
             button1.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            button2.Location = new Point(86, 310);
+            button2.Name = "button2";
+            button2.Size = new Size(152, 34);
+            button2.TabIndex = 2;
+            button2.Text = "Switch player";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // Caro
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(247, 249, 252);
             ClientSize = new Size(1312, 770);
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(pnTable);
             Name = "Caro";
             Text = "Caro";
+            Load += Caro_Load;
             ResumeLayout(false);
         }
 
@@ -70,5 +83,6 @@
 
         private Lab_3.Addon_Round_Panel pnTable;
         private Button button1;
+        private Button button2;
     }
 }
