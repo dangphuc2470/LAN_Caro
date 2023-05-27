@@ -11,7 +11,7 @@ namespace LAN_Caro
 {
     public class TableManager
     {
-        public int isServerPlayer;
+        public int isServerPlayer = 0;
         private int isClientTurn;
         public static int SQUARE_SIZE = 40;
         public static int TABLE_WIDTH = 24;
@@ -33,11 +33,12 @@ namespace LAN_Caro
         }
 
 
-
-
-        public void DrawTable(int isServerPlayer = 0)
+        public void playerInfo(int isServerPlayer)
         {
             this.isServerPlayer = isServerPlayer;
+        }
+        public void DrawTable(int isServerPlayer = 0)
+        {
             Button lastButton = new Button() { Width = 0, Location = new Point(40, 40) };
             for (int i = 0; i < TABLE_HEIGHT; i++)
             {

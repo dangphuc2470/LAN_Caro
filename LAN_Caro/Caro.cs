@@ -20,7 +20,11 @@ namespace LAN_Caro
         public Caro()
         {
             InitializeComponent();
+            tableManager = new TableManager(pnTable);
+            tableManager.DrawTable();
             socket = new SocketManager();
+            tbIPAdress.Text = "127.0.0.1";
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -28,50 +32,18 @@ namespace LAN_Caro
             tableManager.switchPlayer();
         }
 
-        private void Caro_Load(object sender, EventArgs e)
-        {
-            tableManager = new TableManager(pnTable);
-            tableManager.DrawTable(isServerPlayer);
-        }
-
         private void btConnect_Click(object sender, EventArgs e)
         {
             socket.IP = tbIPAdress.Text;
             if (!socket.ConnectServer())
             {
+                MessageBox.Show("Cant find server, creating a new server");
                 socket.CreateServer();
-
-                Thread listenThread = new Thread(() =>
-                {
-                    while (true)
-                    {
-                        Thread.Sleep(500);
-                        try
-                        {
-                            Listen();
-                            break;
-                        }
-                        catch
-                        {
-
-                        }
-                    }
-
-                });
-                listenThread.IsBackground = true;
-                listenThread.Start();
+                tableManager.playerInfo(1);
             }
             else
-            {
-                Thread listenThread = new Thread(() =>
-                {
-                    Listen();
-                });
-                listenThread.IsBackground = true;
-                listenThread.Start();
+                Listen();
 
-                socket.Send("Thông tin từ Client");
-            }
         }
         private void Caro_Shown(object sender, EventArgs e)
         {
@@ -89,5 +61,11 @@ namespace LAN_Caro
             MessageBox.Show(data);
         }
 
+        private void rdButton_Click(object sender, EventArgs e)
+        {
+            //rdButton.Text = "Cancel";
+
+
+        }
     }
 }

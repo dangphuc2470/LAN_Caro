@@ -33,6 +33,7 @@
             button2 = new Button();
             btConnect = new Button();
             tbIPAdress = new TextBox();
+            rdButton = new Button();
             SuspendLayout();
             // 
             // pnTable
@@ -83,12 +84,23 @@
             tbIPAdress.Size = new Size(150, 31);
             tbIPAdress.TabIndex = 4;
             // 
+            // rdButton
+            // 
+            rdButton.Location = new Point(76, 465);
+            rdButton.Name = "rdButton";
+            rdButton.Size = new Size(112, 34);
+            rdButton.TabIndex = 5;
+            rdButton.Text = "Ready";
+            rdButton.UseVisualStyleBackColor = true;
+            rdButton.Click += rdButton_Click;
+            // 
             // Caro
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(247, 249, 252);
             ClientSize = new Size(1312, 770);
+            Controls.Add(rdButton);
             Controls.Add(tbIPAdress);
             Controls.Add(btConnect);
             Controls.Add(button2);
@@ -96,7 +108,6 @@
             Controls.Add(pnTable);
             Name = "Caro";
             Text = "Caro";
-            Load += Caro_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -108,5 +119,6 @@
         private Button button2;
         private Button btConnect;
         private TextBox tbIPAdress;
+        private Button rdButton;
     }
 }

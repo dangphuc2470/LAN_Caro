@@ -14,7 +14,7 @@ namespace LAN_Caro
     {
         #region Client
         Socket client;
-        public bool ConnectServer()
+        public void ConnectServer()
         {
             IPEndPoint iep = new IPEndPoint(IPAddress.Parse(IP), PORT);
             client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -22,11 +22,10 @@ namespace LAN_Caro
             try
             {
                 client.Connect(iep);
-                return true;
             }
             catch
             {
-                return false;
+                MessageBox.Show("Cant connect to server!")
             }
 
         }
@@ -39,7 +38,6 @@ namespace LAN_Caro
         {
             IPEndPoint iep = new IPEndPoint(IPAddress.Parse(IP), PORT);
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
             server.Bind(iep);
             server.Listen(10);
 
@@ -59,7 +57,7 @@ namespace LAN_Caro
         public const int BUFFER = 1024;
 
         public bool isServer = true;
-        public bool Send(object data)
+        public bool Send(string data)
         {
             byte[] sendData = SerializeData(data);
             return SendData(client, sendData);
