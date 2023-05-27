@@ -34,6 +34,7 @@
             // 
             // pnTable
             // 
+            pnTable.AutoScroll = true;
             pnTable.BackColor = Color.White;
             pnTable.CornerRadius = 25;
             pnTable.Location = new Point(286, 32);
