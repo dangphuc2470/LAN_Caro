@@ -11,6 +11,8 @@ namespace LAN_Caro
 {
     public class TableManager
     {
+        public int isServerPlayer;
+        private int isClientTurn;
         public static int SQUARE_SIZE = 40;
         public static int TABLE_WIDTH = 24;
         public static int TABLE_HEIGHT = 16;
@@ -19,7 +21,6 @@ namespace LAN_Caro
         public List<Player> PlayerList { get; set; }
         public List<List<Button>> buttonList = new List<List<Button>>();
 
-        private int PlayerNum;
         public TableManager(Addon_Round_Panel table)
         {
             this.Table = table;
@@ -28,15 +29,16 @@ namespace LAN_Caro
                 new Player("X", Properties.Resources.x),
                 new Player("O", Properties.Resources.o)
             };
-            PlayerNum = 0;
+            isClientTurn = 0;
         }
 
 
 
 
-        public void DrawTable()
+        public void DrawTable(int isServerPlayer = 0)
         {
-            Button oldButton = new Button() { Width = 0, Location = new Point(40, 40) };
+            this.isServerPlayer = isServerPlayer;
+            Button lastButton = new Button() { Width = 0, Location = new Point(40, 40) };
             for (int i = 0; i < TABLE_HEIGHT; i++)
             {
                 buttonList.Add(new List<Button>());
@@ -46,55 +48,58 @@ namespace LAN_Caro
                     {
                         Width = SQUARE_SIZE,
                         Height = SQUARE_SIZE,
-                        Location = new Point(oldButton.Location.X + oldButton.Width, oldButton.Location.Y),
+                        Location = new Point(lastButton.Location.X + lastButton.Width, lastButton.Location.Y),
                         FlatStyle = FlatStyle.Flat,
-                        Name = i.ToString() //Name as Y
-
+                        Name = "bt" + j + "_" + i,
                     };
-                    button.Tag = j;         //Tag as X
                     button.FlatAppearance.BorderColor = Color.Silver;
                     button.Click += btn_Click;
                     Table.Controls.Add(button);
                     buttonList[i].Add(button);
-                    oldButton = button;
+                    lastButton = button;
                 }
-                oldButton.Location = new Point(40, oldButton.Location.Y + SQUARE_SIZE);
-                oldButton.Width = 0;
-                oldButton.Height = 0;
+                lastButton.Location = new Point(40, lastButton.Location.Y + SQUARE_SIZE);
+                lastButton.Width = 0;
+                lastButton.Height = 0;
             }
 
         }
 
         void btn_Click(object sender, EventArgs e)
         {
+            if (isServerPlayer == isClientTurn)  //Nếu chưa tới lượt thì không thể nhấn nút
+                return;
             Button button = sender as Button;
-            int y = Int32.Parse(button.Name);
-            int x = Int32.Parse(button.Tag.ToString());
+            int index = button.Name.IndexOf("_");
+            int x = Int32.Parse(button.Name.Substring(2, index - 2));
+            int y = Int32.Parse(button.Name.Substring(index + 1));
             if (buttonList[y][x].Image != null)
                 return;
-            buttonList[y][x].Image = PlayerList[PlayerNum].Sign;
+            buttonList[y][x].Image = PlayerList[isClientTurn].Image;
 
-
-
-
-            if (countVertical(button) >=4 || countHorizontal(button) >= 4 || countMainDiag(button) >=4 || countSubDiag(button) >= 4)
+            if (countVertical(x, y) >= 4 || countHorizontal(x, y) >= 4 || countMainDiag(x, y) >= 4 || countSubDiag(x, y) >= 4)
                 MessageBox.Show("WIN");
 
-
-            if (PlayerNum == 0)
-            {
-                PlayerNum = 1;
-            }
-            else PlayerNum = 0;
+            switchPlayer();
+           
         }
-        public int countVertical(Button button)
+
+        public void switchPlayer()
         {
-            int y = Int32.Parse(button.Name);
-            int x = Int32.Parse(button.Tag.ToString());
+            if (isClientTurn == 0)
+                isClientTurn = 1;
+            else
+                isClientTurn = 0;
+        }
+
+        #region COUNT
+        public int countVertical(int x, int y)
+        {
+            Image thisButtonImage = buttonList[y][x].Image;
             int count = 0;
             for (int i = x - 1; i >= 0; i--)
             {
-                if (buttonList[y][i].Image == buttonList[y][x].Image)
+                if (buttonList[y][i].Image == thisButtonImage)
                     count++;
                 else
                     break;
@@ -102,7 +107,7 @@ namespace LAN_Caro
 
             for (int i = x + 1; i < TABLE_WIDTH; i++)
             {
-                if (buttonList[y][i].Image == buttonList[y][x].Image)
+                if (buttonList[y][i].Image == thisButtonImage)
                     count++;
                 else
                     break;
@@ -111,69 +116,67 @@ namespace LAN_Caro
 
 
         }
-        public int countHorizontal(Button button)
+        public int countHorizontal(int x, int y)
         {
-            int y = Int32.Parse(button.Name);
-            int x = Int32.Parse(button.Tag.ToString());
+            Image thisButtonImage = buttonList[y][x].Image;
             int count = 0;
             for (int i = y - 1; i >= 0; i--)
             {
-                if (buttonList[i][x].Image == buttonList[y][x].Image)
+                if (buttonList[i][x].Image == thisButtonImage)
                     count++;
                 else
                     break;
             }
             for (int i = y + 1; i < TABLE_HEIGHT; i++)
             {
-                if (buttonList[i][x].Image == buttonList[y][x].Image)
+                if (buttonList[i][x].Image == thisButtonImage)
                     count++;
                 else
                     break;
             }
-
             return count;
 
         }
-        public int countMainDiag(Button button)
+        public int countMainDiag(int x, int y)
         {
-            int y = Int32.Parse(button.Name);
-            int x = Int32.Parse(button.Tag.ToString());
+            Image thisButtonImage = buttonList[y][x].Image;
             int count = 0;
             for (int i = x - 1, j = y - 1; i >= 0 && j >= 0; i--, j--)
             {
-                if (buttonList[j][i].Image == buttonList[y][x].Image)
+                if (buttonList[j][i].Image == thisButtonImage)
                     count++;
                 else break;
             }
             for (int i = x + 1, j = y + 1; i < TABLE_WIDTH && j < TABLE_HEIGHT; i++, j++)
             {
-                if (buttonList[j][i].Image == buttonList[y][x].Image)
+                if (buttonList[j][i].Image == thisButtonImage)
                     count++;
                 else break;
             }
             return count;
         }
 
-        public int countSubDiag(Button button)
+        public int countSubDiag(int x, int y)
         {
-            int y = Int32.Parse(button.Name);
-            int x = Int32.Parse(button.Tag.ToString());
+            Image thisButtonImage = buttonList[y][x].Image;
             int count = 0;
             for (int i = x - 1, j = y + 1; i >= 0 && j < TABLE_HEIGHT; i--, j++)
             {
-                if (buttonList[j][i].Image == buttonList[y][x].Image)
+                if (buttonList[j][i].Image == thisButtonImage)
                     count++;
-                else break;
+                else
+                    break;
             }
             for (int i = x + 1, j = y - 1; i < TABLE_WIDTH && j >= 0; i++, j--)
             {
-                if (buttonList[j][i].Image == buttonList[y][x].Image)
+                if (buttonList[j][i].Image == thisButtonImage)
                     count++;
-                else break;
+                else
+                    break;
             }
             return count;
         }
-
+        #endregion
 
 
 

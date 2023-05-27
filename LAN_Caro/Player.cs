@@ -10,13 +10,13 @@ namespace LAN_Caro
     {
         private string name;
         public string Name { get => name; set => name = value; }
-        private Image sign;
-        public Image Sign { get => sign; set => sign = value; }
+        private Image image;
+        public Image Image { get => image; set => image = value; }
 
-        public Player(string name, Image sign) 
+        public Player(string name, Image image) 
         {
             this.Name = name;
-            this.Sign = sign;
+            this.Image = image;
         }
 
 
