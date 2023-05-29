@@ -1,6 +1,18 @@
+<<<<<<< HEAD
+=======
+using System;
+using System.Collections.Generic;
+using System.Drawing.Drawing2D;
+using System.Linq;
+>>>>>>> 314f212812de1cf56557fc34da6a08a39912d154
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+<<<<<<< HEAD
+=======
+using System.Threading.Tasks;
+using System.Xml.Linq;
+>>>>>>> 314f212812de1cf56557fc34da6a08a39912d154
 namespace LAN_Caro
 {
     #region Client
@@ -187,7 +199,11 @@ namespace LAN_Caro
             }
         }
 
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 314f212812de1cf56557fc34da6a08a39912d154
 
     }
     #endregion

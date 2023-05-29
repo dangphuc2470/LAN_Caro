@@ -1,4 +1,15 @@
 ﻿using Lab_3;
+<<<<<<< HEAD
+=======
+using System;
+using System.Collections.Generic;
+using System.Formats.Asn1;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+>>>>>>> 314f212812de1cf56557fc34da6a08a39912d154
 
 namespace LAN_Caro
 {
@@ -71,7 +82,11 @@ namespace LAN_Caro
 
             if (countVertical(x, y) >= 4 || countHorizontal(x, y) >= 4 || countMainDiag(x, y) >= 4 || countSubDiag(x, y) >= 4)
                 MessageBox.Show("WIN");
+<<<<<<< HEAD
             ButtonClicked?.Invoke(this, x + ":" + y);
+=======
+            ButtonClicked?.Invoke(this, x+":"+y);
+>>>>>>> 314f212812de1cf56557fc34da6a08a39912d154
         }
 
         public void clickReceive(int x, int y)

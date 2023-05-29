@@ -16,7 +16,11 @@ namespace LAN_Caro
 
         int isServerPlayer = 0;
         TableManager tableManager;
+<<<<<<< HEAD
 
+=======
+       
+>>>>>>> 314f212812de1cf56557fc34da6a08a39912d154
         Server_OBJ serverObj;
         Client_OBJ clientObj;
         public Caro()
@@ -80,3 +84,4 @@ namespace LAN_Caro
         }
     }
 }
+
