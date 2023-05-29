@@ -1,17 +1,10 @@
 ﻿using Lab_3;
-using System;
-using System.Collections.Generic;
-using System.Formats.Asn1;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LAN_Caro
 {
     public class TableManager
     {
-        public int isServerPlayer = 0;
+        public int isServerPlayer;
         private int isClientTurn;
         public static int SQUARE_SIZE = 40;
         public static int TABLE_WIDTH = 24;
@@ -33,11 +26,9 @@ namespace LAN_Caro
         }
 
 
-        public void playerInfo(int isServerPlayer)
-        {
-            this.isServerPlayer = isServerPlayer;
-        }
-        public void DrawTable(int isServerPlayer = 0)
+
+
+        public void DrawTable()
         {
             Button lastButton = new Button() { Width = 0, Location = new Point(40, 40) };
             for (int i = 0; i < TABLE_HEIGHT; i++)
@@ -66,7 +57,7 @@ namespace LAN_Caro
 
         }
 
-        void btn_Click(object sender, EventArgs e)
+        public void btn_Click(object sender, EventArgs e)
         {
             if (isServerPlayer == isClientTurn)  //Nếu chưa tới lượt thì không thể nhấn nút
                 return;
@@ -80,9 +71,26 @@ namespace LAN_Caro
 
             if (countVertical(x, y) >= 4 || countHorizontal(x, y) >= 4 || countMainDiag(x, y) >= 4 || countSubDiag(x, y) >= 4)
                 MessageBox.Show("WIN");
+            ButtonClicked?.Invoke(this, x + ":" + y);
+        }
 
-            //switchPlayer();
-           
+        public void clickReceive(int x, int y)
+        {
+            if (buttonList[y][x].Image != null)
+                return;
+            buttonList[y][x].Image = PlayerList[isClientTurn].Image;
+
+            if (countVertical(x, y) >= 4 || countHorizontal(x, y) >= 4 || countMainDiag(x, y) >= 4 || countSubDiag(x, y) >= 4)
+                MessageBox.Show("WIN");
+            switchPlayer();
+        }
+
+        public event EventHandler<string> ButtonClicked; //Gửi dữ liệu sang form
+
+
+        public void setPlayer(int isServerPlayer)
+        {
+            this.isServerPlayer = isServerPlayer;
         }
 
         public void switchPlayer()

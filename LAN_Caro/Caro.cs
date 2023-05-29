@@ -16,15 +16,12 @@ namespace LAN_Caro
 
         int isServerPlayer = 0;
         TableManager tableManager;
-        SocketManager socket;
+
+        Server_OBJ serverObj;
+        Client_OBJ clientObj;
         public Caro()
         {
             InitializeComponent();
-            tableManager = new TableManager(pnTable);
-            tableManager.DrawTable();
-            socket = new SocketManager();
-            tbIPAdress.Text = "127.0.0.1";
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -32,40 +29,54 @@ namespace LAN_Caro
             tableManager.switchPlayer();
         }
 
+        private void Caro_Load(object sender, EventArgs e)
+        {
+            tableManager = new TableManager(pnTable);
+            tableManager.ButtonClicked += TableManager_ButtonClicked;
+            tableManager.DrawTable();
+        }
+
         private void btConnect_Click(object sender, EventArgs e)
         {
-            socket.IP = tbIPAdress.Text;
-            if (!socket.ConnectServer())
+            if (chbServer.CheckState == CheckState.Checked)
             {
-                MessageBox.Show("Cant find server, creating a new server");
-                socket.CreateServer();
-                tableManager.playerInfo(1);
+                serverObj = new Server_OBJ(tableManager);
+                isServerPlayer = 1;
+                tableManager.setPlayer(isServerPlayer);
             }
             else
-                Listen();
-
-        }
-        private void Caro_Shown(object sender, EventArgs e)
-        {
-            tbIPAdress.Text = socket.GetLocalIPv4(NetworkInterfaceType.Wireless80211);
-
-            if (string.IsNullOrEmpty(tbIPAdress.Text))
             {
-                tbIPAdress.Text = socket.GetLocalIPv4(NetworkInterfaceType.Ethernet);
+                clientObj = new Client_OBJ(tableManager, tbIPAdress.Text);
             }
+
         }
 
-        void Listen()
+        private void btSend_Click(object sender, EventArgs e)
         {
-            string data = (string)socket.Receive();
-            MessageBox.Show(data);
+            if (isServerPlayer == 1)
+            {
+                serverObj.sendToClient(tbData.Text + "\n");
+                tableManager.switchPlayer();
+            }
+            else
+            {
+                clientObj.messageSend(tbData.Text + "\n");
+                tableManager.switchPlayer();
+            }
+
         }
-
-        private void rdButton_Click(object sender, EventArgs e)
+        private void TableManager_ButtonClicked(object sender, string text)
         {
-            //rdButton.Text = "Cancel";
-
-
+            if (isServerPlayer == 1)
+            {
+                serverObj.sendToClient(text);
+                tableManager.switchPlayer();
+            }
+            else
+            {
+                clientObj.messageSend(text);
+                tableManager.switchPlayer();
+            }
         }
     }
 }
