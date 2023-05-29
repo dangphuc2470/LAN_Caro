@@ -1,6 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 namespace LAN_Caro
 {
     #region Client

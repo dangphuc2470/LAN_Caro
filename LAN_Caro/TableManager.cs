@@ -1,4 +1,12 @@
 ﻿using Lab_3;
+using System;
+using System.Collections.Generic;
+using System.Formats.Asn1;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace LAN_Caro
 {
