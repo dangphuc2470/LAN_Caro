@@ -1,4 +1,10 @@
-﻿namespace LAN_Caro
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LAN_Caro
 {
     public class Player
     {
@@ -9,8 +15,8 @@
 
         public Player(string name, Image image) 
         {
-            Name = name;
-            Image = image;
+            this.Name = name;
+            this.Image = image;
         }
 
 
