@@ -16,22 +16,17 @@ namespace LAN_Caro
 
         int isServerPlayer = 0;
         TableManager tableManager;
-
-        Server_OBJ serverObj;
-        Client_OBJ clientObj;
+        Both_OBJ ServerOrClient;
         public Caro()
         {
             InitializeComponent();
-        }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            tableManager.switchPlayer();
+
         }
 
         private void Caro_Load(object sender, EventArgs e)
         {
-            tableManager = new TableManager(pnTable);
+            tableManager = new TableManager(pnTable, lbStatus, imgTurn);
             tableManager.ButtonClicked += TableManager_ButtonClicked;
             tableManager.DrawTable();
         }
@@ -40,43 +35,26 @@ namespace LAN_Caro
         {
             if (chbServer.CheckState == CheckState.Checked)
             {
-                serverObj = new Server_OBJ(tableManager);
+                ServerOrClient = new Server_OBJ(tableManager);
                 isServerPlayer = 1;
                 tableManager.setPlayer(isServerPlayer);
             }
             else
             {
-                clientObj = new Client_OBJ(tableManager, tbIPAdress.Text);
+                ServerOrClient = new Client_OBJ(tableManager, tbIPAdress.Text);
             }
-
         }
 
-        private void btSend_Click(object sender, EventArgs e)
-        {
-            if (isServerPlayer == 1)
-            {
-                serverObj.sendToClient(tbData.Text + "\n");
-                tableManager.switchPlayer();
-            }
-            else
-            {
-                clientObj.messageSend(tbData.Text + "\n");
-                tableManager.switchPlayer();
-            }
 
-        }
         private void TableManager_ButtonClicked(object sender, string text)
         {
-            if (isServerPlayer == 1)
-            {
-                serverObj.sendToClient(text);
-                tableManager.switchPlayer();
-            }
-            else
-            {
-                clientObj.messageSend(text);
-                tableManager.switchPlayer();
-            }
+            ServerOrClient.messageSend(text);
+            tableManager.switchPlayer();
+        }
+
+        private void chbServer_CheckedChanged(object sender, EventArgs e)
+        {
+            tbIPAdress.Text = "127.0.0.1";
         }
     }
 }
