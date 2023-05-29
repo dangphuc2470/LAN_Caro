@@ -16,12 +16,11 @@ namespace LAN_Caro
 
         int isServerPlayer = 0;
         TableManager tableManager;
-
-        Server_OBJ serverObj;
-        Client_OBJ clientObj;
+        SocketManager socket;
         public Caro()
         {
             InitializeComponent();
+            socket = new SocketManager();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -32,52 +31,63 @@ namespace LAN_Caro
         private void Caro_Load(object sender, EventArgs e)
         {
             tableManager = new TableManager(pnTable);
-            tableManager.ButtonClicked += TableManager_ButtonClicked;
-            tableManager.DrawTable();
+            tableManager.DrawTable(isServerPlayer);
         }
 
         private void btConnect_Click(object sender, EventArgs e)
         {
-            if (chbServer.CheckState == CheckState.Checked)
+            socket.IP = tbIPAdress.Text;
+            if (!socket.ConnectServer())
             {
-                serverObj = new Server_OBJ(tableManager);
-                isServerPlayer = 1;
-                tableManager.setPlayer(isServerPlayer);
+                socket.CreateServer();
+
+                Thread listenThread = new Thread(() =>
+                {
+                    while (true)
+                    {
+                        Thread.Sleep(500);
+                        try
+                        {
+                            Listen();
+                            break;
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+
+                });
+                listenThread.IsBackground = true;
+                listenThread.Start();
             }
             else
             {
-                clientObj = new Client_OBJ(tableManager, tbIPAdress.Text);
+                Thread listenThread = new Thread(() =>
+                {
+                    Listen();
+                });
+                listenThread.IsBackground = true;
+                listenThread.Start();
+
+                socket.Send("Thông tin từ Client");
             }
-
         }
-
-        private void btSend_Click(object sender, EventArgs e)
+        private void Caro_Shown(object sender, EventArgs e)
         {
-            if (isServerPlayer == 1)
-            {
-                serverObj.sendToClient(tbData.Text + "\n");
-                tableManager.switchPlayer();
-            }
-            else
-            {
-                clientObj.messageSend(tbData.Text + "\n");
-                tableManager.switchPlayer();
-            }
+            tbIPAdress.Text = socket.GetLocalIPv4(NetworkInterfaceType.Wireless80211);
 
+            if (string.IsNullOrEmpty(tbIPAdress.Text))
+            {
+                tbIPAdress.Text = socket.GetLocalIPv4(NetworkInterfaceType.Ethernet);
+            }
         }
-        private void TableManager_ButtonClicked(object sender, string text)
+
+        void Listen()
         {
-            if (isServerPlayer == 1)
-            {
-                serverObj.sendToClient(text);
-                tableManager.switchPlayer();
-            }
-            else
-            {
-                clientObj.messageSend(text);
-                tableManager.switchPlayer();
-            }
+            string data = (string)socket.Receive();
+            MessageBox.Show(data);
         }
+
     }
 }
-
