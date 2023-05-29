@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
@@ -7,117 +8,195 @@ using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
-// Class này dùng để gửi và nhận  
+using System.Xml.Linq;
 namespace LAN_Caro
 {
-    public class SocketManager
+    #region Client
+    public class Client_OBJ
     {
-        #region Client
-        Socket client;
-        public bool ConnectServer()
+        TcpClient tcpClient = new TcpClient();
+        NetworkStream netStream;
+        TableManager tableManager;
+        public Client_OBJ(TableManager tableManager, string ipAddress)
         {
-            IPEndPoint iep = new IPEndPoint(IPAddress.Parse(IP), PORT);
-            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
             try
             {
-                client.Connect(iep);
-                return true;
+                IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Parse(ipAddress), 8082);
+                tcpClient.Connect(ipEndPoint);
+                netStream = tcpClient.GetStream();
+                this.tableManager = tableManager;
+                Task.Run(() =>
+                {
+                    ReceiveMessage(tcpClient.Client);
+                });
             }
             catch
             {
-                return false;
+                MessageBox.Show("Server must be started first!", "Error");
+            }
+        }
+
+        ~Client_OBJ()
+        {
+            tcpClient.Close();
+            netStream.Close();
+        }
+
+
+        public void ReceiveMessage(Socket tcpClient_Client)
+        {
+            int bytesReceived = 0;
+            byte[] recv = new byte[1];
+            while (tcpClient_Client.Connected)
+            {
+                string Chr;
+                string temp = "";
+                while (true)
+                {
+
+                    bytesReceived = tcpClient_Client.Receive(recv);
+                    Chr = Encoding.UTF8.GetString(recv);
+                    if (Chr == "\n")
+                        break;
+                    temp += Chr;
+
+                }
+                if (temp == "")
+                    continue;
+                string[] parts = temp.Split(':');
+                int x = Int32.Parse(parts[0]);
+                int y = Int32.Parse(parts[1]);
+                tableManager.clickReceive(x, y);
+                //tableManager.switchPlayer();
+
+
+                //MessageBox.Show("message in client form" + temp);
+                //tableManager.switchPlayer();
+
+            }
+        }
+
+        public void messageSend(string dataS)
+        {
+            if (netStream != null)
+            {
+                byte[] data = System.Text.Encoding.UTF8.GetBytes(dataS + "\n");
+                netStream.Write(data, 0, data.Length);
             }
 
         }
-        #endregion
+    }
+    #endregion
 
-        #region Server
 
-        Socket server;
-        public void CreateServer()
+
+
+
+
+
+
+
+
+
+
+
+    #region Server
+    public class Server_OBJ
+    {
+        TcpListener tcpListener;
+        IPEndPoint ipepServer;
+        NetworkStream netStream;
+        TableManager tableManager;
+        List<TcpClient> clients = new List<TcpClient>();
+
+        public Server_OBJ(TableManager tableManager)
         {
-            IPEndPoint iep = new IPEndPoint(IPAddress.Parse(IP), PORT);
-            server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-            server.Bind(iep);
-            server.Listen(10);
-
-            Thread acceptClient = new Thread(() =>
+            MessageBox.Show("Waiting connect...\n");
+            ipepServer = new IPEndPoint(IPAddress.Any, 8082);
+            tcpListener = new TcpListener(ipepServer);
+            tcpListener.Start();
+            Task.Run(() =>
             {
-                client = server.Accept();
+                AcceptConnection();
             });
-
-            acceptClient.IsBackground = true;
-            acceptClient.Start();
-        }
-        #endregion
-
-        #region Both
-        public String IP = "127.0.0.1";
-        public int PORT = 3333;
-        public const int BUFFER = 1024;
-
-        public bool isServer = true;
-        public bool Send(object data)
-        {
-            byte[] sendData = SerializeData(data);
-            return SendData(client, sendData);
+            this.tableManager = tableManager;
         }
 
-        public object Receive()
-        {
-            byte[] receiveData = new byte[BUFFER];
-            bool isOK = ReceiveData(client, receiveData);
 
-            return DeserializeData(receiveData);
-        }
-        private bool SendData(Socket target, byte[] data)
+        public void ReceiveMessage(Socket tcpClient_Client)
         {
-            return target.Send(data) == 1? true : false;
-        }
-
-        private bool ReceiveData(Socket target, byte[] data)
-        {
-            return target.Receive(data) == 1 ? true : false;
-        }
-        //nen doi tuong thanh mang byte
-        public byte[] SerializeData(Object o)
-        {
-            MemoryStream ms = new MemoryStream();
-            BinaryFormatter bf1 = new BinaryFormatter();
-            bf1.Serialize(ms,o);
-            return ms.ToArray();
-        }
-
-        //giai nen 1 mang byte thanh 1 doi tuong
-        public object DeserializeData(byte[] theByteArray)
-        {
-            MemoryStream ms = new MemoryStream(theByteArray);
-            BinaryFormatter bf1 = new BinaryFormatter();
-            ms.Position = 0;
-            return bf1.Deserialize(ms);
-        }
-
-        //Lay ra IPv4 cua card mang dang dung
-        public string GetLocalIPv4(NetworkInterfaceType _type)
-        {
-            string output = "";
-            foreach (NetworkInterface item in NetworkInterface.GetAllNetworkInterfaces())
+            int bytesReceived = 0;
+            byte[] recv = new byte[1];
+            while (tcpClient_Client.Connected)
             {
-                if (item.NetworkInterfaceType == _type && item.OperationalStatus == OperationalStatus.Up)
+                string Chr;
+                string temp = "";
+                while (true)
                 {
-                    foreach (UnicastIPAddressInformation ip in item.GetIPProperties().UnicastAddresses)
-                    {
-                        if (ip.Address.AddressFamily == AddressFamily.InterNetwork)
-                        {
-                            output = ip.Address.ToString();
-                        }
-                    }
+
+                    bytesReceived = tcpClient_Client.Receive(recv);
+                    Chr = Encoding.UTF8.GetString(recv);
+                    if (Chr == "\n")
+                        break;
+                    temp += Chr;
+
+                }
+                if (tcpClient_Client.Poll(0, SelectMode.SelectRead) && tcpClient_Client.Available == 0)
+                {
+                    //Kiểm tra và đóng kết nối
+                    MessageBox.Show("Client disconnected!\n");
+                    tcpClient_Client.Close();
+                }
+                else
+                {
+                    if (temp == "")
+                        continue;
+                    string[] parts = temp.Split(':');
+                    int x = Int32.Parse(parts[0]);
+                    int y = Int32.Parse(parts[1]);
+                    tableManager.clickReceive(x, y);
                 }
             }
-            return output;
         }
-        #endregion
+
+        public void AcceptConnection()
+        {
+            while (true)
+            {
+                try
+                {
+                    TcpClient tcpClient = tcpListener.AcceptTcpClient();
+                    clients.Add(tcpClient); // thêm client vào danh sách
+                    IPEndPoint clientEndPoint = (IPEndPoint)tcpClient.Client.RemoteEndPoint;
+                    string clientIPAddress = clientEndPoint.ToString();
+                    MessageBox.Show(clientIPAddress + " connected!\n");
+                    Task.Run(() =>
+                    {
+                        ReceiveMessage(tcpClient.Client);
+                    });
+                }
+                catch (Exception ex)
+                {
+                    break;
+                }
+            }
+        }
+
+        public void sendToClient(string message)
+        {
+            foreach (TcpClient client in clients)
+            {
+                netStream = client.GetStream();
+                if (netStream != null)
+                {
+                    byte[] data = Encoding.UTF8.GetBytes(message + "\n");
+                    netStream.Write(data, 0, data.Length);
+                }
+            }
+        }
+
+      
+
     }
+    #endregion
 }
