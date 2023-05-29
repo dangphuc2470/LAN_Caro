@@ -30,15 +30,13 @@
         {
             components = new System.ComponentModel.Container();
             pnTable = new Lab_3.Addon_Round_Panel();
-            button1 = new Button();
-            button2 = new Button();
             btConnect = new Button();
             tbIPAdress = new TextBox();
             chbServer = new CheckBox();
-            tbData = new TextBox();
-            btSend = new Button();
             imageList1 = new ImageList(components);
             lbStatus = new Label();
+            imgTurn = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
             SuspendLayout();
             // 
             // pnTable
@@ -50,27 +48,6 @@
             pnTable.Name = "pnTable";
             pnTable.Size = new Size(996, 711);
             pnTable.TabIndex = 0;
-            // 
-            // button1
-            // 
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.ForeColor = SystemColors.ActiveCaptionText;
-            button1.Image = Properties.Resources.o;
-            button1.Location = new Point(28, 260);
-            button1.Name = "button1";
-            button1.Size = new Size(40, 40);
-            button1.TabIndex = 1;
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(86, 310);
-            button2.Name = "button2";
-            button2.Size = new Size(152, 34);
-            button2.TabIndex = 2;
-            button2.Text = "Switch player";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
             // 
             // btConnect
             // 
@@ -100,23 +77,7 @@
             chbServer.TabIndex = 5;
             chbServer.Text = "Server";
             chbServer.UseVisualStyleBackColor = true;
-            // 
-            // tbData
-            // 
-            tbData.Location = new Point(53, 528);
-            tbData.Name = "tbData";
-            tbData.Size = new Size(150, 31);
-            tbData.TabIndex = 6;
-            // 
-            // btSend
-            // 
-            btSend.Location = new Point(91, 585);
-            btSend.Name = "btSend";
-            btSend.Size = new Size(112, 34);
-            btSend.TabIndex = 7;
-            btSend.Text = "Send";
-            btSend.UseVisualStyleBackColor = true;
-            btSend.Click += btSend_Click;
+            chbServer.CheckedChanged += chbServer_CheckedChanged;
             // 
             // imageList1
             // 
@@ -133,24 +94,33 @@
             lbStatus.TabIndex = 8;
             lbStatus.Text = "label1";
             // 
+            // imgTurn
+            // 
+            imgTurn.Image = Properties.Resources.x;
+            imgTurn.ImageLocation = "";
+            imgTurn.InitialImage = null;
+            imgTurn.Location = new Point(43, 186);
+            imgTurn.Name = "imgTurn";
+            imgTurn.Size = new Size(34, 35);
+            imgTurn.TabIndex = 9;
+            imgTurn.TabStop = false;
+            // 
             // Caro
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(247, 249, 252);
             ClientSize = new Size(1312, 770);
+            Controls.Add(imgTurn);
             Controls.Add(lbStatus);
-            Controls.Add(btSend);
-            Controls.Add(tbData);
             Controls.Add(chbServer);
             Controls.Add(tbIPAdress);
             Controls.Add(btConnect);
-            Controls.Add(button2);
-            Controls.Add(button1);
             Controls.Add(pnTable);
             Name = "Caro";
             Text = "Caro";
             Load += Caro_Load;
+            ((System.ComponentModel.ISupportInitialize)imgTurn).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -158,14 +128,11 @@
         #endregion
 
         private Lab_3.Addon_Round_Panel pnTable;
-        private Button button1;
-        private Button button2;
         private Button btConnect;
         private TextBox tbIPAdress;
         private CheckBox chbServer;
-        private TextBox tbData;
-        private Button btSend;
         private ImageList imageList1;
         private Label lbStatus;
+        private PictureBox imgTurn;
     }
 }

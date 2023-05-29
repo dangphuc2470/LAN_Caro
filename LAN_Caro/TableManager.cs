@@ -10,14 +10,18 @@ namespace LAN_Caro
         public static int TABLE_WIDTH = 24;
         public static int TABLE_HEIGHT = 16;
         private Addon_Round_Panel table;
-        public Addon_Round_Panel Table { get => table; set => table = value; }
+        private Label label;
+        private PictureBox picture;
+        Addon_Round_Panel Table;
         public List<Player> PlayerList { get; set; }
         public List<List<Button>> buttonList = new List<List<Button>>();
 
-        public TableManager(Addon_Round_Panel table)
+        public TableManager(Addon_Round_Panel table, Label label, PictureBox picture)
         {
-            this.Table = table;
-            this.PlayerList = new List<Player>()
+            Table = table;
+            this.label = label;
+            this.picture = picture;
+            PlayerList = new List<Player>()
             {
                 new Player("X", Properties.Resources.x),
                 new Player("O", Properties.Resources.o)
@@ -99,6 +103,7 @@ namespace LAN_Caro
                 isClientTurn = 1;
             else
                 isClientTurn = 0;
+            picture.Image = PlayerList[isClientTurn].Image;
         }
 
         #region COUNT
