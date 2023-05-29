@@ -4,20 +4,24 @@ namespace LAN_Caro
 {
     public class TableManager
     {
-        public int isServerPlayer;
+        public int isClientPlayer = 1;
         private int isClientTurn;
         public static int SQUARE_SIZE = 40;
         public static int TABLE_WIDTH = 24;
         public static int TABLE_HEIGHT = 16;
         private Addon_Round_Panel table;
-        public Addon_Round_Panel Table { get => table; set => table = value; }
+        private Label label;
+        private PictureBox picture;
+        Addon_Round_Panel Table;
         public List<Player> PlayerList { get; set; }
         public List<List<Button>> buttonList = new List<List<Button>>();
 
-        public TableManager(Addon_Round_Panel table)
+        public TableManager(Addon_Round_Panel table, Label label, PictureBox picture)
         {
-            this.Table = table;
-            this.PlayerList = new List<Player>()
+            Table = table;
+            this.label = label;
+            this.picture = picture;
+            PlayerList = new List<Player>()
             {
                 new Player("X", Properties.Resources.x),
                 new Player("O", Properties.Resources.o)
@@ -56,10 +60,10 @@ namespace LAN_Caro
             }
 
         }
-
+        public event EventHandler<string> tableButtonClickedSend; //Gửi dữ liệu sang form
         public void btn_Click(object sender, EventArgs e)
         {
-            if (isServerPlayer == isClientTurn)  //Nếu chưa tới lượt thì không thể nhấn nút
+            if (isClientPlayer != isClientTurn)  //Nếu chưa tới lượt thì không thể nhấn nút
                 return;
             Button button = sender as Button;
             int index = button.Name.IndexOf("_");
@@ -71,7 +75,7 @@ namespace LAN_Caro
 
             if (countVertical(x, y) >= 4 || countHorizontal(x, y) >= 4 || countMainDiag(x, y) >= 4 || countSubDiag(x, y) >= 4)
                 MessageBox.Show("WIN");
-            ButtonClicked?.Invoke(this, x + ":" + y);
+            tableButtonClickedSend?.Invoke(this, x + ":" + y);
         }
 
         public void clickReceive(int x, int y)
@@ -85,20 +89,18 @@ namespace LAN_Caro
             switchPlayer();
         }
 
-        public event EventHandler<string> ButtonClicked; //Gửi dữ liệu sang form
 
 
-        public void setPlayer(int isServerPlayer)
+
+        public void setPlayer(int isClientPlayer)
         {
-            this.isServerPlayer = isServerPlayer;
+            this.isClientPlayer = isClientPlayer;
         }
 
         public void switchPlayer()
         {
-            if (isClientTurn == 0)
-                isClientTurn = 1;
-            else
-                isClientTurn = 0;
+            isClientTurn = isClientTurn == 0 ? 1 : 0;
+            picture.Image = PlayerList[isClientTurn].Image;
         }
 
         #region COUNT

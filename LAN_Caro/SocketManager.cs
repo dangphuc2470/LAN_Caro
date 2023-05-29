@@ -1,22 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Net;
-using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 namespace LAN_Caro
 {
+    public abstract class Both_OBJ
+    {
+        public NetworkStream netStream;
+        public TableManager tableManager;
+        public abstract void ReceiveMessage(Socket tcpClient_Client);
+        public abstract void messageSend(string dataS);
+    }
+
+
     #region Client
-    public class Client_OBJ
+    public class Client_OBJ : Both_OBJ
     {
         TcpClient tcpClient = new TcpClient();
-        NetworkStream netStream;
-        TableManager tableManager;
         public Client_OBJ(TableManager tableManager, string ipAddress)
         {
             try
@@ -43,7 +42,7 @@ namespace LAN_Caro
         }
 
 
-        public void ReceiveMessage(Socket tcpClient_Client)
+        public override void ReceiveMessage(Socket tcpClient_Client)
         {
             int bytesReceived = 0;
             byte[] recv = new byte[1];
@@ -67,16 +66,11 @@ namespace LAN_Caro
                 int x = Int32.Parse(parts[0]);
                 int y = Int32.Parse(parts[1]);
                 tableManager.clickReceive(x, y);
-                //tableManager.switchPlayer();
-
-
-                //MessageBox.Show("message in client form" + temp);
-                //tableManager.switchPlayer();
 
             }
         }
 
-        public void messageSend(string dataS)
+        public override void messageSend(string dataS)
         {
             if (netStream != null)
             {
@@ -90,23 +84,12 @@ namespace LAN_Caro
 
 
 
-
-
-
-
-
-
-
-
-
-
     #region Server
-    public class Server_OBJ
+    public class Server_OBJ : Both_OBJ
     {
         TcpListener tcpListener;
         IPEndPoint ipepServer;
-        NetworkStream netStream;
-        TableManager tableManager;
+       
         List<TcpClient> clients = new List<TcpClient>();
 
         public Server_OBJ(TableManager tableManager)
@@ -123,7 +106,7 @@ namespace LAN_Caro
         }
 
 
-        public void ReceiveMessage(Socket tcpClient_Client)
+        public override void ReceiveMessage(Socket tcpClient_Client)
         {
             int bytesReceived = 0;
             byte[] recv = new byte[1];
@@ -159,6 +142,20 @@ namespace LAN_Caro
             }
         }
 
+
+        public override void messageSend(string message)
+        {
+            foreach (TcpClient client in clients)
+            {
+                netStream = client.GetStream();
+                if (netStream != null)
+                {
+                    byte[] data = Encoding.UTF8.GetBytes(message + "\n");
+                    netStream.Write(data, 0, data.Length);
+                }
+            }
+        }
+
         public void AcceptConnection()
         {
             while (true)
@@ -178,19 +175,6 @@ namespace LAN_Caro
                 catch (Exception ex)
                 {
                     break;
-                }
-            }
-        }
-
-        public void sendToClient(string message)
-        {
-            foreach (TcpClient client in clients)
-            {
-                netStream = client.GetStream();
-                if (netStream != null)
-                {
-                    byte[] data = Encoding.UTF8.GetBytes(message + "\n");
-                    netStream.Write(data, 0, data.Length);
                 }
             }
         }
