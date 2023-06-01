@@ -37,7 +37,8 @@
             lbStatus = new Label();
             imgTurn = new PictureBox();
             addon_Custom_Button1 = new Lab_3.Addon_Custom_Button();
-            addon_Custom_Button2 = new Lab_3.Addon_Custom_Button();
+            btNewGame = new Lab_3.Addon_Custom_Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
             SuspendLayout();
             // 
@@ -129,23 +130,36 @@
             addon_Custom_Button1.UseVisualStyleBackColor = false;
             addon_Custom_Button1.Click += addon_Custom_Button1_Click;
             // 
-            // addon_Custom_Button2
+            // btNewGame
             // 
-            addon_Custom_Button2.BackColor = Color.White;
-            addon_Custom_Button2.BackgroundColor = Color.White;
-            addon_Custom_Button2.BorderColor = Color.Gainsboro;
-            addon_Custom_Button2.BorderRadius = 0;
-            addon_Custom_Button2.BorderSize = 2;
-            addon_Custom_Button2.FlatAppearance.BorderSize = 0;
-            addon_Custom_Button2.FlatStyle = FlatStyle.Flat;
-            addon_Custom_Button2.ForeColor = Color.DodgerBlue;
-            addon_Custom_Button2.Location = new Point(34, 275);
-            addon_Custom_Button2.Name = "addon_Custom_Button2";
-            addon_Custom_Button2.Size = new Size(151, 43);
-            addon_Custom_Button2.TabIndex = 11;
-            addon_Custom_Button2.Text = "bt";
-            addon_Custom_Button2.TextColor = Color.DodgerBlue;
-            addon_Custom_Button2.UseVisualStyleBackColor = false;
+            btNewGame.BackColor = Color.FromArgb(213, 227, 255);
+            btNewGame.BackgroundColor = Color.FromArgb(213, 227, 255);
+            btNewGame.BorderColor = Color.PaleVioletRed;
+            btNewGame.BorderRadius = 30;
+            btNewGame.BorderSize = 0;
+            btNewGame.FlatAppearance.BorderSize = 0;
+            btNewGame.FlatStyle = FlatStyle.Flat;
+            btNewGame.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btNewGame.ForeColor = Color.FromArgb(0, 28, 59);
+            btNewGame.Location = new Point(25, 589);
+            btNewGame.Name = "btNewGame";
+            btNewGame.Size = new Size(225, 60);
+            btNewGame.TabIndex = 11;
+            btNewGame.Text = "New Game";
+            btNewGame.TextColor = Color.FromArgb(0, 28, 59);
+            btNewGame.UseVisualStyleBackColor = false;
+            btNewGame.Click += btNewGame_Click;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.LightGreen;
+            button1.Location = new Point(102, 507);
+            button1.Name = "button1";
+            button1.Size = new Size(112, 34);
+            button1.TabIndex = 12;
+            button1.Text = "random quan co";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // Caro
             // 
@@ -153,7 +167,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(247, 249, 252);
             ClientSize = new Size(1312, 770);
-            Controls.Add(addon_Custom_Button2);
+            Controls.Add(button1);
+            Controls.Add(btNewGame);
             Controls.Add(addon_Custom_Button1);
             Controls.Add(imgTurn);
             Controls.Add(lbStatus);
@@ -179,6 +194,7 @@
         private Label lbStatus;
         private PictureBox imgTurn;
         private Lab_3.Addon_Custom_Button addon_Custom_Button1;
-        private Lab_3.Addon_Custom_Button addon_Custom_Button2;
+        private Lab_3.Addon_Custom_Button btNewGame;
+        private Button button1;
     }
 }

@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using System.Text;
 namespace LAN_Caro
 {
-    public abstract class Both_OBJ
+    public abstract class Player_OBJ
     {
         public NetworkStream netStream;
         public TableManager tableManager;
@@ -13,7 +13,7 @@ namespace LAN_Caro
 
 
     #region Client
-    public class Client_OBJ : Both_OBJ
+    public class Client_OBJ : Player_OBJ
     {
         TcpClient tcpClient = new TcpClient();
         public Client_OBJ(TableManager tableManager, string ipAddress)
@@ -44,14 +44,17 @@ namespace LAN_Caro
 
         public override void ReceiveMessage(Socket tcpClient_Client)
         {
-            int bytesReceived = 0;
-            string data = "";
+            string data;
             byte[] recv = new byte[10];
             while (tcpClient_Client.Connected)
             {
-                bytesReceived = tcpClient_Client.Receive(recv);
+                tcpClient_Client.Receive(recv);
                 data = Encoding.ASCII.GetString(recv);
-
+                if (data.StartsWith("NG"))
+                {
+                    tableManager.newGame();
+                    return;
+                }
                 string[] parts = data.Split(':');
                 int x = Int32.Parse(parts[0]);
                 int y = Int32.Parse(parts[1]);
@@ -75,7 +78,7 @@ namespace LAN_Caro
 
 
     #region Server
-    public class Server_OBJ : Both_OBJ
+    public class Server_OBJ : Player_OBJ
     {
         TcpListener tcpListener;
         IPEndPoint ipepServer;
@@ -98,15 +101,18 @@ namespace LAN_Caro
 
         public override void ReceiveMessage(Socket tcpClient_Client)
         {
-            int bytesReceived = 0;
-            string data = "";
+            string data;
             byte[] recv = new byte[10];
             while (tcpClient_Client.Connected)
             {
-                bytesReceived = tcpClient_Client.Receive(recv);
+                tcpClient_Client.Receive(recv);
                 data = Encoding.ASCII.GetString(recv);
-
-                if (tcpClient_Client.Poll(0, SelectMode.SelectRead) && tcpClient_Client.Available == 0)
+                if (data.StartsWith("NG"))
+                {
+                    tableManager.newGame();
+                    return;
+                }
+                    if (tcpClient_Client.Poll(0, SelectMode.SelectRead) && tcpClient_Client.Available == 0)
                 {
                     //Kiểm tra và đóng kết nối
                     MessageBox.Show("Client disconnected!\n");

@@ -25,7 +25,7 @@ namespace LAN_Caro
             PlayerList = new List<Player>()
             {
                 new Player("X", Properties.Resources.x),
-                new Player("O", Properties.Resources.o)
+                new Player("O", Properties.Resources.o),
             };
             isClientTurn = 0;
         }
@@ -57,7 +57,6 @@ namespace LAN_Caro
                     };
                     button.FlatAppearance.BorderColor = Color.Silver;
                     button.Click += btn_Click;
-                    button.Tag = 0;
                     panel.Controls.Add(button);
                     buttonList[i].Add(button);
                     lastButton = button;
@@ -199,49 +198,97 @@ namespace LAN_Caro
         #endregion
 
         #region Hiệu ứng khởi tạo button
-        public void UpdateCorlor()
+        public void UpdateCorlor(Color color, int loop = 100)
+        {
+            resetTag();
+            Random rand = new Random();
+            int i = 0;
+            while (!isUpdated())
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    int x = rand.Next(24);
+                    int y = rand.Next(16);
+                    buttonList[y][x].BorderColor = color;
+                    buttonList[y][x].Tag = 1;
+                    buttonList[y][x].Image = null;
+                }
+                i++;
+                if (i < loop)
+                    Thread.Sleep(1);
+            }
+        }
+
+
+        public bool isUpdated()
+        {
+            for (int x = 0; x < TABLE_WIDTH; x++)
+            {
+                for (int y = 0; y < TABLE_HEIGHT; y++)
+                {
+                    if (buttonList[y][x].Tag.ToString().Equals("0"))
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        public bool resetTag()
+        {
+            for (int x = 0; x < TABLE_WIDTH; x++)
+            {
+                for (int y = 0; y < TABLE_HEIGHT; y++)
+                {
+                    buttonList[y][x].Tag = 0;
+                }
+            }
+            return true;
+        }
+
+        public void newGame()
+        {
+            Task.Run(() =>
+            {
+                UpdateCorlor(Color.White, 50);
+                UpdateCorlor(Color.LightGreen, 50);
+            });
+            switchPlayer();
+        }
+
+        #endregion
+
+
+
+        #region Hiệu ứng khởi tạo button
+        public void UpdateCorlorTest(Color color, int loop = 100)
         {
 
             Task.Run(() =>
             {
+                resetTag();
                 Random rand = new Random();
                 int i = 0;
-
-                while (i < 1000)
+                while (!isUpdated())
                 {
-                    int c = rand.Next(24);
-                    int r = rand.Next(16);
-                    if (buttonList[r][c].Tag.ToString() == "1")
-                        continue;
-                    buttonList[r][c].BorderColor = Color.DodgerBlue;
-                    buttonList[r][c].Tag = 1;
+                    for (int j = 0; j < 5; j++)
+                    {
+                        int x = rand.Next(24);
+                        int y = rand.Next(16);
+                        buttonList[y][x].BorderColor = color;
+                        buttonList[y][x].Tag = 1;
+                        int temp = rand.Next(3);
+                        if (temp == 2)
+                            buttonList[y][x].Image = null;
+                        else
+                            buttonList[y][x].Image = PlayerList[temp].Image;
+
+                    }
                     i++;
-                   if (i<100)
-                        Thread.Sleep(10);
                 }
+
             });
-            // Lặp cho đến khi tất cả các phần tử trong danh sách đều đã được truy cập
-            //while (CountNonNullElements(buttonList) > 0)
-            //{
-            //    // Tạo ngẫu nhiên chỉ số hàng và chỉ số cột của một phần tử trong danh sách
-            //    int row = rand.Next(buttonList.Count);
-            //    int col = rand.Next(buttonList[TABLE_WIDTH].Count -1);
-
-            //    // Nếu phần tử đã được truy cập, tiếp tục lặp
-            //    if (buttonList[row][col].Tag.ToString() == "1")
-            //    {
-            //        continue;
-            //    }
-            //    //MessageBox.Show(row.ToString() + col.ToString());
-            //    // Truy cập phần tử
-            //    buttonList[row][col].BorderColor = Color.Gainsboro;
-
-            //    // Đánh dấu phần tử đã được truy cập bằng cách gán giá trị null cho phần tử đó
-            //    buttonList[row][col].Tag = 1;
-            //}
-
+            
         }
-
         #endregion
 
 

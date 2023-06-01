@@ -4,17 +4,20 @@
     {
 
         TableManager tableManager;
-        Both_OBJ ServerOrClient;
+        Player_OBJ ServerOrClient;
         public Caro()
         {
             InitializeComponent();
-
+        }
         private void Caro_Load(object sender, EventArgs e)
         {
             tableManager = new TableManager(pnTable, lbStatus, imgTurn);
             tableManager.tableButtonClickedSend += TableManager_ButtonClickedSend;
             tableManager.DrawTable();
-            tableManager.UpdateCorlor();
+            Task.Run(() =>
+            {
+                tableManager.UpdateCorlor(Color.LightGreen);
+            });
         }
 
         private void btConnect_Click(object sender, EventArgs e)
@@ -44,5 +47,18 @@
         {
             //pnTable.Visible = true;
         }
+
+        private void btNewGame_Click(object sender, EventArgs e)
+        {
+            ServerOrClient.messageSend("NG");
+            tableManager.newGame();     
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tableManager.UpdateCorlorTest(Color.LightGreen);
+        }
+
+        
     }
 }
