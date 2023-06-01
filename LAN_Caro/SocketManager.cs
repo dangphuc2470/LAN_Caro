@@ -45,24 +45,14 @@ namespace LAN_Caro
         public override void ReceiveMessage(Socket tcpClient_Client)
         {
             int bytesReceived = 0;
-            byte[] recv = new byte[1];
+            string data = "";
+            byte[] recv = new byte[10];
             while (tcpClient_Client.Connected)
             {
-                string Chr;
-                string temp = "";
-                while (true)
-                {
+                bytesReceived = tcpClient_Client.Receive(recv);
+                data = Encoding.ASCII.GetString(recv);
 
-                    bytesReceived = tcpClient_Client.Receive(recv);
-                    Chr = Encoding.UTF8.GetString(recv);
-                    if (Chr == "\n")
-                        break;
-                    temp += Chr;
-
-                }
-                if (temp == "")
-                    continue;
-                string[] parts = temp.Split(':');
+                string[] parts = data.Split(':');
                 int x = Int32.Parse(parts[0]);
                 int y = Int32.Parse(parts[1]);
                 tableManager.clickReceive(x, y);
@@ -89,7 +79,7 @@ namespace LAN_Caro
     {
         TcpListener tcpListener;
         IPEndPoint ipepServer;
-       
+
         List<TcpClient> clients = new List<TcpClient>();
 
         public Server_OBJ(TableManager tableManager)
@@ -109,21 +99,13 @@ namespace LAN_Caro
         public override void ReceiveMessage(Socket tcpClient_Client)
         {
             int bytesReceived = 0;
-            byte[] recv = new byte[1];
+            string data = "";
+            byte[] recv = new byte[10];
             while (tcpClient_Client.Connected)
             {
-                string Chr;
-                string temp = "";
-                while (true)
-                {
+                bytesReceived = tcpClient_Client.Receive(recv);
+                data = Encoding.ASCII.GetString(recv);
 
-                    bytesReceived = tcpClient_Client.Receive(recv);
-                    Chr = Encoding.UTF8.GetString(recv);
-                    if (Chr == "\n")
-                        break;
-                    temp += Chr;
-
-                }
                 if (tcpClient_Client.Poll(0, SelectMode.SelectRead) && tcpClient_Client.Available == 0)
                 {
                     //Kiểm tra và đóng kết nối
@@ -132,9 +114,7 @@ namespace LAN_Caro
                 }
                 else
                 {
-                    if (temp == "")
-                        continue;
-                    string[] parts = temp.Split(':');
+                    string[] parts = data.Split(':');
                     int x = Int32.Parse(parts[0]);
                     int y = Int32.Parse(parts[1]);
                     tableManager.clickReceive(x, y);
