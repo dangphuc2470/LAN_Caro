@@ -37,6 +37,7 @@
             lbStatus = new Label();
             imgTurn = new PictureBox();
             addon_Custom_Button1 = new Lab_3.Addon_Custom_Button();
+            addon_Custom_Button2 = new Lab_3.Addon_Custom_Button();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
             SuspendLayout();
             // 
@@ -52,12 +53,14 @@
             // 
             // btConnect
             // 
+            btConnect.BackColor = Color.White;
+            btConnect.FlatStyle = FlatStyle.Flat;
             btConnect.Location = new Point(73, 379);
             btConnect.Name = "btConnect";
             btConnect.Size = new Size(112, 34);
             btConnect.TabIndex = 3;
             btConnect.Text = "Connect";
-            btConnect.UseVisualStyleBackColor = true;
+            btConnect.UseVisualStyleBackColor = false;
             btConnect.Click += btConnect_Click;
             // 
             // tbIPAdress
@@ -124,6 +127,25 @@
             addon_Custom_Button1.Text = "Ready";
             addon_Custom_Button1.TextColor = Color.FromArgb(0, 28, 59);
             addon_Custom_Button1.UseVisualStyleBackColor = false;
+            addon_Custom_Button1.Click += addon_Custom_Button1_Click;
+            // 
+            // addon_Custom_Button2
+            // 
+            addon_Custom_Button2.BackColor = Color.White;
+            addon_Custom_Button2.BackgroundColor = Color.White;
+            addon_Custom_Button2.BorderColor = Color.Gainsboro;
+            addon_Custom_Button2.BorderRadius = 0;
+            addon_Custom_Button2.BorderSize = 2;
+            addon_Custom_Button2.FlatAppearance.BorderSize = 0;
+            addon_Custom_Button2.FlatStyle = FlatStyle.Flat;
+            addon_Custom_Button2.ForeColor = Color.DodgerBlue;
+            addon_Custom_Button2.Location = new Point(34, 275);
+            addon_Custom_Button2.Name = "addon_Custom_Button2";
+            addon_Custom_Button2.Size = new Size(151, 43);
+            addon_Custom_Button2.TabIndex = 11;
+            addon_Custom_Button2.Text = "bt";
+            addon_Custom_Button2.TextColor = Color.DodgerBlue;
+            addon_Custom_Button2.UseVisualStyleBackColor = false;
             // 
             // Caro
             // 
@@ -131,6 +153,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(247, 249, 252);
             ClientSize = new Size(1312, 770);
+            Controls.Add(addon_Custom_Button2);
             Controls.Add(addon_Custom_Button1);
             Controls.Add(imgTurn);
             Controls.Add(lbStatus);
@@ -156,5 +179,6 @@
         private Label lbStatus;
         private PictureBox imgTurn;
         private Lab_3.Addon_Custom_Button addon_Custom_Button1;
+        private Lab_3.Addon_Custom_Button addon_Custom_Button2;
     }
 }

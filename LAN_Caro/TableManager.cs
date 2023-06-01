@@ -1,4 +1,5 @@
 ﻿using Lab_3;
+using System.Collections.Generic;
 
 namespace LAN_Caro
 {
@@ -12,13 +13,13 @@ namespace LAN_Caro
         private Addon_Round_Panel table;
         private Label label;
         private PictureBox picture;
-        Addon_Round_Panel Table;
+        Addon_Round_Panel panel;
         public List<Player> PlayerList { get; set; }
-        public List<List<Button>> buttonList = new List<List<Button>>();
+        public List<List<Addon_Custom_Button>> buttonList = new List<List<Addon_Custom_Button>>();
 
         public TableManager(Addon_Round_Panel table, Label label, PictureBox picture)
         {
-            Table = table;
+            panel = table;
             this.label = label;
             this.picture = picture;
             PlayerList = new List<Player>()
@@ -31,26 +32,33 @@ namespace LAN_Caro
 
 
 
-
         public void DrawTable()
         {
             Button lastButton = new Button() { Width = 0, Location = new Point(40, 40) };
             for (int i = 0; i < TABLE_HEIGHT; i++)
             {
-                buttonList.Add(new List<Button>());
+                buttonList.Add(new List<Addon_Custom_Button>());
                 for (int j = 0; j < TABLE_WIDTH; j++)
                 {
-                    Button button = new Button()
+                    Addon_Custom_Button button = new Addon_Custom_Button()
                     {
+                        BackColor = Color.White,
+                        BackgroundColor = Color.White,
+                        BorderColor = Color.White,
+                        BorderRadius = 0,
+                        BorderSize = 1,
+                        FlatStyle = FlatStyle.Flat,
+                        ForeColor = Color.White,
                         Width = SQUARE_SIZE,
                         Height = SQUARE_SIZE,
                         Location = new Point(lastButton.Location.X + lastButton.Width, lastButton.Location.Y),
-                        FlatStyle = FlatStyle.Flat,
                         Name = "bt" + j + "_" + i,
+
                     };
                     button.FlatAppearance.BorderColor = Color.Silver;
                     button.Click += btn_Click;
-                    Table.Controls.Add(button);
+                    button.Tag = 0;
+                    panel.Controls.Add(button);
                     buttonList[i].Add(button);
                     lastButton = button;
                 }
@@ -58,6 +66,7 @@ namespace LAN_Caro
                 lastButton.Width = 0;
                 lastButton.Height = 0;
             }
+            //MessageBox.Show("sadad");
 
         }
         public event EventHandler<string> tableButtonClickedSend; //Gửi dữ liệu sang form
@@ -85,7 +94,7 @@ namespace LAN_Caro
             buttonList[y][x].Image = PlayerList[isClientTurn].Image;
 
             if (countVertical(x, y) >= 4 || countHorizontal(x, y) >= 4 || countMainDiag(x, y) >= 4 || countSubDiag(x, y) >= 4)
-                MessageBox.Show("WIN");
+                MessageBox.Show("LOOOOOOOSER");
             switchPlayer();
         }
 
@@ -189,7 +198,51 @@ namespace LAN_Caro
         }
         #endregion
 
+        #region Hiệu ứng khởi tạo button
+        public void UpdateCorlor()
+        {
 
+            Task.Run(() =>
+            {
+                Random rand = new Random();
+                int i = 0;
+
+                while (i < 1000)
+                {
+                    int c = rand.Next(24);
+                    int r = rand.Next(16);
+                    if (buttonList[r][c].Tag.ToString() == "1")
+                        continue;
+                    buttonList[r][c].BorderColor = Color.DodgerBlue;
+                    buttonList[r][c].Tag = 1;
+                    i++;
+                   if (i<100)
+                        Thread.Sleep(10);
+                }
+            });
+            // Lặp cho đến khi tất cả các phần tử trong danh sách đều đã được truy cập
+            //while (CountNonNullElements(buttonList) > 0)
+            //{
+            //    // Tạo ngẫu nhiên chỉ số hàng và chỉ số cột của một phần tử trong danh sách
+            //    int row = rand.Next(buttonList.Count);
+            //    int col = rand.Next(buttonList[TABLE_WIDTH].Count -1);
+
+            //    // Nếu phần tử đã được truy cập, tiếp tục lặp
+            //    if (buttonList[row][col].Tag.ToString() == "1")
+            //    {
+            //        continue;
+            //    }
+            //    //MessageBox.Show(row.ToString() + col.ToString());
+            //    // Truy cập phần tử
+            //    buttonList[row][col].BorderColor = Color.Gainsboro;
+
+            //    // Đánh dấu phần tử đã được truy cập bằng cách gán giá trị null cho phần tử đó
+            //    buttonList[row][col].Tag = 1;
+            //}
+
+        }
+
+        #endregion
 
 
     }

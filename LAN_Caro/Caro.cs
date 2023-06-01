@@ -15,6 +15,7 @@
             tableManager = new TableManager(pnTable, lbStatus, imgTurn);
             tableManager.tableButtonClickedSend += TableManager_ButtonClickedSend;
             tableManager.DrawTable();
+            tableManager.UpdateCorlor();
         }
 
         private void btConnect_Click(object sender, EventArgs e)
@@ -38,6 +39,11 @@
         private void chbServer_CheckedChanged(object sender, EventArgs e)
         {
             tbIPAdress.Text = "127.0.0.1";
+        }
+
+        private void addon_Custom_Button1_Click(object sender, EventArgs e)
+        {
+            //pnTable.Visible = true;
         }
     }
 }
