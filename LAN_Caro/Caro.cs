@@ -8,7 +8,6 @@
         public Caro()
         {
             InitializeComponent();
-        }
 
         private void Caro_Load(object sender, EventArgs e)
         {
