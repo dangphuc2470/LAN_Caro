@@ -34,11 +34,12 @@
             tbIPAdress = new TextBox();
             chbServer = new CheckBox();
             imageList1 = new ImageList(components);
-            lbStatus = new Label();
             imgTurn = new PictureBox();
             addon_Custom_Button1 = new Lab_3.Addon_Custom_Button();
             btNewGame = new Lab_3.Addon_Custom_Button();
             button1 = new Button();
+            button2 = new Button();
+            richTextBox1 = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
             SuspendLayout();
             // 
@@ -56,7 +57,7 @@
             // 
             btConnect.BackColor = Color.White;
             btConnect.FlatStyle = FlatStyle.Flat;
-            btConnect.Location = new Point(73, 379);
+            btConnect.Location = new Point(34, 446);
             btConnect.Name = "btConnect";
             btConnect.Size = new Size(112, 34);
             btConnect.TabIndex = 3;
@@ -66,7 +67,7 @@
             // 
             // tbIPAdress
             // 
-            tbIPAdress.Location = new Point(53, 101);
+            tbIPAdress.Location = new Point(43, 363);
             tbIPAdress.Name = "tbIPAdress";
             tbIPAdress.Size = new Size(150, 31);
             tbIPAdress.TabIndex = 4;
@@ -76,7 +77,7 @@
             chbServer.AutoSize = true;
             chbServer.Checked = true;
             chbServer.CheckState = CheckState.Checked;
-            chbServer.Location = new Point(86, 432);
+            chbServer.Location = new Point(172, 451);
             chbServer.Name = "chbServer";
             chbServer.Size = new Size(87, 29);
             chbServer.TabIndex = 5;
@@ -90,21 +91,12 @@
             imageList1.ImageSize = new Size(16, 16);
             imageList1.TransparentColor = Color.Transparent;
             // 
-            // lbStatus
-            // 
-            lbStatus.AutoSize = true;
-            lbStatus.Location = new Point(43, 16);
-            lbStatus.Name = "lbStatus";
-            lbStatus.Size = new Size(59, 25);
-            lbStatus.TabIndex = 8;
-            lbStatus.Text = "label1";
-            // 
             // imgTurn
             // 
             imgTurn.Image = Properties.Resources.x;
             imgTurn.ImageLocation = "";
             imgTurn.InitialImage = null;
-            imgTurn.Location = new Point(43, 186);
+            imgTurn.Location = new Point(225, 359);
             imgTurn.Name = "imgTurn";
             imgTurn.Size = new Size(34, 35);
             imgTurn.TabIndex = 9;
@@ -161,17 +153,37 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
+            // button2
+            // 
+            button2.Location = new Point(147, 400);
+            button2.Name = "button2";
+            button2.Size = new Size(112, 34);
+            button2.TabIndex = 0;
+            button2.Text = "Switch";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.Location = new Point(29, 32);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(221, 256);
+            richTextBox1.TabIndex = 13;
+            richTextBox1.Text = "";
+            richTextBox1.TextChanged += richTextBox1_TextChanged;
+            // 
             // Caro
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(247, 249, 252);
             ClientSize = new Size(1312, 770);
+            Controls.Add(richTextBox1);
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(btNewGame);
             Controls.Add(addon_Custom_Button1);
             Controls.Add(imgTurn);
-            Controls.Add(lbStatus);
             Controls.Add(chbServer);
             Controls.Add(tbIPAdress);
             Controls.Add(btConnect);
@@ -191,10 +203,11 @@
         private TextBox tbIPAdress;
         private CheckBox chbServer;
         private ImageList imageList1;
-        private Label lbStatus;
         private PictureBox imgTurn;
         private Lab_3.Addon_Custom_Button addon_Custom_Button1;
         private Lab_3.Addon_Custom_Button btNewGame;
         private Button button1;
+        private Button button2;
+        private RichTextBox richTextBox1;
     }
 }

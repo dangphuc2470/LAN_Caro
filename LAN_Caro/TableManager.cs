@@ -10,17 +10,16 @@ namespace LAN_Caro
         public static int SQUARE_SIZE = 40;
         public static int TABLE_WIDTH = 24;
         public static int TABLE_HEIGHT = 16;
-        private Addon_Round_Panel table;
-        private Label label;
-        private PictureBox picture;
-        Addon_Round_Panel panel;
+        public RichTextBox richTextBox;
+        public PictureBox picture;
+        public Addon_Round_Panel panel;
         public List<Player> PlayerList { get; set; }
         public List<List<Addon_Custom_Button>> buttonList = new List<List<Addon_Custom_Button>>();
 
-        public TableManager(Addon_Round_Panel table, Label label, PictureBox picture)
+        public TableManager(Addon_Round_Panel table, RichTextBox richTextBox, PictureBox picture)
         {
             panel = table;
-            this.label = label;
+            this.richTextBox = richTextBox;
             this.picture = picture;
             PlayerList = new List<Player>()
             {
@@ -65,7 +64,6 @@ namespace LAN_Caro
                 lastButton.Width = 0;
                 lastButton.Height = 0;
             }
-            //MessageBox.Show("sadad");
 
         }
         public event EventHandler<string> tableButtonClickedSend; //Gửi dữ liệu sang form
@@ -88,12 +86,13 @@ namespace LAN_Caro
 
         public void clickReceive(int x, int y)
         {
+            //MessageBox.Show(x.ToString() + y.ToString());
             if (buttonList[y][x].Image != null)
                 return;
             buttonList[y][x].Image = PlayerList[isClientTurn].Image;
 
             if (countVertical(x, y) >= 4 || countHorizontal(x, y) >= 4 || countMainDiag(x, y) >= 4 || countSubDiag(x, y) >= 4)
-                MessageBox.Show("LOOOOOOOSER");
+                MessageBox.Show("LOSE");
             switchPlayer();
         }
 
@@ -249,7 +248,6 @@ namespace LAN_Caro
         {
             Task.Run(() =>
             {
-                UpdateCorlor(Color.White, 50);
                 UpdateCorlor(Color.LightGreen, 50);
             });
             switchPlayer();
