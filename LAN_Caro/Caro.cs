@@ -11,12 +11,13 @@
         }
         private void Caro_Load(object sender, EventArgs e)
         {
-            tableManager = new TableManager(pnTable, lbStatus, imgTurn);
+            tableManager = new TableManager(pnTable, richTextBox1, imgTurn);
             tableManager.tableButtonClickedSend += TableManager_ButtonClickedSend;
             tableManager.DrawTable();
             Task.Run(() =>
             {
                 tableManager.UpdateCorlor(Color.LightGreen);
+
             });
         }
 
@@ -51,7 +52,7 @@
         private void btNewGame_Click(object sender, EventArgs e)
         {
             ServerOrClient.messageSend("NG");
-            tableManager.newGame();     
+            tableManager.newGame();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -59,6 +60,15 @@
             tableManager.UpdateCorlorTest(Color.LightGreen);
         }
 
-        
+        private void button2_Click(object sender, EventArgs e)
+        {
+            tableManager.switchPlayer();
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionStart = richTextBox1.Text.Length;
+            richTextBox1.ScrollToCaret();
+        }
     }
 }
