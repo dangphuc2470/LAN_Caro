@@ -1,5 +1,6 @@
 ﻿using Lab_3;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace LAN_Caro
 {
@@ -10,17 +11,19 @@ namespace LAN_Caro
         public static int SQUARE_SIZE = 40;
         public static int TABLE_WIDTH = 24;
         public static int TABLE_HEIGHT = 16;
-        public RichTextBox richTextBox;
-        public PictureBox picture;
-        public Addon_Round_Panel panel;
+        public RichTextBox rtbLog;
+        public PictureBox imgTurn;
+        public TextBox tbIPAdress;
+        public Addon_Round_Panel pnTable;
         public List<Player> PlayerList { get; set; }
         public List<List<Addon_Custom_Button>> buttonList = new List<List<Addon_Custom_Button>>();
 
-        public TableManager(Addon_Round_Panel table, RichTextBox richTextBox, PictureBox picture)
+        public TableManager(Addon_Round_Panel pnTable, RichTextBox rtbLog, PictureBox imgTurn, TextBox tbIPAdress)
         {
-            panel = table;
-            this.richTextBox = richTextBox;
-            this.picture = picture;
+            this.pnTable = pnTable;
+            this.rtbLog = rtbLog;
+            this.imgTurn = imgTurn;
+            this.tbIPAdress = tbIPAdress;
             PlayerList = new List<Player>()
             {
                 new Player("X", Properties.Resources.x),
@@ -56,7 +59,7 @@ namespace LAN_Caro
                     };
                     button.FlatAppearance.BorderColor = Color.Silver;
                     button.Click += btn_Click;
-                    panel.Controls.Add(button);
+                    pnTable.Controls.Add(button);
                     buttonList[i].Add(button);
                     lastButton = button;
                 }
@@ -107,7 +110,7 @@ namespace LAN_Caro
         public void switchPlayer()
         {
             isClientTurn = isClientTurn == 0 ? 1 : 0;
-            picture.Image = PlayerList[isClientTurn].Image;
+            imgTurn.Image = PlayerList[isClientTurn].Image;
         }
 
         #region COUNT
@@ -197,8 +200,10 @@ namespace LAN_Caro
         #endregion
 
         #region Hiệu ứng khởi tạo button
-        public void UpdateCorlor(Color color, int loop = 100)
+        public void UpdateColor(Color color, bool updateWhite = false, int loop = 100)
         {
+            if (updateWhite)
+                UpdateColor(Color.White);
             resetTag();
             Random rand = new Random();
             int i = 0;
@@ -209,6 +214,7 @@ namespace LAN_Caro
                     int x = rand.Next(24);
                     int y = rand.Next(16);
                     buttonList[y][x].BorderColor = color;
+                    buttonList[y][x].BackColor = Color.White;
                     buttonList[y][x].Tag = 1;
                     buttonList[y][x].Image = null;
                 }
@@ -244,11 +250,24 @@ namespace LAN_Caro
             return true;
         }
 
+        public bool resetColor()
+        {
+            for (int x = 0; x < TABLE_WIDTH; x++)
+            {
+                for (int y = 0; y < TABLE_HEIGHT; y++)
+                {
+                    buttonList[y][x].BorderColor = Color.FromArgb(123, 124, 126);
+                    buttonList[y][x].BackColor = Color.FromArgb(123, 124, 126);
+                }
+            }
+            return true;
+        }
+
         public void newGame()
         {
             Task.Run(() =>
             {
-                UpdateCorlor(Color.LightGreen, 50);
+                UpdateColor(Color.Wheat, true, 50);
             });
             switchPlayer();
         }
@@ -257,7 +276,7 @@ namespace LAN_Caro
 
 
 
-        #region Hiệu ứng khởi tạo button
+        #region Test New Game
         public void UpdateCorlorTest(Color color, int loop = 100)
         {
 
@@ -285,7 +304,7 @@ namespace LAN_Caro
                 }
 
             });
-            
+
         }
         #endregion
 

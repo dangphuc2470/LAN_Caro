@@ -1,4 +1,5 @@
-﻿namespace LAN_Caro
+﻿using System.Drawing;
+namespace LAN_Caro
 {
     public partial class Caro : Form
     {
@@ -11,12 +12,12 @@
         }
         private void Caro_Load(object sender, EventArgs e)
         {
-            tableManager = new TableManager(pnTable, richTextBox1, imgTurn);
+            tableManager = new TableManager(pnTable, rtbLog, imgTurn, tbIPAdress);
             tableManager.tableButtonClickedSend += TableManager_ButtonClickedSend;
             tableManager.DrawTable();
             Task.Run(() =>
             {
-                tableManager.UpdateCorlor(Color.LightGreen);
+                tableManager.UpdateColor(Color.Wheat);
 
             });
         }
@@ -46,7 +47,10 @@
 
         private void addon_Custom_Button1_Click(object sender, EventArgs e)
         {
-            //pnTable.Visible = true;
+
+            panel1.Dock = DockStyle.Fill;
+            panel1.Visible = true;
+            tableManager.resetColor();
         }
 
         private void btNewGame_Click(object sender, EventArgs e)
@@ -67,8 +71,17 @@
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            richTextBox1.SelectionStart = richTextBox1.Text.Length;
-            richTextBox1.ScrollToCaret();
+            rtbLog.SelectionStart = rtbLog.Text.Length;
+            rtbLog.ScrollToCaret();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            tableManager.UpdateColor(Color.Wheat);
+            panel1.Visible = false;
+            //Task.Run(() =>
+            //{
+            //});
         }
     }
 }
