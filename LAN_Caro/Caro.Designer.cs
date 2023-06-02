@@ -35,12 +35,15 @@
             chbServer = new CheckBox();
             imageList1 = new ImageList(components);
             imgTurn = new PictureBox();
-            addon_Custom_Button1 = new Lab_3.Addon_Custom_Button();
+            btPause = new Lab_3.Addon_Custom_Button();
             btNewGame = new Lab_3.Addon_Custom_Button();
             button1 = new Button();
             button2 = new Button();
-            richTextBox1 = new RichTextBox();
+            rtbLog = new RichTextBox();
+            panel1 = new xPanel();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // pnTable
@@ -102,25 +105,25 @@
             imgTurn.TabIndex = 9;
             imgTurn.TabStop = false;
             // 
-            // addon_Custom_Button1
+            // btPause
             // 
-            addon_Custom_Button1.BackColor = Color.FromArgb(213, 227, 255);
-            addon_Custom_Button1.BackgroundColor = Color.FromArgb(213, 227, 255);
-            addon_Custom_Button1.BorderColor = Color.PaleVioletRed;
-            addon_Custom_Button1.BorderRadius = 30;
-            addon_Custom_Button1.BorderSize = 0;
-            addon_Custom_Button1.FlatAppearance.BorderSize = 0;
-            addon_Custom_Button1.FlatStyle = FlatStyle.Flat;
-            addon_Custom_Button1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            addon_Custom_Button1.ForeColor = Color.FromArgb(0, 28, 59);
-            addon_Custom_Button1.Location = new Point(34, 683);
-            addon_Custom_Button1.Name = "addon_Custom_Button1";
-            addon_Custom_Button1.Size = new Size(225, 60);
-            addon_Custom_Button1.TabIndex = 10;
-            addon_Custom_Button1.Text = "Ready";
-            addon_Custom_Button1.TextColor = Color.FromArgb(0, 28, 59);
-            addon_Custom_Button1.UseVisualStyleBackColor = false;
-            addon_Custom_Button1.Click += addon_Custom_Button1_Click;
+            btPause.BackColor = Color.FromArgb(213, 227, 255);
+            btPause.BackgroundColor = Color.FromArgb(213, 227, 255);
+            btPause.BorderColor = Color.PaleVioletRed;
+            btPause.BorderRadius = 30;
+            btPause.BorderSize = 0;
+            btPause.FlatAppearance.BorderSize = 0;
+            btPause.FlatStyle = FlatStyle.Flat;
+            btPause.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btPause.ForeColor = Color.FromArgb(0, 28, 59);
+            btPause.Location = new Point(34, 683);
+            btPause.Name = "btPause";
+            btPause.Size = new Size(225, 60);
+            btPause.TabIndex = 10;
+            btPause.Text = "Pause";
+            btPause.TextColor = Color.FromArgb(0, 28, 59);
+            btPause.UseVisualStyleBackColor = false;
+            btPause.Click += addon_Custom_Button1_Click;
             // 
             // btNewGame
             // 
@@ -144,8 +147,8 @@
             // 
             // button1
             // 
-            button1.BackColor = Color.LightGreen;
-            button1.Location = new Point(102, 507);
+            button1.BackColor = Color.MediumVioletRed;
+            button1.Location = new Point(34, 506);
             button1.Name = "button1";
             button1.Size = new Size(112, 34);
             button1.TabIndex = 12;
@@ -163,14 +166,34 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
-            // richTextBox1
+            // rtbLog
             // 
-            richTextBox1.Location = new Point(29, 32);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(221, 256);
-            richTextBox1.TabIndex = 13;
-            richTextBox1.Text = "";
-            richTextBox1.TextChanged += richTextBox1_TextChanged;
+            rtbLog.BorderStyle = BorderStyle.None;
+            rtbLog.Location = new Point(25, 32);
+            rtbLog.Name = "rtbLog";
+            rtbLog.Size = new Size(221, 256);
+            rtbLog.TabIndex = 13;
+            rtbLog.Text = "";
+            rtbLog.TextChanged += richTextBox1_TextChanged;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(button3);
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(12, 15);
+            panel1.TabIndex = 14;
+            panel1.Visible = false;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(5, 41);
+            button3.Name = "button3";
+            button3.Size = new Size(27, 34);
+            button3.TabIndex = 0;
+            button3.Text = "button3";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // Caro
             // 
@@ -178,11 +201,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(247, 249, 252);
             ClientSize = new Size(1312, 770);
-            Controls.Add(richTextBox1);
+            Controls.Add(panel1);
+            Controls.Add(rtbLog);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(btNewGame);
-            Controls.Add(addon_Custom_Button1);
+            Controls.Add(btPause);
             Controls.Add(imgTurn);
             Controls.Add(chbServer);
             Controls.Add(tbIPAdress);
@@ -192,6 +216,7 @@
             Text = "Caro";
             Load += Caro_Load;
             ((System.ComponentModel.ISupportInitialize)imgTurn).EndInit();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -204,10 +229,12 @@
         private CheckBox chbServer;
         private ImageList imageList1;
         private PictureBox imgTurn;
-        private Lab_3.Addon_Custom_Button addon_Custom_Button1;
+        private Lab_3.Addon_Custom_Button btPause;
         private Lab_3.Addon_Custom_Button btNewGame;
         private Button button1;
         private Button button2;
-        private RichTextBox richTextBox1;
+        private RichTextBox rtbLog;
+        private Button button3;
+        private xPanel panel1;
     }
 }

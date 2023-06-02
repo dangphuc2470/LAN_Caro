@@ -97,8 +97,6 @@ namespace Lab_3
         protected override void OnPaint(PaintEventArgs pevent)
         {
             base.OnPaint(pevent);
-
-
             Rectangle rectSurface = this.ClientRectangle;
             Rectangle rectBorder = Rectangle.Inflate(rectSurface, -borderSize, -borderSize);
             int smoothSize = 2;
