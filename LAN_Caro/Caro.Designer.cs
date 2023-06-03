@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            pnTable = new Lab_3.Addon_Round_Panel();
+            pnTable = new Addon_Round_Panel();
             btConnect = new Button();
             tbIPAdress = new TextBox();
             chbServer = new CheckBox();
             imageList1 = new ImageList(components);
             imgTurn = new PictureBox();
-            btPause = new Lab_3.Addon_Custom_Button();
-            btNewGame = new Lab_3.Addon_Custom_Button();
+            btPause = new Round_Button();
+            btNewGame = new Round_Button();
             button1 = new Button();
             button2 = new Button();
             rtbLog = new RichTextBox();
@@ -66,7 +66,7 @@
             btConnect.TabIndex = 3;
             btConnect.Text = "Connect";
             btConnect.UseVisualStyleBackColor = false;
-            btConnect.Click += btConnect_Click;
+            btConnect.Click += Connect_Click;
             // 
             // tbIPAdress
             // 
@@ -123,7 +123,7 @@
             btPause.Text = "Pause";
             btPause.TextColor = Color.FromArgb(0, 28, 59);
             btPause.UseVisualStyleBackColor = false;
-            btPause.Click += addon_Custom_Button1_Click;
+            btPause.Click += Pause_Click;
             // 
             // btNewGame
             // 
@@ -143,7 +143,7 @@
             btNewGame.Text = "New Game";
             btNewGame.TextColor = Color.FromArgb(0, 28, 59);
             btNewGame.UseVisualStyleBackColor = false;
-            btNewGame.Click += btNewGame_Click;
+            btNewGame.Click += NewGame_Click;
             // 
             // button1
             // 
@@ -154,17 +154,17 @@
             button1.TabIndex = 12;
             button1.Text = "random quan co";
             button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            button1.Click += RandomPattern_Click;
             // 
             // button2
             // 
             button2.Location = new Point(147, 400);
-            button2.Name = "button2";
+            button2.Name = "btSwitch";
             button2.Size = new Size(112, 34);
             button2.TabIndex = 0;
             button2.Text = "Switch";
             button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            button2.Click += SwitchPlayer_Click;
             // 
             // rtbLog
             // 
@@ -193,7 +193,6 @@
             button3.TabIndex = 0;
             button3.Text = "button3";
             button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
             // 
             // Caro
             // 
@@ -223,14 +222,14 @@
 
         #endregion
 
-        private Lab_3.Addon_Round_Panel pnTable;
+        private Addon_Round_Panel pnTable;
         private Button btConnect;
         private TextBox tbIPAdress;
         private CheckBox chbServer;
         private ImageList imageList1;
         private PictureBox imgTurn;
-        private Lab_3.Addon_Custom_Button btPause;
-        private Lab_3.Addon_Custom_Button btNewGame;
+        private Round_Button btPause;
+        private Round_Button btNewGame;
         private Button button1;
         private Button button2;
         private RichTextBox rtbLog;

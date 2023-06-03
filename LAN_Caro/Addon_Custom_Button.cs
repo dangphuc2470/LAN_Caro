@@ -11,9 +11,9 @@ using System.ComponentModel;
 using System.Drawing.Text;
 using System.Reflection.Emit;
 
-namespace Lab_3
+namespace LAN_Caro
 {
-    public class Addon_Custom_Button : Button
+    public class Round_Button : Button
     {
         //Fields
         private int borderSize = 0;
@@ -69,7 +69,7 @@ namespace Lab_3
         }
 
         //Constructor
-        public Addon_Custom_Button()
+        public Round_Button()
         {
             this.FlatStyle = FlatStyle.Flat;
             this.FlatAppearance.BorderSize = 0;
@@ -156,14 +156,14 @@ namespace Lab_3
         }
 
 
-        public void UseCustomFont(string name, int size, Button button)
+        public void UseCustomFont(string name, int size, FontStyle fontStyle)
         {
 
             PrivateFontCollection modernFont = new PrivateFontCollection();
 
             modernFont.AddFontFile(name);
 
-            button.Font = new Font(modernFont.Families[0], size);
+            Font = new Font(modernFont.Families[0], size, fontStyle);
 
 
         }

@@ -2,7 +2,7 @@
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace Lab_3
+namespace LAN_Caro
 {
     public class Addon_Round_Panel : Panel
     {

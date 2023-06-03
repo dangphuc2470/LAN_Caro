@@ -9,6 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\HeadlinerNo.45 DEMO.ttf" />
+    <None Remove="Resources\UI.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\HeadlinerNo.45 DEMO.ttf" />
+    <Content Include="Resources\UI.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
