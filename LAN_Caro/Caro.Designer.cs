@@ -216,7 +216,6 @@ namespace LAN_Caro
             btExitGame.Text = "EXIT GAME";
             btExitGame.TextAlign = ContentAlignment.MiddleRight;
             btExitGame.TextColor = Color.White;
-            btExitGame.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
             btExitGame.UseVisualStyleBackColor = false;
             // 
             // btLeaveMatch
@@ -236,7 +235,6 @@ namespace LAN_Caro
             btLeaveMatch.Text = "LEAVE MATCH";
             btLeaveMatch.TextAlign = ContentAlignment.MiddleRight;
             btLeaveMatch.TextColor = Color.White;
-            btLeaveMatch.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
             btLeaveMatch.UseVisualStyleBackColor = false;
             // 
             // btSettings
@@ -255,26 +253,49 @@ namespace LAN_Caro
             btSettings.TabIndex = 2;
             btSettings.Text = "SETTINGS";
             btSettings.TextAlign = ContentAlignment.MiddleRight;
-            btSettings.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
             btSettings.TextColor = Color.White;
-
             btSettings.UseVisualStyleBackColor = false;
             // 
-            panel1.Controls.Add(button3);
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(12, 15);
-            panel1.TabIndex = 14;
-            panel1.Visible = false;
+            // btMatchLog
+            // 
+            btMatchLog.BackColor = Color.Transparent;
+            btMatchLog.BackgroundColor = Color.Transparent;
+            btMatchLog.BorderColor = Color.PaleVioletRed;
+            btMatchLog.BorderRadius = 0;
+            btMatchLog.BorderSize = 0;
+            btMatchLog.FlatAppearance.BorderSize = 0;
+            btMatchLog.FlatStyle = FlatStyle.Flat;
+            btMatchLog.ForeColor = Color.White;
+            btMatchLog.Location = new Point(54, 250);
+            btMatchLog.Name = "btMatchLog";
+            btMatchLog.Size = new Size(225, 60);
+            btMatchLog.TabIndex = 1;
+            btMatchLog.Text = "MATCH LOG";
+            btMatchLog.TextAlign = ContentAlignment.MiddleRight;
+            btMatchLog.TextColor = Color.White;
+            btMatchLog.UseVisualStyleBackColor = false;
+            btMatchLog.Click += btMatchLog_Click;
             // 
             // btContinue
             // 
-            button3.Location = new Point(5, 41);
-            button3.Name = "button3";
-            button3.Size = new Size(27, 34);
-            button3.TabIndex = 0;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            btContinue.BackColor = Color.Transparent;
+            btContinue.BackgroundColor = Color.Transparent;
+            btContinue.BorderColor = Color.PaleVioletRed;
+            btContinue.BorderRadius = 0;
+            btContinue.BorderSize = 0;
+            btContinue.FlatAppearance.BorderSize = 0;
+            btContinue.FlatStyle = FlatStyle.Flat;
+            btContinue.ForeColor = Color.White;
+            btContinue.Location = new Point(25, 164);
+            btContinue.Name = "btContinue";
+            btContinue.RightToLeft = RightToLeft.No;
+            btContinue.Size = new Size(263, 80);
+            btContinue.TabIndex = 0;
+            btContinue.Text = "CONTINUE";
+            btContinue.TextAlign = ContentAlignment.MiddleRight;
+            btContinue.TextColor = Color.White;
+            btContinue.UseVisualStyleBackColor = false;
+            btContinue.Click += Continue_Click;
             // 
             // Caro
             // 
