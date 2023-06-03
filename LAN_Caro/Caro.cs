@@ -57,7 +57,7 @@ namespace LAN_Caro
             pnPause.Visible = true;
             tableManager.resetColor();
 
-
+            
         }
 
         private void NewGame_Click(object sender, EventArgs e)
