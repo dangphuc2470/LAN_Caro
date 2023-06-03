@@ -81,6 +81,16 @@ namespace LAN_Caro.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap od {
+            get {
+                object obj = ResourceManager.GetObject("od", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] UI {
@@ -96,6 +106,16 @@ namespace LAN_Caro.Properties {
         internal static System.Drawing.Bitmap x {
             get {
                 object obj = ResourceManager.GetObject("x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap xd {
+            get {
+                object obj = ResourceManager.GetObject("xd", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

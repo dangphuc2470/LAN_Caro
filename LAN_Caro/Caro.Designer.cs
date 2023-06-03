@@ -35,15 +35,19 @@ namespace LAN_Caro
             chbServer = new CheckBox();
             imageList1 = new ImageList(components);
             imgTurn = new PictureBox();
-            btPause = new Round_Button();
-            btNewGame = new Round_Button();
+            btPause = new Addon_Custom_Button();
+            btNewGame = new Addon_Custom_Button();
             button1 = new Button();
             button2 = new Button();
             rtbLog = new RichTextBox();
-            panel1 = new xPanel();
-            button3 = new Button();
+            pnPause = new xPanel();
+            btExitGame = new Addon_Custom_Button();
+            btLeaveMatch = new Addon_Custom_Button();
+            btSettings = new Addon_Custom_Button();
+            btMatchLog = new Addon_Custom_Button();
+            btContinue = new Addon_Custom_Button();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
-            panel1.SuspendLayout();
+            pnPause.SuspendLayout();
             SuspendLayout();
             // 
             // pnTable
@@ -116,7 +120,7 @@ namespace LAN_Caro
             btPause.FlatStyle = FlatStyle.Flat;
             btPause.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btPause.ForeColor = Color.FromArgb(0, 28, 59);
-            btPause.Location = new Point(34, 683);
+            btPause.Location = new Point(31, 683);
             btPause.Name = "btPause";
             btPause.Size = new Size(225, 60);
             btPause.TabIndex = 10;
@@ -159,7 +163,7 @@ namespace LAN_Caro
             // button2
             // 
             button2.Location = new Point(147, 400);
-            button2.Name = "btSwitch";
+            button2.Name = "button2";
             button2.Size = new Size(112, 34);
             button2.TabIndex = 0;
             button2.Text = "Switch";
@@ -168,31 +172,130 @@ namespace LAN_Caro
             // 
             // rtbLog
             // 
+            rtbLog.BackColor = Color.FromArgb(75, 75, 75);
             rtbLog.BorderStyle = BorderStyle.None;
-            rtbLog.Location = new Point(25, 32);
+            rtbLog.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            rtbLog.ForeColor = Color.White;
+            rtbLog.Location = new Point(368, 164);
             rtbLog.Name = "rtbLog";
-            rtbLog.Size = new Size(221, 256);
+            rtbLog.Size = new Size(729, 500);
             rtbLog.TabIndex = 13;
             rtbLog.Text = "";
+            rtbLog.Visible = false;
             rtbLog.TextChanged += richTextBox1_TextChanged;
             // 
-            // panel1
+            // pnPause
             // 
-            panel1.Controls.Add(button3);
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(12, 15);
-            panel1.TabIndex = 14;
-            panel1.Visible = false;
+            pnPause.Controls.Add(rtbLog);
+            pnPause.Controls.Add(btExitGame);
+            pnPause.Controls.Add(btLeaveMatch);
+            pnPause.Controls.Add(btSettings);
+            pnPause.Controls.Add(btMatchLog);
+            pnPause.Controls.Add(btContinue);
+            pnPause.Dock = DockStyle.Fill;
+            pnPause.Location = new Point(0, 0);
+            pnPause.Name = "pnPause";
+            pnPause.Size = new Size(1312, 770);
+            pnPause.TabIndex = 14;
+            pnPause.Visible = false;
             // 
-            // button3
+            // btExitGame
             // 
-            button3.Location = new Point(5, 41);
-            button3.Name = "button3";
-            button3.Size = new Size(27, 34);
-            button3.TabIndex = 0;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            btExitGame.BackColor = Color.Transparent;
+            btExitGame.BackgroundColor = Color.Transparent;
+            btExitGame.BorderColor = Color.PaleVioletRed;
+            btExitGame.BorderRadius = 0;
+            btExitGame.BorderSize = 0;
+            btExitGame.FlatAppearance.BorderSize = 0;
+            btExitGame.FlatStyle = FlatStyle.Flat;
+            btExitGame.ForeColor = Color.White;
+            btExitGame.Location = new Point(55, 440);
+            btExitGame.Name = "btExitGame";
+            btExitGame.Size = new Size(225, 60);
+            btExitGame.TabIndex = 4;
+            btExitGame.Text = "EXIT GAME";
+            btExitGame.TextAlign = ContentAlignment.MiddleRight;
+            btExitGame.TextColor = Color.White;
+            btExitGame.UseVisualStyleBackColor = false;
+            // 
+            // btLeaveMatch
+            // 
+            btLeaveMatch.BackColor = Color.Transparent;
+            btLeaveMatch.BackgroundColor = Color.Transparent;
+            btLeaveMatch.BorderColor = Color.PaleVioletRed;
+            btLeaveMatch.BorderRadius = 0;
+            btLeaveMatch.BorderSize = 0;
+            btLeaveMatch.FlatAppearance.BorderSize = 0;
+            btLeaveMatch.FlatStyle = FlatStyle.Flat;
+            btLeaveMatch.ForeColor = Color.White;
+            btLeaveMatch.Location = new Point(55, 382);
+            btLeaveMatch.Name = "btLeaveMatch";
+            btLeaveMatch.Size = new Size(225, 60);
+            btLeaveMatch.TabIndex = 3;
+            btLeaveMatch.Text = "LEAVE MATCH";
+            btLeaveMatch.TextAlign = ContentAlignment.MiddleRight;
+            btLeaveMatch.TextColor = Color.White;
+            btLeaveMatch.UseVisualStyleBackColor = false;
+            // 
+            // btSettings
+            // 
+            btSettings.BackColor = Color.Transparent;
+            btSettings.BackgroundColor = Color.Transparent;
+            btSettings.BorderColor = Color.PaleVioletRed;
+            btSettings.BorderRadius = 0;
+            btSettings.BorderSize = 0;
+            btSettings.FlatAppearance.BorderSize = 0;
+            btSettings.FlatStyle = FlatStyle.Flat;
+            btSettings.ForeColor = Color.White;
+            btSettings.Location = new Point(55, 316);
+            btSettings.Name = "btSettings";
+            btSettings.Size = new Size(225, 60);
+            btSettings.TabIndex = 2;
+            btSettings.Text = "SETTINGS";
+            btSettings.TextAlign = ContentAlignment.MiddleRight;
+            btSettings.TextColor = Color.White;
+            btSettings.UseVisualStyleBackColor = false;
+            // 
+            // btMatchLog
+            // 
+            btMatchLog.BackColor = Color.Transparent;
+            btMatchLog.BackgroundColor = Color.Transparent;
+            btMatchLog.BorderColor = Color.PaleVioletRed;
+            btMatchLog.BorderRadius = 0;
+            btMatchLog.BorderSize = 0;
+            btMatchLog.FlatAppearance.BorderSize = 0;
+            btMatchLog.FlatStyle = FlatStyle.Flat;
+            btMatchLog.ForeColor = Color.White;
+            btMatchLog.Location = new Point(54, 250);
+            btMatchLog.Name = "btMatchLog";
+            btMatchLog.Size = new Size(225, 60);
+            btMatchLog.TabIndex = 1;
+            btMatchLog.Text = "MATCH LOG";
+            btMatchLog.TextAlign = ContentAlignment.MiddleRight;
+            btMatchLog.TextColor = Color.White;
+            btMatchLog.UseVisualStyleBackColor = false;
+            btMatchLog.Click += btMatchLog_Click;
+            // 
+            // btContinue
+            // 
+            btContinue.BackColor = Color.Transparent;
+            btContinue.BackgroundColor = Color.Transparent;
+            btContinue.BorderColor = Color.PaleVioletRed;
+            btContinue.BorderRadius = 0;
+            btContinue.BorderSize = 0;
+            btContinue.FlatAppearance.BorderSize = 0;
+            btContinue.FlatStyle = FlatStyle.Flat;
+            btContinue.ForeColor = Color.White;
+            btContinue.Location = new Point(25, 164);
+            btContinue.Name = "btContinue";
+            btContinue.RightToLeft = RightToLeft.No;
+            btContinue.Size = new Size(263, 80);
+            btContinue.TabIndex = 0;
+            btContinue.Text = "CONTINUE";
+            btContinue.TextAlign = ContentAlignment.MiddleRight;
+            btContinue.TextColor = Color.White;
+            btContinue.UseVisualStyleBackColor = false;
+            btContinue.Click += Continue_Click;
             // 
             // Caro
             // 
@@ -200,8 +303,7 @@ namespace LAN_Caro
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(247, 249, 252);
             ClientSize = new Size(1312, 770);
-            Controls.Add(panel1);
-            Controls.Add(rtbLog);
+            Controls.Add(pnPause);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(btNewGame);
@@ -215,7 +317,7 @@ namespace LAN_Caro
             Text = "Caro";
             Load += Caro_Load;
             ((System.ComponentModel.ISupportInitialize)imgTurn).EndInit();
-            panel1.ResumeLayout(false);
+            pnPause.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -228,12 +330,17 @@ namespace LAN_Caro
         private CheckBox chbServer;
         private ImageList imageList1;
         private PictureBox imgTurn;
-        private Round_Button btPause;
-        private Round_Button btNewGame;
+        private Addon_Custom_Button btPause;
+        private Addon_Custom_Button btNewGame;
         private Button button1;
         private Button button2;
         private RichTextBox rtbLog;
         private xPanel pnPause;
         private Label label1;
+        private Addon_Custom_Button btContinue;
+        private Addon_Custom_Button btMatchLog;
+        private Addon_Custom_Button btSettings;
+        private Addon_Custom_Button btExitGame;
+        private Addon_Custom_Button btLeaveMatch;
     }
 }
