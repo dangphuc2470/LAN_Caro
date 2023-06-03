@@ -13,7 +13,7 @@ using System.Reflection.Emit;
 
 namespace LAN_Caro
 {
-    public class Round_Button : Button
+    public class Addon_Custom_Button : Button
     {
         //Fields
         private int borderSize = 0;
@@ -21,7 +21,7 @@ namespace LAN_Caro
         private Color borderColor = Color.PaleVioletRed;
 
         //Properties
-       
+
         public int BorderSize
         {
             get { return borderSize; }
@@ -32,7 +32,7 @@ namespace LAN_Caro
             }
         }
 
-       
+
         public int BorderRadius
         {
             get { return borderRadius; }
@@ -43,7 +43,7 @@ namespace LAN_Caro
             }
         }
 
-       
+
         public Color BorderColor
         {
             get { return borderColor; }
@@ -54,14 +54,14 @@ namespace LAN_Caro
             }
         }
 
-       
+
         public Color BackgroundColor
         {
             get { return this.BackColor; }
             set { this.BackColor = value; }
         }
 
-       
+
         public Color TextColor
         {
             get { return this.ForeColor; }
@@ -69,7 +69,7 @@ namespace LAN_Caro
         }
 
         //Constructor
-        public Round_Button()
+        public Addon_Custom_Button()
         {
             this.FlatStyle = FlatStyle.Flat;
             this.FlatAppearance.BorderSize = 0;

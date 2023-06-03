@@ -13,11 +13,11 @@ namespace LAN_Caro
         public RichTextBox rtbLog;
         public PictureBox imgTurn;
         public TextBox tbIPAdress;
-        public Addon_Round_Panel pnTable;
+        public Panel pnTable;
         public List<Player> PlayerList { get; set; }
         public List<List<Button>> buttonList = new List<List<Button>>();
 
-        public TableManager(Addon_Round_Panel pnTable, RichTextBox rtbLog, PictureBox imgTurn, TextBox tbIPAdress)
+        public TableManager(Panel pnTable, RichTextBox rtbLog, PictureBox imgTurn, TextBox tbIPAdress)
         {
             this.pnTable = pnTable;
             this.rtbLog = rtbLog;
@@ -44,19 +44,14 @@ namespace LAN_Caro
                     Button button = new Button()
                     {
                         BackColor = Color.White,
-                        BackgroundColor = Color.White,
-                        BorderColor = Color.White,
-                        BorderRadius = 0,
-                        BorderSize = 1,
                         FlatStyle = FlatStyle.Flat,
-                        ForeColor = Color.White,
                         Width = SQUARE_SIZE,
                         Height = SQUARE_SIZE,
                         Location = new Point(lastButton.Location.X + lastButton.Width, lastButton.Location.Y),
                         Name = "bt" + j + "_" + i,
 
                     };
-                    button.FlatAppearance.BorderColor = Color.Silver;
+                    button.FlatAppearance.BorderColor = Color.White;
                     button.Click += btn_Click;
                     pnTable.Controls.Add(button);
                     buttonList[i].Add(button);
@@ -73,7 +68,7 @@ namespace LAN_Caro
         {
             if (isClientPlayer != isClientTurn)  //Nếu chưa tới lượt thì không thể nhấn nút
                 return;
-            Button button = sender as Button;
+            Button? button = sender as Button;
             int index = button.Name.IndexOf("_");
             int x = Int32.Parse(button.Name.Substring(2, index - 2));
             int y = Int32.Parse(button.Name.Substring(index + 1));
@@ -95,7 +90,7 @@ namespace LAN_Caro
 
             if (countVertical(x, y) >= 4 || countHorizontal(x, y) >= 4 || countMainDiag(x, y) >= 4 || countSubDiag(x, y) >= 4)
                 MessageBox.Show("LOSE");
-            switchPlayer();
+            SwitchPlayer();
         }
 
 
@@ -106,7 +101,7 @@ namespace LAN_Caro
             this.isClientPlayer = isClientPlayer;
         }
 
-        public void switchPlayer()
+        public void SwitchPlayer()
         {
             isClientTurn = isClientTurn == 0 ? 1 : 0;
             imgTurn.Image = PlayerList[isClientTurn].Image;
@@ -203,16 +198,16 @@ namespace LAN_Caro
         {
             if (updateWhite)
                 UpdateColor(Color.White);
-            resetTag();
+            ResetTag();
             Random rand = new Random();
             int i = 0;
-            while (!isUpdated())
+            while (!IsUpdated())
             {
                 for (int j = 0; j < 5; j++)
                 {
                     int x = rand.Next(24);
                     int y = rand.Next(16);
-                    buttonList[y][x].BorderColor = color;
+                    buttonList[y][x].FlatAppearance.BorderColor = color;
                     buttonList[y][x].BackColor = Color.White;
                     buttonList[y][x].Tag = 1;
                     buttonList[y][x].Image = null;
@@ -224,7 +219,7 @@ namespace LAN_Caro
         }
 
 
-        public bool isUpdated()
+        public bool IsUpdated()
         {
             for (int x = 0; x < TABLE_WIDTH; x++)
             {
@@ -237,7 +232,7 @@ namespace LAN_Caro
             return true;
         }
 
-        public bool resetTag()
+        public bool ResetTag()
         {
             for (int x = 0; x < TABLE_WIDTH; x++)
             {
@@ -249,26 +244,50 @@ namespace LAN_Caro
             return true;
         }
 
-        public bool resetColor()
+        /// <summary>
+        /// Hiển thị màu button tối hơn
+        /// </summary>
+        /// <returns></returns>
+        public void DarkColor()
         {
             for (int x = 0; x < TABLE_WIDTH; x++)
             {
                 for (int y = 0; y < TABLE_HEIGHT; y++)
                 {
-                    buttonList[y][x].BorderColor = Color.FromArgb(123, 124, 126);
-                    buttonList[y][x].BackColor = Color.FromArgb(123, 124, 126);
+                    buttonList[y][x].FlatAppearance.BorderColor = Color.FromArgb(69, 69, 69);
+                    buttonList[y][x].BackColor = Color.FromArgb(75, 75, 75);
+                    if (buttonList[y][x].Image == PlayerList[1].Image)
+                        buttonList[y][x].Image = Properties.Resources.od;
+                    else if (buttonList[y][x].Image == PlayerList[0].Image)
+                        buttonList[y][x].Image = Properties.Resources.xd;
+
+
                 }
             }
-            return true;
         }
 
-        public void newGame()
+        /// <summary>
+        /// Đặt lại màu cho button
+        /// </summary>
+        public void ResetColor()
+        {
+            for (int x = 0; x < TABLE_WIDTH; x++)
+            {
+                for (int y = 0; y < TABLE_HEIGHT; y++)
+                {
+                    buttonList[y][x].FlatAppearance.BorderColor = Color.Silver;
+                    buttonList[y][x].BackColor = Color.White;
+                }
+            }
+        }
+
+        public void NewGame()
         {
             Task.Run(() =>
             {
-                UpdateColor(Color.Wheat, true, 50);
+                UpdateColor(Color.Silver, true, 50);
             });
-            switchPlayer();
+            SwitchPlayer();
         }
 
         #endregion
@@ -281,16 +300,16 @@ namespace LAN_Caro
 
             Task.Run(() =>
             {
-                resetTag();
+                ResetTag();
                 Random rand = new Random();
                 int i = 0;
-                while (!isUpdated())
+                while (!IsUpdated())
                 {
                     for (int j = 0; j < 5; j++)
                     {
                         int x = rand.Next(24);
                         int y = rand.Next(16);
-                        buttonList[y][x].BorderColor = color;
+                        buttonList[y][x].FlatAppearance.BorderColor = color;
                         buttonList[y][x].Tag = 1;
                         int temp = rand.Next(3);
                         if (temp == 2)

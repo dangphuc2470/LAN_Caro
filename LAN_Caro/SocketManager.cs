@@ -69,7 +69,7 @@ namespace LAN_Caro
                     continue;
                 else if (temp.StartsWith("NG"))
                 {
-                    tableManager.newGame();
+                    //tableManager.newGame();
                     continue;
                 }
                 string[] parts = temp.Split(':');
@@ -152,7 +152,7 @@ namespace LAN_Caro
                     continue;
                 else if (temp.StartsWith("NG"))
                 {
-                    tableManager.newGame();
+                    //tableManager.newGame();
                     continue;
                 }
 
