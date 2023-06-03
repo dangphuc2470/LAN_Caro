@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
+namespace LAN_Caro;
 class xPanel : Panel
 {
     protected override CreateParams CreateParams

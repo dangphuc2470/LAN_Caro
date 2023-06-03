@@ -1,5 +1,4 @@
-﻿using Lab_3;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace LAN_Caro
@@ -16,7 +15,7 @@ namespace LAN_Caro
         public TextBox tbIPAdress;
         public Addon_Round_Panel pnTable;
         public List<Player> PlayerList { get; set; }
-        public List<List<Addon_Custom_Button>> buttonList = new List<List<Addon_Custom_Button>>();
+        public List<List<Button>> buttonList = new List<List<Button>>();
 
         public TableManager(Addon_Round_Panel pnTable, RichTextBox rtbLog, PictureBox imgTurn, TextBox tbIPAdress)
         {
@@ -39,10 +38,10 @@ namespace LAN_Caro
             Button lastButton = new Button() { Width = 0, Location = new Point(40, 40) };
             for (int i = 0; i < TABLE_HEIGHT; i++)
             {
-                buttonList.Add(new List<Addon_Custom_Button>());
+                buttonList.Add(new List<Button>());
                 for (int j = 0; j < TABLE_WIDTH; j++)
                 {
-                    Addon_Custom_Button button = new Addon_Custom_Button()
+                    Button button = new Button()
                     {
                         BackColor = Color.White,
                         BackgroundColor = Color.White,

@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using System.Drawing.Text;
+
 namespace LAN_Caro
 {
     public partial class Caro : Form
@@ -6,6 +8,9 @@ namespace LAN_Caro
 
         TableManager tableManager;
         Player_OBJ ServerOrClient;
+        Font customfont;
+
+
         public Caro()
         {
             InitializeComponent();
@@ -22,7 +27,7 @@ namespace LAN_Caro
             });
         }
 
-        private void btConnect_Click(object sender, EventArgs e)
+        private void Connect_Click(object sender, EventArgs e)
         {
             if (chbServer.CheckState == CheckState.Checked)
             {
@@ -45,26 +50,28 @@ namespace LAN_Caro
             tbIPAdress.Text = "127.0.0.1";
         }
 
-        private void addon_Custom_Button1_Click(object sender, EventArgs e)
+        private void Pause_Click(object sender, EventArgs e)
         {
 
-            panel1.Dock = DockStyle.Fill;
-            panel1.Visible = true;
+            pnPause.Dock = DockStyle.Fill;
+            pnPause.Visible = true;
             tableManager.resetColor();
+
+
         }
 
-        private void btNewGame_Click(object sender, EventArgs e)
+        private void NewGame_Click(object sender, EventArgs e)
         {
             ServerOrClient.messageSend("NG");
             tableManager.newGame();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void RandomPattern_Click(object sender, EventArgs e)
         {
             tableManager.UpdateCorlorTest(Color.LightGreen);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void SwitchPlayer_Click(object sender, EventArgs e)
         {
             tableManager.switchPlayer();
         }
@@ -75,10 +82,10 @@ namespace LAN_Caro
             rtbLog.ScrollToCaret();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Continue_Click(object sender, EventArgs e)
         {
             tableManager.UpdateColor(Color.Wheat);
-            panel1.Visible = false;
+
             //Task.Run(() =>
             //{
             //});

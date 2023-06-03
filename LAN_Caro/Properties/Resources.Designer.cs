@@ -61,12 +61,32 @@ namespace LAN_Caro.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] HeadlinerNo_45_DEMO {
+            get {
+                object obj = ResourceManager.GetObject("HeadlinerNo_45_DEMO", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap o {
             get {
                 object obj = ResourceManager.GetObject("o", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] UI {
+            get {
+                object obj = ResourceManager.GetObject("UI", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
