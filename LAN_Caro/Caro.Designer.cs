@@ -1,4 +1,4 @@
-﻿namespace LAN_Caro
+namespace LAN_Caro
 {
     partial class Caro
     {
@@ -228,8 +228,8 @@
         private CheckBox chbServer;
         private ImageList imageList1;
         private PictureBox imgTurn;
-        private Lab_3.Addon_Custom_Button btPause;
-        private Lab_3.Addon_Custom_Button btNewGame;
+        private Round_Button btPause;
+        private Round_Button btNewGame;
         private Button button1;
         private Button button2;
         private RichTextBox rtbLog;
