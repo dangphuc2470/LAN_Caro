@@ -14,6 +14,8 @@ namespace LAN_Caro
         public Caro()
         {
             InitializeComponent();
+            btContinue.UseCustomFont("UI.ttf", 35, FontStyle.Bold);
+
         }
         private void Caro_Load(object sender, EventArgs e)
         {
@@ -22,7 +24,7 @@ namespace LAN_Caro
             tableManager.DrawTable();
             Task.Run(() =>
             {
-                tableManager.UpdateColor(Color.Wheat);
+                tableManager.UpdateColor(Color.Silver);
 
             });
         }
@@ -42,7 +44,7 @@ namespace LAN_Caro
         private void TableManager_ButtonClickedSend(object sender, string text)
         {
             ServerOrClient.messageSend(text);
-            tableManager.switchPlayer();
+            tableManager.SwitchPlayer();
         }
 
         private void chbServer_CheckedChanged(object sender, EventArgs e)
@@ -55,25 +57,25 @@ namespace LAN_Caro
 
             pnPause.Dock = DockStyle.Fill;
             pnPause.Visible = true;
-            tableManager.resetColor();
+            tableManager.DarkColor();
 
-            
+
         }
 
         private void NewGame_Click(object sender, EventArgs e)
         {
             ServerOrClient.messageSend("NG");
-            tableManager.newGame();
+            tableManager.NewGame();
         }
 
         private void RandomPattern_Click(object sender, EventArgs e)
         {
-            tableManager.UpdateCorlorTest(Color.LightGreen);
+            tableManager.UpdateCorlorTest(Color.Silver);
         }
 
         private void SwitchPlayer_Click(object sender, EventArgs e)
         {
-            tableManager.switchPlayer();
+            tableManager.SwitchPlayer();
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -84,11 +86,16 @@ namespace LAN_Caro
 
         private void Continue_Click(object sender, EventArgs e)
         {
-            tableManager.UpdateColor(Color.Wheat);
+            //tableManager.UpdateColor(Color.Wheat);
 
             //Task.Run(() =>
             //{
             //});
+        }
+
+        private void btMatchLog_Click(object sender, EventArgs e)
+        {
+            rtbLog.Visible = true;
         }
     }
 }
