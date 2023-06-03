@@ -228,12 +228,12 @@
         private CheckBox chbServer;
         private ImageList imageList1;
         private PictureBox imgTurn;
-        private Round_Button btPause;
-        private Round_Button btNewGame;
+        private Lab_3.Addon_Custom_Button btPause;
+        private Lab_3.Addon_Custom_Button btNewGame;
         private Button button1;
         private Button button2;
         private RichTextBox rtbLog;
-        private Button button3;
-        private xPanel panel1;
+        private xPanel pnPause;
+        private Label label1;
     }
 }
