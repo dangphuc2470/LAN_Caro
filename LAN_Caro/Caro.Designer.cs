@@ -216,6 +216,7 @@ namespace LAN_Caro
             btExitGame.Text = "EXIT GAME";
             btExitGame.TextAlign = ContentAlignment.MiddleRight;
             btExitGame.TextColor = Color.White;
+            btExitGame.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
             btExitGame.UseVisualStyleBackColor = false;
             // 
             // btLeaveMatch
@@ -235,6 +236,7 @@ namespace LAN_Caro
             btLeaveMatch.Text = "LEAVE MATCH";
             btLeaveMatch.TextAlign = ContentAlignment.MiddleRight;
             btLeaveMatch.TextColor = Color.White;
+            btLeaveMatch.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
             btLeaveMatch.UseVisualStyleBackColor = false;
             // 
             // btSettings
@@ -253,7 +255,9 @@ namespace LAN_Caro
             btSettings.TabIndex = 2;
             btSettings.Text = "SETTINGS";
             btSettings.TextAlign = ContentAlignment.MiddleRight;
+            btSettings.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
             btSettings.TextColor = Color.White;
+
             btSettings.UseVisualStyleBackColor = false;
             // 
             // btMatchLog
@@ -273,6 +277,7 @@ namespace LAN_Caro
             btMatchLog.Text = "MATCH LOG";
             btMatchLog.TextAlign = ContentAlignment.MiddleRight;
             btMatchLog.TextColor = Color.White;
+            btMatchLog.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
             btMatchLog.UseVisualStyleBackColor = false;
             btMatchLog.Click += btMatchLog_Click;
             // 
@@ -295,6 +300,7 @@ namespace LAN_Caro
             btContinue.TextAlign = ContentAlignment.MiddleRight;
             btContinue.TextColor = Color.White;
             btContinue.UseVisualStyleBackColor = false;
+            btContinue.UseCustomFont("UI.ttf", 35, FontStyle.Bold);
             btContinue.Click += Continue_Click;
             // 
             // Caro
