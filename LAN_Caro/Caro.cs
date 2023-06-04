@@ -132,24 +132,6 @@ namespace LAN_Caro
 
         }
 
-        private void btResume_Click(object sender, EventArgs e)
-        {
-            Button button = sender as Button;
-            ResetTag(button);
-
-            pnPause.Visible = false;
-            tableManager.ResetColor();
-            ResetVisible();
-        }
-
-        private void btPause_Click(object sender, EventArgs e)
-        {
-            Button button = sender as Button;
-            ResetTag(button);
-
-
-        }
-
         private void btMatchLog_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
