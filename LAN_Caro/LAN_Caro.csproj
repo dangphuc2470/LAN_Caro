@@ -9,11 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Arbuz.ttf" />
     <None Remove="Resources\HeadlinerNo.45 DEMO.ttf" />
     <None Remove="Resources\UI.ttf" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\Arbuz.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\HeadlinerNo.45 DEMO.ttf" />
     <Content Include="Resources\UI.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
