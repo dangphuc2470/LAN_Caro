@@ -280,7 +280,7 @@ namespace LAN_Caro
         }
 
         /// <summary>
-        /// Đặt lại màu cho button
+        /// Đặt lại màu cho button ô cờ
         /// </summary>
         public void ResetColor()
         {

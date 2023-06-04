@@ -43,14 +43,14 @@ namespace LAN_Caro
             button1 = new Button();
             button2 = new Button();
             rtbLog = new RichTextBox();
-            pnPause = new xPanel();
-            btMenuLabel = new Addon_Custom_Button();
-            btResume = new Addon_Custom_Button();
-            btExitGame = new Addon_Custom_Button();
-            btLeaveMatch = new Addon_Custom_Button();
-            btSettings = new Addon_Custom_Button();
-            btMatchLog = new Addon_Custom_Button();
-            btPauseGame = new Addon_Custom_Button();
+            pnPause = new Addon_Transparent_Panel();
+            lbExit = new CustomLabel();
+            lbLeaveMatch = new CustomLabel();
+            lbMatchLog = new CustomLabel();
+            lbSettings = new CustomLabel();
+            lbOptions = new CustomLabel();
+            lbResume = new CustomLabel();
+            lbMenu = new CustomLabel();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
             pnPause.SuspendLayout();
             SuspendLayout();
@@ -181,7 +181,7 @@ namespace LAN_Caro
             rtbLog.BorderStyle = BorderStyle.None;
             rtbLog.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             rtbLog.ForeColor = Color.White;
-            rtbLog.Location = new Point(337, 95);
+            rtbLog.Location = new Point(343, 90);
             rtbLog.Name = "rtbLog";
             rtbLog.Size = new Size(760, 569);
             rtbLog.TabIndex = 13;
@@ -191,14 +191,14 @@ namespace LAN_Caro
             // 
             // pnPause
             // 
-            pnPause.Controls.Add(btMenuLabel);
-            pnPause.Controls.Add(btResume);
+            pnPause.Controls.Add(lbExit);
+            pnPause.Controls.Add(lbLeaveMatch);
+            pnPause.Controls.Add(lbMatchLog);
+            pnPause.Controls.Add(lbSettings);
+            pnPause.Controls.Add(lbOptions);
+            pnPause.Controls.Add(lbResume);
+            pnPause.Controls.Add(lbMenu);
             pnPause.Controls.Add(rtbLog);
-            pnPause.Controls.Add(btExitGame);
-            pnPause.Controls.Add(btLeaveMatch);
-            pnPause.Controls.Add(btSettings);
-            pnPause.Controls.Add(btMatchLog);
-            pnPause.Controls.Add(btPauseGame);
             pnPause.Dock = DockStyle.Fill;
             pnPause.Location = new Point(0, 0);
             pnPause.Name = "pnPause";
@@ -207,163 +207,88 @@ namespace LAN_Caro
             pnPause.Tag = "0";
             pnPause.Visible = false;
             // 
-            // btMenuLabel
+            // lbExit
             // 
-            btMenuLabel.BackColor = Color.Transparent;
-            btMenuLabel.BackgroundColor = Color.Transparent;
-            btMenuLabel.BorderColor = Color.PaleVioletRed;
-            btMenuLabel.BorderRadius = 0;
-            btMenuLabel.BorderSize = 0;
-            btMenuLabel.FlatAppearance.BorderSize = 0;
-            btMenuLabel.FlatStyle = FlatStyle.Flat;
-            btMenuLabel.ForeColor = Color.White;
-            btMenuLabel.Location = new Point(34, 95);
-            btMenuLabel.Name = "btMenuLabel";
-            btMenuLabel.RightToLeft = RightToLeft.No;
-            btMenuLabel.Size = new Size(225, 86);
-            btMenuLabel.TabIndex = 16;
-            btMenuLabel.Text = "MENU";
-            btMenuLabel.TextAlign = ContentAlignment.MiddleLeft;
-            btMenuLabel.TextColor = Color.White;
-            btMenuLabel.UseVisualStyleBackColor = false;
-            btMenuLabel.Click += btMenu_Click;
-            btMenuLabel.Leave += PauseButton_MouseLeave;
-            btMenuLabel.MouseClick += btMenu_MouseClick;
-            btMenuLabel.MouseDown += btMenu_MouseClick;
-            btMenuLabel.MouseEnter += MenuButton_MouseEnter;
-            btMenuLabel.MouseLeave += MenuButton_MouseLeave;
-            btMenuLabel.MouseUp += btMenu_MouseClick;
+            lbExit.AutoSize = true;
+            lbExit.BackColor = Color.Transparent;
+            lbExit.ForeColor = Color.White;
+            lbExit.Location = new Point(45, 570);
+            lbExit.Name = "lbExit";
+            lbExit.Size = new Size(152, 25);
+            lbExit.TabIndex = 21;
+            lbExit.Text = "EXIT TO DESKTOP";
+            lbExit.Click += lbExit_Click;
             // 
-            // btResume
+            // lbLeaveMatch
             // 
-            btResume.BackColor = Color.Transparent;
-            btResume.BackgroundColor = Color.Transparent;
-            btResume.BorderColor = Color.PaleVioletRed;
-            btResume.BorderRadius = 0;
-            btResume.BorderSize = 0;
-            btResume.FlatAppearance.BorderSize = 0;
-            btResume.FlatStyle = FlatStyle.Flat;
-            btResume.ForeColor = Color.White;
-            btResume.Location = new Point(43, 215);
-            btResume.Name = "btResume";
-            btResume.RightToLeft = RightToLeft.No;
-            btResume.Size = new Size(225, 60);
-            btResume.TabIndex = 14;
-            btResume.Text = "RESUME";
-            btResume.TextAlign = ContentAlignment.MiddleLeft;
-            btResume.TextColor = Color.White;
-            btResume.UseVisualStyleBackColor = false;
-            btResume.Click += btResume_Click;
-            btResume.MouseEnter += PauseButton_MouseEnter;
-            btResume.MouseLeave += PauseButton_MouseLeave;
+            lbLeaveMatch.AutoSize = true;
+            lbLeaveMatch.BackColor = Color.Transparent;
+            lbLeaveMatch.ForeColor = Color.White;
+            lbLeaveMatch.Location = new Point(45, 500);
+            lbLeaveMatch.Name = "lbLeaveMatch";
+            lbLeaveMatch.Size = new Size(124, 25);
+            lbLeaveMatch.TabIndex = 20;
+            lbLeaveMatch.Text = "LEAVE MATCH";
+            lbLeaveMatch.Click += lbLeaveMatch_Click;
             // 
-            // btExitGame
+            // lbMatchLog
             // 
-            btExitGame.BackColor = Color.Transparent;
-            btExitGame.BackgroundColor = Color.Transparent;
-            btExitGame.BorderColor = Color.PaleVioletRed;
-            btExitGame.BorderRadius = 0;
-            btExitGame.BorderSize = 0;
-            btExitGame.FlatAppearance.BorderSize = 0;
-            btExitGame.FlatStyle = FlatStyle.Flat;
-            btExitGame.ForeColor = Color.White;
-            btExitGame.Location = new Point(43, 540);
-            btExitGame.Name = "btExitGame";
-            btExitGame.Size = new Size(298, 60);
-            btExitGame.TabIndex = 4;
-            btExitGame.Text = "EXIT TO DESKTOP";
-            btExitGame.TextAlign = ContentAlignment.MiddleLeft;
-            btExitGame.TextColor = Color.White;
-            btExitGame.UseVisualStyleBackColor = false;
-            btExitGame.MouseEnter += PauseButton_MouseEnter;
-            btExitGame.MouseLeave += PauseButton_MouseLeave;
+            lbMatchLog.AutoSize = true;
+            lbMatchLog.BackColor = Color.Transparent;
+            lbMatchLog.ForeColor = Color.White;
+            lbMatchLog.Location = new Point(45, 430);
+            lbMatchLog.Name = "lbMatchLog";
+            lbMatchLog.Size = new Size(109, 25);
+            lbMatchLog.TabIndex = 19;
+            lbMatchLog.Text = "MATCH LOG";
+            lbMatchLog.Click += lbMatchLog_Click;
             // 
-            // btLeaveMatch
+            // lbSettings
             // 
-            btLeaveMatch.BackColor = Color.Transparent;
-            btLeaveMatch.BackgroundColor = Color.Transparent;
-            btLeaveMatch.BorderColor = Color.PaleVioletRed;
-            btLeaveMatch.BorderRadius = 0;
-            btLeaveMatch.BorderSize = 0;
-            btLeaveMatch.FlatAppearance.BorderSize = 0;
-            btLeaveMatch.FlatStyle = FlatStyle.Flat;
-            btLeaveMatch.ForeColor = Color.White;
-            btLeaveMatch.Location = new Point(43, 475);
-            btLeaveMatch.Name = "btLeaveMatch";
-            btLeaveMatch.Size = new Size(225, 60);
-            btLeaveMatch.TabIndex = 3;
-            btLeaveMatch.Text = "LEAVE MATCH";
-            btLeaveMatch.TextAlign = ContentAlignment.MiddleLeft;
-            btLeaveMatch.TextColor = Color.White;
-            btLeaveMatch.UseVisualStyleBackColor = false;
-            btLeaveMatch.MouseEnter += PauseButton_MouseEnter;
-            btLeaveMatch.MouseLeave += PauseButton_MouseLeave;
+            lbSettings.AutoSize = true;
+            lbSettings.BackColor = Color.Transparent;
+            lbSettings.ForeColor = Color.White;
+            lbSettings.Location = new Point(45, 360);
+            lbSettings.Name = "lbSettings";
+            lbSettings.Size = new Size(89, 25);
+            lbSettings.TabIndex = 18;
+            lbSettings.Text = "SETTINGS";
+            lbSettings.Click += lbSettings_Click;
             // 
-            // btSettings
+            // lbOptions
             // 
-            btSettings.BackColor = Color.Transparent;
-            btSettings.BackgroundColor = Color.Transparent;
-            btSettings.BorderColor = Color.PaleVioletRed;
-            btSettings.BorderRadius = 0;
-            btSettings.BorderSize = 0;
-            btSettings.FlatAppearance.BorderSize = 0;
-            btSettings.FlatStyle = FlatStyle.Flat;
-            btSettings.ForeColor = Color.White;
-            btSettings.Location = new Point(43, 345);
-            btSettings.Name = "btSettings";
-            btSettings.Size = new Size(225, 60);
-            btSettings.TabIndex = 2;
-            btSettings.Text = "SETTINGS";
-            btSettings.TextAlign = ContentAlignment.MiddleLeft;
-            btSettings.TextColor = Color.White;
-            btSettings.UseVisualStyleBackColor = false;
-            btSettings.MouseEnter += PauseButton_MouseEnter;
-            btSettings.MouseLeave += PauseButton_MouseLeave;
+            lbOptions.AutoSize = true;
+            lbOptions.BackColor = Color.Transparent;
+            lbOptions.ForeColor = Color.White;
+            lbOptions.Location = new Point(45, 290);
+            lbOptions.Name = "lbOptions";
+            lbOptions.Size = new Size(87, 25);
+            lbOptions.TabIndex = 17;
+            lbOptions.Text = "OPTIONS";
+            lbOptions.Click += lbOptions_Click;
             // 
-            // btMatchLog
+            // lbResume
             // 
-            btMatchLog.BackColor = Color.Transparent;
-            btMatchLog.BackgroundColor = Color.Transparent;
-            btMatchLog.BorderColor = Color.PaleVioletRed;
-            btMatchLog.BorderRadius = 0;
-            btMatchLog.BorderSize = 0;
-            btMatchLog.FlatAppearance.BorderSize = 0;
-            btMatchLog.FlatStyle = FlatStyle.Flat;
-            btMatchLog.ForeColor = Color.White;
-            btMatchLog.Location = new Point(43, 410);
-            btMatchLog.Name = "btMatchLog";
-            btMatchLog.Size = new Size(225, 60);
-            btMatchLog.TabIndex = 1;
-            btMatchLog.Text = "MATCH LOG";
-            btMatchLog.TextAlign = ContentAlignment.MiddleLeft;
-            btMatchLog.TextColor = Color.White;
-            btMatchLog.UseVisualStyleBackColor = false;
-            btMatchLog.Click += btMatchLog_Click;
-            btMatchLog.MouseEnter += PauseButton_MouseEnter;
-            btMatchLog.MouseLeave += PauseButton_MouseLeave;
+            lbResume.AutoSize = true;
+            lbResume.BackColor = Color.Transparent;
+            lbResume.ForeColor = Color.White;
+            lbResume.Location = new Point(45, 220);
+            lbResume.Name = "lbResume";
+            lbResume.Size = new Size(79, 25);
+            lbResume.TabIndex = 16;
+            lbResume.Text = "RESUME";
+            lbResume.Click += lbResume_Click;
             // 
-            // btPauseGame
+            // lbMenu
             // 
-            btPauseGame.BackColor = Color.Transparent;
-            btPauseGame.BackgroundColor = Color.Transparent;
-            btPauseGame.BorderColor = Color.PaleVioletRed;
-            btPauseGame.BorderRadius = 0;
-            btPauseGame.BorderSize = 0;
-            btPauseGame.FlatAppearance.BorderSize = 0;
-            btPauseGame.FlatStyle = FlatStyle.Flat;
-            btPauseGame.ForeColor = Color.White;
-            btPauseGame.Location = new Point(43, 280);
-            btPauseGame.Name = "btPauseGame";
-            btPauseGame.RightToLeft = RightToLeft.No;
-            btPauseGame.Size = new Size(225, 60);
-            btPauseGame.TabIndex = 0;
-            btPauseGame.Text = "PAUSE GAME";
-            btPauseGame.TextAlign = ContentAlignment.MiddleLeft;
-            btPauseGame.TextColor = Color.White;
-            btPauseGame.UseVisualStyleBackColor = false;
-            btPauseGame.Click += btPause_Click;
-            btPauseGame.MouseEnter += PauseButton_MouseEnter;
-            btPauseGame.MouseLeave += PauseButton_MouseLeave;
+            lbMenu.AutoSize = true;
+            lbMenu.BackColor = Color.Transparent;
+            lbMenu.ForeColor = Color.White;
+            lbMenu.Location = new Point(34, 110);
+            lbMenu.Name = "lbMenu";
+            lbMenu.Size = new Size(62, 25);
+            lbMenu.TabIndex = 15;
+            lbMenu.Text = "MENU";
             // 
             // Caro
             // 
@@ -387,6 +312,7 @@ namespace LAN_Caro
             KeyDown += Caro_KeyDown;
             ((System.ComponentModel.ISupportInitialize)imgTurn).EndInit();
             pnPause.ResumeLayout(false);
+            pnPause.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -405,14 +331,15 @@ namespace LAN_Caro
         private Button button1;
         private Button button2;
         private RichTextBox rtbLog;
-        private xPanel pnPause;
+        private Addon_Transparent_Panel pnPause;
         private Label label1;
-        private Addon_Custom_Button btPauseGame;
-        private Addon_Custom_Button btMatchLog;
-        private Addon_Custom_Button btSettings;
-        private Addon_Custom_Button btExitGame;
-        private Addon_Custom_Button btLeaveMatch;
-        private Addon_Custom_Button btResume;
         private Addon_Custom_Button btMenuLabel;
+        private CustomLabel lbExit;
+        private CustomLabel lbLeaveMatch;
+        private CustomLabel lbMatchLog;
+        private CustomLabel lbSettings;
+        private CustomLabel lbOptions;
+        private CustomLabel lbResume;
+        private CustomLabel lbMenu;
     }
 }
