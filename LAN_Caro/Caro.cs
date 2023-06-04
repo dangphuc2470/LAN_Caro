@@ -8,9 +8,13 @@ namespace LAN_Caro
 
         TableManager tableManager;
         Player_OBJ ServerOrClient;
+        public int remainingTimeInSeconds = 60; // Thời gian ban đầu là 60 giây
+        public int initialTimeInSeconds;
         public Caro()
         {
             InitializeComponent();
+            initialTimeInSeconds = remainingTimeInSeconds;
+            lbTimer.ForeColor = Color.Blue;
             KeyPreview = true;
             #region Format Pause Panel font
             foreach (CustomLabel label in pnPause.Controls.OfType<CustomLabel>())
@@ -21,6 +25,8 @@ namespace LAN_Caro
                     label.ForeColor = Color.White;
                     continue;
                 }
+                else if (label.Name == "randomPatternLabel")
+                    continue;
                 label.MouseEnter += PauseLabel_MouseEnter;
                 label.MouseLeave += PauseLabel_MouseLeave;
                 label.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
@@ -31,7 +37,8 @@ namespace LAN_Caro
         }
         private void Caro_Load(object sender, EventArgs e)
         {
-            tableManager = new TableManager(pnTable, rtbLog, imgTurn, tbIPAdress);
+            lbTimer.Text = initialTimeInSeconds.ToString();
+            tableManager = new TableManager(pnTable, rtbLog, imgTurn, tbIPAdress, timer1);
             tableManager.tableButtonClickedSend += TableManager_ButtonClickedSend;
             tableManager.DrawTable();
             Task.Run(() =>
@@ -41,18 +48,35 @@ namespace LAN_Caro
             });
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            remainingTimeInSeconds--;
+            lbTimer.Text = remainingTimeInSeconds.ToString();
+
+            if (remainingTimeInSeconds == 0)
+            {
+                timer1.Enabled = false;
+                MessageBox.Show("Đếm ngược đã kết thúc!");
+            }
+        }
+
+
         private void Connect_Click(object sender, EventArgs e)
         {
             if (chbServer.CheckState == CheckState.Checked)
             {
                 ServerOrClient = new Server_OBJ(tableManager);
                 tableManager.setPlayer(0);
+
             }
             else
             {
                 try
-                { ServerOrClient = new Client_OBJ(tableManager, tbIPAdress.Text); }
-                catch 
+                {
+                    ServerOrClient = new Client_OBJ(tableManager, tbIPAdress.Text);
+                    timer1.Start();
+                }
+                catch
                 {
                     MessageBox.Show("Server does not started yet!");
                     return;
@@ -148,8 +172,7 @@ namespace LAN_Caro
         {
             ResetColor(lbOptions);
             ResetVisible();
-            lbPause.Visible = true;
-            lbRandom.Visible = true;
+            randomPatternLabel.Visible = true;
             lbRestart.Visible = true;
         }
 
@@ -224,7 +247,7 @@ namespace LAN_Caro
 
         private void lbPause_Click(object sender, EventArgs e)
         {
-
+            ServerOrClient.messageSend("PS");
         }
         private void lbRandom_Click(object sender, EventArgs e)
         {
@@ -232,6 +255,11 @@ namespace LAN_Caro
             tableManager.RandomPatern();
         }
 
-
+        private void lbRestart_VisibleChanged(object sender, EventArgs e)
+        {
+            lbRandom.Visible = lbRestart.Visible;
+            lbPause.Visible = lbRestart.Visible;
+            randomPatternLabel.Visible = lbRestart.Visible;
+        }
     }
 }

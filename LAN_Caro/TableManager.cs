@@ -14,10 +14,11 @@ namespace LAN_Caro
         public PictureBox imgTurn;
         public TextBox tbIPAdress;
         public Panel pnTable;
+        public System.Windows.Forms.Timer timer;
         public List<Player> PlayerList { get; set; }
         public List<List<Button>> buttonList = new List<List<Button>>();
 
-        public TableManager(Panel pnTable, RichTextBox rtbLog, PictureBox imgTurn, TextBox tbIPAdress)
+        public TableManager(Panel pnTable, RichTextBox rtbLog, PictureBox imgTurn, TextBox tbIPAdress, System.Windows.Forms.Timer timer)
         {
             this.pnTable = pnTable;
             this.rtbLog = rtbLog;
@@ -29,10 +30,11 @@ namespace LAN_Caro
                 new Player("O", Properties.Resources.o, Properties.Resources.od),
             };
             isClientTurn = 0;
+            this.timer = timer;
         }
 
 
-
+        #region Xử lí bàn cờ
         public void DrawTable()
         {
             Button lastButton = new Button() { Width = 0, Location = new Point(40, 40) };
@@ -64,6 +66,8 @@ namespace LAN_Caro
 
         }
         public event EventHandler<string> tableButtonClickedSend; //Gửi dữ liệu sang form
+
+
         public void btn_Click(object sender, EventArgs e)
         {
             if (isClientPlayer != isClientTurn)  //Nếu chưa tới lượt thì không thể nhấn nút
@@ -76,7 +80,7 @@ namespace LAN_Caro
                 return;
             buttonList[y][x].Image = PlayerList[isClientTurn].Image;
 
-            if (countVertical(x, y) >= 4 || countHorizontal(x, y) >= 4 || countMainDiag(x, y) >= 4 || countSubDiag(x, y) >= 4)
+            if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
                 MessageBox.Show("WIN");
             tableButtonClickedSend?.Invoke(this, x + ":" + y);
         }
@@ -88,13 +92,10 @@ namespace LAN_Caro
                 return;
             buttonList[y][x].Image = PlayerList[isClientTurn].Image;
 
-            if (countVertical(x, y) >= 4 || countHorizontal(x, y) >= 4 || countMainDiag(x, y) >= 4 || countSubDiag(x, y) >= 4)
+            if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
                 MessageBox.Show("LOSE");
             SwitchPlayer();
         }
-
-
-
 
         public void setPlayer(int isClientPlayer)
         {
@@ -107,8 +108,18 @@ namespace LAN_Caro
             imgTurn.Image = PlayerList[isClientTurn].Image;
         }
 
-        #region COUNT
-        public int countHorizontal(int x, int y)
+        #endregion
+
+
+
+
+
+
+
+
+
+        #region Kiểm tra thắng thua
+        public bool countHorizontal(int x, int y)
         {
             Image thisButtonImage = buttonList[y][x].Image;
             int count = 0;
@@ -146,12 +157,13 @@ namespace LAN_Caro
                         break;
                 }
                 buttonList[y][x].BackColor = Color.LightGreen;
+                return true;
             }
-            return count;
+            return false;
 
 
         }
-        public int countVertical(int x, int y)
+        public bool countVertical(int x, int y)
         {
             Image thisButtonImage = buttonList[y][x].Image;
             int count = 0;
@@ -186,12 +198,13 @@ namespace LAN_Caro
                         break;
                 }
                 buttonList[y][x].BackColor = Color.LightGreen;
+                return true;
             }
 
-            return count;
+            return false;
 
         }
-        public int countMainDiag(int x, int y)
+        public bool countMainDiag(int x, int y)
         {
             Image thisButtonImage = buttonList[y][x].Image;
             int count = 0;
@@ -223,11 +236,12 @@ namespace LAN_Caro
                     else break;
                 }
                 buttonList[y][x].BackColor = Color.LightGreen;
+                return true;
             }
-            return count;
+            return false;
         }
 
-        public int countSubDiag(int x, int y)
+        public bool countSubDiag(int x, int y)
         {
             Image thisButtonImage = buttonList[y][x].Image;
             int count = 0;
@@ -245,7 +259,7 @@ namespace LAN_Caro
                 else
                     break;
             }
-            if (count >=4 ) 
+            if (count >= 4)
             {
                 for (int i = x - 1, j = y + 1; i >= 0 && j < TABLE_HEIGHT; i--, j++)
                 {
@@ -262,10 +276,17 @@ namespace LAN_Caro
                         break;
                 }
                 buttonList[y][x].BackColor = Color.LightGreen;
+                return true;
             }
-            return count;
+            return false;
         }
         #endregion
+
+
+
+
+
+
 
         #region Hiệu ứng khởi tạo button
         /// <summary>
@@ -384,20 +405,14 @@ namespace LAN_Caro
             SwitchPlayer();
         }
 
-        #endregion
 
-
-
-        #region Test New Game
         public void RandomPatern()
         {
-
-
             ResetTag();
             Random rand = new Random();
-            int i = 0;
-            while (!IsUpdated())
+            for (int i = 0; !IsUpdated(); i++)
             {
+
                 for (int j = 0; j < 5; j++)
                 {
                     int x = rand.Next(24);
@@ -410,15 +425,10 @@ namespace LAN_Caro
                         buttonList[y][x].Image = PlayerList[temp].Image;
 
                 }
-                i++;
             }
-
-
-
         }
         #endregion
-
-
     }
 }
+
 

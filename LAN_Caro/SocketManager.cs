@@ -27,6 +27,7 @@ namespace LAN_Caro
                 netStream = tcpClient.GetStream();
                 tableManager = table;
                 tableManager.rtbLog.Text += tableManager.tbIPAdress.Text + ":8082\nConnected!\n";
+                messageSend("Start");
                 Task.Run(() =>
                 {
                     ReceiveMessage(tcpClient.Client);
@@ -50,6 +51,7 @@ namespace LAN_Caro
         {
             int bytesReceived = 0;
             byte[] recv = new byte[1];
+            tableManager.timer.Start();
             while (tcpClient_Client.Connected)
             {
                 string Chr;
@@ -153,6 +155,11 @@ namespace LAN_Caro
                 else if (temp.StartsWith("RS"))
                 {
                     tableManager.Restart();
+                    continue;
+                }
+                else if (temp.StartsWith("Start"))
+                {
+                    tableManager.timer.Start();
                     continue;
                 }
 
