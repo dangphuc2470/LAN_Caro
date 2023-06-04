@@ -176,8 +176,7 @@ namespace LAN_Caro
 
         private void lbExit_Click(object sender, EventArgs e)
         {
-            ResetColor(lbExit);
-            ResetVisible();
+            this.Close();
         }
 
         /// <summary>
