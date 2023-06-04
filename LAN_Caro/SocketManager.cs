@@ -67,9 +67,9 @@ namespace LAN_Caro
                 tableManager.rtbLog.Text += "Receive: " + temp + "\n";
                 if (temp == "")
                     continue;
-                else if (temp.StartsWith("NG"))
+                else if (temp.StartsWith("RS"))
                 {
-                    //tableManager.newGame();
+                    tableManager.Restart();
                     continue;
                 }
                 string[] parts = temp.Split(':');
@@ -150,9 +150,9 @@ namespace LAN_Caro
                 tableManager.rtbLog.Text += "Receive: " + temp + "\n";
                 if (temp == "")
                     continue;
-                else if (temp.StartsWith("NG"))
+                else if (temp.StartsWith("RS"))
                 {
-                    //tableManager.newGame();
+                    tableManager.Restart();
                     continue;
                 }
 

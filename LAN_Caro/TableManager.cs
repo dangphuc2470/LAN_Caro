@@ -25,8 +25,8 @@ namespace LAN_Caro
             this.tbIPAdress = tbIPAdress;
             PlayerList = new List<Player>()
             {
-                new Player("X", Properties.Resources.x),
-                new Player("O", Properties.Resources.o),
+                new Player("X", Properties.Resources.x, Properties.Resources.xd),
+                new Player("O", Properties.Resources.o, Properties.Resources.od),
             };
             isClientTurn = 0;
         }
@@ -270,9 +270,9 @@ namespace LAN_Caro
                     buttonList[y][x].FlatAppearance.BorderColor = Color.FromArgb(69, 69, 69);
                     buttonList[y][x].BackColor = Color.FromArgb(75, 75, 75);
                     if (buttonList[y][x].Image == PlayerList[1].Image)
-                        buttonList[y][x].Image = Properties.Resources.od;
+                        buttonList[y][x].Image = PlayerList[1].DarkImage;
                     else if (buttonList[y][x].Image == PlayerList[0].Image)
-                        buttonList[y][x].Image = Properties.Resources.xd;
+                        buttonList[y][x].Image = PlayerList[0].DarkImage;
 
 
                 }
@@ -290,6 +290,10 @@ namespace LAN_Caro
                 {
                     buttonList[y][x].FlatAppearance.BorderColor = Color.Silver;
                     buttonList[y][x].BackColor = Color.White;
+                    if (buttonList[y][x].Image == PlayerList[1].DarkImage)
+                        buttonList[y][x].Image = PlayerList[1].Image;
+                    else if (buttonList[y][x].Image == PlayerList[0].DarkImage)
+                        buttonList[y][x].Image = PlayerList[0].Image;
                 }
             }
         }
@@ -297,7 +301,7 @@ namespace LAN_Caro
         /// <summary>
         /// Reset bàn cờ
         /// </summary>
-        public void NewGame()
+        public void Restart()
         {
             Task.Run(() =>
             {
@@ -314,8 +318,7 @@ namespace LAN_Caro
         public void RandomPatern()
         {
 
-            Task.Run(() =>
-            {
+            
                 ResetTag();
                 Random rand = new Random();
                 int i = 0;
@@ -336,7 +339,7 @@ namespace LAN_Caro
                     i++;
                 }
 
-            });
+           
 
         }
         #endregion

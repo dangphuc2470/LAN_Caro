@@ -12,6 +12,7 @@ namespace LAN_Caro
         {
             InitializeComponent();
             KeyPreview = true;
+            #region Format Pause Panel font
             foreach (CustomLabel label in pnPause.Controls.OfType<CustomLabel>())
             {
                 if (label.Name == "lbMenu")
@@ -25,8 +26,8 @@ namespace LAN_Caro
                 label.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
                 label.ForeColor = Color.Silver;
                 label.Tag = "0";
-
             }
+            #endregion
         }
         private void Caro_Load(object sender, EventArgs e)
         {
@@ -48,7 +49,15 @@ namespace LAN_Caro
                 tableManager.setPlayer(0);
             }
             else
-                ServerOrClient = new Client_OBJ(tableManager, tbIPAdress.Text);
+            {
+                try
+                { ServerOrClient = new Client_OBJ(tableManager, tbIPAdress.Text); }
+                catch 
+                {
+                    MessageBox.Show("Server does not started yet!");
+                    return;
+                }
+            }
         }
 
 
@@ -71,12 +80,6 @@ namespace LAN_Caro
             tableManager.DarkColor();
         }
 
-        private void NewGame_Click(object sender, EventArgs e)
-        {
-            ServerOrClient.messageSend("NG");
-            tableManager.NewGame();
-        }
-
         private void RandomPattern_Click(object sender, EventArgs e)
         {
             tableManager.RandomPatern();
@@ -95,6 +98,23 @@ namespace LAN_Caro
 
 
         #region Pause Panel
+        private void Caro_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (pnPause.Tag == "0")
+                {
+                    tableManager.DarkColor();
+                    pnPause.Dock = DockStyle.Fill;
+                    pnPause.Visible = true;
+                    pnPause.Tag = "1";
+                    ResetColor(lbResume);
+                }
+                else
+                    Resume();
+            }
+        }
+
         private void PauseLabel_MouseEnter(object sender, EventArgs e)
         {
             CustomLabel label = (CustomLabel)sender;
@@ -108,6 +128,7 @@ namespace LAN_Caro
                 label.ForeColor = Color.Silver;
         }
 
+
         private void lbResume_Click(object sender, EventArgs e)
         {
             Resume();
@@ -116,17 +137,20 @@ namespace LAN_Caro
         private void Resume()
         {
             ResetColor();
-            tableManager.ResetColor();
             pnPause.Visible = false;
             pnPause.Tag = "0";
             ResetVisible();
+            tableManager.ResetColor();
+
         }
 
         private void lbOptions_Click(object sender, EventArgs e)
         {
             ResetColor(lbOptions);
-
             ResetVisible();
+            lbPause.Visible = true;
+            lbRandom.Visible = true;
+            lbRestart.Visible = true;
         }
 
         private void lbSettings_Click(object sender, EventArgs e)
@@ -138,6 +162,7 @@ namespace LAN_Caro
 
         private void lbMatchLog_Click(object sender, EventArgs e)
         {
+            ResetVisible();
             ResetColor(lbMatchLog);
             rtbLog.Visible = true;
         }
@@ -180,30 +205,34 @@ namespace LAN_Caro
         /// </summary>
         private void ResetVisible()
         {
-            tableManager.DarkColor();
             rtbLog.Visible = false;
+            lbPause.Visible = false;
+            lbRandom.Visible = false;
+            lbRestart.Visible = false;
+            tableManager.DarkColor();
 
         }
+
+
         #endregion
 
-
-
-        private void Caro_KeyDown(object sender, KeyEventArgs e)
+        private void lbRestart_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
-            {
-                if (pnPause.Tag == "0")
-                {
-                    pnPause.Dock = DockStyle.Fill;
-                    pnPause.Visible = true;
-                    tableManager.DarkColor();
-                    pnPause.Tag = "1";
-                    ResetColor(lbResume);
-                }
-                else
-                    Resume();
-            }
+            Resume();
+            tableManager.Restart();
+            ServerOrClient.messageSend("RS");
         }
-    }
 
+        private void lbPause_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void lbRandom_Click(object sender, EventArgs e)
+        {
+            Resume();
+            tableManager.RandomPatern();
+        }
+
+
+    }
 }

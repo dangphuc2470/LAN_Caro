@@ -12,11 +12,13 @@ namespace LAN_Caro
         public string Name { get => name; set => name = value; }
         private Image image;
         public Image Image { get => image; set => image = value; }
-
-        public Player(string name, Image image) 
+        private Image darkImage;
+        public Image DarkImage { get => darkImage; set => darkImage = value; }
+        public Player(string name, Image image, Image darkImage) 
         {
-            this.Name = name;
-            this.Image = image;
+            Name = name;
+            Image = image;
+            DarkImage = darkImage;
         }
 
 

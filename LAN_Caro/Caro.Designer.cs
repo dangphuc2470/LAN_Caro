@@ -39,11 +39,13 @@ namespace LAN_Caro
             imageList1 = new ImageList(components);
             imgTurn = new PictureBox();
             btMenu = new Addon_Custom_Button();
-            btNewGamea = new Addon_Custom_Button();
             button1 = new Button();
             button2 = new Button();
             rtbLog = new RichTextBox();
             pnPause = new Addon_Transparent_Panel();
+            lbRandom = new CustomLabel();
+            lbPause = new CustomLabel();
+            lbRestart = new CustomLabel();
             lbExit = new CustomLabel();
             lbLeaveMatch = new CustomLabel();
             lbMatchLog = new CustomLabel();
@@ -119,7 +121,7 @@ namespace LAN_Caro
             btMenu.BackColor = Color.FromArgb(213, 227, 255);
             btMenu.BackgroundColor = Color.FromArgb(213, 227, 255);
             btMenu.BorderColor = Color.PaleVioletRed;
-            btMenu.BorderRadius = 30;
+            btMenu.BorderRadius = 20;
             btMenu.BorderSize = 0;
             btMenu.FlatAppearance.BorderSize = 0;
             btMenu.FlatStyle = FlatStyle.Flat;
@@ -127,32 +129,11 @@ namespace LAN_Caro
             btMenu.ForeColor = Color.FromArgb(0, 28, 59);
             btMenu.Location = new Point(31, 683);
             btMenu.Name = "btMenu";
-            btMenu.Size = new Size(225, 60);
+            btMenu.Size = new Size(60, 60);
             btMenu.TabIndex = 10;
-            btMenu.Text = "Pause";
             btMenu.TextColor = Color.FromArgb(0, 28, 59);
             btMenu.UseVisualStyleBackColor = false;
             btMenu.Click += Menu_Click;
-            // 
-            // btNewGamea
-            // 
-            btNewGamea.BackColor = Color.FromArgb(213, 227, 255);
-            btNewGamea.BackgroundColor = Color.FromArgb(213, 227, 255);
-            btNewGamea.BorderColor = Color.PaleVioletRed;
-            btNewGamea.BorderRadius = 30;
-            btNewGamea.BorderSize = 0;
-            btNewGamea.FlatAppearance.BorderSize = 0;
-            btNewGamea.FlatStyle = FlatStyle.Flat;
-            btNewGamea.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btNewGamea.ForeColor = Color.FromArgb(0, 28, 59);
-            btNewGamea.Location = new Point(25, 589);
-            btNewGamea.Name = "btNewGamea";
-            btNewGamea.Size = new Size(225, 60);
-            btNewGamea.TabIndex = 11;
-            btNewGamea.Text = "New Game";
-            btNewGamea.TextColor = Color.FromArgb(0, 28, 59);
-            btNewGamea.UseVisualStyleBackColor = false;
-            btNewGamea.Click += NewGame_Click;
             // 
             // button1
             // 
@@ -181,9 +162,9 @@ namespace LAN_Caro
             rtbLog.BorderStyle = BorderStyle.None;
             rtbLog.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             rtbLog.ForeColor = Color.White;
-            rtbLog.Location = new Point(343, 90);
+            rtbLog.Location = new Point(320, 63);
             rtbLog.Name = "rtbLog";
-            rtbLog.Size = new Size(760, 569);
+            rtbLog.Size = new Size(933, 652);
             rtbLog.TabIndex = 13;
             rtbLog.Text = "";
             rtbLog.Visible = false;
@@ -191,6 +172,9 @@ namespace LAN_Caro
             // 
             // pnPause
             // 
+            pnPause.Controls.Add(lbRandom);
+            pnPause.Controls.Add(lbPause);
+            pnPause.Controls.Add(lbRestart);
             pnPause.Controls.Add(lbExit);
             pnPause.Controls.Add(lbLeaveMatch);
             pnPause.Controls.Add(lbMatchLog);
@@ -206,6 +190,45 @@ namespace LAN_Caro
             pnPause.TabIndex = 14;
             pnPause.Tag = "0";
             pnPause.Visible = false;
+            // 
+            // lbRandom
+            // 
+            lbRandom.AutoSize = true;
+            lbRandom.BackColor = Color.Transparent;
+            lbRandom.ForeColor = Color.White;
+            lbRandom.Location = new Point(320, 363);
+            lbRandom.Name = "lbRandom";
+            lbRandom.Size = new Size(330, 25);
+            lbRandom.TabIndex = 24;
+            lbRandom.Text = "RANDOM PATTERN (TESTING PURPOSE)";
+            lbRandom.Visible = false;
+            lbRandom.Click += lbRandom_Click;
+            // 
+            // lbPause
+            // 
+            lbPause.AutoSize = true;
+            lbPause.BackColor = Color.Transparent;
+            lbPause.ForeColor = Color.White;
+            lbPause.Location = new Point(320, 290);
+            lbPause.Name = "lbPause";
+            lbPause.Size = new Size(64, 25);
+            lbPause.TabIndex = 23;
+            lbPause.Text = "PAUSE";
+            lbPause.Visible = false;
+            lbPause.Click += lbPause_Click;
+            // 
+            // lbRestart
+            // 
+            lbRestart.AutoSize = true;
+            lbRestart.BackColor = Color.Transparent;
+            lbRestart.ForeColor = Color.White;
+            lbRestart.Location = new Point(320, 220);
+            lbRestart.Name = "lbRestart";
+            lbRestart.Size = new Size(81, 25);
+            lbRestart.TabIndex = 22;
+            lbRestart.Text = "RESTART";
+            lbRestart.Visible = false;
+            lbRestart.Click += lbRestart_Click;
             // 
             // lbExit
             // 
@@ -299,7 +322,6 @@ namespace LAN_Caro
             Controls.Add(pnPause);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(btNewGamea);
             Controls.Add(btMenu);
             Controls.Add(imgTurn);
             Controls.Add(chbServer);
@@ -327,7 +349,6 @@ namespace LAN_Caro
         private ImageList imageList1;
         private PictureBox imgTurn;
         private Addon_Custom_Button btMenu;
-        private Addon_Custom_Button btNewGamea;
         private Button button1;
         private Button button2;
         private RichTextBox rtbLog;
@@ -341,5 +362,8 @@ namespace LAN_Caro
         private CustomLabel lbOptions;
         private CustomLabel lbResume;
         private CustomLabel lbMenu;
+        private CustomLabel lbRandom;
+        private CustomLabel lbPause;
+        private CustomLabel lbRestart;
     }
 }
