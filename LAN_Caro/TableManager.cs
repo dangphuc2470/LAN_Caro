@@ -108,7 +108,7 @@ namespace LAN_Caro
         }
 
         #region COUNT
-        public int countVertical(int x, int y)
+        public int countHorizontal(int x, int y)
         {
             Image thisButtonImage = buttonList[y][x].Image;
             int count = 0;
@@ -127,11 +127,31 @@ namespace LAN_Caro
                 else
                     break;
             }
+
+            if (count >= 4)
+            {
+                for (int i = x - 1; i >= 0; i--)
+                {
+                    if (buttonList[y][i].Image == thisButtonImage)
+                        buttonList[y][i].BackColor = Color.LightGreen;
+                    else
+                        break;
+                }
+
+                for (int i = x + 1; i < TABLE_WIDTH; i++)
+                {
+                    if (buttonList[y][i].Image == thisButtonImage)
+                        buttonList[y][i].BackColor = Color.LightGreen;
+                    else
+                        break;
+                }
+                buttonList[y][x].BackColor = Color.LightGreen;
+            }
             return count;
 
 
         }
-        public int countHorizontal(int x, int y)
+        public int countVertical(int x, int y)
         {
             Image thisButtonImage = buttonList[y][x].Image;
             int count = 0;
@@ -149,6 +169,25 @@ namespace LAN_Caro
                 else
                     break;
             }
+            if (count >= 4)
+            {
+                for (int i = y - 1; i >= 0; i--)
+                {
+                    if (buttonList[i][x].Image == thisButtonImage)
+                        buttonList[i][x].BackColor = Color.LightGreen;
+                    else
+                        break;
+                }
+                for (int i = y + 1; i < TABLE_HEIGHT; i++)
+                {
+                    if (buttonList[i][x].Image == thisButtonImage)
+                        buttonList[i][x].BackColor = Color.LightGreen;
+                    else
+                        break;
+                }
+                buttonList[y][x].BackColor = Color.LightGreen;
+            }
+
             return count;
 
         }
@@ -167,6 +206,23 @@ namespace LAN_Caro
                 if (buttonList[j][i].Image == thisButtonImage)
                     count++;
                 else break;
+            }
+
+            if (count >= 4)
+            {
+                for (int i = x - 1, j = y - 1; i >= 0 && j >= 0; i--, j--)
+                {
+                    if (buttonList[j][i].Image == thisButtonImage)
+                        buttonList[j][i].BackColor = Color.LightGreen;
+                    else break;
+                }
+                for (int i = x + 1, j = y + 1; i < TABLE_WIDTH && j < TABLE_HEIGHT; i++, j++)
+                {
+                    if (buttonList[j][i].Image == thisButtonImage)
+                        buttonList[j][i].BackColor = Color.LightGreen;
+                    else break;
+                }
+                buttonList[y][x].BackColor = Color.LightGreen;
             }
             return count;
         }
@@ -188,6 +244,24 @@ namespace LAN_Caro
                     count++;
                 else
                     break;
+            }
+            if (count >=4 ) 
+            {
+                for (int i = x - 1, j = y + 1; i >= 0 && j < TABLE_HEIGHT; i--, j++)
+                {
+                    if (buttonList[j][i].Image == thisButtonImage)
+                        buttonList[j][i].BackColor = Color.LightGreen;
+                    else
+                        break;
+                }
+                for (int i = x + 1, j = y - 1; i < TABLE_WIDTH && j >= 0; i++, j--)
+                {
+                    if (buttonList[j][i].Image == thisButtonImage)
+                        buttonList[j][i].BackColor = Color.LightGreen;
+                    else
+                        break;
+                }
+                buttonList[y][x].BackColor = Color.LightGreen;
             }
             return count;
         }
@@ -318,28 +392,28 @@ namespace LAN_Caro
         public void RandomPatern()
         {
 
-            
-                ResetTag();
-                Random rand = new Random();
-                int i = 0;
-                while (!IsUpdated())
+
+            ResetTag();
+            Random rand = new Random();
+            int i = 0;
+            while (!IsUpdated())
+            {
+                for (int j = 0; j < 5; j++)
                 {
-                    for (int j = 0; j < 5; j++)
-                    {
-                        int x = rand.Next(24);
-                        int y = rand.Next(16);
-                        buttonList[y][x].Tag = 1;
-                        int temp = rand.Next(3);
-                        if (temp == 2)
-                            buttonList[y][x].Image = null;
-                        else
-                            buttonList[y][x].Image = PlayerList[temp].Image;
+                    int x = rand.Next(24);
+                    int y = rand.Next(16);
+                    buttonList[y][x].Tag = 1;
+                    int temp = rand.Next(3);
+                    if (temp == 2)
+                        buttonList[y][x].Image = null;
+                    else
+                        buttonList[y][x].Image = PlayerList[temp].Image;
 
-                    }
-                    i++;
                 }
+                i++;
+            }
 
-           
+
 
         }
         #endregion
