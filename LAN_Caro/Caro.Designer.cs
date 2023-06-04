@@ -43,6 +43,7 @@ namespace LAN_Caro
             button2 = new Button();
             rtbLog = new RichTextBox();
             pnPause = new Addon_Transparent_Panel();
+            randomPatternLabel = new CustomLabel();
             lbRandom = new CustomLabel();
             lbPause = new CustomLabel();
             lbRestart = new CustomLabel();
@@ -53,6 +54,8 @@ namespace LAN_Caro
             lbOptions = new CustomLabel();
             lbResume = new CustomLabel();
             lbMenu = new CustomLabel();
+            timer1 = new System.Windows.Forms.Timer(components);
+            lbTimer = new Label();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
             pnPause.SuspendLayout();
             SuspendLayout();
@@ -172,6 +175,7 @@ namespace LAN_Caro
             // 
             // pnPause
             // 
+            pnPause.Controls.Add(randomPatternLabel);
             pnPause.Controls.Add(lbRandom);
             pnPause.Controls.Add(lbPause);
             pnPause.Controls.Add(lbRestart);
@@ -183,13 +187,25 @@ namespace LAN_Caro
             pnPause.Controls.Add(lbResume);
             pnPause.Controls.Add(lbMenu);
             pnPause.Controls.Add(rtbLog);
-            pnPause.Dock = DockStyle.Fill;
             pnPause.Location = new Point(0, 0);
             pnPause.Name = "pnPause";
-            pnPause.Size = new Size(1312, 770);
+            pnPause.Size = new Size(10, 10);
             pnPause.TabIndex = 14;
             pnPause.Tag = "0";
             pnPause.Visible = false;
+            // 
+            // randomPatternLabel
+            // 
+            randomPatternLabel.AutoSize = true;
+            randomPatternLabel.BackColor = Color.Transparent;
+            randomPatternLabel.Font = new Font("Arial Narrow", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            randomPatternLabel.ForeColor = Color.White;
+            randomPatternLabel.Location = new Point(583, 391);
+            randomPatternLabel.Name = "randomPatternLabel";
+            randomPatternLabel.Size = new Size(184, 24);
+            randomPatternLabel.TabIndex = 25;
+            randomPatternLabel.Text = "(Testing purpose only)";
+            randomPatternLabel.Visible = false;
             // 
             // lbRandom
             // 
@@ -198,9 +214,9 @@ namespace LAN_Caro
             lbRandom.ForeColor = Color.White;
             lbRandom.Location = new Point(320, 363);
             lbRandom.Name = "lbRandom";
-            lbRandom.Size = new Size(330, 25);
+            lbRandom.Size = new Size(167, 25);
             lbRandom.TabIndex = 24;
-            lbRandom.Text = "RANDOM PATTERN (TESTING PURPOSE)";
+            lbRandom.Text = "RANDOM PATTERN";
             lbRandom.Visible = false;
             lbRandom.Click += lbRandom_Click;
             // 
@@ -228,6 +244,7 @@ namespace LAN_Caro
             lbRestart.TabIndex = 22;
             lbRestart.Text = "RESTART";
             lbRestart.Visible = false;
+            lbRestart.VisibleChanged += lbRestart_VisibleChanged;
             lbRestart.Click += lbRestart_Click;
             // 
             // lbExit
@@ -313,12 +330,26 @@ namespace LAN_Caro
             lbMenu.TabIndex = 15;
             lbMenu.Text = "MENU";
             // 
+            // timer1
+            // 
+            timer1.Interval = 1000;
+            timer1.Tick += timer1_Tick;
+            // 
+            // lbTimer
+            // 
+            lbTimer.AutoSize = true;
+            lbTimer.Location = new Point(60, 101);
+            lbTimer.Name = "lbTimer";
+            lbTimer.Size = new Size(0, 25);
+            lbTimer.TabIndex = 16;
+            // 
             // Caro
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(247, 249, 252);
             ClientSize = new Size(1312, 770);
+            Controls.Add(lbTimer);
             Controls.Add(pnPause);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -365,5 +396,8 @@ namespace LAN_Caro
         private CustomLabel lbRandom;
         private CustomLabel lbPause;
         private CustomLabel lbRestart;
+        private CustomLabel randomPatternLabel;
+        private System.Windows.Forms.Timer timer1;
+        private Label lbTimer;
     }
 }
