@@ -4,7 +4,7 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace LAN_Caro;
-class xPanel : Panel
+class Addon_Transparent_Panel : Panel
 {
     protected override CreateParams CreateParams
     {

@@ -12,17 +12,21 @@ namespace LAN_Caro
         {
             InitializeComponent();
             KeyPreview = true;
-            foreach (Addon_Custom_Button button in pnPause.Controls.OfType<Button>())
+            foreach (CustomLabel label in pnPause.Controls.OfType<CustomLabel>())
             {
-                button.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
-                button.ForeColor = Color.FromArgb(176, 177, 180);
-                if (button.Name == "btMenuLabel")
+                if (label.Name == "lbMenu")
                 {
-                    button.UseCustomFont("Arbuz.ttf", 40, FontStyle.Bold);
-                    button.ForeColor = Color.White;
+                    label.UseCustomFont("Arbuz.ttf", 40, FontStyle.Bold);
+                    label.ForeColor = Color.White;
+                    continue;
                 }
-            }
+                label.MouseEnter += PauseLabel_MouseEnter;
+                label.MouseLeave += PauseLabel_MouseLeave;
+                label.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
+                label.ForeColor = Color.Silver;
+                label.Tag = "0";
 
+            }
         }
         private void Caro_Load(object sender, EventArgs e)
         {
@@ -91,70 +95,84 @@ namespace LAN_Caro
 
 
         #region Pause Panel
-        private void PauseButton_MouseEnter(object sender, EventArgs e)
+        private void PauseLabel_MouseEnter(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
-            button.BackColor = Color.FromArgb(62, 62, 62);
-            button.ForeColor = Color.White;
+            CustomLabel label = (CustomLabel)sender;
+            label.ForeColor = Color.White;
         }
 
-
-        private void PauseButton_MouseLeave(object sender, EventArgs e)
+        private void PauseLabel_MouseLeave(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
-            button.BackColor = Color.Transparent;
-            if (button.Tag == "1")
-                return;
-            button.ForeColor = Color.FromArgb(176, 177, 180);
-
+            CustomLabel label = (CustomLabel)sender;
+            if (label.Tag == "0")
+                label.ForeColor = Color.Silver;
         }
 
-        private void btResume_Click(object sender, EventArgs e)
+        private void lbResume_Click(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-            Resume(button);
+            Resume();
         }
 
-        private void Resume(Button button)
+        private void Resume()
         {
-            ResetTag(button);
-            pnPause.Visible = false;
+            ResetColor();
             tableManager.ResetColor();
-            ResetVisible();
+            pnPause.Visible = false;
             pnPause.Tag = "0";
+            ResetVisible();
         }
 
-        private void btPause_Click(object sender, EventArgs e)
+        private void lbOptions_Click(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-            ResetTag(button);
+            ResetColor(lbOptions);
 
-
+            ResetVisible();
         }
 
-        private void btMatchLog_Click(object sender, EventArgs e)
+        private void lbSettings_Click(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-            ResetTag(button);
+            ResetColor(lbSettings);
+            ResetVisible();
+        }
 
+
+        private void lbMatchLog_Click(object sender, EventArgs e)
+        {
+            ResetColor(lbMatchLog);
             rtbLog.Visible = true;
+        }
+
+
+        private void lbLeaveMatch_Click(object sender, EventArgs e)
+        {
+            ResetColor(lbLeaveMatch);
+            ResetVisible();
+        }
+
+        private void lbExit_Click(object sender, EventArgs e)
+        {
+            ResetColor(lbExit);
+            ResetVisible();
         }
 
         /// <summary>
         /// Reset tag và màu cho các button
         /// </summary>
-        private void ResetTag(Button thisButton)
+        /// 
+        private void ResetColor(CustomLabel thisLabel = null)
         {
-            foreach (Addon_Custom_Button button in pnPause.Controls.OfType<Button>())
+            foreach (CustomLabel label in pnPause.Controls.OfType<CustomLabel>())
             {
-                if (button.Name == "btMenuLabel")
+                if (label.Name == "lbMenu")
                     continue;
-                button.Tag = 0;
-                button.ForeColor = Color.FromArgb(176, 177, 180);
-
+                label.ForeColor = Color.Silver;
+                label.Tag = "0";
+                if (thisLabel != null && thisLabel.Name != "lbResume")
+                {
+                    thisLabel.ForeColor = Color.White;
+                    thisLabel.Tag = "1";
+                }
             }
-            thisButton.ForeColor = Color.White;
-            thisButton.Tag = "1";
         }
 
         /// <summary>
@@ -162,41 +180,13 @@ namespace LAN_Caro
         /// </summary>
         private void ResetVisible()
         {
+            tableManager.DarkColor();
             rtbLog.Visible = false;
 
         }
         #endregion
 
-        #region Disable MenuButton
 
-        private void MenuButton_MouseEnter(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            button.BackColor = Color.FromArgb(62, 62, 62);
-            button.ForeColor = Color.White;
-        }
-
-        private void MenuButton_MouseLeave(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            button.BackColor = Color.Transparent;
-            button.ForeColor = Color.White;
-        }
-
-        private void btMenu_MouseClick(object sender, MouseEventArgs e)
-        {
-            Button button = (Button)sender;
-            button.BackColor = Color.FromArgb(62, 62, 62);
-            button.ForeColor = Color.White;
-        }
-
-        private void btMenu_Click(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            button.BackColor = Color.FromArgb(62, 62, 62);
-            button.ForeColor = Color.White;
-        }
-        #endregion
 
         private void Caro_KeyDown(object sender, KeyEventArgs e)
         {
@@ -208,9 +198,10 @@ namespace LAN_Caro
                     pnPause.Visible = true;
                     tableManager.DarkColor();
                     pnPause.Tag = "1";
+                    ResetColor(lbResume);
                 }
                 else
-                    Resume(btResume);
+                    Resume();
             }
         }
     }
