@@ -194,7 +194,13 @@ namespace LAN_Caro
         #endregion
 
         #region Hiệu ứng khởi tạo button
-        public void UpdateColor(Color color, bool updateWhite = false, int loop = 100)
+        /// <summary>
+        /// Đổi màu border cho button và xóa nước cờ
+        /// </summary>
+        /// <param name="color"></param>
+        /// <param name="updateWhite"></param>
+        /// <param name="interval"></param>
+        public void UpdateColor(Color color, bool updateWhite = false, int interval = 100)
         {
             if (updateWhite)
                 UpdateColor(Color.White);
@@ -213,12 +219,15 @@ namespace LAN_Caro
                     buttonList[y][x].Image = null;
                 }
                 i++;
-                if (i < loop)
+                if (i < interval)
                     Thread.Sleep(1);
             }
         }
 
-
+        /// <summary>
+        /// Kiểm tra xem tất cả các button có được đổi màu hay chưa
+        /// </summary>
+        /// <returns></returns>
         public bool IsUpdated()
         {
             for (int x = 0; x < TABLE_WIDTH; x++)
@@ -232,6 +241,10 @@ namespace LAN_Caro
             return true;
         }
 
+        /// <summary>
+        /// Đặt trạng thái của button thành chưa đổi màu
+        /// </summary>
+        /// <returns></returns>
         public bool ResetTag()
         {
             for (int x = 0; x < TABLE_WIDTH; x++)
@@ -281,6 +294,9 @@ namespace LAN_Caro
             }
         }
 
+        /// <summary>
+        /// Reset bàn cờ
+        /// </summary>
         public void NewGame()
         {
             Task.Run(() =>
@@ -295,7 +311,7 @@ namespace LAN_Caro
 
 
         #region Test New Game
-        public void UpdateCorlorTest(Color color, int loop = 100)
+        public void RandomPatern()
         {
 
             Task.Run(() =>
@@ -309,7 +325,6 @@ namespace LAN_Caro
                     {
                         int x = rand.Next(24);
                         int y = rand.Next(16);
-                        buttonList[y][x].FlatAppearance.BorderColor = color;
                         buttonList[y][x].Tag = 1;
                         int temp = rand.Next(3);
                         if (temp == 2)

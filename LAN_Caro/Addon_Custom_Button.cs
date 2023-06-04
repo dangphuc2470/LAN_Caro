@@ -167,5 +167,11 @@ namespace LAN_Caro
 
 
         }
+
+        protected override void OnEnabledChanged(EventArgs e)
+        {
+            base.OnEnabledChanged(e);
+                ForeColor = Color.White;
+        }
     }
 }

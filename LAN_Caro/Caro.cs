@@ -8,13 +8,19 @@ namespace LAN_Caro
 
         TableManager tableManager;
         Player_OBJ ServerOrClient;
-        Font customfont;
-
-
         public Caro()
         {
             InitializeComponent();
-            btContinue.UseCustomFont("UI.ttf", 35, FontStyle.Bold);
+            foreach (Addon_Custom_Button button in pnPause.Controls.OfType<Button>())
+            {
+                button.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
+                button.ForeColor = Color.FromArgb(176, 177, 180);
+                if (button.Name == "btMenuLabel")
+                {
+                    button.UseCustomFont("Arbuz.ttf", 40, FontStyle.Bold);
+                    button.ForeColor = Color.White;
+                }
+            }
 
         }
         private void Caro_Load(object sender, EventArgs e)
@@ -52,14 +58,12 @@ namespace LAN_Caro
             tbIPAdress.Text = "127.0.0.1";
         }
 
-        private void Pause_Click(object sender, EventArgs e)
+        private void Menu_Click(object sender, EventArgs e)
         {
 
             pnPause.Dock = DockStyle.Fill;
             pnPause.Visible = true;
             tableManager.DarkColor();
-
-
         }
 
         private void NewGame_Click(object sender, EventArgs e)
@@ -70,7 +74,7 @@ namespace LAN_Caro
 
         private void RandomPattern_Click(object sender, EventArgs e)
         {
-            tableManager.UpdateCorlorTest(Color.Silver);
+            tableManager.RandomPatern();
         }
 
         private void SwitchPlayer_Click(object sender, EventArgs e)
@@ -84,18 +88,108 @@ namespace LAN_Caro
             rtbLog.ScrollToCaret();
         }
 
-        private void Continue_Click(object sender, EventArgs e)
-        {
-            //tableManager.UpdateColor(Color.Wheat);
 
-            //Task.Run(() =>
-            //{
-            //});
+        #region Pause Panel
+        private void PauseButton_MouseEnter(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.BackColor = Color.FromArgb(62, 62, 62);
+            button.ForeColor = Color.White;
+        }
+
+
+        private void PauseButton_MouseLeave(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.BackColor = Color.Transparent;
+            if (button.Tag == "1")
+                return;
+            button.ForeColor = Color.FromArgb(176, 177, 180);
+
+        }
+
+        private void btResume_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            ResetTag(button);
+
+            pnPause.Visible = false;
+            tableManager.ResetColor();
+            ResetVisible();
+        }
+
+        private void btPause_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            ResetTag(button);
+
+
         }
 
         private void btMatchLog_Click(object sender, EventArgs e)
         {
+            Button button = sender as Button;
+            ResetTag(button);
+
             rtbLog.Visible = true;
         }
+
+        /// <summary>
+        /// Reset tag và màu cho các button
+        /// </summary>
+        private void ResetTag(Button thisButton)
+        {
+            foreach (Addon_Custom_Button button in pnPause.Controls.OfType<Button>())
+            {
+                if (button.Name == "btMenuLabel")
+                    continue;
+                button.Tag = 0;
+                button.ForeColor = Color.FromArgb(176, 177, 180);
+
+            }
+            thisButton.ForeColor = Color.White;
+            thisButton.Tag = "1";
+        }
+
+        /// <summary>
+        /// Ẩn tất cả tính năng trên Pause Panel
+        /// </summary>
+        private void ResetVisible()
+        {
+            rtbLog.Visible = false;
+
+        }
+        #endregion
+
+        #region Disable MenuButton
+
+        private void MenuButton_MouseEnter(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.BackColor = Color.FromArgb(62, 62, 62);
+            button.ForeColor = Color.White;
+        }
+
+        private void MenuButton_MouseLeave(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.BackColor = Color.Transparent;
+            button.ForeColor = Color.White;
+        }
+
+        private void btMenu_MouseClick(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+            button.BackColor = Color.FromArgb(62, 62, 62);
+            button.ForeColor = Color.White;
+        }
+
+        private void btMenu_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.BackColor = Color.FromArgb(62, 62, 62);
+            button.ForeColor = Color.White;
+        }
+        #endregion
     }
 }
