@@ -35,6 +35,23 @@ namespace LAN_Caro
                 label.Tag = "0";
             }
             #endregion
+            #region Format StartMenu Panel
+            foreach (CustomLabel label in pnStartMenu.Controls.OfType<CustomLabel>())
+            {
+                label.Parent = pictureBox1;
+                label.BackColor = Color.Transparent;
+                label.ForeColor = Color.White;
+                label.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
+            }
+            btPlayMM.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
+            btLan.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
+            lbSetting.Parent = pictureBox1;
+            lbSetting.BackColor = Color.Transparent;
+            lbSetting.ForeColor = Color.White;
+            lbSetting.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
+            //lbPlay.UseCustomFont("HeadlinerNo.45 DEMO.ttf", 45, FontStyle.Regular);
+            //lbPlay.ForeColor = Color.FromArgb(234, 178, 26);
+            #endregion
         }
         private void Caro_Load(object sender, EventArgs e)
         {
@@ -42,11 +59,6 @@ namespace LAN_Caro
             tableManager = new TableManager(pnTable, rtbLog, imgTurn, tbIPAdress, timer1, lbTimer, btReady, remainingTimeInSeconds);
             tableManager.tableButtonClickedSend += TableManager_ButtonClickedSend;
             tableManager.DrawTable();
-            Task.Run(() =>
-            {
-                tableManager.UpdateColor(Color.Silver);
-
-            });
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -186,6 +198,9 @@ namespace LAN_Caro
         {
             ResetColor(lbLeaveMatch);
             ResetVisible();
+            lbPause.Visible = false;
+            //Lam lai tu dau
+            pnStartMenu.Visible = true;
         }
 
         private void lbExit_Click(object sender, EventArgs e)
@@ -234,7 +249,7 @@ namespace LAN_Caro
             Resume();
             tableManager.Restart();
             remainingTimeInSeconds = 60;
-            ServerOrClient.messageSend("Restart:"+remainingTimeInSeconds);
+            ServerOrClient.messageSend("Restart:" + remainingTimeInSeconds);
         }
 
         private void lbPause_Click(object sender, EventArgs e)
@@ -307,6 +322,28 @@ namespace LAN_Caro
                 btReady.Visible = !pnPause.Visible;
         }
 
+        private void btLan_Click(object sender, EventArgs e)
+        {
 
+            Task.Run(() =>
+            {
+                tableManager.UpdateColor(Color.Silver);
+
+            });
+            pnStartMenu.Visible = false;
+            pnPause.Visible = false;
+        }
+
+        private void Caro_Resize(object sender, EventArgs e)
+        {
+            int width = this.Width;
+            int height = this.Height;
+            int targetHeight = (int)(width * 9.0 / 16.0);
+
+            if (height != targetHeight)
+            {
+                this.SetBounds(this.Bounds.X, this.Bounds.Y, width, targetHeight);
+            }
+        }
     }
 }

@@ -71,6 +71,26 @@ namespace LAN_Caro.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ezgif_1_2b46e4d3fb {
+            get {
+                object obj = ResourceManager.GetObject("ezgif-1-2b46e4d3fb", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ezgif_1_32739badee {
+            get {
+                object obj = ResourceManager.GetObject("ezgif-1-32739badee", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] HeadlinerNo_45_DEMO {
@@ -106,6 +126,26 @@ namespace LAN_Caro.Properties {
         internal static System.Drawing.Bitmap od {
             get {
                 object obj = ResourceManager.GetObject("od", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PSFix_20230605_223910_auto_x2_2 {
+            get {
+                object obj = ResourceManager.GetObject("PSFix_20230605_223910_auto_x2~2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PSFix_20230605_223910_auto_x2_3 {
+            get {
+                object obj = ResourceManager.GetObject("PSFix_20230605_223910_auto_x2~3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
