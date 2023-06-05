@@ -39,10 +39,10 @@ namespace LAN_Caro
             imageList1 = new ImageList(components);
             imgTurn = new PictureBox();
             btMenu = new Addon_Custom_Button();
-            button1 = new Button();
-            button2 = new Button();
             rtbLog = new RichTextBox();
             pnPause = new Addon_Transparent_Panel();
+            customLabel1 = new CustomLabel();
+            lbChangeTurn = new CustomLabel();
             randomPatternLabel = new CustomLabel();
             lbRandom = new CustomLabel();
             lbPause = new CustomLabel();
@@ -56,6 +56,7 @@ namespace LAN_Caro
             lbMenu = new CustomLabel();
             timer1 = new System.Windows.Forms.Timer(components);
             lbTimer = new Label();
+            btReady = new Addon_Custom_Button();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
             pnPause.SuspendLayout();
             SuspendLayout();
@@ -115,9 +116,10 @@ namespace LAN_Caro
             imgTurn.InitialImage = null;
             imgTurn.Location = new Point(225, 359);
             imgTurn.Name = "imgTurn";
-            imgTurn.Size = new Size(34, 35);
+            imgTurn.Size = new Size(35, 35);
             imgTurn.TabIndex = 9;
             imgTurn.TabStop = false;
+            imgTurn.SizeChanged += imgTurn_SizeChanged;
             // 
             // btMenu
             // 
@@ -130,34 +132,14 @@ namespace LAN_Caro
             btMenu.FlatStyle = FlatStyle.Flat;
             btMenu.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btMenu.ForeColor = Color.FromArgb(0, 28, 59);
-            btMenu.Location = new Point(31, 683);
+            btMenu.Image = Properties.Resources.icons8_settings_24;
+            btMenu.Location = new Point(9, 700);
             btMenu.Name = "btMenu";
             btMenu.Size = new Size(60, 60);
-            btMenu.TabIndex = 10;
+            btMenu.TabIndex = 5;
             btMenu.TextColor = Color.FromArgb(0, 28, 59);
             btMenu.UseVisualStyleBackColor = false;
             btMenu.Click += Menu_Click;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.MediumVioletRed;
-            button1.Location = new Point(34, 506);
-            button1.Name = "button1";
-            button1.Size = new Size(112, 34);
-            button1.TabIndex = 12;
-            button1.Text = "random quan co";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += RandomPattern_Click;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(147, 400);
-            button2.Name = "button2";
-            button2.Size = new Size(112, 34);
-            button2.TabIndex = 0;
-            button2.Text = "Switch";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += SwitchPlayer_Click;
             // 
             // rtbLog
             // 
@@ -175,6 +157,8 @@ namespace LAN_Caro
             // 
             // pnPause
             // 
+            pnPause.Controls.Add(customLabel1);
+            pnPause.Controls.Add(lbChangeTurn);
             pnPause.Controls.Add(randomPatternLabel);
             pnPause.Controls.Add(lbRandom);
             pnPause.Controls.Add(lbPause);
@@ -187,12 +171,39 @@ namespace LAN_Caro
             pnPause.Controls.Add(lbResume);
             pnPause.Controls.Add(lbMenu);
             pnPause.Controls.Add(rtbLog);
-            pnPause.Location = new Point(0, 0);
+            pnPause.Location = new Point(961, 671);
             pnPause.Name = "pnPause";
-            pnPause.Size = new Size(10, 10);
+            pnPause.Size = new Size(351, 99);
             pnPause.TabIndex = 14;
             pnPause.Tag = "0";
             pnPause.Visible = false;
+            pnPause.VisibleChanged += pnPause_VisibleChanged;
+            // 
+            // customLabel1
+            // 
+            customLabel1.AutoSize = true;
+            customLabel1.BackColor = Color.Transparent;
+            customLabel1.Font = new Font("Arial Narrow", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            customLabel1.ForeColor = Color.White;
+            customLabel1.Location = new Point(583, 458);
+            customLabel1.Name = "customLabel1";
+            customLabel1.Size = new Size(184, 24);
+            customLabel1.TabIndex = 27;
+            customLabel1.Text = "(Testing purpose only)";
+            customLabel1.Visible = false;
+            // 
+            // lbChangeTurn
+            // 
+            lbChangeTurn.AutoSize = true;
+            lbChangeTurn.BackColor = Color.Transparent;
+            lbChangeTurn.ForeColor = Color.White;
+            lbChangeTurn.Location = new Point(320, 430);
+            lbChangeTurn.Name = "lbChangeTurn";
+            lbChangeTurn.Size = new Size(132, 25);
+            lbChangeTurn.TabIndex = 26;
+            lbChangeTurn.Text = "CHANGE TURN";
+            lbChangeTurn.Visible = false;
+            lbChangeTurn.Click += lbChangeTurn_Click;
             // 
             // randomPatternLabel
             // 
@@ -338,10 +349,34 @@ namespace LAN_Caro
             // lbTimer
             // 
             lbTimer.AutoSize = true;
-            lbTimer.Location = new Point(60, 101);
+            lbTimer.BackColor = Color.Transparent;
+            lbTimer.Location = new Point(60, 78);
             lbTimer.Name = "lbTimer";
             lbTimer.Size = new Size(0, 25);
             lbTimer.TabIndex = 16;
+            lbTimer.Tag = "0";
+            // 
+            // btReady
+            // 
+            btReady.BackColor = Color.FromArgb(213, 227, 255);
+            btReady.BackgroundColor = Color.FromArgb(213, 227, 255);
+            btReady.BorderColor = Color.PaleVioletRed;
+            btReady.BorderRadius = 20;
+            btReady.BorderSize = 0;
+            btReady.FlatAppearance.BorderSize = 0;
+            btReady.FlatStyle = FlatStyle.Flat;
+            btReady.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btReady.ForeColor = Color.WhiteSmoke;
+            btReady.Location = new Point(94, 700);
+            btReady.Name = "btReady";
+            btReady.Size = new Size(166, 60);
+            btReady.TabIndex = 17;
+            btReady.Tag = 0;
+            btReady.Text = "Ready";
+            btReady.TextColor = Color.WhiteSmoke;
+            btReady.UseVisualStyleBackColor = false;
+            btReady.Click += btReady_Click;
+            btReady.MouseHover += btReady_MouseHover;
             // 
             // Caro
             // 
@@ -349,10 +384,9 @@ namespace LAN_Caro
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(247, 249, 252);
             ClientSize = new Size(1312, 770);
+            Controls.Add(btReady);
             Controls.Add(lbTimer);
             Controls.Add(pnPause);
-            Controls.Add(button2);
-            Controls.Add(button1);
             Controls.Add(btMenu);
             Controls.Add(imgTurn);
             Controls.Add(chbServer);
@@ -380,8 +414,6 @@ namespace LAN_Caro
         private ImageList imageList1;
         private PictureBox imgTurn;
         private Addon_Custom_Button btMenu;
-        private Button button1;
-        private Button button2;
         private RichTextBox rtbLog;
         private Addon_Transparent_Panel pnPause;
         private Label label1;
@@ -399,5 +431,8 @@ namespace LAN_Caro
         private CustomLabel randomPatternLabel;
         private System.Windows.Forms.Timer timer1;
         private Label lbTimer;
+        private Addon_Custom_Button btReady;
+        private CustomLabel customLabel1;
+        private CustomLabel lbChangeTurn;
     }
 }

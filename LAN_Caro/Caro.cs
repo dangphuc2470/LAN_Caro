@@ -8,14 +8,15 @@ namespace LAN_Caro
 
         TableManager tableManager;
         Player_OBJ ServerOrClient;
-        public int remainingTimeInSeconds = 60; // Thời gian ban đầu là 60 giây
-        public int initialTimeInSeconds;
+        ToolTip toolTip1;
+        public int remainingTimeInSeconds; // Thời gian ban đầu là 60 giây
         public Caro()
         {
             InitializeComponent();
-            initialTimeInSeconds = remainingTimeInSeconds;
+            remainingTimeInSeconds = 60;
             lbTimer.ForeColor = Color.Blue;
             KeyPreview = true;
+            toolTip1 = new ToolTip();
             #region Format Pause Panel font
             foreach (CustomLabel label in pnPause.Controls.OfType<CustomLabel>())
             {
@@ -37,8 +38,8 @@ namespace LAN_Caro
         }
         private void Caro_Load(object sender, EventArgs e)
         {
-            lbTimer.Text = initialTimeInSeconds.ToString();
-            tableManager = new TableManager(pnTable, rtbLog, imgTurn, tbIPAdress, timer1);
+            lbTimer.Text = remainingTimeInSeconds.ToString();
+            tableManager = new TableManager(pnTable, rtbLog, imgTurn, tbIPAdress, timer1, lbTimer, btReady, remainingTimeInSeconds);
             tableManager.tableButtonClickedSend += TableManager_ButtonClickedSend;
             tableManager.DrawTable();
             Task.Run(() =>
@@ -67,14 +68,15 @@ namespace LAN_Caro
             {
                 ServerOrClient = new Server_OBJ(tableManager);
                 tableManager.setPlayer(0);
-
+                btReady.Text = "Play";
             }
             else
             {
                 try
                 {
                     ServerOrClient = new Client_OBJ(tableManager, tbIPAdress.Text);
-                    timer1.Start();
+                    btReady.Tag = 1;
+                    btReady.ForeColor = Color.Black;
                 }
                 catch
                 {
@@ -98,20 +100,9 @@ namespace LAN_Caro
 
         private void Menu_Click(object sender, EventArgs e)
         {
-
             pnPause.Dock = DockStyle.Fill;
             pnPause.Visible = true;
             tableManager.DarkColor();
-        }
-
-        private void RandomPattern_Click(object sender, EventArgs e)
-        {
-            tableManager.RandomPatern();
-        }
-
-        private void SwitchPlayer_Click(object sender, EventArgs e)
-        {
-            tableManager.SwitchPlayer();
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -242,12 +233,13 @@ namespace LAN_Caro
         {
             Resume();
             tableManager.Restart();
-            ServerOrClient.messageSend("RS");
+            remainingTimeInSeconds = 60;
+            ServerOrClient.messageSend("Restart:"+remainingTimeInSeconds);
         }
 
         private void lbPause_Click(object sender, EventArgs e)
         {
-            ServerOrClient.messageSend("PS");
+            ServerOrClient.messageSend("Pause");
         }
         private void lbRandom_Click(object sender, EventArgs e)
         {
@@ -255,11 +247,66 @@ namespace LAN_Caro
             tableManager.RandomPatern();
         }
 
+
+        /// <summary>
+        /// Hiển thị các label trong Options chung với Restart
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lbRestart_VisibleChanged(object sender, EventArgs e)
         {
             lbRandom.Visible = lbRestart.Visible;
             lbPause.Visible = lbRestart.Visible;
             randomPatternLabel.Visible = lbRestart.Visible;
         }
+
+        private void lbChangeTurn_Click(object sender, EventArgs e)
+        {
+            tableManager.SwitchPlayer();
+        }
+
+        /// <summary>
+        /// Mượn sự kiện SizeChanged để kích hoạt timer trong UI Thread (Vì không thể kích hoạt timer trong thread khác)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void imgTurn_SizeChanged(object sender, EventArgs e)
+        {
+            if (timer1.Enabled)
+                timer1.Stop();
+            else
+                timer1.Start();
+        }
+
+        private void btReady_Click(object sender, EventArgs e)
+        {
+            if (btReady.Tag.ToString() == "0")
+                return;
+            ServerOrClient.ready();
+            btReady.Tag = 1;
+        }
+
+        private void btReady_MouseHover(object sender, EventArgs e)
+        {
+            if (btReady.Tag.ToString() == "0")
+                toolTip1.Show("The other party is not ready at the moment or there is a connection problem...", btReady);
+        }
+
+        private void pnPause_VisibleChanged(object sender, EventArgs e)
+        {
+            if (pnPause.Visible)
+            {
+                lbTimer.BackColor = Color.FromArgb(75, 75, 75);
+            }
+            else
+            {
+                lbTimer.BackColor = Color.Transparent;
+            }
+
+            if (btReady.Tag.ToString() == "0")
+                btReady.Visible = !pnPause.Visible;
+        }
+
+
     }
 }
