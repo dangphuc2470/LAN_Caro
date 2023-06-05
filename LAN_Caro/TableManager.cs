@@ -15,15 +15,25 @@ namespace LAN_Caro
         public TextBox tbIPAdress;
         public Panel pnTable;
         public System.Windows.Forms.Timer timer;
+        public Label lbTimer;
+        public Addon_Custom_Button btReady; 
+        public int remainingTimeInSeconds;
+
         public List<Player> PlayerList { get; set; }
         public List<List<Button>> buttonList = new List<List<Button>>();
 
-        public TableManager(Panel pnTable, RichTextBox rtbLog, PictureBox imgTurn, TextBox tbIPAdress, System.Windows.Forms.Timer timer)
+        public TableManager(Panel pnTable, RichTextBox rtbLog, PictureBox imgTurn, TextBox tbIPAdress, 
+                            System.Windows.Forms.Timer timer, Label lbTimer, 
+                            Addon_Custom_Button btReady, int remainingTimeInSeconds)
         {
             this.pnTable = pnTable;
             this.rtbLog = rtbLog;
             this.imgTurn = imgTurn;
             this.tbIPAdress = tbIPAdress;
+            this.lbTimer = lbTimer;
+            this.btReady = btReady;
+            this.lbTimer.SizeChanged += lbTimer_SizeChanged;
+            this.remainingTimeInSeconds = remainingTimeInSeconds;
             PlayerList = new List<Player>()
             {
                 new Player("X", Properties.Resources.x, Properties.Resources.xd),
@@ -67,10 +77,10 @@ namespace LAN_Caro
         }
         public event EventHandler<string> tableButtonClickedSend; //Gửi dữ liệu sang form
 
-
+        #region Click
         public void btn_Click(object sender, EventArgs e)
         {
-            if (isClientPlayer != isClientTurn)  //Nếu chưa tới lượt thì không thể nhấn nút
+            if (isClientPlayer != isClientTurn || btReady.Tag.ToString() == "0")  //Nếu chưa tới lượt thì không thể nhấn nút
                 return;
             Button? button = sender as Button;
             int index = button.Name.IndexOf("_");
@@ -87,7 +97,6 @@ namespace LAN_Caro
 
         public void clickReceive(int x, int y)
         {
-            //MessageBox.Show(x.ToString() + y.ToString());
             if (buttonList[y][x].Image != null)
                 return;
             buttonList[y][x].Image = PlayerList[isClientTurn].Image;
@@ -96,6 +105,8 @@ namespace LAN_Caro
                 MessageBox.Show("LOSE");
             SwitchPlayer();
         }
+
+        #endregion
 
         public void setPlayer(int isClientPlayer)
         {
@@ -106,6 +117,8 @@ namespace LAN_Caro
         {
             isClientTurn = isClientTurn == 0 ? 1 : 0;
             imgTurn.Image = PlayerList[isClientTurn].Image;
+            Size size = imgTurn.Size;
+            imgTurn.Size = new Size(size.Width + 1, size.Height);
         }
 
         #endregion
@@ -398,7 +411,8 @@ namespace LAN_Caro
         /// </summary>
         public void Restart()
         {
-            Task.Run(() =>
+            
+             Task.Run(() =>
             {
                 UpdateColor(Color.Silver, true, 50);
             });
@@ -426,6 +440,13 @@ namespace LAN_Caro
 
                 }
             }
+        }
+        #endregion
+
+        #region Timer
+        public void lbTimer_SizeChanged(object sender, EventArgs e)
+        {
+            timer.Start();
         }
         #endregion
     }

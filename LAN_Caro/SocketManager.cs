@@ -1,3 +1,4 @@
+using System.Data;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -11,7 +12,33 @@ namespace LAN_Caro
         public TableManager tableManager;
         public abstract void ReceiveMessage(Socket tcpClient_Client);
         public abstract void messageSend(string dataS);
+        public abstract void ready();
+
+
+        public void TimerStartAndStop(int plusOrMinus)
+        {
+            Size size = tableManager.imgTurn.Size;
+            tableManager.imgTurn.Size = new Size(size.Width + plusOrMinus, size.Height);
+
+        }
+
+        public void btReadyHide()
+        {
+            // Check if the button control exists and is accessible from this thread
+            if (tableManager.btReady.InvokeRequired)
+            {
+                // Use marshaling to invoke the DisableButton method on the thread that created the button
+                tableManager.btReady.Invoke(new Action(btReadyHide));
+            }
+            else
+            {
+                // Disable the button
+                tableManager.btReady.Visible = false;
+            }
+        }
+
     }
+
 
 
     #region Client
@@ -27,7 +54,6 @@ namespace LAN_Caro
                 netStream = tcpClient.GetStream();
                 tableManager = table;
                 tableManager.rtbLog.Text += tableManager.tbIPAdress.Text + ":8082\nConnected!\n";
-                messageSend("Start");
                 Task.Run(() =>
                 {
                     ReceiveMessage(tcpClient.Client);
@@ -51,7 +77,6 @@ namespace LAN_Caro
         {
             int bytesReceived = 0;
             byte[] recv = new byte[1];
-            tableManager.timer.Start();
             while (tcpClient_Client.Connected)
             {
                 string Chr;
@@ -69,15 +94,26 @@ namespace LAN_Caro
                 tableManager.rtbLog.Text += "Receive: " + temp + "\n";
                 if (temp == "")
                     continue;
-                else if (temp.StartsWith("RS"))
+                else if (temp.StartsWith("Restart"))
                 {
+                    string[] partsRestart = temp.Split(':');
+                    tableManager.remainingTimeInSeconds = Int32.Parse(partsRestart[1]);
                     tableManager.Restart();
                     continue;
                 }
+                else if (temp.StartsWith("Play"))
+                {
+                    btReadyHide();
+                    continue;
+                }
+
+
+
                 string[] parts = temp.Split(':');
                 int x = Int32.Parse(parts[0]);
                 int y = Int32.Parse(parts[1]);
                 tableManager.clickReceive(x, y);
+                //Cần cho client ko start sau lần gửi đầu tiên
             }
         }
 
@@ -88,9 +124,24 @@ namespace LAN_Caro
                 tableManager.rtbLog.Text += "Send: " + dataS + "\n";
                 byte[] data = System.Text.Encoding.UTF8.GetBytes(dataS + "\n");
                 netStream.Write(data, 0, data.Length);
+                //TimerStartAndStop(-1); //Stop
+
             }
 
         }
+
+        public override void ready()
+        {
+            if (tableManager.btReady.Text == "Cancel")
+            {
+                tableManager.btReady.Text = "Ready";
+                messageSend("Cancel");
+                return;
+            }
+            messageSend("Ready");
+            tableManager.btReady.Text = "Cancel";
+        }
+
     }
     #endregion
 
@@ -124,6 +175,7 @@ namespace LAN_Caro
             ipepServer = new IPEndPoint(IPAddress.Any, 8082);
             tcpListener = new TcpListener(ipepServer);
             tcpListener.Start();
+
             Task.Run(() =>
             {
                 AcceptConnection();
@@ -152,17 +204,26 @@ namespace LAN_Caro
                 tableManager.rtbLog.Text += "Receive: " + temp + "\n";
                 if (temp == "")
                     continue;
-                else if (temp.StartsWith("RS"))
+                else if (temp.StartsWith("Restart"))
                 {
+                    string[] partsRestart = temp.Split(':');
+                    tableManager.remainingTimeInSeconds = Int32.Parse(partsRestart[1]);
                     tableManager.Restart();
                     continue;
                 }
-                else if (temp.StartsWith("Start"))
+                else if (temp.StartsWith("Ready"))
                 {
-                    tableManager.timer.Start();
+                    tableManager.btReady.Tag = "1";
+                    tableManager.btReady.ForeColor = Color.Black;
+                    //tableManager.btReady.T = true;
                     continue;
                 }
-
+                else if (temp.StartsWith("Cancel"))
+                {
+                    tableManager.btReady.Tag = "0";
+                    tableManager.btReady.ForeColor = Color.WhiteSmoke;
+                    continue;
+                }
                 string[] parts = temp.Split(':');
                 int x = Int32.Parse(parts[0]);
                 int y = Int32.Parse(parts[1]);
@@ -182,6 +243,7 @@ namespace LAN_Caro
                     byte[] data = Encoding.UTF8.GetBytes(message + "\n");
                     netStream.Write(data, 0, data.Length);
                 }
+
             }
         }
 
@@ -207,8 +269,12 @@ namespace LAN_Caro
                 }
             }
         }
-
-
+        public override void ready()
+        {
+            TimerStartAndStop(1);
+            btReadyHide();
+            messageSend("Play");
+        }
 
     }
     #endregion
