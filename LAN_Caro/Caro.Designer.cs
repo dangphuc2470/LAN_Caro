@@ -57,8 +57,17 @@ namespace LAN_Caro
             timer1 = new System.Windows.Forms.Timer(components);
             lbTimer = new Label();
             btReady = new Addon_Custom_Button();
+            pnStartMenu = new Panel();
+            btPlayMM = new Addon_Custom_Button();
+            btLan = new Addon_Custom_Button();
+            lbHelp = new CustomLabel();
+            lbSetting = new CustomLabel();
+            lbAbout = new CustomLabel();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
             pnPause.SuspendLayout();
+            pnStartMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pnTable
@@ -171,12 +180,11 @@ namespace LAN_Caro
             pnPause.Controls.Add(lbResume);
             pnPause.Controls.Add(lbMenu);
             pnPause.Controls.Add(rtbLog);
-            pnPause.Location = new Point(961, 671);
+            pnPause.Location = new Point(994, 604);
             pnPause.Name = "pnPause";
-            pnPause.Size = new Size(351, 99);
+            pnPause.Size = new Size(177, 99);
             pnPause.TabIndex = 14;
             pnPause.Tag = "0";
-            pnPause.Visible = false;
             pnPause.VisibleChanged += pnPause_VisibleChanged;
             // 
             // customLabel1
@@ -378,15 +386,124 @@ namespace LAN_Caro
             btReady.Click += btReady_Click;
             btReady.MouseHover += btReady_MouseHover;
             // 
+            // pnStartMenu
+            // 
+            pnStartMenu.BackgroundImageLayout = ImageLayout.Stretch;
+            pnStartMenu.Controls.Add(btPlayMM);
+            pnStartMenu.Controls.Add(btLan);
+            pnStartMenu.Controls.Add(lbHelp);
+            pnStartMenu.Controls.Add(lbSetting);
+            pnStartMenu.Controls.Add(lbAbout);
+            pnStartMenu.Controls.Add(pictureBox1);
+            pnStartMenu.Dock = DockStyle.Fill;
+            pnStartMenu.Location = new Point(0, 0);
+            pnStartMenu.Name = "pnStartMenu";
+            pnStartMenu.Size = new Size(1344, 712);
+            pnStartMenu.TabIndex = 19;
+            // 
+            // btPlayMM
+            // 
+            btPlayMM.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btPlayMM.BackColor = Color.MediumSlateBlue;
+            btPlayMM.BackgroundColor = Color.MediumSlateBlue;
+            btPlayMM.BackgroundImage = Properties.Resources.PSFix_20230605_223910_auto_x2_3;
+            btPlayMM.BackgroundImageLayout = ImageLayout.Stretch;
+            btPlayMM.BorderColor = Color.White;
+            btPlayMM.BorderRadius = 4;
+            btPlayMM.BorderSize = 1;
+            btPlayMM.FlatAppearance.BorderSize = 0;
+            btPlayMM.FlatStyle = FlatStyle.Flat;
+            btPlayMM.ForeColor = Color.White;
+            btPlayMM.Location = new Point(34, 497);
+            btPlayMM.Name = "btPlayMM";
+            btPlayMM.Size = new Size(329, 86);
+            btPlayMM.TabIndex = 19;
+            btPlayMM.Text = "PLAY";
+            btPlayMM.TextColor = Color.White;
+            btPlayMM.UseVisualStyleBackColor = false;
+            // 
+            // btLan
+            // 
+            btLan.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btLan.BackColor = Color.MediumSlateBlue;
+            btLan.BackgroundColor = Color.MediumSlateBlue;
+            btLan.BackgroundImage = Properties.Resources.PSFix_20230605_223910_auto_x2_2;
+            btLan.BackgroundImageLayout = ImageLayout.Stretch;
+            btLan.BorderColor = Color.White;
+            btLan.BorderRadius = 4;
+            btLan.BorderSize = 1;
+            btLan.FlatAppearance.BorderSize = 0;
+            btLan.FlatStyle = FlatStyle.Flat;
+            btLan.ForeColor = Color.White;
+            btLan.Location = new Point(34, 599);
+            btLan.Name = "btLan";
+            btLan.Size = new Size(329, 86);
+            btLan.TabIndex = 18;
+            btLan.Text = "MULTIPLAYER";
+            btLan.TextColor = Color.White;
+            btLan.UseVisualStyleBackColor = false;
+            btLan.Click += btLan_Click;
+            // 
+            // lbHelp
+            // 
+            lbHelp.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbHelp.AutoSize = true;
+            lbHelp.BackColor = Color.Transparent;
+            lbHelp.FlatStyle = FlatStyle.Flat;
+            lbHelp.ForeColor = Color.Black;
+            lbHelp.Location = new Point(579, 630);
+            lbHelp.Name = "lbHelp";
+            lbHelp.Size = new Size(52, 25);
+            lbHelp.TabIndex = 17;
+            lbHelp.Text = "HELP";
+            // 
+            // lbSetting
+            // 
+            lbSetting.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbSetting.AutoSize = true;
+            lbSetting.BackColor = Color.Transparent;
+            lbSetting.FlatStyle = FlatStyle.Flat;
+            lbSetting.ForeColor = Color.Black;
+            lbSetting.Location = new Point(408, 630);
+            lbSetting.Name = "lbSetting";
+            lbSetting.Size = new Size(79, 25);
+            lbSetting.TabIndex = 5;
+            lbSetting.Text = "SETTING";
+            // 
+            // lbAbout
+            // 
+            lbAbout.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbAbout.AutoSize = true;
+            lbAbout.BackColor = Color.Transparent;
+            lbAbout.FlatStyle = FlatStyle.Flat;
+            lbAbout.ForeColor = Color.Black;
+            lbAbout.Location = new Point(713, 630);
+            lbAbout.Name = "lbAbout";
+            lbAbout.Size = new Size(69, 25);
+            lbAbout.TabIndex = 2;
+            lbAbout.Text = "ABOUT";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.Image = Properties.Resources.ezgif_1_2b46e4d3fb;
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(1344, 712);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
             // Caro
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(247, 249, 252);
-            ClientSize = new Size(1312, 770);
+            ClientSize = new Size(1344, 712);
+            Controls.Add(pnStartMenu);
             Controls.Add(btReady);
-            Controls.Add(lbTimer);
             Controls.Add(pnPause);
+            Controls.Add(lbTimer);
             Controls.Add(btMenu);
             Controls.Add(imgTurn);
             Controls.Add(chbServer);
@@ -397,9 +514,13 @@ namespace LAN_Caro
             Text = "Caro";
             Load += Caro_Load;
             KeyDown += Caro_KeyDown;
+            Resize += Caro_Resize;
             ((System.ComponentModel.ISupportInitialize)imgTurn).EndInit();
             pnPause.ResumeLayout(false);
             pnPause.PerformLayout();
+            pnStartMenu.ResumeLayout(false);
+            pnStartMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -434,5 +555,12 @@ namespace LAN_Caro
         private Addon_Custom_Button btReady;
         private CustomLabel customLabel1;
         private CustomLabel lbChangeTurn;
+        private Panel pnStartMenu;
+        private PictureBox pictureBox1;
+        private CustomLabel lbSetting;
+        private CustomLabel lbAbout;
+        private CustomLabel lbHelp;
+        private Addon_Custom_Button btLan;
+        private Addon_Custom_Button btPlayMM;
     }
 }
