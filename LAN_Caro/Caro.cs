@@ -26,7 +26,7 @@ namespace LAN_Caro
                     label.ForeColor = Color.White;
                     continue;
                 }
-                else if (label.Name == "randomPatternLabel")
+                else if (label.Name == "lbTesting2" || label.Name == "lbTesting1")
                     continue;
                 label.MouseEnter += PauseLabel_MouseEnter;
                 label.MouseLeave += PauseLabel_MouseLeave;
@@ -34,23 +34,24 @@ namespace LAN_Caro
                 label.ForeColor = Color.Silver;
                 label.Tag = "0";
             }
+            lbChangeTurn.Visible = false;
             #endregion
-            #region Format StartMenu Panel
-            foreach (CustomLabel label in pnStartMenu.Controls.OfType<CustomLabel>())
-            {
-                label.Parent = pictureBox1;
-                label.BackColor = Color.Transparent;
-                label.ForeColor = Color.White;
-                label.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
-            }
-            btPlayMM.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
-            btLan.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
-            lbSetting.Parent = pictureBox1;
-            lbSetting.BackColor = Color.Transparent;
-            lbSetting.ForeColor = Color.White;
-            lbSetting.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
-            //lbPlay.UseCustomFont("HeadlinerNo.45 DEMO.ttf", 45, FontStyle.Regular);
-            //lbPlay.ForeColor = Color.FromArgb(234, 178, 26);
+
+            #region Test
+            //TransparentLabel transparentLabel = new TransparentLabel();
+            //transparentLabel.ForeColor = Color.Green;
+            //pnPause.Controls.Add(transparentLabel);
+            //transparentLabel.BackColor = Color.Transparent;
+            //transparentLabel.Text = "asdasd";
+            panel1.BackColor = Color.FromArgb(100, 0, 0, 0);
+            //Label label2 = new Label();
+            //label2.ForeColor = Color.Green;
+
+            //pnPause.Controls.Add(label2);
+            //label2.Parent = pictureBox1;
+            //label2.BackColor = Color.Transparent;
+
+            //label2.Text = "asdasd";
             #endregion
         }
         private void Caro_Load(object sender, EventArgs e)
@@ -125,21 +126,28 @@ namespace LAN_Caro
 
 
         #region Pause Panel
-        private void Caro_KeyDown(object sender, KeyEventArgs e)
+        public void ShowPausePanel()
         {
-            if (e.KeyCode == Keys.Escape)
+            if (pnPause.Tag == "0" && tableManager.button_IsLoading == false)
             {
-                if (pnPause.Tag == "0")
-                {
-                    tableManager.DarkColor();
-                    pnPause.Dock = DockStyle.Fill;
-                    pnPause.Visible = true;
-                    pnPause.Tag = "1";
-                    ResetColor(lbResume);
-                }
-                else
-                    Resume();
+                tableManager.DarkColor();
+                pnPause.Dock = DockStyle.Fill;
+                pnPause.Visible = true;
+                pnPause.Tag = "1";
+                ResetColor(lbResume);
             }
+            else
+                Resume();
+        }
+
+        public void LoadButtonColor()
+        {
+            //tableManager.ResetColor();
+            Task.Run(() =>
+            {
+                tableManager.UpdateColor(Color.Silver);
+            }
+            );
         }
 
         private void PauseLabel_MouseEnter(object sender, EventArgs e)
@@ -175,7 +183,7 @@ namespace LAN_Caro
         {
             ResetColor(lbOptions);
             ResetVisible();
-            randomPatternLabel.Visible = true;
+            lbTesting2.Visible = true;
             lbRestart.Visible = true;
         }
 
@@ -196,11 +204,7 @@ namespace LAN_Caro
 
         private void lbLeaveMatch_Click(object sender, EventArgs e)
         {
-            ResetColor(lbLeaveMatch);
-            ResetVisible();
-            lbPause.Visible = false;
-            //Lam lai tu dau
-            pnStartMenu.Visible = true;
+            this.Close();
         }
 
         private void lbExit_Click(object sender, EventArgs e)
@@ -249,7 +253,15 @@ namespace LAN_Caro
             Resume();
             tableManager.Restart();
             remainingTimeInSeconds = 60;
-            ServerOrClient.messageSend("Restart:" + remainingTimeInSeconds);
+            try
+            {
+                ServerOrClient.messageSend("Restart:" + remainingTimeInSeconds);
+
+            }
+            catch
+            {
+                MessageBox.Show("Could not send command to opponient, check your connection and try again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void lbPause_Click(object sender, EventArgs e)
@@ -272,7 +284,9 @@ namespace LAN_Caro
         {
             lbRandom.Visible = lbRestart.Visible;
             lbPause.Visible = lbRestart.Visible;
-            randomPatternLabel.Visible = lbRestart.Visible;
+            lbTesting2.Visible = lbRestart.Visible;
+            lbTesting1.Visible = lbRestart.Visible;
+            lbChangeTurn.Visible = lbRestart.Visible;
         }
 
         private void lbChangeTurn_Click(object sender, EventArgs e)
@@ -322,28 +336,6 @@ namespace LAN_Caro
                 btReady.Visible = !pnPause.Visible;
         }
 
-        private void btLan_Click(object sender, EventArgs e)
-        {
 
-            Task.Run(() =>
-            {
-                tableManager.UpdateColor(Color.Silver);
-
-            });
-            pnStartMenu.Visible = false;
-            pnPause.Visible = false;
-        }
-
-        private void Caro_Resize(object sender, EventArgs e)
-        {
-            int width = this.Width;
-            int height = this.Height;
-            int targetHeight = (int)(width * 9.0 / 16.0);
-
-            if (height != targetHeight)
-            {
-                this.SetBounds(this.Bounds.X, this.Bounds.Y, width, targetHeight);
-            }
-        }
     }
 }

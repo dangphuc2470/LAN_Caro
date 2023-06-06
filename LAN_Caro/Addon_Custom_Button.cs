@@ -96,7 +96,11 @@ namespace LAN_Caro
 
         protected override void OnPaint(PaintEventArgs pevent)
         {
-            base.OnPaint(pevent);
+            try
+            {
+                base.OnPaint(pevent);
+            }
+            catch { }
             Rectangle rectSurface = this.ClientRectangle;
             Rectangle rectBorder = Rectangle.Inflate(rectSurface, -borderSize, -borderSize);
             int smoothSize = 2;

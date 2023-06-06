@@ -16,14 +16,17 @@ namespace LAN_Caro
         public Panel pnTable;
         public System.Windows.Forms.Timer timer;
         public Label lbTimer;
-        public Addon_Custom_Button btReady; 
+        public Addon_Custom_Button btReady;
         public int remainingTimeInSeconds;
-
+        private bool isEndGame = false;
+        public bool button_IsLoading = true;
         public List<Player> PlayerList { get; set; }
+        public bool IsEndGame { get => isEndGame; set => isEndGame = value; }
+
         public List<List<Button>> buttonList = new List<List<Button>>();
 
-        public TableManager(Panel pnTable, RichTextBox rtbLog, PictureBox imgTurn, TextBox tbIPAdress, 
-                            System.Windows.Forms.Timer timer, Label lbTimer, 
+        public TableManager(Panel pnTable, RichTextBox rtbLog, PictureBox imgTurn, TextBox tbIPAdress,
+                            System.Windows.Forms.Timer timer, Label lbTimer,
                             Addon_Custom_Button btReady, int remainingTimeInSeconds)
         {
             this.pnTable = pnTable;
@@ -63,7 +66,8 @@ namespace LAN_Caro
                         Name = "bt" + j + "_" + i,
 
                     };
-                    button.FlatAppearance.BorderColor = Color.White;
+                    button.FlatAppearance.BorderColor = Color.FromArgb(240, 240, 240);
+                    button.BackColor = Color.FromArgb(240, 240, 240);
                     button.Click += btn_Click;
                     pnTable.Controls.Add(button);
                     buttonList[i].Add(button);
@@ -80,7 +84,7 @@ namespace LAN_Caro
         #region Click
         public void btn_Click(object sender, EventArgs e)
         {
-            if (isClientPlayer != isClientTurn || btReady.Tag.ToString() == "0")  //Nếu chưa tới lượt thì không thể nhấn nút
+            if (isClientPlayer != isClientTurn || btReady.Tag.ToString() == "0" || isEndGame == true)  //Nếu chưa tới lượt, chưa ready hoặc đã kết thúc game thì không thể nhấn nút
                 return;
             Button? button = sender as Button;
             int index = button.Name.IndexOf("_");
@@ -91,7 +95,10 @@ namespace LAN_Caro
             buttonList[y][x].Image = PlayerList[isClientTurn].Image;
 
             if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
+            {
                 MessageBox.Show("WIN");
+                IsEndGame = true;
+            }
             tableButtonClickedSend?.Invoke(this, x + ":" + y);
         }
 
@@ -102,7 +109,10 @@ namespace LAN_Caro
             buttonList[y][x].Image = PlayerList[isClientTurn].Image;
 
             if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
+            {
                 MessageBox.Show("LOSE");
+                IsEndGame = true;
+            }
             SwitchPlayer();
         }
 
@@ -303,13 +313,15 @@ namespace LAN_Caro
 
         #region Hiệu ứng khởi tạo button
         /// <summary>
-        /// Đổi màu border cho button và xóa nước cờ
+        /// Đổi màu border cho button một cách random và xóa nước cờ
         /// </summary>
         /// <param name="color"></param>
         /// <param name="updateWhite"></param>
         /// <param name="interval"></param>
         public void UpdateColor(Color color, bool updateWhite = false, int interval = 100)
         {
+            button_IsLoading = true;
+
             if (updateWhite)
                 UpdateColor(Color.White);
             ResetTag();
@@ -330,6 +342,8 @@ namespace LAN_Caro
                 if (i < interval)
                     Thread.Sleep(1);
             }
+            button_IsLoading = false;
+
         }
 
         /// <summary>
@@ -371,6 +385,7 @@ namespace LAN_Caro
         /// <returns></returns>
         public void DarkColor()
         {
+            button_IsLoading = true;
             for (int x = 0; x < TABLE_WIDTH; x++)
             {
                 for (int y = 0; y < TABLE_HEIGHT; y++)
@@ -385,13 +400,15 @@ namespace LAN_Caro
 
                 }
             }
+            button_IsLoading = false;
         }
 
         /// <summary>
-        /// Đặt lại màu cho button ô cờ
+        /// Đặt lại màu cho button ô cờ tuần tự
         /// </summary>
         public void ResetColor()
         {
+            button_IsLoading = true;
             for (int x = 0; x < TABLE_WIDTH; x++)
             {
                 for (int y = 0; y < TABLE_HEIGHT; y++)
@@ -404,6 +421,7 @@ namespace LAN_Caro
                         buttonList[y][x].Image = PlayerList[0].Image;
                 }
             }
+            button_IsLoading = false;
         }
 
         /// <summary>
@@ -411,17 +429,18 @@ namespace LAN_Caro
         /// </summary>
         public void Restart()
         {
-            
-             Task.Run(() =>
-            {
-                UpdateColor(Color.Silver, true, 50);
-            });
+            isEndGame = false;
+            Task.Run(() =>
+           {
+               UpdateColor(Color.Silver, true, 50);
+           });
             SwitchPlayer();
         }
 
 
         public void RandomPatern()
         {
+            button_IsLoading = true;
             ResetTag();
             Random rand = new Random();
             for (int i = 0; !IsUpdated(); i++)
@@ -440,6 +459,7 @@ namespace LAN_Caro
 
                 }
             }
+            button_IsLoading = false;
         }
         #endregion
 

@@ -73,9 +73,9 @@ namespace LAN_Caro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ezgif_1_2b46e4d3fb {
+        internal static System.Drawing.Bitmap Backgroud {
             get {
-                object obj = ResourceManager.GetObject("ezgif-1-2b46e4d3fb", resourceCulture);
+                object obj = ResourceManager.GetObject("Backgroud", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,19 @@ namespace LAN_Caro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ezgif_1_32739badee {
+        internal static System.Drawing.Bitmap backround {
             get {
-                object obj = ResourceManager.GetObject("ezgif-1-32739badee", resourceCulture);
+                object obj = ResourceManager.GetObject("backround", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fakeBackground {
+            get {
+                object obj = ResourceManager.GetObject("fakeBackground", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
