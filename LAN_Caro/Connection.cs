@@ -96,28 +96,24 @@ namespace LAN_Caro
 
                 }
                 tableManager.rtbLog.Text += "Receive: " + temp + "\n";
-               // MessageBox.Show(temp);
+                // MessageBox.Show(temp);
                 switch (temp)
                 {
                     case "Switch":
                         tableManager.SwitchPlayer();
                         break;
-                    //case string s when s.StartsWith("Restart"):
-                    //    MessageBox.Show("Restatr");
-                    //    string[] partsRestart = temp.Split(':');
-                    //    tableManager.remainingTimeInSeconds = int.Parse(partsRestart[1]);
-                    //    tableManager.Restart();
-                    //    break;
-                    case "Restart:60":
-                        //MessageBox.Show("Restatr");
-                        string[] partsRestart = temp.Split(':');
+                    case string s when s.StartsWith("Restart"):
+                        string[] partsRestart = temp.Split('_');
+                        tableManager.lbTimer.Text = partsRestart[1];
                         tableManager.remainingTimeInSeconds = int.Parse(partsRestart[1]);
                         tableManager.Restart();
                         break;
                     case "Play":
+                        tableManager.timer.Start();
                         btReadyHide();
                         break;
                     default:
+                        tableManager.timer.Start();
                         string[] parts = temp.Split(':');
                         int x = int.Parse(parts[0]);
                         int y = int.Parse(parts[1]);
@@ -133,8 +129,11 @@ namespace LAN_Caro
             if (netStream != null)
             {
                 tableManager.rtbLog.Text += "Send: " + dataS + "\n";
+                if (dataS.Contains(":"))
+                    tableManager.timer.Stop();
                 byte[] data = System.Text.Encoding.UTF8.GetBytes(dataS + "\n");
                 netStream.Write(data, 0, data.Length);
+                tableManager.timer.Stop();
 
             }
 
@@ -212,7 +211,7 @@ namespace LAN_Caro
 
                 }
                 tableManager.rtbLog.Text += "Receive: " + temp + "\n";
-                switch(temp)
+                switch (temp)
                 {
                     case "Ready":
                         tableManager.btReady.Tag = "1";
@@ -226,18 +225,20 @@ namespace LAN_Caro
                         tableManager.SwitchPlayer();
                         break;
                     case string s when s.StartsWith("Restart"):
-                        string[] partsRestart = temp.Split(':');
+                        string[] partsRestart = temp.Split('_');
+                        tableManager.lbTimer.Text = partsRestart[1];
                         tableManager.remainingTimeInSeconds = int.Parse(partsRestart[1]);
                         tableManager.Restart();
                         break;
                     default:
+                        tableManager.timer.Start();
                         string[] parts = temp.Split(':');
                         int x = int.Parse(parts[0]);
                         int y = int.Parse(parts[1]);
                         tableManager.clickReceive(x, y);
                         break;
                 }
-               
+
             }
         }
 
@@ -249,10 +250,14 @@ namespace LAN_Caro
                 netStream = client.GetStream();
                 if (netStream != null)
                 {
+                    if (message.Contains(":"))
+                        tableManager.timer.Stop();
                     tableManager.rtbLog.Text += "Send: " + message + "\n";
                     byte[] data = Encoding.UTF8.GetBytes(message + "\n");
                     netStream.Write(data, 0, data.Length);
+
                 }
+
 
             }
         }
@@ -284,6 +289,8 @@ namespace LAN_Caro
             TimerStartAndStop(1);
             btReadyHide();
             messageSend("Play");
+            tableManager.timer.Start();
+
         }
 
     }
