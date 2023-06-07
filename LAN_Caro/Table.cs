@@ -16,7 +16,6 @@ namespace LAN_Caro
         public Color backColorNormal = Color.FromArgb(235, 240, 250);
         public Color backColorDark = Color.FromArgb(69, 70, 73);
         public Color borderColorNormal = Color.Silver;
-        public Color borderColorDark = Color.Black;
         public RichTextBox rtbLog;
         public PictureBox imgTurn;
         public TextBox tbIPAdress;
@@ -138,6 +137,7 @@ namespace LAN_Caro
             imgTurn.Size = new Size(size.Width + 1, size.Height);
         }
 
+       
         #endregion
 
 
@@ -323,14 +323,14 @@ namespace LAN_Caro
         /// Đổi màu border cho button một cách random và xóa nước cờ
         /// </summary>
         /// <param name="color"></param>
-        /// <param name="updateWhite"></param>
-        /// <param name="interval"></param>
-        public void UpdateColor(Color color, bool updateWhite = false, int interval = 100)
+        /// <param name="clearBorderColor"></param>
+        /// <param name="interval "></param>
+        public void UpdateColor(Color color, bool clearBorderColor = false, int interval = 100)
         {
             button_IsLoading = true;
 
-            if (updateWhite)
-                UpdateColor(Color.White);
+            if (clearBorderColor)
+                UpdateColor(backColorNormal);
             ResetTag();
             Random rand = new Random();
             int i = 0;

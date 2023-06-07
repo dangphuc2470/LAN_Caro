@@ -33,6 +33,7 @@ namespace LAN_Caro
 
         public MenuForm()
         {
+            CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
             #region test
             //pnStartMenu.Visible = false;
@@ -104,7 +105,7 @@ namespace LAN_Caro
             if (e.KeyCode == Keys.Escape)
             {
                 if (pnMultiplayer.Visible)
-                    caro.ShowPausePanel();
+                    caro.ShowPausePanel_Click(null, null);
             }
         }
         #endregion
