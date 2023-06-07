@@ -3,13 +3,20 @@ using System.Windows.Forms;
 
 namespace LAN_Caro
 {
-    public class TableManager
+    public class Table
     {
         public int isClientPlayer = 1;
-        private int isClientTurn;
+        public int isClientTurn;
         public static int SQUARE_SIZE = 40;
-        public static int TABLE_WIDTH = 24;
-        public static int TABLE_HEIGHT = 16;
+        public static int TABLE_WIDTH = 25;
+        public static int TABLE_HEIGHT = 17;
+        public int remainingTimeInSeconds;
+        public bool isEndGame = false;
+        public bool button_IsLoading = true;
+        public Color backColorNormal = Color.FromArgb(235, 240, 250);
+        public Color backColorDark = Color.FromArgb(69, 70, 73);
+        public Color borderColorNormal = Color.Silver;
+        public Color borderColorDark = Color.Black;
         public RichTextBox rtbLog;
         public PictureBox imgTurn;
         public TextBox tbIPAdress;
@@ -17,15 +24,12 @@ namespace LAN_Caro
         public System.Windows.Forms.Timer timer;
         public Label lbTimer;
         public Addon_Custom_Button btReady;
-        public int remainingTimeInSeconds;
-        private bool isEndGame = false;
-        public bool button_IsLoading = true;
         public List<Player> PlayerList { get; set; }
         public bool IsEndGame { get => isEndGame; set => isEndGame = value; }
 
         public List<List<Button>> buttonList = new List<List<Button>>();
 
-        public TableManager(Panel pnTable, RichTextBox rtbLog, PictureBox imgTurn, TextBox tbIPAdress,
+        public Table(Panel pnTable, RichTextBox rtbLog, PictureBox imgTurn, TextBox tbIPAdress,
                             System.Windows.Forms.Timer timer, Label lbTimer,
                             Addon_Custom_Button btReady, int remainingTimeInSeconds)
         {
@@ -50,7 +54,7 @@ namespace LAN_Caro
         #region Xử lí bàn cờ
         public void DrawTable()
         {
-            Button lastButton = new Button() { Width = 0, Location = new Point(40, 40) };
+            Button lastButton = new Button() { Width = 0, Location = new Point(0, 0) };
             for (int i = 0; i < TABLE_HEIGHT; i++)
             {
                 buttonList.Add(new List<Button>());
@@ -66,17 +70,20 @@ namespace LAN_Caro
                         Name = "bt" + j + "_" + i,
 
                     };
-                    button.FlatAppearance.BorderColor = Color.FromArgb(240, 240, 240);
-                    button.BackColor = Color.FromArgb(240, 240, 240);
+                    button.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0, 0);
+                    button.Parent = pnTable;
+                    button.BackColor = Color.FromArgb(0, 0, 0, 0);
                     button.Click += btn_Click;
                     pnTable.Controls.Add(button);
                     buttonList[i].Add(button);
                     lastButton = button;
                 }
-                lastButton.Location = new Point(40, lastButton.Location.Y + SQUARE_SIZE);
+                lastButton.Location = new Point(0, lastButton.Location.Y + SQUARE_SIZE);
                 lastButton.Width = 0;
                 lastButton.Height = 0;
             }
+
+            //UpdateColor(borderColorNormal);
 
         }
         public event EventHandler<string> tableButtonClickedSend; //Gửi dữ liệu sang form
@@ -331,10 +338,10 @@ namespace LAN_Caro
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    int x = rand.Next(24);
-                    int y = rand.Next(16);
+                    int x = rand.Next(TABLE_WIDTH);
+                    int y = rand.Next(TABLE_HEIGHT);
                     buttonList[y][x].FlatAppearance.BorderColor = color;
-                    buttonList[y][x].BackColor = Color.White;
+                    buttonList[y][x].BackColor = backColorNormal;//Trùng ResetColor
                     buttonList[y][x].Tag = 1;
                     buttonList[y][x].Image = null;
                 }
@@ -380,7 +387,7 @@ namespace LAN_Caro
         }
 
         /// <summary>
-        /// Hiển thị màu button tối hơn
+        /// Hiển thị màu button tối hơn (Hiển thị khi pnPause xuất hiện)
         /// </summary>
         /// <returns></returns>
         public void DarkColor()
@@ -391,7 +398,7 @@ namespace LAN_Caro
                 for (int y = 0; y < TABLE_HEIGHT; y++)
                 {
                     buttonList[y][x].FlatAppearance.BorderColor = Color.FromArgb(69, 69, 69);
-                    buttonList[y][x].BackColor = Color.FromArgb(75, 75, 75);
+                    buttonList[y][x].BackColor = backColorDark;
                     if (buttonList[y][x].Image == PlayerList[1].Image)
                         buttonList[y][x].Image = PlayerList[1].DarkImage;
                     else if (buttonList[y][x].Image == PlayerList[0].Image)
@@ -404,7 +411,7 @@ namespace LAN_Caro
         }
 
         /// <summary>
-        /// Đặt lại màu cho button ô cờ tuần tự
+        /// Đặt lại màu cho button ô cờ tuần tự (dùng khi resume)
         /// </summary>
         public void ResetColor()
         {
@@ -414,7 +421,7 @@ namespace LAN_Caro
                 for (int y = 0; y < TABLE_HEIGHT; y++)
                 {
                     buttonList[y][x].FlatAppearance.BorderColor = Color.Silver;
-                    buttonList[y][x].BackColor = Color.White;
+                    buttonList[y][x].BackColor = backColorNormal;  //Cần trùng màu với Update Color
                     if (buttonList[y][x].Image == PlayerList[1].DarkImage)
                         buttonList[y][x].Image = PlayerList[1].Image;
                     else if (buttonList[y][x].Image == PlayerList[0].DarkImage)
@@ -432,7 +439,7 @@ namespace LAN_Caro
             isEndGame = false;
             Task.Run(() =>
            {
-               UpdateColor(Color.Silver, true, 50);
+               UpdateColor(borderColorNormal, true, 50);
            });
             SwitchPlayer();
         }
@@ -448,8 +455,8 @@ namespace LAN_Caro
 
                 for (int j = 0; j < 5; j++)
                 {
-                    int x = rand.Next(24);
-                    int y = rand.Next(16);
+                    int x = rand.Next(TABLE_WIDTH);
+                    int y = rand.Next(TABLE_HEIGHT);
                     buttonList[y][x].Tag = 1;
                     int temp = rand.Next(3);
                     if (temp == 2)

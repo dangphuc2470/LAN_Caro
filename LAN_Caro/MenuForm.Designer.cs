@@ -68,6 +68,7 @@
             btPlaySingle.BorderSize = 1;
             btPlaySingle.FlatAppearance.BorderSize = 0;
             btPlaySingle.FlatStyle = FlatStyle.Flat;
+            btPlaySingle.Font = new Font("Impact", 25F, FontStyle.Regular, GraphicsUnit.Point);
             btPlaySingle.ForeColor = Color.White;
             btPlaySingle.Location = new Point(38, 578);
             btPlaySingle.Name = "btPlaySingle";
@@ -129,6 +130,7 @@
             btLan.BorderSize = 1;
             btLan.FlatAppearance.BorderSize = 0;
             btLan.FlatStyle = FlatStyle.Flat;
+            btLan.Font = new Font("Impact", 25F, FontStyle.Regular, GraphicsUnit.Point);
             btLan.ForeColor = Color.White;
             btLan.Location = new Point(38, 670);
             btLan.Name = "btLan";
@@ -152,7 +154,7 @@
             // 
             // pnMultiplayer
             // 
-            pnMultiplayer.BackgroundImage = Properties.Resources.fakeBackground;
+            pnMultiplayer.BackgroundImage = Properties.Resources.Picsart_23_06_07_08_41_09_453;
             pnMultiplayer.BackgroundImageLayout = ImageLayout.Stretch;
             pnMultiplayer.Dock = DockStyle.Fill;
             pnMultiplayer.Location = new Point(0, 0);
