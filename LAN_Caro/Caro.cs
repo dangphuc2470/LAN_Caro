@@ -16,9 +16,9 @@ namespace LAN_Caro
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
             remainingTimeInSeconds = 60;
-            lbTimer.ForeColor = Color.Blue;
             KeyPreview = true;
             toolTip1 = new ToolTip();
+            lbTimer.Text = SecondToMinute(remainingTimeInSeconds.ToString());
             #region Format Pause Panel font
             foreach (CustomLabel label in pnPause1.Controls.OfType<CustomLabel>())
             {
@@ -51,20 +51,19 @@ namespace LAN_Caro
         }
         private void Caro_Load(object sender, EventArgs e)
         {
-            lbTimer.Text = remainingTimeInSeconds.ToString();
-            tableManager = new Table(pnTable, rtbLog, imgTurn, tbIPAdress, timer1, lbTimer, btReady, remainingTimeInSeconds);
+            tableManager = new Table(pnTable, rtbLog, imgTurn, tbIPAdress, timer1, lbTimer, btReady, remainingTimeInSeconds, timer);
             tableManager.tableButtonClickedSend += TableManager_ButtonClickedSend;
             tableManager.DrawTable();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
-            remainingTimeInSeconds--;
-            lbTimer.Text = remainingTimeInSeconds.ToString();
+            tableManager.remainingTimeInSeconds--;
+            lbTimer.Text = SecondToMinute(tableManager.remainingTimeInSeconds.ToString());
 
             if (remainingTimeInSeconds == 0)
             {
-                timer1.Enabled = false;
+                timer.Enabled = false;
                 MessageBox.Show("Đếm ngược đã kết thúc!");
             }
         }
@@ -246,7 +245,7 @@ namespace LAN_Caro
             remainingTimeInSeconds = 60;
             try
             {
-                ServerOrClient.messageSend("Restart:" + remainingTimeInSeconds);
+                ServerOrClient.messageSend("Restart_" + remainingTimeInSeconds);
             }
             catch
             {
@@ -284,19 +283,6 @@ namespace LAN_Caro
             Resume();
         }
 
-        /// <summary>
-        /// Mượn sự kiện SizeChanged để kích hoạt timer trong UI Thread (Vì không thể kích hoạt timer trong thread khác)
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void imgTurn_SizeChanged(object sender, EventArgs e)
-        {
-            if (timer1.Enabled)
-                timer1.Stop();
-            else
-                timer1.Start();
-        }
-
         private void btReady_Click(object sender, EventArgs e)
         {
             if (btReady.Tag.ToString() == "0")
@@ -321,9 +307,7 @@ namespace LAN_Caro
 
                     label.UseDefaultFont();
                 }
-
-
-                lbTimer.BackColor = Color.FromArgb(75, 75, 75);
+                //                lbTimer.BackColor = Color.FromArgb(75, 75, 75);
             }
             else
             {
@@ -352,13 +336,20 @@ namespace LAN_Caro
                     label.ForeColor = Color.Silver;
                     label.Tag = "0";
                 }
-                lbTimer.BackColor = Color.Transparent;
+                //lbTimer.BackColor = Color.Transparent;
             }
 
             if (btReady.Tag.ToString() == "0")
                 btReady.Visible = !pnPause2.Visible;
         }
 
-
+        private static string SecondToMinute(string second)
+        {
+            int minute = int.Parse(second) / 60;
+            int second_ = int.Parse(second) % 60;
+            string second__ = (second_ == 0) ? "00" : second;
+            return minute + ":" + second__;
+        }
+ 
     }
 }

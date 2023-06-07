@@ -52,10 +52,10 @@ namespace LAN_Caro
             lbOptions = new CustomLabel();
             lbResume = new CustomLabel();
             lbMenu = new CustomLabel();
-            timer1 = new System.Windows.Forms.Timer(components);
-            lbTimer = new Label();
             btReady = new Addon_Custom_Button();
             pnPause1 = new Panel();
+            lbTimer = new Label();
+            timer = new System.Windows.Forms.Timer(components);
             pnPause2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
             pnPause1.SuspendLayout();
@@ -204,7 +204,6 @@ namespace LAN_Caro
             imgTurn.Size = new Size(35, 35);
             imgTurn.TabIndex = 9;
             imgTurn.TabStop = false;
-            imgTurn.SizeChanged += imgTurn_SizeChanged;
             // 
             // btShowPausePanel
             // 
@@ -310,21 +309,6 @@ namespace LAN_Caro
             lbMenu.TabIndex = 15;
             lbMenu.Text = "MENU";
             // 
-            // timer1
-            // 
-            timer1.Interval = 1000;
-            timer1.Tick += timer1_Tick;
-            // 
-            // lbTimer
-            // 
-            lbTimer.AutoSize = true;
-            lbTimer.BackColor = Color.Transparent;
-            lbTimer.Location = new Point(60, 78);
-            lbTimer.Name = "lbTimer";
-            lbTimer.Size = new Size(0, 25);
-            lbTimer.TabIndex = 16;
-            lbTimer.Tag = "0";
-            // 
             // btReady
             // 
             btReady.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -358,11 +342,28 @@ namespace LAN_Caro
             pnPause1.Controls.Add(lbMatchLog);
             pnPause1.Controls.Add(lbLeaveMatch);
             pnPause1.Controls.Add(lbExit);
-            pnPause1.Location = new Point(0, 0);
+            pnPause1.Location = new Point(0, 486);
             pnPause1.Name = "pnPause1";
-            pnPause1.Size = new Size(452, 788);
+            pnPause1.Size = new Size(452, 302);
             pnPause1.TabIndex = 19;
             pnPause1.Visible = false;
+            // 
+            // lbTimer
+            // 
+            lbTimer.AutoSize = true;
+            lbTimer.BackColor = Color.Transparent;
+            lbTimer.Font = new Font("Impact", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            lbTimer.ForeColor = Color.Gray;
+            lbTimer.Location = new Point(74, 105);
+            lbTimer.Name = "lbTimer";
+            lbTimer.Size = new Size(89, 48);
+            lbTimer.TabIndex = 20;
+            lbTimer.Text = "1:00";
+            // 
+            // timer
+            // 
+            timer.Interval = 1000;
+            timer.Tick += timer_Tick;
             // 
             // Caro
             // 
@@ -372,10 +373,10 @@ namespace LAN_Caro
             BackgroundImage = Properties.Resources.Picsart_23_06_07_08_41_09_453;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1480, 788);
+            Controls.Add(lbTimer);
             Controls.Add(pnPause2);
             Controls.Add(pnPause1);
             Controls.Add(btReady);
-            Controls.Add(lbTimer);
             Controls.Add(btShowPausePanel);
             Controls.Add(imgTurn);
             Controls.Add(chbServer);
@@ -431,5 +432,7 @@ namespace LAN_Caro
         private CustomLabel customLabel5;
         private CustomLabel customLabel4;
         private Panel pnPause1;
+        private Label lbTimer2;
+        private System.Windows.Forms.Timer timer;
     }
 }

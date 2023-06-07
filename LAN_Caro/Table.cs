@@ -30,7 +30,7 @@ namespace LAN_Caro
 
         public Table(Panel pnTable, RichTextBox rtbLog, PictureBox imgTurn, TextBox tbIPAdress,
                             System.Windows.Forms.Timer timer, Label lbTimer,
-                            Addon_Custom_Button btReady, int remainingTimeInSeconds)
+                            Addon_Custom_Button btReady, int remainingTimeInSeconds, System.Windows.Forms.Timer timer2)
         {
             this.pnTable = pnTable;
             this.rtbLog = rtbLog;
@@ -38,7 +38,7 @@ namespace LAN_Caro
             this.tbIPAdress = tbIPAdress;
             this.lbTimer = lbTimer;
             this.btReady = btReady;
-            this.lbTimer.SizeChanged += lbTimer_SizeChanged;
+            //this.lbTimer.SizeChanged += lbTimer_SizeChanged;
             this.remainingTimeInSeconds = remainingTimeInSeconds;
             PlayerList = new List<Player>()
             {
@@ -46,7 +46,7 @@ namespace LAN_Caro
                 new Player("O", Properties.Resources.o, Properties.Resources.od),
             };
             isClientTurn = 0;
-            this.timer = timer;
+            this.timer = timer2;
         }
 
 
@@ -471,10 +471,10 @@ namespace LAN_Caro
         #endregion
 
         #region Timer
-        public void lbTimer_SizeChanged(object sender, EventArgs e)
-        {
-            timer.Start();
-        }
+        //public void lbTimer_SizeChanged(object sender, EventArgs e)
+        //{
+        //    timer.Start();
+        //}
         #endregion
     }
 }
