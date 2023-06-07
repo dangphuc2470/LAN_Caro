@@ -9,7 +9,7 @@ namespace LAN_Caro
     public abstract class Player_OBJ
     {
         public NetworkStream netStream;
-        public TableManager tableManager;
+        public Table tableManager;
         public abstract void ReceiveMessage(Socket tcpClient_Client);
         public abstract void messageSend(string dataS);
         public abstract void ready();
@@ -45,7 +45,7 @@ namespace LAN_Caro
     public class Client_OBJ : Player_OBJ
     {
         TcpClient tcpClient = new TcpClient();
-        public Client_OBJ(TableManager table, string ipAddress)
+        public Client_OBJ(Table table, string ipAddress)
         {
             try
             {
@@ -169,7 +169,7 @@ namespace LAN_Caro
 
         List<TcpClient> clients = new List<TcpClient>();
 
-        public Server_OBJ(TableManager tableManager)
+        public Server_OBJ(Table tableManager)
         {
             tableManager.rtbLog.Text += "Waiting connect...\n";
             ipepServer = new IPEndPoint(IPAddress.Any, 8082);

@@ -1,15 +1,16 @@
 ﻿using System.Drawing;
 using System.Drawing.Text;
+using System.Windows.Forms;
 
 namespace LAN_Caro
 {
     public partial class Caro : Form
     {
 
-        TableManager tableManager;
+        public Table tableManager;
         Player_OBJ ServerOrClient;
         ToolTip toolTip1;
-        public int remainingTimeInSeconds; // Thời gian ban đầu là 60 giây
+        public int remainingTimeInSeconds;  // Thời gian ban đầu là 60 giây
         public Caro()
         {
             InitializeComponent();
@@ -18,7 +19,7 @@ namespace LAN_Caro
             KeyPreview = true;
             toolTip1 = new ToolTip();
             #region Format Pause Panel font
-            foreach (CustomLabel label in pnPause.Controls.OfType<CustomLabel>())
+            foreach (CustomLabel label in pnPause1.Controls.OfType<CustomLabel>())
             {
                 if (label.Name == "lbMenu")
                 {
@@ -26,7 +27,16 @@ namespace LAN_Caro
                     label.ForeColor = Color.White;
                     continue;
                 }
-                else if (label.Name == "lbTesting2" || label.Name == "lbTesting1")
+                label.MouseEnter += PauseLabel_MouseEnter;
+                label.MouseLeave += PauseLabel_MouseLeave;
+                label.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
+                label.ForeColor = Color.Silver;
+                label.Tag = "0";
+            }
+
+            foreach (CustomLabel label in pnPause2.Controls.OfType<CustomLabel>())
+            {
+                if (label.Name == "lbTesting2" || label.Name == "lbTesting1")
                     continue;
                 label.MouseEnter += PauseLabel_MouseEnter;
                 label.MouseLeave += PauseLabel_MouseLeave;
@@ -34,30 +44,14 @@ namespace LAN_Caro
                 label.ForeColor = Color.Silver;
                 label.Tag = "0";
             }
-            lbChangeTurn.Visible = false;
+
             #endregion
 
-            #region Test
-            //TransparentLabel transparentLabel = new TransparentLabel();
-            //transparentLabel.ForeColor = Color.Green;
-            //pnPause.Controls.Add(transparentLabel);
-            //transparentLabel.BackColor = Color.Transparent;
-            //transparentLabel.Text = "asdasd";
-            panel1.BackColor = Color.FromArgb(100, 0, 0, 0);
-            //Label label2 = new Label();
-            //label2.ForeColor = Color.Green;
-
-            //pnPause.Controls.Add(label2);
-            //label2.Parent = pictureBox1;
-            //label2.BackColor = Color.Transparent;
-
-            //label2.Text = "asdasd";
-            #endregion
         }
         private void Caro_Load(object sender, EventArgs e)
         {
             lbTimer.Text = remainingTimeInSeconds.ToString();
-            tableManager = new TableManager(pnTable, rtbLog, imgTurn, tbIPAdress, timer1, lbTimer, btReady, remainingTimeInSeconds);
+            tableManager = new Table(pnTable, rtbLog, imgTurn, tbIPAdress, timer1, lbTimer, btReady, remainingTimeInSeconds);
             tableManager.tableButtonClickedSend += TableManager_ButtonClickedSend;
             tableManager.DrawTable();
         }
@@ -113,9 +107,19 @@ namespace LAN_Caro
 
         private void Menu_Click(object sender, EventArgs e)
         {
-            pnPause.Dock = DockStyle.Fill;
-            pnPause.Visible = true;
-            tableManager.DarkColor();
+            if (pnPause2.Tag == "0" && tableManager.button_IsLoading == false)
+            {
+                tableManager.DarkColor();
+                pnPause2.Dock = DockStyle.Right;
+                pnPause1.Dock = DockStyle.Left;
+                pnPause2.Size = new Size(1022, 788);
+                pnPause1.Size = new Size(458, 788);
+                pnPause2.Visible = true;
+                pnPause2.Tag = "1";
+                ResetColor(lbResume);
+            }
+            else
+                Resume();
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -128,26 +132,17 @@ namespace LAN_Caro
         #region Pause Panel
         public void ShowPausePanel()
         {
-            if (pnPause.Tag == "0" && tableManager.button_IsLoading == false)
-            {
-                tableManager.DarkColor();
-                pnPause.Dock = DockStyle.Fill;
-                pnPause.Visible = true;
-                pnPause.Tag = "1";
-                ResetColor(lbResume);
-            }
-            else
-                Resume();
+            Menu_Click(btMenu, null);
         }
 
         public void LoadButtonColor()
         {
             //tableManager.ResetColor();
-            Task.Run(() =>
-            {
-                tableManager.UpdateColor(Color.Silver);
-            }
-            );
+            //Task.Run(() =>
+            //{
+            //    //tableManager.UpdateColor(tableManager.borderColorNormal);
+            //}
+            //);
         }
 
         private void PauseLabel_MouseEnter(object sender, EventArgs e)
@@ -172,8 +167,8 @@ namespace LAN_Caro
         private void Resume()
         {
             ResetColor();
-            pnPause.Visible = false;
-            pnPause.Tag = "0";
+            pnPause2.Visible = false;
+            pnPause2.Tag = "0";
             ResetVisible();
             tableManager.ResetColor();
 
@@ -218,7 +213,7 @@ namespace LAN_Caro
         /// 
         private void ResetColor(CustomLabel thisLabel = null)
         {
-            foreach (CustomLabel label in pnPause.Controls.OfType<CustomLabel>())
+            foreach (CustomLabel label in pnPause2.Controls.OfType<CustomLabel>())
             {
                 if (label.Name == "lbMenu")
                     continue;
@@ -241,6 +236,7 @@ namespace LAN_Caro
             lbPause.Visible = false;
             lbRandom.Visible = false;
             lbRestart.Visible = false;
+            lbChangeTurn.Visible = false;
             tableManager.DarkColor();
 
         }
@@ -323,17 +319,50 @@ namespace LAN_Caro
 
         private void pnPause_VisibleChanged(object sender, EventArgs e)
         {
-            if (pnPause.Visible)
+            pnPause1.Visible = pnPause2.Visible;
+            if (!pnPause2.Visible)
             {
+                foreach (CustomLabel label in pnPause1.Controls.OfType<CustomLabel>())
+                {
+
+                    label.UseDefaultFont();
+                }
+
+
                 lbTimer.BackColor = Color.FromArgb(75, 75, 75);
             }
             else
             {
+                foreach (CustomLabel label in pnPause1.Controls.OfType<CustomLabel>())
+                {
+                    if (label.Name == "lbMenu")
+                    {
+                        label.UseCustomFont("Arbuz.ttf", 40, FontStyle.Bold);
+                        label.ForeColor = Color.White;
+                        continue;
+                    }
+                    label.MouseEnter += PauseLabel_MouseEnter;
+                    label.MouseLeave += PauseLabel_MouseLeave;
+                    label.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
+                    label.ForeColor = Color.Silver;
+                    label.Tag = "0";
+                }
+
+                foreach (CustomLabel label in pnPause2.Controls.OfType<CustomLabel>())
+                {
+                    if (label.Name == "lbTesting2" || label.Name == "lbTesting1")
+                        continue;
+                    label.MouseEnter += PauseLabel_MouseEnter;
+                    label.MouseLeave += PauseLabel_MouseLeave;
+                    label.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
+                    label.ForeColor = Color.Silver;
+                    label.Tag = "0";
+                }
                 lbTimer.BackColor = Color.Transparent;
             }
 
             if (btReady.Tag.ToString() == "0")
-                btReady.Visible = !pnPause.Visible;
+                btReady.Visible = !pnPause2.Visible;
         }
 
 

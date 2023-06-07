@@ -177,5 +177,9 @@ namespace LAN_Caro
             base.OnEnabledChanged(e);
                 ForeColor = Color.White;
         }
+        public void UseDefaultFont()
+        {
+            Font = new Font("Impact", 25F, FontStyle.Regular, GraphicsUnit.Point);
+        }
     }
 }

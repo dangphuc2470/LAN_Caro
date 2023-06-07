@@ -39,8 +39,8 @@ namespace LAN_Caro
             //pnMultiplayer.Visible = true;
             #endregion
             #region Format StartMenu Panel
-            btPlaySingle.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
-            btLan.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
+            //btPlaySingle.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
+            //btLan.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
 
 
             lbHelp.Parent = ptbBackround;
@@ -112,8 +112,8 @@ namespace LAN_Caro
         {
             pnStartMenu.Visible = false;
             pnMultiplayer.Visible = true;
-            caro.LoadButtonColor();
-
+            Task.Run(() => { caro.tableManager.UpdateColor(caro.tableManager.borderColorNormal); });
+            
         }
 
 
@@ -139,18 +139,24 @@ namespace LAN_Caro
         {
             if (!pnStartMenu.Visible)
             {
-                btPlaySingle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-                btLan.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-                lbSetting.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-                lbHelp.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-                lbAbout.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+                //btPlaySingle.UseDefaultFont();
+                //btLan.UseDefaultFont();
+                lbSetting.UseDefaultFont();
+                lbHelp.UseDefaultFont();
+                lbAbout.UseDefaultFont();
             }
             else
             {
-
-                btPlaySingle.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
-                btLan.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
-
+                //try
+                //{
+                //    btPlaySingle.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
+                //    btLan.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
+                //}
+                //catch
+                //{
+                //    btPlaySingle.UseDefaultFont();
+                //    btLan.UseDefaultFont();
+                //}
                 lbSetting.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
                 lbHelp.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
                 lbAbout.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
