@@ -13,6 +13,7 @@ namespace LAN_Caro
         public int remainingTimeInSeconds;  // Thời gian ban đầu là 60 giây
         public Caro()
         {
+            CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
             remainingTimeInSeconds = 60;
             lbTimer.ForeColor = Color.Blue;
@@ -105,9 +106,9 @@ namespace LAN_Caro
             tbIPAdress.Text = "127.0.0.1";
         }
 
-        private void Menu_Click(object sender, EventArgs e)
+        public void ShowPausePanel_Click(object sender, EventArgs e)
         {
-            if (pnPause2.Tag == "0" && tableManager.button_IsLoading == false)
+            if (pnPause2.Tag.ToString() == "0" && tableManager.button_IsLoading == false)
             {
                 tableManager.DarkColor();
                 pnPause2.Dock = DockStyle.Right;
@@ -130,11 +131,6 @@ namespace LAN_Caro
 
 
         #region Pause Panel
-        public void ShowPausePanel()
-        {
-            Menu_Click(btMenu, null);
-        }
-
         public void LoadButtonColor()
         {
             //tableManager.ResetColor();
@@ -178,7 +174,6 @@ namespace LAN_Caro
         {
             ResetColor(lbOptions);
             ResetVisible();
-            lbTesting2.Visible = true;
             lbRestart.Visible = true;
         }
 
@@ -208,12 +203,12 @@ namespace LAN_Caro
         }
 
         /// <summary>
-        /// Reset tag và màu cho các button
+        /// Reset tag và màu cho các label
         /// </summary>
         /// 
         private void ResetColor(CustomLabel thisLabel = null)
         {
-            foreach (CustomLabel label in pnPause2.Controls.OfType<CustomLabel>())
+            foreach (CustomLabel label in pnPause1.Controls.OfType<CustomLabel>())
             {
                 if (label.Name == "lbMenu")
                     continue;
@@ -252,7 +247,6 @@ namespace LAN_Caro
             try
             {
                 ServerOrClient.messageSend("Restart:" + remainingTimeInSeconds);
-
             }
             catch
             {
@@ -280,14 +274,14 @@ namespace LAN_Caro
         {
             lbRandom.Visible = lbRestart.Visible;
             lbPause.Visible = lbRestart.Visible;
-            lbTesting2.Visible = lbRestart.Visible;
-            lbTesting1.Visible = lbRestart.Visible;
             lbChangeTurn.Visible = lbRestart.Visible;
         }
 
         private void lbChangeTurn_Click(object sender, EventArgs e)
         {
             tableManager.SwitchPlayer();
+            ServerOrClient.messageSend("Switch");
+            Resume();
         }
 
         /// <summary>

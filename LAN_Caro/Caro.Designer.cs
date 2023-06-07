@@ -34,9 +34,7 @@ namespace LAN_Caro
             components = new System.ComponentModel.Container();
             pnTable = new Addon_Round_Panel();
             pnPause2 = new Addon_Transparent_Panel();
-            lbTesting1 = new CustomLabel();
             lbChangeTurn = new CustomLabel();
-            lbTesting2 = new CustomLabel();
             lbRandom = new CustomLabel();
             lbPause = new CustomLabel();
             lbRestart = new CustomLabel();
@@ -46,7 +44,7 @@ namespace LAN_Caro
             chbServer = new CheckBox();
             imageList1 = new ImageList(components);
             imgTurn = new PictureBox();
-            btMenu = new Addon_Custom_Button();
+            btShowPausePanel = new Addon_Custom_Button();
             lbExit = new CustomLabel();
             lbLeaveMatch = new CustomLabel();
             lbMatchLog = new CustomLabel();
@@ -68,6 +66,7 @@ namespace LAN_Caro
             pnTable.AutoScroll = true;
             pnTable.BackColor = Color.Transparent;
             pnTable.BackgroundImageLayout = ImageLayout.Stretch;
+            pnTable.CornerRadius = 25;
             pnTable.Location = new Point(453, 54);
             pnTable.Name = "pnTable";
             pnTable.Size = new Size(960, 680);
@@ -75,71 +74,43 @@ namespace LAN_Caro
             // 
             // pnPause2
             // 
-            pnPause2.Controls.Add(lbTesting1);
             pnPause2.Controls.Add(lbChangeTurn);
-            pnPause2.Controls.Add(lbTesting2);
             pnPause2.Controls.Add(lbRandom);
             pnPause2.Controls.Add(lbPause);
             pnPause2.Controls.Add(lbRestart);
             pnPause2.Controls.Add(rtbLog);
             pnPause2.Dock = DockStyle.Right;
-            pnPause2.Location = new Point(456, 0);
+            pnPause2.Location = new Point(458, 0);
             pnPause2.Name = "pnPause2";
-            pnPause2.Size = new Size(1024, 788);
+            pnPause2.Size = new Size(1022, 788);
             pnPause2.TabIndex = 14;
             pnPause2.Tag = "0";
             pnPause2.Visible = false;
             pnPause2.VisibleChanged += pnPause_VisibleChanged;
-            // 
-            // lbTesting1
-            // 
-            lbTesting1.AutoSize = true;
-            lbTesting1.BackColor = Color.Transparent;
-            lbTesting1.Font = new Font("Arial Narrow", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lbTesting1.ForeColor = Color.White;
-            lbTesting1.Location = new Point(583, 458);
-            lbTesting1.Name = "lbTesting1";
-            lbTesting1.Size = new Size(184, 24);
-            lbTesting1.TabIndex = 27;
-            lbTesting1.Text = "(Testing purpose only)";
-            lbTesting1.Visible = false;
             // 
             // lbChangeTurn
             // 
             lbChangeTurn.AutoSize = true;
             lbChangeTurn.BackColor = Color.Transparent;
             lbChangeTurn.ForeColor = Color.White;
-            lbChangeTurn.Location = new Point(320, 430);
+            lbChangeTurn.Location = new Point(30, 440);
             lbChangeTurn.Name = "lbChangeTurn";
-            lbChangeTurn.Size = new Size(132, 25);
+            lbChangeTurn.Size = new Size(219, 25);
             lbChangeTurn.TabIndex = 26;
-            lbChangeTurn.Text = "CHANGE TURN";
+            lbChangeTurn.Text = "CHANGE TURN (FOR DEV)";
             lbChangeTurn.Visible = false;
             lbChangeTurn.Click += lbChangeTurn_Click;
-            // 
-            // lbTesting2
-            // 
-            lbTesting2.AutoSize = true;
-            lbTesting2.BackColor = Color.Transparent;
-            lbTesting2.Font = new Font("Arial Narrow", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lbTesting2.ForeColor = Color.White;
-            lbTesting2.Location = new Point(583, 391);
-            lbTesting2.Name = "lbTesting2";
-            lbTesting2.Size = new Size(184, 24);
-            lbTesting2.TabIndex = 25;
-            lbTesting2.Text = "(Testing purpose only)";
-            lbTesting2.Visible = false;
             // 
             // lbRandom
             // 
             lbRandom.AutoSize = true;
             lbRandom.BackColor = Color.Transparent;
             lbRandom.ForeColor = Color.White;
-            lbRandom.Location = new Point(320, 363);
+            lbRandom.Location = new Point(30, 373);
             lbRandom.Name = "lbRandom";
-            lbRandom.Size = new Size(167, 25);
+            lbRandom.Size = new Size(254, 25);
             lbRandom.TabIndex = 24;
-            lbRandom.Text = "RANDOM PATTERN";
+            lbRandom.Text = "RANDOM PATTERN (FOR DEV)";
             lbRandom.Visible = false;
             lbRandom.Click += lbRandom_Click;
             // 
@@ -148,7 +119,7 @@ namespace LAN_Caro
             lbPause.AutoSize = true;
             lbPause.BackColor = Color.Transparent;
             lbPause.ForeColor = Color.White;
-            lbPause.Location = new Point(320, 290);
+            lbPause.Location = new Point(30, 300);
             lbPause.Name = "lbPause";
             lbPause.Size = new Size(64, 25);
             lbPause.TabIndex = 23;
@@ -161,7 +132,7 @@ namespace LAN_Caro
             lbRestart.AutoSize = true;
             lbRestart.BackColor = Color.Transparent;
             lbRestart.ForeColor = Color.White;
-            lbRestart.Location = new Point(320, 220);
+            lbRestart.Location = new Point(30, 230);
             lbRestart.Name = "lbRestart";
             lbRestart.Size = new Size(81, 25);
             lbRestart.TabIndex = 22;
@@ -172,14 +143,14 @@ namespace LAN_Caro
             // 
             // rtbLog
             // 
-            rtbLog.BackColor = Color.FromArgb(75, 75, 75);
+            rtbLog.BackColor = Color.FromArgb(70, 71, 74);
             rtbLog.BorderStyle = BorderStyle.None;
             rtbLog.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             rtbLog.ForeColor = Color.Transparent;
-            rtbLog.Location = new Point(320, 63);
+            rtbLog.Location = new Point(-2, 54);
             rtbLog.Name = "rtbLog";
             rtbLog.ReadOnly = true;
-            rtbLog.Size = new Size(933, 652);
+            rtbLog.Size = new Size(960, 680);
             rtbLog.TabIndex = 13;
             rtbLog.Text = "";
             rtbLog.Visible = false;
@@ -235,26 +206,26 @@ namespace LAN_Caro
             imgTurn.TabStop = false;
             imgTurn.SizeChanged += imgTurn_SizeChanged;
             // 
-            // btMenu
+            // btShowPausePanel
             // 
-            btMenu.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btMenu.BackColor = Color.FromArgb(213, 227, 255);
-            btMenu.BackgroundColor = Color.FromArgb(213, 227, 255);
-            btMenu.BorderColor = Color.PaleVioletRed;
-            btMenu.BorderRadius = 20;
-            btMenu.BorderSize = 0;
-            btMenu.FlatAppearance.BorderSize = 0;
-            btMenu.FlatStyle = FlatStyle.Flat;
-            btMenu.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btMenu.ForeColor = Color.FromArgb(0, 28, 59);
-            btMenu.Image = Properties.Resources.icons8_settings_24;
-            btMenu.Location = new Point(9, 700);
-            btMenu.Name = "btMenu";
-            btMenu.Size = new Size(60, 60);
-            btMenu.TabIndex = 5;
-            btMenu.TextColor = Color.FromArgb(0, 28, 59);
-            btMenu.UseVisualStyleBackColor = false;
-            btMenu.Click += Menu_Click;
+            btShowPausePanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btShowPausePanel.BackColor = Color.FromArgb(213, 227, 255);
+            btShowPausePanel.BackgroundColor = Color.FromArgb(213, 227, 255);
+            btShowPausePanel.BorderColor = Color.PaleVioletRed;
+            btShowPausePanel.BorderRadius = 20;
+            btShowPausePanel.BorderSize = 0;
+            btShowPausePanel.FlatAppearance.BorderSize = 0;
+            btShowPausePanel.FlatStyle = FlatStyle.Flat;
+            btShowPausePanel.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btShowPausePanel.ForeColor = Color.FromArgb(0, 28, 59);
+            btShowPausePanel.Image = Properties.Resources.icons8_settings_24;
+            btShowPausePanel.Location = new Point(9, 700);
+            btShowPausePanel.Name = "btShowPausePanel";
+            btShowPausePanel.Size = new Size(60, 60);
+            btShowPausePanel.TabIndex = 5;
+            btShowPausePanel.TextColor = Color.FromArgb(0, 28, 59);
+            btShowPausePanel.UseVisualStyleBackColor = false;
+            btShowPausePanel.Click += ShowPausePanel_Click;
             // 
             // lbExit
             // 
@@ -389,7 +360,7 @@ namespace LAN_Caro
             pnPause1.Controls.Add(lbExit);
             pnPause1.Location = new Point(0, 0);
             pnPause1.Name = "pnPause1";
-            pnPause1.Size = new Size(10, 788);
+            pnPause1.Size = new Size(452, 788);
             pnPause1.TabIndex = 19;
             pnPause1.Visible = false;
             // 
@@ -405,7 +376,7 @@ namespace LAN_Caro
             Controls.Add(pnPause1);
             Controls.Add(btReady);
             Controls.Add(lbTimer);
-            Controls.Add(btMenu);
+            Controls.Add(btShowPausePanel);
             Controls.Add(imgTurn);
             Controls.Add(chbServer);
             Controls.Add(tbIPAdress);
@@ -433,10 +404,10 @@ namespace LAN_Caro
         private CheckBox chbServer;
         private ImageList imageList1;
         private PictureBox imgTurn;
-        private Addon_Custom_Button btMenu;
+        private Addon_Custom_Button btShowPausePanel;
         private RichTextBox rtbLog;
         private Addon_Transparent_Panel pnPause2;
-        private Addon_Custom_Button btMenuLabel;
+        private Addon_Custom_Button btShowPausePanelLabel;
         private CustomLabel lbExit;
         private CustomLabel lbLeaveMatch;
         private CustomLabel lbMatchLog;
@@ -447,11 +418,9 @@ namespace LAN_Caro
         private CustomLabel lbRandom;
         private CustomLabel lbPause;
         private CustomLabel lbRestart;
-        private CustomLabel lbTesting2;
         private System.Windows.Forms.Timer timer1;
         private Label lbTimer;
         private Addon_Custom_Button btReady;
-        private CustomLabel lbTesting1;
         private CustomLabel lbChangeTurn;
         private Panel panel1;
         private CustomLabel customLabel1;

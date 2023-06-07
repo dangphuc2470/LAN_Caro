@@ -15,6 +15,10 @@ namespace LAN_Caro
         public abstract void ready();
 
 
+        /// <summary>
+        /// Vì không thể bắt đầu timer từ thread khác nên ta mượn thuộc tính size của imgTurn để kích hoạt sự kiện bên thread chính để bắt đầu timer
+        /// </summary>
+        /// <param name="plusOrMinus"></param>
         public void TimerStartAndStop(int plusOrMinus)
         {
             Size size = tableManager.imgTurn.Size;
@@ -92,28 +96,35 @@ namespace LAN_Caro
 
                 }
                 tableManager.rtbLog.Text += "Receive: " + temp + "\n";
-                if (temp == "")
-                    continue;
-                else if (temp.StartsWith("Restart"))
+               // MessageBox.Show(temp);
+                switch (temp)
                 {
-                    string[] partsRestart = temp.Split(':');
-                    tableManager.remainingTimeInSeconds = Int32.Parse(partsRestart[1]);
-                    tableManager.Restart();
-                    continue;
+                    case "Switch":
+                        tableManager.SwitchPlayer();
+                        break;
+                    //case string s when s.StartsWith("Restart"):
+                    //    MessageBox.Show("Restatr");
+                    //    string[] partsRestart = temp.Split(':');
+                    //    tableManager.remainingTimeInSeconds = int.Parse(partsRestart[1]);
+                    //    tableManager.Restart();
+                    //    break;
+                    case "Restart:60":
+                        //MessageBox.Show("Restatr");
+                        string[] partsRestart = temp.Split(':');
+                        tableManager.remainingTimeInSeconds = int.Parse(partsRestart[1]);
+                        tableManager.Restart();
+                        break;
+                    case "Play":
+                        btReadyHide();
+                        break;
+                    default:
+                        string[] parts = temp.Split(':');
+                        int x = int.Parse(parts[0]);
+                        int y = int.Parse(parts[1]);
+                        tableManager.clickReceive(x, y);
+                        break;
                 }
-                else if (temp.StartsWith("Play"))
-                {
-                    btReadyHide();
-                    continue;
-                }
 
-
-
-                string[] parts = temp.Split(':');
-                int x = Int32.Parse(parts[0]);
-                int y = Int32.Parse(parts[1]);
-                tableManager.clickReceive(x, y);
-                //Cần cho client ko start sau lần gửi đầu tiên
             }
         }
 
@@ -124,7 +135,6 @@ namespace LAN_Caro
                 tableManager.rtbLog.Text += "Send: " + dataS + "\n";
                 byte[] data = System.Text.Encoding.UTF8.GetBytes(dataS + "\n");
                 netStream.Write(data, 0, data.Length);
-                //TimerStartAndStop(-1); //Stop
 
             }
 
@@ -202,32 +212,32 @@ namespace LAN_Caro
 
                 }
                 tableManager.rtbLog.Text += "Receive: " + temp + "\n";
-                if (temp == "")
-                    continue;
-                else if (temp.StartsWith("Restart"))
+                switch(temp)
                 {
-                    string[] partsRestart = temp.Split(':');
-                    tableManager.remainingTimeInSeconds = Int32.Parse(partsRestart[1]);
-                    tableManager.Restart();
-                    continue;
+                    case "Ready":
+                        tableManager.btReady.Tag = "1";
+                        tableManager.btReady.ForeColor = Color.Black;
+                        break;
+                    case "Cancel":
+                        tableManager.btReady.Tag = "0";
+                        tableManager.btReady.ForeColor = Color.WhiteSmoke;
+                        break;
+                    case "Switch":
+                        tableManager.SwitchPlayer();
+                        break;
+                    case string s when s.StartsWith("Restart"):
+                        string[] partsRestart = temp.Split(':');
+                        tableManager.remainingTimeInSeconds = int.Parse(partsRestart[1]);
+                        tableManager.Restart();
+                        break;
+                    default:
+                        string[] parts = temp.Split(':');
+                        int x = int.Parse(parts[0]);
+                        int y = int.Parse(parts[1]);
+                        tableManager.clickReceive(x, y);
+                        break;
                 }
-                else if (temp.StartsWith("Ready"))
-                {
-                    tableManager.btReady.Tag = "1";
-                    tableManager.btReady.ForeColor = Color.Black;
-                    //tableManager.btReady.T = true;
-                    continue;
-                }
-                else if (temp.StartsWith("Cancel"))
-                {
-                    tableManager.btReady.Tag = "0";
-                    tableManager.btReady.ForeColor = Color.WhiteSmoke;
-                    continue;
-                }
-                string[] parts = temp.Split(':');
-                int x = Int32.Parse(parts[0]);
-                int y = Int32.Parse(parts[1]);
-                tableManager.clickReceive(x, y);
+               
             }
         }
 
