@@ -23,6 +23,7 @@ namespace LAN_Caro
         public System.Windows.Forms.Timer timer;
         public Label lbTimer;
         public Addon_Custom_Button btReady;
+        Caro caro1;
         public List<Player> PlayerList { get; set; }
         public bool IsEndGame { get => isEndGame; set => isEndGame = value; }
 
@@ -30,8 +31,9 @@ namespace LAN_Caro
 
         public Table(Panel pnTable, RichTextBox rtbLog, PictureBox imgTurn, TextBox tbIPAdress,
                             System.Windows.Forms.Timer timer, Label lbTimer,
-                            Addon_Custom_Button btReady, int remainingTimeInSeconds, System.Windows.Forms.Timer timer2)
+                            Addon_Custom_Button btReady, int remainingTimeInSeconds, System.Windows.Forms.Timer timer2, Caro caro1)
         {
+            this.caro1 = caro1;
             this.pnTable = pnTable;
             this.rtbLog = rtbLog;
             this.imgTurn = imgTurn;
@@ -135,9 +137,14 @@ namespace LAN_Caro
             imgTurn.Image = PlayerList[isClientTurn].Image;
             Size size = imgTurn.Size;
             imgTurn.Size = new Size(size.Width + 1, size.Height);
+            if (isClientPlayer == isClientTurn)
+            {
+                StartTimer();
+            }
+            else StopTimer();
         }
 
-       
+
         #endregion
 
 
@@ -471,6 +478,23 @@ namespace LAN_Caro
         #endregion
 
         #region Timer
+        public void StartTimer()
+        {
+            caro1.Invoke((MethodInvoker)delegate
+            {
+                timer.Start();
+            });
+
+        }
+
+        public void StopTimer()
+        {
+            caro1.Invoke((MethodInvoker)delegate
+            {
+                timer.Stop();
+            });
+
+        }
         //public void lbTimer_SizeChanged(object sender, EventArgs e)
         //{
         //    timer.Start();

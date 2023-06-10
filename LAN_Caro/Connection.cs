@@ -19,12 +19,12 @@ namespace LAN_Caro
         /// Vì không thể bắt đầu timer từ thread khác nên ta mượn thuộc tính size của imgTurn để kích hoạt sự kiện bên thread chính để bắt đầu timer
         /// </summary>
         /// <param name="plusOrMinus"></param>
-        public void TimerStartAndStop(int plusOrMinus)
-        {
-            Size size = tableManager.imgTurn.Size;
-            tableManager.imgTurn.Size = new Size(size.Width + plusOrMinus, size.Height);
+        //public void TimerStartAndStop(int plusOrMinus)
+        //{
+        //    Size size = tableManager.imgTurn.Size;
+        //    tableManager.imgTurn.Size = new Size(size.Width + plusOrMinus, size.Height);
 
-        }
+        //}
 
         public void btReadyHide()
         {
@@ -109,11 +109,10 @@ namespace LAN_Caro
                         tableManager.Restart();
                         break;
                     case "Play":
-                        tableManager.timer.Start();
                         btReadyHide();
                         break;
                     default:
-                        tableManager.timer.Start();
+                        //tableManager.StartTimer();
                         string[] parts = temp.Split(':');
                         int x = int.Parse(parts[0]);
                         int y = int.Parse(parts[1]);
@@ -130,11 +129,10 @@ namespace LAN_Caro
             {
                 tableManager.rtbLog.Text += "Send: " + dataS + "\n";
                 if (dataS.Contains(":"))
-                    tableManager.timer.Stop();
+                    tableManager.StopTimer();
                 byte[] data = System.Text.Encoding.UTF8.GetBytes(dataS + "\n");
                 netStream.Write(data, 0, data.Length);
-                tableManager.timer.Stop();
-
+                
             }
 
         }
@@ -231,7 +229,8 @@ namespace LAN_Caro
                         tableManager.Restart();
                         break;
                     default:
-                        tableManager.timer.Start();
+                        //tableManager.StartTimer();
+                        tableManager.rtbLog.Text += "Start timer";
                         string[] parts = temp.Split(':');
                         int x = int.Parse(parts[0]);
                         int y = int.Parse(parts[1]);
@@ -257,7 +256,7 @@ namespace LAN_Caro
                     netStream.Write(data, 0, data.Length);
 
                 }
-
+                //tableManager.StopTimer();
 
             }
         }
@@ -286,11 +285,9 @@ namespace LAN_Caro
         }
         public override void ready()
         {
-            TimerStartAndStop(1);
             btReadyHide();
             messageSend("Play");
-            tableManager.timer.Start();
-
+            tableManager.StartTimer();
         }
 
     }

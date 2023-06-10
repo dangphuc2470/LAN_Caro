@@ -51,7 +51,7 @@ namespace LAN_Caro
         }
         private void Caro_Load(object sender, EventArgs e)
         {
-            tableManager = new Table(pnTable, rtbLog, imgTurn, tbIPAdress, timer1, lbTimer, btReady, remainingTimeInSeconds, timer);
+            tableManager = new Table(pnTable, rtbLog, imgTurn, tbIPAdress, timer1, lbTimer, btReady, remainingTimeInSeconds, timer, this);
             tableManager.tableButtonClickedSend += TableManager_ButtonClickedSend;
             tableManager.DrawTable();
         }
@@ -350,6 +350,6 @@ namespace LAN_Caro
             string second__ = (second_ == 0) ? "00" : second;
             return minute + ":" + second__;
         }
- 
+
     }
 }
