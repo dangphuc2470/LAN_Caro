@@ -10,12 +10,16 @@
 
   <ItemGroup>
     <None Remove="Resources\Arbuz.ttf" />
+    <None Remove="Resources\DS-DIGII.TTF" />
     <None Remove="Resources\HeadlinerNo.45 DEMO.ttf" />
     <None Remove="Resources\UI.ttf" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Resources\Arbuz.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\DS-DIGII.TTF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\HeadlinerNo.45 DEMO.ttf" />

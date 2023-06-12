@@ -91,6 +91,16 @@ namespace LAN_Caro.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] DS_DIGII {
+            get {
+                object obj = ResourceManager.GetObject("DS_DIGII", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap fakeBackground {
@@ -146,6 +156,46 @@ namespace LAN_Caro.Properties {
         internal static System.Drawing.Bitmap Picsart_23_06_07_08_41_09_453 {
             get {
                 object obj = ResourceManager.GetObject("Picsart_23-06-07_08-41-09-453", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Picsart_23_06_12_21_41_29_589 {
+            get {
+                object obj = ResourceManager.GetObject("Picsart_23-06-12_21-41-29-589", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Picsart_23_06_12_21_54_09_715 {
+            get {
+                object obj = ResourceManager.GetObject("Picsart_23-06-12_21-54-09-715", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Picsart_23_06_12_22_28_22_579 {
+            get {
+                object obj = ResourceManager.GetObject("Picsart_23-06-12_22-28-22-579", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Picsart_23_06_12_22_28_37_117 {
+            get {
+                object obj = ResourceManager.GetObject("Picsart_23-06-12_22-28-37-117", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

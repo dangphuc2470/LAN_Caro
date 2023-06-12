@@ -5,10 +5,13 @@ using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Net;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace LAN_Caro
 {
@@ -114,7 +117,7 @@ namespace LAN_Caro
             pnStartMenu.Visible = false;
             pnMultiplayer.Visible = true;
             Task.Run(() => { caro.tableManager.UpdateColor(caro.tableManager.borderColorNormal); });
-            
+
         }
 
 
@@ -164,6 +167,29 @@ namespace LAN_Caro
 
             }
 
+        }
+
+        private void MenuForm_Load(object sender, EventArgs e)
+        {
+            // Lấy thông tin mạng của máy tính
+            string ipv4Address = "";
+            foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (ni.OperationalStatus == OperationalStatus.Up && ni.NetworkInterfaceType != NetworkInterfaceType.Loopback)
+                {
+                    foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            //MessageBox.Show(ip.Address.ToString() + ni.Name.ToString());
+                        }
+                    }
+                }
+                if (!string.IsNullOrEmpty(ipv4Address))
+                {
+                    break;
+                }
+            }
         }
     }
 }
