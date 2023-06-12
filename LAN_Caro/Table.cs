@@ -137,7 +137,7 @@ namespace LAN_Caro
             imgTurn.Image = PlayerList[isClientTurn].Image;
             Size size = imgTurn.Size;
             imgTurn.Size = new Size(size.Width + 1, size.Height);
-            if (isClientPlayer == isClientTurn)
+            if (isClientPlayer == isClientTurn && !IsEndGame)
             {
                 StartTimer();
             }
@@ -441,8 +441,10 @@ namespace LAN_Caro
         /// <summary>
         /// Reset bàn cờ
         /// </summary>
-        public void Restart()
+        public void Restart(int setRemain)
         {
+            remainingTimeInSeconds = setRemain;
+            lbTimer.Text = SecondToMinute(remainingTimeInSeconds.ToString());
             isEndGame = false;
             Task.Run(() =>
            {
@@ -495,11 +497,15 @@ namespace LAN_Caro
             });
 
         }
-        //public void lbTimer_SizeChanged(object sender, EventArgs e)
-        //{
-        //    timer.Start();
-        //}
         #endregion
+
+        public static string SecondToMinute(string second)
+        {
+            int minute = int.Parse(second) / 60;
+            int second_ = int.Parse(second) % 60;
+            string second__ = (second_ == 0) ? "00" : second;
+            return minute + ":" + second__;
+        }
     }
 }
 

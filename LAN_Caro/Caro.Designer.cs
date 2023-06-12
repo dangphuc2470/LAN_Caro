@@ -342,7 +342,7 @@ namespace LAN_Caro
             pnPause1.Controls.Add(lbMatchLog);
             pnPause1.Controls.Add(lbLeaveMatch);
             pnPause1.Controls.Add(lbExit);
-            pnPause1.Location = new Point(0, 486);
+            pnPause1.Location = new Point(360, 740);
             pnPause1.Name = "pnPause1";
             pnPause1.Size = new Size(452, 302);
             pnPause1.TabIndex = 19;
@@ -352,11 +352,11 @@ namespace LAN_Caro
             // 
             lbTimer.AutoSize = true;
             lbTimer.BackColor = Color.Transparent;
-            lbTimer.Font = new Font("Impact", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            lbTimer.ForeColor = Color.Gray;
-            lbTimer.Location = new Point(74, 105);
+            lbTimer.Font = new Font("Arial Rounded MT Bold", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            lbTimer.ForeColor = Color.WhiteSmoke;
+            lbTimer.Location = new Point(34, 23);
             lbTimer.Name = "lbTimer";
-            lbTimer.Size = new Size(89, 48);
+            lbTimer.Size = new Size(105, 46);
             lbTimer.TabIndex = 20;
             lbTimer.Text = "1:00";
             // 

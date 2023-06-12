@@ -96,7 +96,6 @@ namespace LAN_Caro
 
                 }
                 tableManager.rtbLog.Text += "Receive: " + temp + "\n";
-                // MessageBox.Show(temp);
                 switch (temp)
                 {
                     case "Switch":
@@ -104,12 +103,16 @@ namespace LAN_Caro
                         break;
                     case string s when s.StartsWith("Restart"):
                         string[] partsRestart = temp.Split('_');
-                        tableManager.lbTimer.Text = partsRestart[1];
-                        tableManager.remainingTimeInSeconds = int.Parse(partsRestart[1]);
-                        tableManager.Restart();
+                        tableManager.Restart(int.Parse(partsRestart[1]));
                         break;
                     case "Play":
                         btReadyHide();
+                        break;
+                    case "Pause":
+                        tableManager.StopTimer();
+                        break;
+                    case "Resume":
+                        tableManager.StartTimer();
                         break;
                     default:
                         //tableManager.StartTimer();
@@ -225,8 +228,13 @@ namespace LAN_Caro
                     case string s when s.StartsWith("Restart"):
                         string[] partsRestart = temp.Split('_');
                         tableManager.lbTimer.Text = partsRestart[1];
-                        tableManager.remainingTimeInSeconds = int.Parse(partsRestart[1]);
-                        tableManager.Restart();
+                        tableManager.Restart(int.Parse(partsRestart[1]));
+                        break;
+                    case "Pause":
+                        tableManager.StopTimer();
+                        break;
+                    case "Resume":
+                        tableManager.StartTimer();
                         break;
                     default:
                         //tableManager.StartTimer();
@@ -256,8 +264,6 @@ namespace LAN_Caro
                     netStream.Write(data, 0, data.Length);
 
                 }
-                //tableManager.StopTimer();
-
             }
         }
 
