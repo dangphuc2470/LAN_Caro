@@ -10,7 +10,8 @@ namespace LAN_Caro
         public Table tableManager;
         Player_OBJ ServerOrClient;
         ToolTip toolTip1;
-        public int remainingTimeInSeconds;  // Thời gian ban đầu là 60 giây
+        public int remainingTimeInSeconds;
+        bool isPause = false;
         public Caro()
         {
             CheckForIllegalCrossThreadCalls = false;
@@ -58,6 +59,7 @@ namespace LAN_Caro
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            if (isPause) return;
             tableManager.remainingTimeInSeconds--;
             lbTimer.Text = SecondToMinute(tableManager.remainingTimeInSeconds.ToString());
 
@@ -241,8 +243,7 @@ namespace LAN_Caro
         private void lbRestart_Click(object sender, EventArgs e)
         {
             Resume();
-            tableManager.Restart();
-            remainingTimeInSeconds = 60;
+            tableManager.Restart(60);
             try
             {
                 ServerOrClient.messageSend("Restart_" + remainingTimeInSeconds);
@@ -256,6 +257,7 @@ namespace LAN_Caro
         private void lbPause_Click(object sender, EventArgs e)
         {
             ServerOrClient.messageSend("Pause");
+            isPause = true;
         }
         private void lbRandom_Click(object sender, EventArgs e)
         {
@@ -307,7 +309,6 @@ namespace LAN_Caro
 
                     label.UseDefaultFont();
                 }
-                //                lbTimer.BackColor = Color.FromArgb(75, 75, 75);
             }
             else
             {
@@ -336,14 +337,19 @@ namespace LAN_Caro
                     label.ForeColor = Color.Silver;
                     label.Tag = "0";
                 }
-                //lbTimer.BackColor = Color.Transparent;
+                lbTimer.BackColor = Color.Transparent;
+                if (isPause) //Tiếp tục timer mỗi khi panel pause bị ẩn
+                {
+                    isPause = false;
+                    ServerOrClient.messageSend("Resume");
+                }
             }
 
             if (btReady.Tag.ToString() == "0")
                 btReady.Visible = !pnPause2.Visible;
         }
 
-        private static string SecondToMinute(string second)
+        public static string SecondToMinute(string second)
         {
             int minute = int.Parse(second) / 60;
             int second_ = int.Parse(second) % 60;
