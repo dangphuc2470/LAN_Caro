@@ -175,6 +175,7 @@
             KeyPreview = true;
             Name = "MenuForm";
             Text = "Paper & Pencil";
+            Load += MenuForm_Load;
             ResizeEnd += MenuForm_SizeChanged;
             KeyDown += MenuForm_KeyDown;
             Move += MenuForm_Move;

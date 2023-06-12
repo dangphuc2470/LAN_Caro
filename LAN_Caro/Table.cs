@@ -23,7 +23,7 @@ namespace LAN_Caro
         public System.Windows.Forms.Timer timer;
         public Label lbTimer;
         public Addon_Custom_Button btReady;
-        Caro caro1;
+        public Caro caro1;
         public List<Player> PlayerList { get; set; }
         public bool IsEndGame { get => isEndGame; set => isEndGame = value; }
 

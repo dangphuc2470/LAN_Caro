@@ -110,6 +110,7 @@ namespace LAN_Caro
                         break;
                     case "Pause":
                         tableManager.StopTimer();
+                        tableManager.caro1.ShowPausePanel_Click(null, null);
                         break;
                     case "Resume":
                         tableManager.StartTimer();
@@ -232,6 +233,7 @@ namespace LAN_Caro
                         break;
                     case "Pause":
                         tableManager.StopTimer();
+                        tableManager.caro1.ShowPausePanel_Click(null, null);
                         break;
                     case "Resume":
                         tableManager.StartTimer();

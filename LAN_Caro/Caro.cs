@@ -20,6 +20,10 @@ namespace LAN_Caro
             KeyPreview = true;
             toolTip1 = new ToolTip();
             lbTimer.Text = SecondToMinute(remainingTimeInSeconds.ToString());
+            lbTimer.UseCustomFont("DS-DIGII.TTF", 35, FontStyle.Bold);
+            lblllMinSecond.UseCustomFont("UI.ttf", 10, FontStyle.Bold);
+            lbTimer.Parent = ptbBackgroundTimer;
+            lblllMinSecond.Parent = ptbBackgroundTimer;
             #region Format Pause Panel font
             foreach (CustomLabel label in pnPause1.Controls.OfType<CustomLabel>())
             {
@@ -71,29 +75,29 @@ namespace LAN_Caro
         }
 
 
-        private void Connect_Click(object sender, EventArgs e)
-        {
-            if (chbServer.CheckState == CheckState.Checked)
-            {
-                ServerOrClient = new Server_OBJ(tableManager);
-                tableManager.setPlayer(0);
-                btReady.Text = "Play";
-            }
-            else
-            {
-                try
-                {
-                    ServerOrClient = new Client_OBJ(tableManager, tbIPAdress.Text);
-                    btReady.Tag = 1;
-                    btReady.ForeColor = Color.Black;
-                }
-                catch
-                {
-                    MessageBox.Show("Server does not started yet!");
-                    return;
-                }
-            }
-        }
+        //private void Connect_Click(object sender, EventArgs e)
+        //{
+        //    if (chbServer.CheckState == CheckState.Checked)
+        //    {
+        //        ServerOrClient = new Server_OBJ(tableManager);
+        //        tableManager.setPlayer(0);
+        //        btReady.Text = "Play";
+        //    }
+        //    else
+        //    {
+        //        try
+        //        {
+        //            ServerOrClient = new Client_OBJ(tableManager, tbIPAdress.Text);
+        //            btReady.Tag = 1;
+        //            btReady.ForeColor = Color.Black;
+        //        }
+        //        catch
+        //        {
+        //            MessageBox.Show("Server does not started yet!");
+        //            return;
+        //        }
+        //    }
+        //}
 
 
         private void TableManager_ButtonClickedSend(object sender, string text)
@@ -306,9 +310,17 @@ namespace LAN_Caro
             {
                 foreach (CustomLabel label in pnPause1.Controls.OfType<CustomLabel>())
                 {
-
                     label.UseDefaultFont();
                 }
+
+                lbTimer.Parent = ptbBackgroundTimer;
+                lblllMinSecond.Parent = ptbBackgroundTimer;
+                lbTimer.UseCustomFont("DS-DIGII.TTF", 35, FontStyle.Bold);
+                lblllMinSecond.UseCustomFont("UI.ttf", 10, FontStyle.Bold);
+                lbTimer.ForeColor = Color.White;
+                lblllMinSecond.ForeColor = Color.White;
+
+
             }
             else
             {
@@ -343,10 +355,13 @@ namespace LAN_Caro
                     isPause = false;
                     ServerOrClient.messageSend("Resume");
                 }
+                lbTimer.Parent = pnPause1;
+                lblllMinSecond.Parent = pnPause1;
             }
 
             if (btReady.Tag.ToString() == "0")
                 btReady.Visible = !pnPause2.Visible;
+            ptbBackgroundTimer.Visible = !pnPause2.Visible;
         }
 
         public static string SecondToMinute(string second)
@@ -357,5 +372,40 @@ namespace LAN_Caro
             return minute + ":" + second__;
         }
 
+        private void btHost_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ServerOrClient = new Server_OBJ(tableManager);
+
+                tableManager.setPlayer(0);
+                btReady.Text = "Play";
+                btClient.Visible = false;
+                lblllChooseRole.Visible = false;
+                btHost.Enabled = false;
+            }
+            catch
+            {
+                MessageBox.Show("Server already running, please join as client instead or restart the game if you fell something was wrong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btClient_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ServerOrClient = new Client_OBJ(tableManager, tbIPAdress.Text);
+                btReady.Tag = 1;
+                btReady.ForeColor = Color.Black;
+                btHost.Visible = false;
+                lblllChooseRole.Visible = false;
+                btClient.Enabled = false;
+                btClient.Location = btHost.Location;
+            }
+            catch
+            {
+                MessageBox.Show("Server does not started yet or maybe you entered wrong IP address!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
