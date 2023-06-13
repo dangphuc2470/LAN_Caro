@@ -36,7 +36,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.Không_có_tiêu_đ1ề;
+            pictureBox1.Image = Properties.Resources.Không_có_tiêu_đ1ề1;
             pictureBox1.Location = new Point(0, -18);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(794, 886);
