@@ -15,8 +15,8 @@ namespace LAN_Caro
     {
         public List<List<Button>> buttonList = new List<List<Button>>();
         public static int SQUARE_SIZE = 40;
-        public static int TABLE_WIDTH = 30;
-        public static int TABLE_HEIGHT = 17;
+        public static int TABLE_WIDTH = 37;
+        public static int TABLE_HEIGHT = 16;
         private bool isEndGame = false;
 
         public CaroOffline()

@@ -209,6 +209,7 @@
             ClientSize = new Size(1480, 788);
             Controls.Add(pnStartMenu);
             Controls.Add(pnMultiplayer);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             KeyPreview = true;
             Name = "MenuForm";
