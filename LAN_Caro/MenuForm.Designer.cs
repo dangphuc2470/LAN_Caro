@@ -75,7 +75,7 @@
             btPlaySingle.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btPlaySingle.BackColor = Color.MediumSlateBlue;
             btPlaySingle.BackgroundColor = Color.MediumSlateBlue;
-            btPlaySingle.BackgroundImage = Properties.Resources.PSFix_20230605_223910_auto_x2_3;
+            btPlaySingle.BackgroundImage = Properties.Resources.Picsart_23_06_13_09_08_41_819;
             btPlaySingle.BackgroundImageLayout = ImageLayout.Stretch;
             btPlaySingle.BorderColor = Color.White;
             btPlaySingle.BorderRadius = 4;
