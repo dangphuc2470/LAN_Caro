@@ -38,9 +38,9 @@
             pnTable.BackColor = Color.Transparent;
             pnTable.BackgroundImageLayout = ImageLayout.Stretch;
             pnTable.CornerRadius = 25;
-            pnTable.Location = new Point(28, 109);
+            pnTable.Location = new Point(28, 136);
             pnTable.Name = "pnTable";
-            pnTable.Size = new Size(1440, 667);
+            pnTable.Size = new Size(1440, 640);
             pnTable.TabIndex = 1;
             // 
             // btHost

@@ -121,7 +121,7 @@ namespace LAN_Caro
             tableButtonClickedSend?.Invoke(this, x + ":" + y);
         }
 
-        private void YouWin()
+        public void YouWin()
         {
             Task.Run(() => 
             {
@@ -140,7 +140,7 @@ namespace LAN_Caro
 
                 }));
 
-
+                isEndGame = true;
             });
             
         }
@@ -159,7 +159,7 @@ namespace LAN_Caro
             SwitchPlayer();
         }
 
-        private void YouLose()
+        public void YouLose()
         {
             Thread.Sleep(2000);
             Task.Run(() =>
@@ -178,6 +178,7 @@ namespace LAN_Caro
 
                 }));
 
+                isEndGame = true;
 
             });
         }

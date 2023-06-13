@@ -117,7 +117,9 @@ namespace LAN_Caro
                             }));
                         });
 
-
+                        break;
+                    case "Lose":
+                        tableManager.YouWin();
                         break;
                     case "Pause":
                         tableManager.StopTimer();
@@ -270,7 +272,6 @@ namespace LAN_Caro
                             // Cập nhật giao diện người dùng trên thread chính
                             tableManager.caro1.ShowPausePanel_Click(null, null);
                         }));
-
                         break;
                     case "Resume":
                         tableManager.caro1.Invoke(new Action(() =>
@@ -282,6 +283,9 @@ namespace LAN_Caro
                                 tableManager.StartTimer();
                             }
                         }));
+                        break;
+                    case "Lose":
+                        tableManager.YouWin();
                         break;
                     case "Leave":
                         DialogResult dg = MessageBox.Show("Client disconnected, leave match?", "Disconected", MessageBoxButtons.YesNo, MessageBoxIcon.Information);

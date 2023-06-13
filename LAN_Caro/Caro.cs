@@ -2,6 +2,7 @@
 using System.Drawing.Text;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LAN_Caro
 {
@@ -69,11 +70,14 @@ namespace LAN_Caro
             if (isPause) return;
             tableManager.remainingTimeInSeconds--;
             lbTimer.Text = SecondToMinute(tableManager.remainingTimeInSeconds.ToString());
+           // MessageBox.Show(lbTimer.Text);
 
-            if (remainingTimeInSeconds == 0)
+            if (lbTimer.Text == "0:00")
             {
+                //MessageBox.Show("asdasd");
+                ServerOrClient.messageSend("Lose");
+                tableManager.YouLose();
                 timer.Enabled = false;
-                MessageBox.Show("Đếm ngược đã kết thúc!");
             }
         }
 
@@ -177,7 +181,11 @@ namespace LAN_Caro
         public void lbLeaveMatch_Click(object sender, EventArgs e)
         {
             this.Close();
-            ServerOrClient.messageSend("Leave");
+            try
+            {
+                ServerOrClient.messageSend("Leave");
+            }
+            catch { }
         }
 
         private void lbExit_Click(object sender, EventArgs e)
