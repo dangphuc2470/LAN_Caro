@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             pnTable = new Addon_Round_Panel();
+            btHost = new Addon_Custom_Button();
             SuspendLayout();
             // 
             // pnTable
@@ -37,10 +38,33 @@
             pnTable.BackColor = Color.Transparent;
             pnTable.BackgroundImageLayout = ImageLayout.Stretch;
             pnTable.CornerRadius = 25;
-            pnTable.Location = new Point(161, 67);
+            pnTable.Location = new Point(244, 12);
             pnTable.Name = "pnTable";
-            pnTable.Size = new Size(960, 680);
+            pnTable.Size = new Size(1224, 764);
             pnTable.TabIndex = 1;
+            // 
+            // btHost
+            // 
+            btHost.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btHost.BackColor = Color.MediumSlateBlue;
+            btHost.BackgroundColor = Color.MediumSlateBlue;
+            btHost.BackgroundImage = Properties.Resources.Picsart_23_06_12_22_28_22_579;
+            btHost.BackgroundImageLayout = ImageLayout.Stretch;
+            btHost.BorderColor = Color.White;
+            btHost.BorderRadius = 4;
+            btHost.BorderSize = 1;
+            btHost.FlatAppearance.BorderSize = 0;
+            btHost.FlatStyle = FlatStyle.Flat;
+            btHost.Font = new Font("Impact", 25F, FontStyle.Regular, GraphicsUnit.Point);
+            btHost.ForeColor = Color.White;
+            btHost.Location = new Point(12, 26);
+            btHost.Name = "btHost";
+            btHost.Size = new Size(206, 86);
+            btHost.TabIndex = 29;
+            btHost.Text = "Restart";
+            btHost.TextColor = Color.White;
+            btHost.UseVisualStyleBackColor = false;
+            btHost.Click += btHost_Click;
             // 
             // CaroOffline
             // 
@@ -48,6 +72,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Picsart_23_06_07_08_41_09_453;
             ClientSize = new Size(1480, 788);
+            Controls.Add(btHost);
             Controls.Add(pnTable);
             Name = "CaroOffline";
             Text = "CaroOffline";
@@ -58,5 +83,6 @@
         #endregion
 
         private Addon_Round_Panel pnTable;
+        private Addon_Custom_Button btHost;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace LAN_Caro
     {
         public List<List<Button>> buttonList = new List<List<Button>>();
         public static int SQUARE_SIZE = 40;
-        public static int TABLE_WIDTH = 25;
+        public static int TABLE_WIDTH = 30;
         public static int TABLE_HEIGHT = 17;
         private bool isEndGame = false;
 
@@ -79,70 +80,139 @@ namespace LAN_Caro
             int space = 1;
             Random random = new Random();
             Random random1 = new Random();
-            int i; int j;
-            while (space < 10)
-            {
-                i = random.Next(-space, space + 1);
-                j = random1.Next(-space, space + 1);
-                if (y + j < 0 || x + i < 0 || y + j >= TABLE_HEIGHT || x + i >= TABLE_WIDTH)
-                {
-                    space++;
-                    continue;
-                }
 
-                if (buttonList[y + j][x + i].Tag.ToString() == "0")
+            Task.Run(() =>
+            {
+
+                //BOTTOM_RIGHT
+                if (isEndGame == false)
                 {
-                    //Tìm tất cả nước đi của player có thể thắng
-                    if (countVertical(x + i, y + j, "1") || countHorizontal(x + i, y + j, "1") || countMainDiag(x + i, y + j, "1") || countSubDiag(x + i, y + j, "1"))
+                    for (int i = x; i < TABLE_WIDTH; i++)
                     {
-                        MessageBox.Show("warining");
-                        //Khi tìm thấy sẽ đánh vào
-                        buttonList[y + j][x + i].Image = Properties.Resources.o;
-                        buttonList[y + j][x + i].Tag = "2";
-                        //Sau đó kiếm tra thắng thua
-                        if (countVertical(x + i, y + j) || countHorizontal(x + i, j + y) || countMainDiag(x + i, y + j) || countSubDiag(x + i, y + j))
+                        for (int j = y; j < TABLE_HEIGHT; j++)
                         {
-                            MessageBox.Show("LOSE");
-                            isEndGame = true;
+                            if (buttonList[j][i].Tag.ToString() == "0")
+                            {
+                                //Tìm tất cả nước đi của player có thể thắng
+                                if (countVertical(i, j, "1") || countHorizontal(i, j, "1") || countMainDiag(i, j, "1") || countSubDiag(i, j, "1"))
+                                {
+                                    //Khi tìm thấy sẽ đánh vào
+                                    buttonList[j][i].Image = Properties.Resources.o;
+                                    buttonList[j][i].Tag = "2";
+                                    //Sau đó kiếm tra thắng thua
+                                    if (countVertical(i, j) || countHorizontal(i, j) || countMainDiag(i, j) || countSubDiag(i, j))
+                                    {
+                                        MessageBox.Show("LOSE");
+                                        isEndGame = true;
+                                    }
+                                    isCounter = true;
+                                    break;
+                                }
+                            }
                         }
-                        isCounter = true;
-                        break;
+                        if (isCounter)
+                            break;
                     }
                 }
-                space++;
-            }
 
-            //if (!isCounter) //Nếu không tìm thấy sẽ đánh random
-            //{
-            //    space = 1;
-            //    while (space < 10)
-            //    {
-            //        i = random.Next(-space, space + 1);
-            //        j = random1.Next(-space, space + 1);
-            //        if (y + j < 0 || x + i < 0 || y + j >= TABLE_HEIGHT || x + i >= TABLE_WIDTH)
-            //        {
-            //            space++;
-            //            continue;
-            //        }
+                //TOP RIGHT
+                if (!isCounter && isEndGame == false)
+                {
+                    for (int i = x; i < TABLE_WIDTH; i++)
+                    {
+                        for (int j = y; j > 0; j--)
+                        {
+                            if (buttonList[j][i].Tag.ToString() == "0")
+                            {
+                                //Tìm tất cả nước đi của player có thể thắng
+                                if (countVertical(i, j, "1") || countHorizontal(i, j, "1") || countMainDiag(i, j, "1") || countSubDiag(i, j, "1"))
+                                {
+                                    //Khi tìm thấy sẽ đánh vào
+                                    buttonList[j][i].Image = Properties.Resources.o;
+                                    buttonList[j][i].Tag = "2";
+                                    //Sau đó kiếm tra thắng thua
+                                    if (countVertical(i, j) || countHorizontal(i, j) || countMainDiag(i, j) || countSubDiag(i, j))
+                                    {
+                                        MessageBox.Show("LOSE");
+                                        isEndGame = true;
+                                    }
+                                    isCounter = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (isCounter)
+                            break;
+                    }
 
-            //        if (buttonList[y + j][x + i].Tag.ToString() == "0")
-            //        {
-            //            buttonList[y + j][x + i].Image = Properties.Resources.o;
-            //            buttonList[y + j][x + i].Tag = "2";
-            //            //Sau đó kiếm tra thắng thua
-            //            if (countVertical(x + i, y + j) || countHorizontal(x + i, j + y) || countMainDiag(x + i, y + j) || countSubDiag(x + i, y + j))
-            //            {
-            //                MessageBox.Show("LOSE");
-            //                isEndGame = true;
-            //            }
-            //            break;
-            //        }
-            //        space++;
+                }
 
-            //    }
-            //}
 
+                //LEFT
+                if (!isCounter && isEndGame == false)
+                {
+                    for (int i = x - 1; i > 0; i--)
+                    {
+                        for (int j = 0; j < TABLE_HEIGHT; j++)
+                        {
+                            if (buttonList[j][i].Tag.ToString() == "0")
+                            {
+                                //Tìm tất cả nước đi của player có thể thắng
+                                if (countVertical(i, j, "1") || countHorizontal(i, j, "1") || countMainDiag(i, j, "1") || countSubDiag(i, j, "1"))
+                                {
+                                    //MessageBox.Show("warining");
+                                    //Khi tìm thấy sẽ đánh vào
+                                    buttonList[j][i].Image = Properties.Resources.o;
+                                    buttonList[j][i].Tag = "2";
+                                    //Sau đó kiếm tra thắng thua
+                                    if (countVertical(i, j) || countHorizontal(i, j) || countMainDiag(i, j) || countSubDiag(i, j))
+                                    {
+                                        MessageBox.Show("LOSE");
+                                        isEndGame = true;
+                                    }
+                                    isCounter = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (isCounter)
+                            break;
+                    }
+
+                }
+
+                if (!isCounter) //Random
+                {
+                    int l = 0;
+                    while (!isCounter)
+                    {
+                        int i = random.Next(-space, space + 1);
+                        while (!isCounter)
+                        {
+                            int j = random1.Next(-space, space + 1);
+                            if (y + j < 0 || y + j >= TABLE_HEIGHT)
+                                continue;
+                            if (x + i < 0 || x + i >= TABLE_WIDTH)
+                                continue;
+                            if (buttonList[y + j][x + i].Tag.ToString() == "0")
+                            {
+                                buttonList[y + j][x + i].Image = Properties.Resources.o;
+                                buttonList[y + j][x + i].Tag = "2";
+                                //Sau đó kiếm tra thắng thua
+                                if (countVertical(x + i, y + j) || countHorizontal(x + i, y + j) || countMainDiag(x + i, y + j) || countSubDiag(x + i, y + j))
+                                {
+                                    MessageBox.Show("LOSE");
+                                    isEndGame = true;
+                                }
+                                isCounter = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            });
         }
+
 
 
 
@@ -323,7 +393,6 @@ namespace LAN_Caro
             int count = 0;
             for (int i = x - 1; i >= 0; i--)
             {
-                //MessageBox.Show(buttonList[y][i].Image.ToString() + thisButtonImage.ToString());
                 if (buttonList[y][i].Tag.ToString() == thisButtonTag)
                     count++;
                 else
@@ -337,11 +406,7 @@ namespace LAN_Caro
                 else
                     break;
             }
-            // MessageBox.Show(count.ToString());
-
-            if (count >= 2)
-
-
+            if (count >= 3)
                 return true;
 
             return false;
@@ -367,7 +432,7 @@ namespace LAN_Caro
                 else
                     break;
             }
-            if (count >= 2)
+            if (count >= 3)
 
 
                 return true;
@@ -393,7 +458,7 @@ namespace LAN_Caro
                 else break;
             }
 
-            if (count >= 2)
+            if (count >= 3)
 
 
                 return true;
@@ -420,7 +485,7 @@ namespace LAN_Caro
                 else
                     break;
             }
-            if (count >= 2)
+            if (count >= 3)
 
 
                 return true;
@@ -428,5 +493,68 @@ namespace LAN_Caro
             return false;
         }
         #endregion
+
+        private void btHost_Click(object sender, EventArgs e)
+        {
+            Task.Run(() => { 
+            UpdateColor();
+            ResetTag();
+            Random rand = new Random();
+            int i = 0;
+            while (i < 2000)
+            {
+                i++;
+                for (int j = 0; j < 5; j++)
+                {
+                    int x = rand.Next(TABLE_WIDTH);
+                    int y = rand.Next(TABLE_HEIGHT);
+                    buttonList[y][x].BackColor = Color.White;
+                    buttonList[y][x].Image = null;
+                }
+                i++;
+                if (i < 100)
+                    Thread.Sleep(1);
+            }
+            });
+            isEndGame = false;
+        }
+
+        private void UpdateColor()
+        {
+            Random rand = new Random();
+            int i = 0;
+            while (i<2000)
+            {
+                i++;
+                for (int j = 0; j < 5; j++)
+                {
+                    int x = rand.Next(TABLE_WIDTH);
+                    int y = rand.Next(TABLE_HEIGHT);
+                    buttonList[y][x].BackColor = Color.WhiteSmoke;
+                    buttonList[y][x].Image = null;
+                }
+                i++;
+                if (i < 100)
+                    Thread.Sleep(1);
+            }
+        }
+
+
+
+        /// <summary>
+        /// Đặt trạng thái của button thành chưa đổi màu
+        /// </summary>
+        /// <returns></returns>
+        public bool ResetTag()
+        {
+            for (int x = 0; x < TABLE_WIDTH; x++)
+            {
+                for (int y = 0; y < TABLE_HEIGHT; y++)
+                {
+                    buttonList[y][x].Tag = 0;
+                }
+            }
+            return true;
+        }
     }
 }
