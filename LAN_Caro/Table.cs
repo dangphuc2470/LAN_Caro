@@ -27,6 +27,7 @@ namespace LAN_Caro
         public TextBox tbClientName;
         public TextBox tbServerName;
         public PictureBox ptbPlay;
+        public CustomLabel lbResume;
         public List<Player> PlayerList { get; set; }
         public bool IsEndGame { get => isEndGame; set => isEndGame = value; }
 
@@ -35,7 +36,7 @@ namespace LAN_Caro
         public Table(Panel pnTable, RichTextBox rtbLog, PictureBox imgTurn, TextBox tbIPAdress,
                             System.Windows.Forms.Timer timer, Label lbTimer,
                             Addon_Custom_Button btReady, int remainingTimeInSeconds, System.Windows.Forms.Timer timer2, Caro caro1, 
-                            TextBox tbClientName, TextBox tbServerName, PictureBox ptbPlay)
+                            TextBox tbClientName, TextBox tbServerName, PictureBox ptbPlay, CustomLabel lbResume)
         {
             this.ptbPlay = ptbPlay;
             this.tbClientName = tbClientName;

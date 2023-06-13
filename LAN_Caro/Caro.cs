@@ -57,7 +57,7 @@ namespace LAN_Caro
             lblllMinSecond.UseCustomFont("UI.ttf", 10, FontStyle.Bold);
             #endregion
             tableManager = new Table(pnTable, rtbLog, imgTurn, tbIPAdress, timer1, lbTimer, btReady,
-                remainingTimeInSeconds, timer, this, lbNameClient, lbNameServer, ptbPlay);
+                remainingTimeInSeconds, timer, this, lbNameClient, lbNameServer, ptbPlay, lbResume);
 
 
             tableManager.tableButtonClickedSend += TableManager_ButtonClickedSend;
@@ -86,6 +86,8 @@ namespace LAN_Caro
 
         public void ShowPausePanel_Click(object sender, EventArgs e)
         {
+           
+            
             if (pnPause2.Tag.ToString() == "0" && tableManager.button_IsLoading == false)
             {
                 tableManager.DarkColor();
@@ -98,7 +100,9 @@ namespace LAN_Caro
                 ResetColor(lbResume);
             }
             else
+            {
                 Resume();
+            }
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
