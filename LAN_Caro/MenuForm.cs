@@ -43,19 +43,19 @@ namespace LAN_Caro
             lbHelp.Parent = ptbBackround;
             lbHelp.BackColor = Color.Transparent;
             lbHelp.ForeColor = Color.White;
-            lbHelp.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
+            //  lbHelp.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
             lbHelp.Visible = true;
 
             lbAbout.Parent = ptbBackround;
             lbAbout.BackColor = Color.Transparent;
             lbAbout.ForeColor = Color.White;
-            lbAbout.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
+            // lbAbout.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
             lbAbout.Visible = true;
 
             lbSetting.Parent = ptbBackround;
             lbSetting.BackColor = Color.Transparent;
             lbSetting.ForeColor = Color.White;
-            lbSetting.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
+            //lbSetting.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
             lbSetting.Visible = true;
             label1.Parent = ptbBackround;
             #endregion
@@ -117,9 +117,9 @@ namespace LAN_Caro
 
         private void btPlayMM_Click(object sender, EventArgs e)
         {
-                CaroOffline caroOffline = new CaroOffline();
-                caroOffline.Show();
-               // openChildForm(caroOffline);
+            CaroOffline caroOffline = new CaroOffline();
+            caroOffline.Show();
+            // openChildForm(caroOffline);
         }
 
         private void pnMultiplayer_ControlRemoved(object sender, ControlEventArgs e)
@@ -130,41 +130,46 @@ namespace LAN_Caro
             openChildForm(caro);
         }
 
+        private void lbAbout_Click(object sender, EventArgs e)
+        {
+            About about = new About();
+            about.Show();
+        }
 
         /// <summary>
         /// Vì font chữ custom gây ra 1 exception khi random pattern và leave match nên khi start menu bị ẩn thì đổi font chữ lại bình thường
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void pnStartMenu_VisibleChanged(object sender, EventArgs e)
-        {
-            if (!pnStartMenu.Visible)
-            {
-                //btPlaySingle.UseDefaultFont();
-                //btLan.UseDefaultFont();
-                lbSetting.UseDefaultFont();
-                lbHelp.UseDefaultFont();
-                lbAbout.UseDefaultFont();
-            }
-            else
-            {
-                //try
-                //{
-                //    btPlaySingle.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
-                //    btLan.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
-                //}
-                //catch
-                //{
-                //    btPlaySingle.UseDefaultFont();
-                //    btLan.UseDefaultFont();
-                //}
-                lbSetting.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
-                lbHelp.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
-                lbAbout.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
+        //private void pnStartMenu_VisibleChanged(object sender, EventArgs e)
+        //{
+        //    if (!pnStartMenu.Visible)
+        //    {
+        //        //btPlaySingle.UseDefaultFont();
+        //        //btLan.UseDefaultFont();
+        //        lbSetting.UseDefaultFont();
+        //        lbHelp.UseDefaultFont();
+        //        lbAbout.UseDefaultFont();
+        //    }
+        //    else
+        //    {
+        //        //try
+        //        //{
+        //        //    btPlaySingle.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
+        //        //    btLan.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
+        //        //}
+        //        //catch
+        //        //{
+        //        //    btPlaySingle.UseDefaultFont();
+        //        //    btLan.UseDefaultFont();
+        //        //}
+        //        //lbSetting.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
+        //        //lbHelp.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
+        //        //lbAbout.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
 
-            }
+        //    }
 
-        }
+        //}
 
     }
 }

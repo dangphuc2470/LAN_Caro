@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuForm));
             pnStartMenu = new Panel();
+            panel1 = new Panel();
             label1 = new Label();
             btPlaySingle = new Addon_Custom_Button();
             lbAbout = new CustomLabel();
@@ -38,12 +39,15 @@
             btLan = new Addon_Custom_Button();
             ptbBackround = new PictureBox();
             pnMultiplayer = new Panel();
+            panel2 = new Panel();
             pnStartMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbBackround).BeginInit();
             SuspendLayout();
             // 
             // pnStartMenu
             // 
+            pnStartMenu.Controls.Add(panel2);
+            pnStartMenu.Controls.Add(panel1);
             pnStartMenu.Controls.Add(label1);
             pnStartMenu.Controls.Add(btPlaySingle);
             pnStartMenu.Controls.Add(lbAbout);
@@ -56,7 +60,14 @@
             pnStartMenu.Name = "pnStartMenu";
             pnStartMenu.Size = new Size(1480, 788);
             pnStartMenu.TabIndex = 20;
-            pnStartMenu.VisibleChanged += pnStartMenu_VisibleChanged;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.Gainsboro;
+            panel1.Location = new Point(629, 708);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(3, 48);
+            panel1.TabIndex = 22;
             // 
             // label1
             // 
@@ -99,12 +110,14 @@
             lbAbout.AutoSize = true;
             lbAbout.BackColor = Color.Transparent;
             lbAbout.FlatStyle = FlatStyle.Flat;
+            lbAbout.Font = new Font("Impact", 20F, FontStyle.Regular, GraphicsUnit.Point);
             lbAbout.ForeColor = Color.White;
-            lbAbout.Location = new Point(636, 708);
+            lbAbout.Location = new Point(655, 708);
             lbAbout.Name = "lbAbout";
-            lbAbout.Size = new Size(69, 25);
+            lbAbout.Size = new Size(124, 48);
             lbAbout.TabIndex = 24;
             lbAbout.Text = "ABOUT";
+            lbAbout.Click += lbAbout_Click;
             // 
             // lbSetting
             // 
@@ -112,10 +125,11 @@
             lbSetting.AutoSize = true;
             lbSetting.BackColor = Color.Transparent;
             lbSetting.FlatStyle = FlatStyle.Flat;
+            lbSetting.Font = new Font("Impact", 20F, FontStyle.Regular, GraphicsUnit.Point);
             lbSetting.ForeColor = Color.White;
-            lbSetting.Location = new Point(465, 708);
+            lbSetting.Location = new Point(463, 708);
             lbSetting.Name = "lbSetting";
-            lbSetting.Size = new Size(79, 25);
+            lbSetting.Size = new Size(149, 48);
             lbSetting.TabIndex = 23;
             lbSetting.Text = "SETTING";
             // 
@@ -125,10 +139,11 @@
             lbHelp.AutoSize = true;
             lbHelp.BackColor = Color.Transparent;
             lbHelp.FlatStyle = FlatStyle.Flat;
+            lbHelp.Font = new Font("Impact", 20F, FontStyle.Regular, GraphicsUnit.Point);
             lbHelp.ForeColor = Color.White;
-            lbHelp.Location = new Point(783, 708);
+            lbHelp.Location = new Point(822, 708);
             lbHelp.Name = "lbHelp";
-            lbHelp.Size = new Size(52, 25);
+            lbHelp.Size = new Size(94, 48);
             lbHelp.TabIndex = 22;
             lbHelp.Text = "HELP";
             // 
@@ -178,6 +193,14 @@
             pnMultiplayer.Visible = false;
             pnMultiplayer.ControlRemoved += pnMultiplayer_ControlRemoved;
             // 
+            // panel2
+            // 
+            panel2.BackColor = Color.Gainsboro;
+            panel2.Location = new Point(799, 708);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(3, 48);
+            panel2.TabIndex = 23;
+            // 
             // MenuForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -209,5 +232,7 @@
         private Addon_Custom_Button btLan;
         private Panel pnMultiplayer;
         private Label label1;
+        private Panel panel1;
+        private Panel panel2;
     }
 }
