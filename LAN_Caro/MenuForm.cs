@@ -38,14 +38,7 @@ namespace LAN_Caro
         {
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
-            #region test
-            //pnStartMenu.Visible = false;
-            //pnMultiplayer.Visible = true;
-            #endregion
             #region Format StartMenu Panel
-            //btPlaySingle.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
-            //btLan.UseCustomFont("UI.ttf", 35, FontStyle.Regular);
-
 
             lbHelp.Parent = ptbBackround;
             lbHelp.BackColor = Color.Transparent;
@@ -64,6 +57,7 @@ namespace LAN_Caro
             lbSetting.ForeColor = Color.White;
             lbSetting.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
             lbSetting.Visible = true;
+            label1.Parent = ptbBackround;
             #endregion
         }
 
@@ -169,27 +163,5 @@ namespace LAN_Caro
 
         }
 
-        private void MenuForm_Load(object sender, EventArgs e)
-        {
-            // Lấy thông tin mạng của máy tính
-            string ipv4Address = "";
-            foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
-            {
-                if (ni.OperationalStatus == OperationalStatus.Up && ni.NetworkInterfaceType != NetworkInterfaceType.Loopback)
-                {
-                    foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
-                    {
-                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                        {
-                            //MessageBox.Show(ip.Address.ToString() + ni.Name.ToString());
-                        }
-                    }
-                }
-                if (!string.IsNullOrEmpty(ipv4Address))
-                {
-                    break;
-                }
-            }
-        }
     }
 }

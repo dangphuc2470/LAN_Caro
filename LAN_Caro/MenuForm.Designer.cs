@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuForm));
             pnStartMenu = new Panel();
+            label1 = new Label();
             btPlaySingle = new Addon_Custom_Button();
             lbAbout = new CustomLabel();
             lbSetting = new CustomLabel();
@@ -43,6 +44,7 @@
             // 
             // pnStartMenu
             // 
+            pnStartMenu.Controls.Add(label1);
             pnStartMenu.Controls.Add(btPlaySingle);
             pnStartMenu.Controls.Add(lbAbout);
             pnStartMenu.Controls.Add(lbSetting);
@@ -55,6 +57,18 @@
             pnStartMenu.Size = new Size(1480, 788);
             pnStartMenu.TabIndex = 20;
             pnStartMenu.VisibleChanged += pnStartMenu_VisibleChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(8, 2);
+            label1.Name = "label1";
+            label1.Size = new Size(74, 15);
+            label1.TabIndex = 25;
+            label1.Text = "v0.0.1 (BETA)";
             // 
             // btPlaySingle
             // 
@@ -175,7 +189,6 @@
             KeyPreview = true;
             Name = "MenuForm";
             Text = "Paper & Pencil";
-            Load += MenuForm_Load;
             ResizeEnd += MenuForm_SizeChanged;
             KeyDown += MenuForm_KeyDown;
             Move += MenuForm_Move;
@@ -195,5 +208,6 @@
         private CustomLabel lbHelp;
         private Addon_Custom_Button btLan;
         private Panel pnMultiplayer;
+        private Label label1;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Drawing.Text;
+using System.Net.NetworkInformation;
 using System.Windows.Forms;
 
 namespace LAN_Caro
@@ -19,12 +20,13 @@ namespace LAN_Caro
             remainingTimeInSeconds = 60;
             KeyPreview = true;
             toolTip1 = new ToolTip();
+        }
+        private void Caro_Load(object sender, EventArgs e)
+        {
+            #region Format Font
             lbTimer.Text = SecondToMinute(remainingTimeInSeconds.ToString());
-            lbTimer.UseCustomFont("DS-DIGII.TTF", 35, FontStyle.Bold);
-            lblllMinSecond.UseCustomFont("UI.ttf", 10, FontStyle.Bold);
             lbTimer.Parent = ptbBackgroundTimer;
             lblllMinSecond.Parent = ptbBackgroundTimer;
-            #region Format Pause Panel font
             foreach (CustomLabel label in pnPause1.Controls.OfType<CustomLabel>())
             {
                 if (label.Name == "lbMenu")
@@ -51,11 +53,9 @@ namespace LAN_Caro
                 label.Tag = "0";
             }
 
+            lbTimer.UseCustomFont("DS-DIGII.TTF", 35, FontStyle.Bold);
+            lblllMinSecond.UseCustomFont("UI.ttf", 10, FontStyle.Bold);
             #endregion
-
-        }
-        private void Caro_Load(object sender, EventArgs e)
-        {
             tableManager = new Table(pnTable, rtbLog, imgTurn, tbIPAdress, timer1, lbTimer, btReady, remainingTimeInSeconds, timer, this);
             tableManager.tableButtonClickedSend += TableManager_ButtonClickedSend;
             tableManager.DrawTable();
@@ -89,7 +89,7 @@ namespace LAN_Caro
         //        {
         //            ServerOrClient = new Client_OBJ(tableManager, tbIPAdress.Text);
         //            btReady.Tag = 1;
-        //            btReady.ForeColor = Color.Black;
+        //           btReady.ForeColor = Color.White;
         //        }
         //        catch
         //        {
@@ -362,6 +362,8 @@ namespace LAN_Caro
             if (btReady.Tag.ToString() == "0")
                 btReady.Visible = !pnPause2.Visible;
             ptbBackgroundTimer.Visible = !pnPause2.Visible;
+            pnIPAddress.Visible = !pnPause2.Visible;
+
         }
 
         public static string SecondToMinute(string second)
@@ -379,10 +381,31 @@ namespace LAN_Caro
                 ServerOrClient = new Server_OBJ(tableManager);
 
                 tableManager.setPlayer(0);
-                btReady.Text = "Play";
+                btReady.Text = "PLAY";
                 btClient.Visible = false;
                 lblllChooseRole.Visible = false;
                 btHost.Enabled = false;
+                labelShowOrInput.Text = "Show this IP address to the client";
+                // Lấy thông tin mạng của máy tính
+                string ipv4Address = "";
+                foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
+                {
+                    if (ni.OperationalStatus == OperationalStatus.Up && ni.NetworkInterfaceType != NetworkInterfaceType.Loopback)
+                    {
+                        foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
+                        {
+                            if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                            {
+                                cbbIP.Items.Add(ip.Address.ToString() + " " + ni.Name.ToString());
+                                tbIPAdress.Text = ip.Address.ToString();
+                            }
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(ipv4Address))
+                    {
+                        break;
+                    }
+                }
             }
             catch
             {
@@ -392,20 +415,54 @@ namespace LAN_Caro
 
         private void btClient_Click(object sender, EventArgs e)
         {
+            if (tbIPAdress.Text == "")
+            {
+                tbIPAdress.Focus();
+                return;
+            }
             try
             {
                 ServerOrClient = new Client_OBJ(tableManager, tbIPAdress.Text);
                 btReady.Tag = 1;
-                btReady.ForeColor = Color.Black;
+                btReady.ForeColor = Color.White;
                 btHost.Visible = false;
                 lblllChooseRole.Visible = false;
                 btClient.Enabled = false;
+                MovePanelWithAnimation(btClient, btHost);
                 btClient.Location = btHost.Location;
             }
             catch
             {
+                tbIPAdress.Focus();
                 MessageBox.Show("Server does not started yet or maybe you entered wrong IP address!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+
+        private void MovePanelWithAnimation(Addon_Custom_Button pnMove, Addon_Custom_Button pnLocation)
+        {
+            Task.Run(() =>
+            {
+                int y = pnMove.Location.Y;
+                while (y <= pnLocation.Location.Y)
+                {
+                    pnMove.Invoke(new Action(() =>
+                    {
+                        pnMove.Location = new Point(pnLocation.Location.X, y + 1);
+                    }));
+                    y = pnMove.Location.Y + 1;
+                    if (y > 670)
+                        Thread.Sleep(15);
+                    else
+                        Thread.Sleep(1);
+
+                }
+            });
+        }
+
+        private void cbbIP_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            tbIPAdress.Text = cbbIP.SelectedItem.ToString().Substring(0, cbbIP.SelectedItem.ToString().IndexOf(" "));
         }
     }
 }
