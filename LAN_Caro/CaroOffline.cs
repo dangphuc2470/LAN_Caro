@@ -81,6 +81,11 @@ namespace LAN_Caro
             Random random = new Random();
             Random random1 = new Random();
 
+            if (ClientWinMove() == true)
+            {
+                MessageBox.Show("LOSE");
+                return;
+            }
             Task.Run(() =>
             {
 
@@ -211,6 +216,23 @@ namespace LAN_Caro
                     }
                 }
             });
+        }
+
+        private bool ClientWinMove()
+        {
+            for (int x = 0; x < TABLE_WIDTH; x++)
+            {
+                for (int y = 0; y < TABLE_HEIGHT;y++)
+                {
+                    if (countVertical(x, y, "2", 5) || countHorizontal(x, y, "2", 5) || countMainDiag(x, y, "2", 5) || countSubDiag(x, y, "2", 5))
+                    {
+                        buttonList[y][x].Image = Properties.Resources.o;
+                        buttonList[y][x].Tag = "2";
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
 
@@ -386,7 +408,7 @@ namespace LAN_Caro
         #endregion
 
         #region Bot
-        public bool countHorizontal(int x, int y, string thisButtonTag = null)
+        public bool countHorizontal(int x, int y, string thisButtonTag = null, int max = 3)
         {
             if (thisButtonTag == null)
                 thisButtonTag = buttonList[y][x].Tag.ToString();
@@ -406,14 +428,14 @@ namespace LAN_Caro
                 else
                     break;
             }
-            if (count >= 3)
+            if (count >= max)
                 return true;
 
             return false;
 
 
         }
-        public bool countVertical(int x, int y, string thisButtonTag = null)
+        public bool countVertical(int x, int y, string thisButtonTag = null, int max = 3)
         {
             if (thisButtonTag == null)
                 thisButtonTag = buttonList[y][x].Tag.ToString();
@@ -432,7 +454,7 @@ namespace LAN_Caro
                 else
                     break;
             }
-            if (count >= 3)
+            if (count >= max)
 
 
                 return true;
@@ -440,7 +462,7 @@ namespace LAN_Caro
             return false;
 
         }
-        public bool countMainDiag(int x, int y, string thisButtonTag = null)
+        public bool countMainDiag(int x, int y, string thisButtonTag = null, int max = 3)
         {
             if (thisButtonTag == null)
                 thisButtonTag = buttonList[y][x].Tag.ToString();
@@ -458,7 +480,7 @@ namespace LAN_Caro
                 else break;
             }
 
-            if (count >= 3)
+            if (count >= max)
 
 
                 return true;
@@ -466,7 +488,7 @@ namespace LAN_Caro
             return false;
         }
 
-        public bool countSubDiag(int x, int y, string thisButtonTag = null)
+        public bool countSubDiag(int x, int y, string thisButtonTag = null, int max = 3)
         {
             if (thisButtonTag == null)
                 thisButtonTag = buttonList[y][x].Tag.ToString();
@@ -485,36 +507,40 @@ namespace LAN_Caro
                 else
                     break;
             }
-            if (count >= 3)
+            if (count >= max)
 
 
                 return true;
 
             return false;
         }
+
+
+
         #endregion
 
         private void btHost_Click(object sender, EventArgs e)
         {
-            Task.Run(() => { 
-            UpdateColor();
-            ResetTag();
-            Random rand = new Random();
-            int i = 0;
-            while (i < 2000)
+            Task.Run(() =>
             {
-                i++;
-                for (int j = 0; j < 5; j++)
+                UpdateColor();
+                ResetTag();
+                Random rand = new Random();
+                int i = 0;
+                while (i < 2000)
                 {
-                    int x = rand.Next(TABLE_WIDTH);
-                    int y = rand.Next(TABLE_HEIGHT);
-                    buttonList[y][x].BackColor = Color.White;
-                    buttonList[y][x].Image = null;
+                    i++;
+                    for (int j = 0; j < 5; j++)
+                    {
+                        int x = rand.Next(TABLE_WIDTH);
+                        int y = rand.Next(TABLE_HEIGHT);
+                        buttonList[y][x].BackColor = Color.White;
+                        buttonList[y][x].Image = null;
+                    }
+                    i++;
+                    if (i < 100)
+                        Thread.Sleep(1);
                 }
-                i++;
-                if (i < 100)
-                    Thread.Sleep(1);
-            }
             });
             isEndGame = false;
         }
@@ -523,7 +549,7 @@ namespace LAN_Caro
         {
             Random rand = new Random();
             int i = 0;
-            while (i<2000)
+            while (i < 2000)
             {
                 i++;
                 for (int j = 0; j < 5; j++)
