@@ -136,6 +136,12 @@ namespace LAN_Caro
             about.Show();
         }
 
+        private void lbHelp_Click(object sender, EventArgs e)
+        {
+            Help help = new Help();
+            help.Show();
+        }
+
         /// <summary>
         /// Vì font chữ custom gây ra 1 exception khi random pattern và leave match nên khi start menu bị ẩn thì đổi font chữ lại bình thường
         /// </summary>

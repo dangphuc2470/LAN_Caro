@@ -86,8 +86,8 @@ namespace LAN_Caro
 
         public void ShowPausePanel_Click(object sender, EventArgs e)
         {
-           
-            
+
+
             if (pnPause2.Tag.ToString() == "0" && tableManager.button_IsLoading == false)
             {
                 tableManager.DarkColor();
@@ -174,9 +174,10 @@ namespace LAN_Caro
         }
 
 
-        private void lbLeaveMatch_Click(object sender, EventArgs e)
+        public void lbLeaveMatch_Click(object sender, EventArgs e)
         {
             this.Close();
+            ServerOrClient.messageSend("Leave");
         }
 
         private void lbExit_Click(object sender, EventArgs e)
@@ -336,7 +337,7 @@ namespace LAN_Caro
                 btReady.Visible = !pnPause2.Visible;
             ptbBackgroundTimer.Visible = !pnPause2.Visible;
             pnIPAddress.Visible = !pnPause2.Visible;
-   
+
 
         }
 

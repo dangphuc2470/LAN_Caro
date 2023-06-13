@@ -139,6 +139,11 @@ namespace LAN_Caro
                             }
                         }));
                         break;
+                    case "Leave":
+                        DialogResult dg = MessageBox.Show("Server disconnected, leave match?", "Disconected", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (dg == DialogResult.Yes)
+                            tableManager.caro1.lbLeaveMatch_Click(null, null);
+                        break;
                     default:
                         //tableManager.StartTimer();
                         string[] parts = temp.Split(':');
@@ -278,9 +283,12 @@ namespace LAN_Caro
                             }
                         }));
                         break;
+                    case "Leave":
+                        DialogResult dg = MessageBox.Show("Client disconnected, leave match?", "Disconected", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (dg == DialogResult.Yes)
+                            tableManager.caro1.lbLeaveMatch_Click(null, null);
+                        break;
                     default:
-                        //tableManager.StartTimer();
-                        tableManager.rtbLog.Text += "Start timer";
                         string[] parts = temp.Split(':');
                         int x = int.Parse(parts[0]);
                         int y = int.Parse(parts[1]);
@@ -289,6 +297,7 @@ namespace LAN_Caro
                 }
 
             }
+
         }
 
 
