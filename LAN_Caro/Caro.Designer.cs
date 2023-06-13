@@ -72,6 +72,7 @@ namespace LAN_Caro
             lbNameServer = new TextBox();
             label2 = new Label();
             label3 = new Label();
+            ptbPlay = new PictureBox();
             pnPause2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
             pnPause1.SuspendLayout();
@@ -81,6 +82,7 @@ namespace LAN_Caro
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ptbPlay).BeginInit();
             SuspendLayout();
             // 
             // pnTable
@@ -596,6 +598,17 @@ namespace LAN_Caro
             label3.TabIndex = 42;
             label3.Text = "SERVER";
             // 
+            // ptbPlay
+            // 
+            ptbPlay.Image = Properties.Resources.ezgif_1_c8277d09a9;
+            ptbPlay.Location = new Point(1096, 765);
+            ptbPlay.Name = "ptbPlay";
+            ptbPlay.Size = new Size(384, 23);
+            ptbPlay.SizeMode = PictureBoxSizeMode.StretchImage;
+            ptbPlay.TabIndex = 43;
+            ptbPlay.TabStop = false;
+            ptbPlay.Visible = false;
+            // 
             // Caro
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -604,10 +617,7 @@ namespace LAN_Caro
             BackgroundImage = Properties.Resources.Picsart_23_06_07_08_41_09_453;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1480, 788);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(lbTimer);
-            Controls.Add(lblllMinSecond);
+            Controls.Add(ptbPlay);
             Controls.Add(pnPause2);
             Controls.Add(pnPause1);
             Controls.Add(btShowPausePanel);
@@ -616,7 +626,6 @@ namespace LAN_Caro
             Controls.Add(btClient);
             Controls.Add(lblllChooseRole);
             Controls.Add(pnIPAddress);
-            Controls.Add(ptbBackgroundTimer);
             Controls.Add(btReady);
             Controls.Add(lbNameServer);
             Controls.Add(lbNameClient);
@@ -626,6 +635,11 @@ namespace LAN_Caro
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(imgTurn);
+            Controls.Add(lbTimer);
+            Controls.Add(label2);
+            Controls.Add(lblllMinSecond);
+            Controls.Add(label3);
+            Controls.Add(ptbBackgroundTimer);
             DoubleBuffered = true;
             Name = "Caro";
             Text = " ";
@@ -642,6 +656,7 @@ namespace LAN_Caro
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ptbPlay).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -700,5 +715,6 @@ namespace LAN_Caro
         private TextBox lbNameServer;
         private Label label2;
         private Label label3;
+        private PictureBox ptbPlay;
     }
 }
