@@ -75,31 +75,6 @@ namespace LAN_Caro
         }
 
 
-        //private void Connect_Click(object sender, EventArgs e)
-        //{
-        //    if (chbServer.CheckState == CheckState.Checked)
-        //    {
-        //        ServerOrClient = new Server_OBJ(tableManager);
-        //        tableManager.setPlayer(0);
-        //        btReady.Text = "Play";
-        //    }
-        //    else
-        //    {
-        //        try
-        //        {
-        //            ServerOrClient = new Client_OBJ(tableManager, tbIPAdress.Text);
-        //            btReady.Tag = 1;
-        //           btReady.ForeColor = Color.White;
-        //        }
-        //        catch
-        //        {
-        //            MessageBox.Show("Server does not started yet!");
-        //            return;
-        //        }
-        //    }
-        //}
-
-
         private void TableManager_ButtonClickedSend(object sender, string text)
         {
             ServerOrClient.messageSend(text);

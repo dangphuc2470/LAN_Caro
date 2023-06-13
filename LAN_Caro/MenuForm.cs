@@ -117,6 +117,9 @@ namespace LAN_Caro
 
         private void btPlayMM_Click(object sender, EventArgs e)
         {
+                CaroOffline caroOffline = new CaroOffline();
+                caroOffline.Show();
+               // openChildForm(caroOffline);
         }
 
         private void pnMultiplayer_ControlRemoved(object sender, ControlEventArgs e)
