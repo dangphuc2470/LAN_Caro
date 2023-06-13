@@ -56,7 +56,7 @@ namespace LAN_Caro
             lbTimer.UseCustomFont("DS-DIGII.TTF", 35, FontStyle.Bold);
             lblllMinSecond.UseCustomFont("UI.ttf", 10, FontStyle.Bold);
             #endregion
-            tableManager = new Table(pnTable, rtbLog, imgTurn, tbIPAdress, timer1, lbTimer, btReady, remainingTimeInSeconds, timer, this);
+            tableManager = new Table(pnTable, rtbLog, imgTurn, tbIPAdress, timer1, lbTimer, btReady, remainingTimeInSeconds, timer, this, lbNameClient, lbNameServer);
             tableManager.tableButtonClickedSend += TableManager_ButtonClickedSend;
             tableManager.DrawTable();
         }
@@ -79,11 +79,6 @@ namespace LAN_Caro
         {
             ServerOrClient.messageSend(text);
             tableManager.SwitchPlayer();
-        }
-
-        private void chbServer_CheckedChanged(object sender, EventArgs e)
-        {
-            tbIPAdress.Text = "127.0.0.1";
         }
 
         public void ShowPausePanel_Click(object sender, EventArgs e)
@@ -381,6 +376,8 @@ namespace LAN_Caro
                         break;
                     }
                 }
+
+                tableManager.PlayerList[0].Name = lbNameServer.Text;
             }
             catch
             {
@@ -405,6 +402,8 @@ namespace LAN_Caro
                 btClient.Enabled = false;
                 MovePanelWithAnimation(btClient, btHost);
                 btClient.Location = btHost.Location;
+                tableManager.PlayerList[1].Name = lbNameClient.Text;
+
             }
             catch
             {

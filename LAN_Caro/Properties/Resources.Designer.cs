@@ -61,6 +61,18 @@ namespace LAN_Caro.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f323639323831302f323130343036312f34643839316563302d386637362d313165332d393230322d6637333934306431306632302e706e67 {
+            get {
+                object obj = ResourceManager.GetObject("68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f3236393238313" +
+                        "02f323130343036312f34643839316563302d386637362d313165332d393230322d6637333934306" +
+                        "431306632302e706e67", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] Arbuz {

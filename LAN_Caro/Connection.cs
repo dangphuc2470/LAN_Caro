@@ -62,6 +62,7 @@ namespace LAN_Caro
                 {
                     ReceiveMessage(tcpClient.Client);
                 });
+                messageSend("//"+tableManager.tbClientName.Text);
             }
             catch
             {
@@ -98,6 +99,9 @@ namespace LAN_Caro
                 tableManager.rtbLog.Text += "Receive: " + temp + "\n";
                 switch (temp)
                 {
+                    case string s when s.StartsWith("//"):
+                        tableManager.tbServerName.Text = s.Substring(2);
+                        break;
                     case "Switch":
                         tableManager.SwitchPlayer();
                         break;
@@ -136,7 +140,7 @@ namespace LAN_Caro
                     tableManager.StopTimer();
                 byte[] data = System.Text.Encoding.UTF8.GetBytes(dataS + "\n");
                 netStream.Write(data, 0, data.Length);
-                
+
             }
 
         }
@@ -215,6 +219,9 @@ namespace LAN_Caro
                 tableManager.rtbLog.Text += "Receive: " + temp + "\n";
                 switch (temp)
                 {
+                    case string s when s.StartsWith("//"):
+                        tableManager.tbClientName.Text = s.Substring(2);
+                        break;
                     case "Ready":
                         tableManager.btReady.Tag = "1";
                         tableManager.btReady.ForeColor = Color.White;
@@ -280,6 +287,7 @@ namespace LAN_Caro
                     IPEndPoint clientEndPoint = (IPEndPoint)tcpClient.Client.RemoteEndPoint;
                     string clientIPAddress = clientEndPoint.ToString();
                     tableManager.rtbLog.Text += clientEndPoint + " Connected!\n";
+
                     Task.Run(() =>
                     {
                         ReceiveMessage(tcpClient.Client);
@@ -290,11 +298,13 @@ namespace LAN_Caro
                     break;
                 }
             }
+
         }
         public override void ready()
         {
             btReadyHide();
             messageSend("Play");
+            messageSend("//" + tableManager.tbServerName.Text);
             tableManager.StartTimer();
         }
 
