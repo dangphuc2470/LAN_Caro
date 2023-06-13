@@ -62,7 +62,7 @@ namespace LAN_Caro
                 {
                     ReceiveMessage(tcpClient.Client);
                 });
-                messageSend("//"+tableManager.tbClientName.Text);
+                messageSend("//" + tableManager.tbClientName.Text);
             }
             catch
             {
@@ -111,6 +111,24 @@ namespace LAN_Caro
                         break;
                     case "Play":
                         btReadyHide();
+                        Task.Run(() =>
+                        {
+                            tableManager.caro1.Invoke(new Action(() =>
+                            {
+                                // Cập nhật giao diện người dùng trên thread chính
+                                tableManager.ptbPlay.Size = new Size(1480, 788);
+                                tableManager.ptbPlay.Location = new Point(0, 0);
+                                tableManager.ptbPlay.Visible = true;
+                            }));
+                            Thread.Sleep(2000); // Chờ đợi 2 giây
+                            tableManager.caro1.Invoke(new Action(() =>
+                            {
+                                // Cập nhật giao diện người dùng trên thread chính
+                                tableManager.ptbPlay.Visible = false;
+                            }));
+                        });
+
+
                         break;
                     case "Pause":
                         tableManager.StopTimer();
@@ -305,7 +323,25 @@ namespace LAN_Caro
             btReadyHide();
             messageSend("Play");
             messageSend("//" + tableManager.tbServerName.Text);
-            tableManager.StartTimer();
+            Task.Run(() => {
+                // Chờ đợi 2 giây
+                tableManager.caro1.Invoke(new Action(() =>
+                {
+                    // Cập nhật giao diện người dùng trên thread chính
+                    tableManager.ptbPlay.Size = new Size(1480, 788);
+                    tableManager.ptbPlay.Location = new Point(0, 0);
+                    tableManager.ptbPlay.Visible = true;
+
+                }));
+                Thread.Sleep(2000); 
+                tableManager.caro1.Invoke(new Action(() =>
+                {
+                    // Cập nhật giao diện người dùng trên thread chính
+                    tableManager.ptbPlay.Visible = false;
+                    tableManager.StartTimer();
+
+                }));
+            });
         }
 
     }

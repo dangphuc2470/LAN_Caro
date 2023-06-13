@@ -56,7 +56,10 @@ namespace LAN_Caro
             lbTimer.UseCustomFont("DS-DIGII.TTF", 35, FontStyle.Bold);
             lblllMinSecond.UseCustomFont("UI.ttf", 10, FontStyle.Bold);
             #endregion
-            tableManager = new Table(pnTable, rtbLog, imgTurn, tbIPAdress, timer1, lbTimer, btReady, remainingTimeInSeconds, timer, this, lbNameClient, lbNameServer);
+            tableManager = new Table(pnTable, rtbLog, imgTurn, tbIPAdress, timer1, lbTimer, btReady,
+                remainingTimeInSeconds, timer, this, lbNameClient, lbNameServer, ptbPlay);
+
+
             tableManager.tableButtonClickedSend += TableManager_ButtonClickedSend;
             tableManager.DrawTable();
         }
@@ -283,13 +286,8 @@ namespace LAN_Caro
                     label.UseDefaultFont();
                 }
 
-                lbTimer.Parent = ptbBackgroundTimer;
-                lblllMinSecond.Parent = ptbBackgroundTimer;
                 lbTimer.UseCustomFont("DS-DIGII.TTF", 35, FontStyle.Bold);
                 lblllMinSecond.UseCustomFont("UI.ttf", 10, FontStyle.Bold);
-                lbTimer.ForeColor = Color.White;
-                lblllMinSecond.ForeColor = Color.White;
-
 
             }
             else
@@ -320,19 +318,21 @@ namespace LAN_Caro
                     label.Tag = "0";
                 }
                 lbTimer.BackColor = Color.Transparent;
-                if (isPause) //Tiếp tục timer mỗi khi panel pause bị ẩn
-                {
-                    isPause = false;
-                    ServerOrClient.messageSend("Resume");
-                }
-                lbTimer.Parent = pnPause1;
-                lblllMinSecond.Parent = pnPause1;
+                lbTimer.UseDefaultFont();
+                lblllMinSecond.UseDefaultFont();
+            }
+
+            if (isPause) //Tiếp tục timer mỗi khi panel pause bị ẩn
+            {
+                isPause = false;
+                ServerOrClient.messageSend("Resume");
             }
 
             if (btReady.Tag.ToString() == "0")
                 btReady.Visible = !pnPause2.Visible;
             ptbBackgroundTimer.Visible = !pnPause2.Visible;
             pnIPAddress.Visible = !pnPause2.Visible;
+   
 
         }
 

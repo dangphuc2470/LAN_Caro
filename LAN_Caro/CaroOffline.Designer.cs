@@ -48,7 +48,7 @@
             btHost.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btHost.BackColor = Color.MediumSlateBlue;
             btHost.BackgroundColor = Color.MediumSlateBlue;
-            btHost.BackgroundImage = Properties.Resources.Picsart_23_06_12_22_28_22_579;
+            btHost.BackgroundImage = Properties.Resources.PSFix_20230605_223910_auto_x2_2;
             btHost.BackgroundImageLayout = ImageLayout.Stretch;
             btHost.BorderColor = Color.White;
             btHost.BorderRadius = 4;
@@ -61,7 +61,7 @@
             btHost.Name = "btHost";
             btHost.Size = new Size(206, 86);
             btHost.TabIndex = 29;
-            btHost.Text = "Restart";
+            btHost.Text = "RESTART";
             btHost.TextColor = Color.White;
             btHost.UseVisualStyleBackColor = false;
             btHost.Click += btHost_Click;
