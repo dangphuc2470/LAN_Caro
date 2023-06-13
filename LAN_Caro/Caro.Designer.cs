@@ -63,11 +63,24 @@ namespace LAN_Caro
             labelShowOrInput = new Label();
             panel3 = new Panel();
             cbbIP = new CustomComboBox();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            pictureBox3 = new PictureBox();
+            pictureBox4 = new PictureBox();
+            label1 = new Label();
+            lbNameClient = new TextBox();
+            lbNameServer = new TextBox();
+            label2 = new Label();
+            label3 = new Label();
             pnPause2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
             pnPause1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbBackgroundTimer).BeginInit();
             pnIPAddress.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
             // 
             // pnTable
@@ -188,7 +201,7 @@ namespace LAN_Caro
             imgTurn.Image = Properties.Resources.x;
             imgTurn.ImageLocation = "";
             imgTurn.InitialImage = null;
-            imgTurn.Location = new Point(328, 343);
+            imgTurn.Location = new Point(361, 311);
             imgTurn.Name = "imgTurn";
             imgTurn.Size = new Size(69, 55);
             imgTurn.SizeMode = PictureBoxSizeMode.Zoom;
@@ -483,6 +496,106 @@ namespace LAN_Caro
             cbbIP.TabIndex = 0;
             cbbIP.SelectionChangeCommitted += cbbIP_SelectionChangeCommitted;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.BackgroundImageLayout = ImageLayout.None;
+            pictureBox1.Image = Properties.Resources._68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f323639323831302f323130343036312f34643839316563302d386637362d313165332d393230322d6637333934306431306632302e706e67;
+            pictureBox1.Location = new Point(189, 168);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(155, 131);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 32;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackColor = Color.Transparent;
+            pictureBox2.BackgroundImageLayout = ImageLayout.None;
+            pictureBox2.Image = Properties.Resources._68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f323639323831302f323130343036312f34643839316563302d386637362d313165332d393230322d6637333934306431306632302e706e67;
+            pictureBox2.Location = new Point(192, 373);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(155, 131);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 33;
+            pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.BackColor = Color.Transparent;
+            pictureBox3.BackgroundImageLayout = ImageLayout.None;
+            pictureBox3.Image = Properties.Resources.xd;
+            pictureBox3.Location = new Point(319, 477);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(25, 27);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 36;
+            pictureBox3.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.BackColor = Color.Transparent;
+            pictureBox4.BackgroundImageLayout = ImageLayout.None;
+            pictureBox4.Image = Properties.Resources.od;
+            pictureBox4.Location = new Point(317, 267);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(36, 27);
+            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox4.TabIndex = 37;
+            pictureBox4.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Impact", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = Color.FromArgb(64, 0, 64);
+            label1.Location = new Point(286, 326);
+            label1.Name = "label1";
+            label1.Size = new Size(58, 27);
+            label1.TabIndex = 38;
+            label1.Text = "TURN";
+            // 
+            // lbNameClient
+            // 
+            lbNameClient.BorderStyle = BorderStyle.None;
+            lbNameClient.Location = new Point(12, 275);
+            lbNameClient.Name = "lbNameClient";
+            lbNameClient.Size = new Size(150, 24);
+            lbNameClient.TabIndex = 39;
+            // 
+            // lbNameServer
+            // 
+            lbNameServer.BorderStyle = BorderStyle.None;
+            lbNameServer.Location = new Point(12, 480);
+            lbNameServer.Name = "lbNameServer";
+            lbNameServer.Size = new Size(150, 24);
+            lbNameServer.TabIndex = 40;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Impact", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.ForeColor = Color.FromArgb(64, 0, 64);
+            label2.Location = new Point(12, 242);
+            label2.Name = "label2";
+            label2.Size = new Size(69, 27);
+            label2.TabIndex = 41;
+            label2.Text = "CLIENT";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Impact", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = Color.FromArgb(64, 0, 64);
+            label3.Location = new Point(12, 447);
+            label3.Name = "label3";
+            label3.Size = new Size(76, 27);
+            label3.TabIndex = 42;
+            label3.Text = "SERVER";
+            // 
             // Caro
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -491,12 +604,13 @@ namespace LAN_Caro
             BackgroundImage = Properties.Resources.Picsart_23_06_07_08_41_09_453;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1480, 788);
+            Controls.Add(label3);
+            Controls.Add(label2);
             Controls.Add(lbTimer);
             Controls.Add(lblllMinSecond);
             Controls.Add(pnPause2);
             Controls.Add(pnPause1);
             Controls.Add(btShowPausePanel);
-            Controls.Add(imgTurn);
             Controls.Add(pnTable);
             Controls.Add(btHost);
             Controls.Add(btClient);
@@ -504,6 +618,14 @@ namespace LAN_Caro
             Controls.Add(pnIPAddress);
             Controls.Add(ptbBackgroundTimer);
             Controls.Add(btReady);
+            Controls.Add(lbNameServer);
+            Controls.Add(lbNameClient);
+            Controls.Add(label1);
+            Controls.Add(pictureBox4);
+            Controls.Add(pictureBox3);
+            Controls.Add(pictureBox2);
+            Controls.Add(pictureBox1);
+            Controls.Add(imgTurn);
             DoubleBuffered = true;
             Name = "Caro";
             Text = " ";
@@ -516,6 +638,10 @@ namespace LAN_Caro
             ((System.ComponentModel.ISupportInitialize)ptbBackgroundTimer).EndInit();
             pnIPAddress.ResumeLayout(false);
             pnIPAddress.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -565,5 +691,14 @@ namespace LAN_Caro
         private CustomComboBox cbbIP;
         private Panel panel3;
         private Label labelShowOrInput;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox4;
+        private Label label1;
+        private TextBox lbNameClient;
+        private TextBox lbNameServer;
+        private Label label2;
+        private Label label3;
     }
 }
