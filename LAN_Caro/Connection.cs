@@ -132,10 +132,23 @@ namespace LAN_Caro
                         break;
                     case "Pause":
                         tableManager.StopTimer();
-                        tableManager.caro1.ShowPausePanel_Click(null, null);
+                        tableManager.caro1.Invoke(new Action(() =>
+                        {
+                            // Cập nhật giao diện người dùng trên thread chính
+                            tableManager.caro1.ShowPausePanel_Click(null, null);
+
+                        }));
                         break;
                     case "Resume":
-                        tableManager.StartTimer();
+                        tableManager.caro1.Invoke(new Action(() =>
+                        {
+                            // Cập nhật giao diện người dùng trên thread chính
+                            tableManager.caro1.ShowPausePanel_Click(null, null);
+                            if (tableManager.isClientPlayer == tableManager.isClientTurn)
+                            {
+                                tableManager.StartTimer();
+                            }
+                        }));
                         break;
                     default:
                         //tableManager.StartTimer();
@@ -258,10 +271,23 @@ namespace LAN_Caro
                         break;
                     case "Pause":
                         tableManager.StopTimer();
-                        tableManager.caro1.ShowPausePanel_Click(null, null);
+                        tableManager.caro1.Invoke(new Action(() =>
+                        {
+                            // Cập nhật giao diện người dùng trên thread chính
+                            tableManager.caro1.ShowPausePanel_Click(null, null);
+                        }));
+
                         break;
                     case "Resume":
-                        tableManager.StartTimer();
+                        tableManager.caro1.Invoke(new Action(() =>
+                        {
+                            // Cập nhật giao diện người dùng trên thread chính
+                            tableManager.caro1.ShowPausePanel_Click(null, null);
+                            if (tableManager.isClientPlayer == tableManager.isClientTurn)
+                            {
+                                tableManager.StartTimer();
+                            }
+                        }));
                         break;
                     default:
                         //tableManager.StartTimer();
@@ -323,7 +349,8 @@ namespace LAN_Caro
             btReadyHide();
             messageSend("Play");
             messageSend("//" + tableManager.tbServerName.Text);
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 // Chờ đợi 2 giây
                 tableManager.caro1.Invoke(new Action(() =>
                 {
@@ -333,7 +360,7 @@ namespace LAN_Caro
                     tableManager.ptbPlay.Visible = true;
 
                 }));
-                Thread.Sleep(2000); 
+                Thread.Sleep(2000);
                 tableManager.caro1.Invoke(new Action(() =>
                 {
                     // Cập nhật giao diện người dùng trên thread chính
