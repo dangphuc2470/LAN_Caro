@@ -350,9 +350,9 @@ namespace LAN_Caro
             pnPause1.Controls.Add(lbMatchLog);
             pnPause1.Controls.Add(lbLeaveMatch);
             pnPause1.Controls.Add(lbExit);
-            pnPause1.Location = new Point(0, 778);
+            pnPause1.Location = new Point(0, 205);
             pnPause1.Name = "pnPause1";
-            pnPause1.Size = new Size(452, 10);
+            pnPause1.Size = new Size(452, 583);
             pnPause1.TabIndex = 19;
             pnPause1.Visible = false;
             // 

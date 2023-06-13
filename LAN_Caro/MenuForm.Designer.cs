@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuForm));
             pnStartMenu = new Panel();
+            panel2 = new Panel();
             panel1 = new Panel();
             label1 = new Label();
             btPlaySingle = new Addon_Custom_Button();
@@ -39,7 +40,6 @@
             btLan = new Addon_Custom_Button();
             ptbBackround = new PictureBox();
             pnMultiplayer = new Panel();
-            panel2 = new Panel();
             pnStartMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbBackround).BeginInit();
             SuspendLayout();
@@ -60,6 +60,14 @@
             pnStartMenu.Name = "pnStartMenu";
             pnStartMenu.Size = new Size(1480, 788);
             pnStartMenu.TabIndex = 20;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.Gainsboro;
+            panel2.Location = new Point(799, 708);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(3, 48);
+            panel2.TabIndex = 23;
             // 
             // panel1
             // 
@@ -146,6 +154,7 @@
             lbHelp.Size = new Size(94, 48);
             lbHelp.TabIndex = 22;
             lbHelp.Text = "HELP";
+            lbHelp.Click += lbHelp_Click;
             // 
             // btLan
             // 
@@ -192,14 +201,6 @@
             pnMultiplayer.TabIndex = 21;
             pnMultiplayer.Visible = false;
             pnMultiplayer.ControlRemoved += pnMultiplayer_ControlRemoved;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.Gainsboro;
-            panel2.Location = new Point(799, 708);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(3, 48);
-            panel2.TabIndex = 23;
             // 
             // MenuForm
             // 
