@@ -203,6 +203,36 @@ namespace LAN_Caro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Picsart_23_06_13_07_48_22_799 {
+            get {
+                object obj = ResourceManager.GetObject("Picsart_23-06-13_07-48-22-799", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Picsart_23_06_13_07_51_33_967 {
+            get {
+                object obj = ResourceManager.GetObject("Picsart_23-06-13_07-51-33-967", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Picsart_23_06_13_09_08_41_819 {
+            get {
+                object obj = ResourceManager.GetObject("Picsart_23-06-13_09-08-41-819", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap PSFix_20230605_223910_auto_x2_2 {
             get {
                 object obj = ResourceManager.GetObject("PSFix_20230605_223910_auto_x2~2", resourceCulture);

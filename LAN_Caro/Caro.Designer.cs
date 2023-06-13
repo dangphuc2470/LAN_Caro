@@ -59,10 +59,15 @@ namespace LAN_Caro
             btHost = new Addon_Custom_Button();
             btClient = new Addon_Custom_Button();
             lblllChooseRole = new Label();
+            pnIPAddress = new Panel();
+            labelShowOrInput = new Label();
+            panel3 = new Panel();
+            cbbIP = new CustomComboBox();
             pnPause2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
             pnPause1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbBackgroundTimer).BeginInit();
+            pnIPAddress.SuspendLayout();
             SuspendLayout();
             // 
             // pnTable
@@ -71,7 +76,7 @@ namespace LAN_Caro
             pnTable.BackColor = Color.Transparent;
             pnTable.BackgroundImageLayout = ImageLayout.Stretch;
             pnTable.CornerRadius = 25;
-            pnTable.Location = new Point(453, 54);
+            pnTable.Location = new Point(458, 86);
             pnTable.Name = "pnTable";
             pnTable.Size = new Size(960, 680);
             pnTable.TabIndex = 0;
@@ -162,9 +167,14 @@ namespace LAN_Caro
             // 
             // tbIPAdress
             // 
-            tbIPAdress.Location = new Point(43, 363);
+            tbIPAdress.AutoCompleteCustomSource.AddRange(new string[] { "127.0.0.1" });
+            tbIPAdress.BackColor = Color.FromArgb(45, 51, 73);
+            tbIPAdress.BorderStyle = BorderStyle.None;
+            tbIPAdress.Font = new Font("Impact", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            tbIPAdress.ForeColor = Color.White;
+            tbIPAdress.Location = new Point(34, 83);
             tbIPAdress.Name = "tbIPAdress";
-            tbIPAdress.Size = new Size(150, 31);
+            tbIPAdress.Size = new Size(230, 35);
             tbIPAdress.TabIndex = 4;
             // 
             // imageList1
@@ -294,20 +304,22 @@ namespace LAN_Caro
             btReady.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btReady.BackColor = Color.FromArgb(213, 227, 255);
             btReady.BackgroundColor = Color.FromArgb(213, 227, 255);
-            btReady.BorderColor = Color.PaleVioletRed;
-            btReady.BorderRadius = 20;
-            btReady.BorderSize = 0;
+            btReady.BackgroundImage = Properties.Resources.Picsart_23_06_13_09_08_41_819;
+            btReady.BackgroundImageLayout = ImageLayout.Stretch;
+            btReady.BorderColor = Color.White;
+            btReady.BorderRadius = 4;
+            btReady.BorderSize = 1;
             btReady.FlatAppearance.BorderSize = 0;
             btReady.FlatStyle = FlatStyle.Flat;
-            btReady.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btReady.ForeColor = Color.WhiteSmoke;
-            btReady.Location = new Point(66, 142);
+            btReady.Font = new Font("Impact", 25F, FontStyle.Regular, GraphicsUnit.Point);
+            btReady.ForeColor = Color.Silver;
+            btReady.Location = new Point(12, 598);
             btReady.Name = "btReady";
-            btReady.Size = new Size(166, 60);
+            btReady.Size = new Size(329, 86);
             btReady.TabIndex = 17;
             btReady.Tag = 0;
-            btReady.Text = "Ready";
-            btReady.TextColor = Color.WhiteSmoke;
+            btReady.Text = "READY";
+            btReady.TextColor = Color.Silver;
             btReady.UseVisualStyleBackColor = false;
             btReady.Click += btReady_Click;
             btReady.MouseHover += btReady_MouseHover;
@@ -425,6 +437,51 @@ namespace LAN_Caro
             lblllChooseRole.TabIndex = 30;
             lblllChooseRole.Text = "CHOOSE YOUR ROLE:";
             // 
+            // pnIPAddress
+            // 
+            pnIPAddress.BackColor = Color.Transparent;
+            pnIPAddress.BackgroundImage = Properties.Resources.Picsart_23_06_13_07_51_33_967;
+            pnIPAddress.BackgroundImageLayout = ImageLayout.Stretch;
+            pnIPAddress.Controls.Add(labelShowOrInput);
+            pnIPAddress.Controls.Add(panel3);
+            pnIPAddress.Controls.Add(tbIPAdress);
+            pnIPAddress.Controls.Add(cbbIP);
+            pnIPAddress.Location = new Point(350, -76);
+            pnIPAddress.Name = "pnIPAddress";
+            pnIPAddress.Size = new Size(340, 150);
+            pnIPAddress.TabIndex = 31;
+            // 
+            // labelShowOrInput
+            // 
+            labelShowOrInput.AutoSize = true;
+            labelShowOrInput.Font = new Font("Impact", 7F, FontStyle.Italic, GraphicsUnit.Point);
+            labelShowOrInput.ForeColor = Color.White;
+            labelShowOrInput.Location = new Point(11, 127);
+            labelShowOrInput.Name = "labelShowOrInput";
+            labelShowOrInput.Size = new Size(139, 18);
+            labelShowOrInput.TabIndex = 6;
+            labelShowOrInput.Text = "Enter server IP address";
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.Silver;
+            panel3.Location = new Point(34, 120);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(230, 1);
+            panel3.TabIndex = 5;
+            // 
+            // cbbIP
+            // 
+            cbbIP.BackColor = Color.FromArgb(45, 51, 73);
+            cbbIP.FlatStyle = FlatStyle.Flat;
+            cbbIP.ForeColor = Color.White;
+            cbbIP.FormattingEnabled = true;
+            cbbIP.Location = new Point(34, 85);
+            cbbIP.Name = "cbbIP";
+            cbbIP.Size = new Size(258, 33);
+            cbbIP.TabIndex = 0;
+            cbbIP.SelectionChangeCommitted += cbbIP_SelectionChangeCommitted;
+            // 
             // Caro
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -435,17 +492,17 @@ namespace LAN_Caro
             ClientSize = new Size(1480, 788);
             Controls.Add(lbTimer);
             Controls.Add(lblllMinSecond);
-            Controls.Add(ptbBackgroundTimer);
             Controls.Add(pnPause2);
             Controls.Add(pnPause1);
-            Controls.Add(btReady);
             Controls.Add(btShowPausePanel);
             Controls.Add(imgTurn);
-            Controls.Add(tbIPAdress);
             Controls.Add(pnTable);
             Controls.Add(btHost);
             Controls.Add(btClient);
             Controls.Add(lblllChooseRole);
+            Controls.Add(pnIPAddress);
+            Controls.Add(ptbBackgroundTimer);
+            Controls.Add(btReady);
             DoubleBuffered = true;
             Name = "Caro";
             Text = " ";
@@ -456,6 +513,8 @@ namespace LAN_Caro
             pnPause1.ResumeLayout(false);
             pnPause1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ptbBackgroundTimer).EndInit();
+            pnIPAddress.ResumeLayout(false);
+            pnIPAddress.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -501,5 +560,9 @@ namespace LAN_Caro
         private Addon_Custom_Button btHost;
         private Addon_Custom_Button btClient;
         private Label lblllChooseRole;
+        private Panel pnIPAddress;
+        private CustomComboBox cbbIP;
+        private Panel panel3;
+        private Label labelShowOrInput;
     }
 }

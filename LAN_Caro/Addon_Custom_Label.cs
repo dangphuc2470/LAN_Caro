@@ -11,11 +11,15 @@ public class CustomLabel : Label
 
     public void UseCustomFont(string name, int size, FontStyle fontStyle)
     {
-        PrivateFontCollection modernFont = new PrivateFontCollection();
+        try
+        {
+            PrivateFontCollection modernFont = new PrivateFontCollection();
 
-        modernFont.AddFontFile(name);
+            modernFont.AddFontFile(name);
 
-        Font = new Font(modernFont.Families[0], size, fontStyle);
+            Font = new Font(modernFont.Families[0], size, fontStyle);
+        }
+        catch { UseDefaultFont(); }
     }
 
     public void UseDefaultFont()

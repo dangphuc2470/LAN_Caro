@@ -143,14 +143,14 @@ namespace LAN_Caro
 
         public override void ready()
         {
-            if (tableManager.btReady.Text == "Cancel")
+            if (tableManager.btReady.Text == "CANCEL")
             {
-                tableManager.btReady.Text = "Ready";
+                tableManager.btReady.Text = "READY";
                 messageSend("Cancel");
                 return;
             }
             messageSend("Ready");
-            tableManager.btReady.Text = "Cancel";
+            tableManager.btReady.Text = "CANCEL";
         }
 
     }
@@ -217,11 +217,11 @@ namespace LAN_Caro
                 {
                     case "Ready":
                         tableManager.btReady.Tag = "1";
-                        tableManager.btReady.ForeColor = Color.Black;
+                        tableManager.btReady.ForeColor = Color.White;
                         break;
                     case "Cancel":
                         tableManager.btReady.Tag = "0";
-                        tableManager.btReady.ForeColor = Color.WhiteSmoke;
+                        tableManager.btReady.ForeColor = Color.Silver;
                         break;
                     case "Switch":
                         tableManager.SwitchPlayer();
