@@ -198,19 +198,20 @@ namespace LAN_Caro
             // btShowPausePanel
             // 
             btShowPausePanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btShowPausePanel.BackColor = Color.FromArgb(213, 227, 255);
-            btShowPausePanel.BackgroundColor = Color.FromArgb(213, 227, 255);
+            btShowPausePanel.BackColor = Color.Transparent;
+            btShowPausePanel.BackgroundColor = Color.Transparent;
+            btShowPausePanel.BackgroundImageLayout = ImageLayout.Stretch;
             btShowPausePanel.BorderColor = Color.PaleVioletRed;
-            btShowPausePanel.BorderRadius = 20;
+            btShowPausePanel.BorderRadius = 0;
             btShowPausePanel.BorderSize = 0;
             btShowPausePanel.FlatAppearance.BorderSize = 0;
             btShowPausePanel.FlatStyle = FlatStyle.Flat;
             btShowPausePanel.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btShowPausePanel.ForeColor = Color.FromArgb(0, 28, 59);
             btShowPausePanel.Image = Properties.Resources.icons8_settings_24;
-            btShowPausePanel.Location = new Point(0, 142);
+            btShowPausePanel.Location = new Point(-8, 126);
             btShowPausePanel.Name = "btShowPausePanel";
-            btShowPausePanel.Size = new Size(60, 60);
+            btShowPausePanel.Size = new Size(83, 73);
             btShowPausePanel.TabIndex = 5;
             btShowPausePanel.TextColor = Color.FromArgb(0, 28, 59);
             btShowPausePanel.UseVisualStyleBackColor = false;
@@ -430,8 +431,8 @@ namespace LAN_Caro
             lblllChooseRole.AutoSize = true;
             lblllChooseRole.BackColor = Color.Transparent;
             lblllChooseRole.Font = new Font("Impact", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            lblllChooseRole.ForeColor = Color.FromArgb(192, 64, 0);
-            lblllChooseRole.Location = new Point(8, 546);
+            lblllChooseRole.ForeColor = Color.Black;
+            lblllChooseRole.Location = new Point(12, 546);
             lblllChooseRole.Name = "lblllChooseRole";
             lblllChooseRole.Size = new Size(244, 37);
             lblllChooseRole.TabIndex = 30;
