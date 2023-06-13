@@ -113,10 +113,34 @@ namespace LAN_Caro
 
             if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
             {
-                MessageBox.Show("WIN");
+                YouWin();
                 IsEndGame = true;
             }
             tableButtonClickedSend?.Invoke(this, x + ":" + y);
+        }
+
+        private void YouWin()
+        {
+            Task.Run(() => 
+            {
+                Thread.Sleep(2000);
+                caro1.Invoke(new Action(() =>
+                {
+                    ptbPlay.Image = Properties.Resources.win;
+                    ptbPlay.Visible = true;
+
+                }));
+                
+                Thread.Sleep(3000);
+                caro1.Invoke(new Action(() =>
+                {
+                    ptbPlay.Visible = false;
+
+                }));
+
+
+            });
+            
         }
 
         public void clickReceive(int x, int y)
@@ -127,10 +151,33 @@ namespace LAN_Caro
 
             if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
             {
-                MessageBox.Show("LOSE");
+                YouLose();
                 IsEndGame = true;
             }
             SwitchPlayer();
+        }
+
+        private void YouLose()
+        {
+            Thread.Sleep(2000);
+            Task.Run(() =>
+            {
+                caro1.Invoke(new Action(() =>
+                {
+                    ptbPlay.Image = Properties.Resources.lose;
+                    ptbPlay.Visible = true;
+
+                }));
+
+                Thread.Sleep(3000);
+                caro1.Invoke(new Action(() =>
+                {
+                    ptbPlay.Visible = false;
+
+                }));
+
+
+            });
         }
 
         #endregion

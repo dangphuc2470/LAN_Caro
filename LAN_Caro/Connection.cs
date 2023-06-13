@@ -15,17 +15,6 @@ namespace LAN_Caro
         public abstract void ready();
 
 
-        /// <summary>
-        /// Vì không thể bắt đầu timer từ thread khác nên ta mượn thuộc tính size của imgTurn để kích hoạt sự kiện bên thread chính để bắt đầu timer
-        /// </summary>
-        /// <param name="plusOrMinus"></param>
-        //public void TimerStartAndStop(int plusOrMinus)
-        //{
-        //    Size size = tableManager.imgTurn.Size;
-        //    tableManager.imgTurn.Size = new Size(size.Width + plusOrMinus, size.Height);
-
-        //}
-
         public void btReadyHide()
         {
             // Check if the button control exists and is accessible from this thread

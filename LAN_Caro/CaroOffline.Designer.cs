@@ -38,17 +38,17 @@
             pnTable.BackColor = Color.Transparent;
             pnTable.BackgroundImageLayout = ImageLayout.Stretch;
             pnTable.CornerRadius = 25;
-            pnTable.Location = new Point(244, 12);
+            pnTable.Location = new Point(28, 109);
             pnTable.Name = "pnTable";
-            pnTable.Size = new Size(1224, 764);
+            pnTable.Size = new Size(1440, 667);
             pnTable.TabIndex = 1;
             // 
             // btHost
             // 
             btHost.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btHost.BackColor = Color.MediumSlateBlue;
-            btHost.BackgroundColor = Color.MediumSlateBlue;
-            btHost.BackgroundImage = Properties.Resources.PSFix_20230605_223910_auto_x2_2;
+            btHost.BackColor = Color.Transparent;
+            btHost.BackgroundColor = Color.Transparent;
+            btHost.BackgroundImage = Properties.Resources.Picsart_23_06_12_21_54_09_715;
             btHost.BackgroundImageLayout = ImageLayout.Stretch;
             btHost.BorderColor = Color.White;
             btHost.BorderRadius = 4;
@@ -57,9 +57,9 @@
             btHost.FlatStyle = FlatStyle.Flat;
             btHost.Font = new Font("Impact", 25F, FontStyle.Regular, GraphicsUnit.Point);
             btHost.ForeColor = Color.White;
-            btHost.Location = new Point(12, 26);
+            btHost.Location = new Point(0, 0);
             btHost.Name = "btHost";
-            btHost.Size = new Size(206, 86);
+            btHost.Size = new Size(355, 103);
             btHost.TabIndex = 29;
             btHost.Text = "RESTART";
             btHost.TextColor = Color.White;
