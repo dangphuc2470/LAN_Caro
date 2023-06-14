@@ -18,6 +18,7 @@ namespace LAN_Caro
         public static int TABLE_WIDTH = 37;
         public static int TABLE_HEIGHT = 16;
         private bool isEndGame = false;
+        private int number;
 
         public CaroOffline()
         {
@@ -99,7 +100,7 @@ namespace LAN_Caro
                 return;
             if (BotNearWinMove())
                 return;
-            if (Bot2Move())
+            if (Bot2Move(number++))
                 return;
             //Nếu các nước trên không đi được thì sẽ đi random
             BotRandomMove(x, y);
@@ -228,28 +229,105 @@ namespace LAN_Caro
         /// Tìm nước hai hướng không có nước đi của người chơi để đánh
         /// </summary>
         /// <returns></returns>
-        private bool Bot2Move()
+        private bool Bot2Move(int number)
         {
-            for (int x = 0; x < TABLE_WIDTH; x++)
+            if (number % 4 == 0) //Lần lượt tìm nước 2 từ các phía tránh dồn về 1 phía
             {
-                for (int y = 0; y < TABLE_HEIGHT; y++)
+                //Từ trái qua phải từ trên xuống dưới
+                for (int x = 0; x < TABLE_WIDTH; x++)
                 {
-                    if (buttonList[y][x].Tag.ToString() != "0")  //Nếu ô đó đã đánh rồi thì không xử lý nữa
-                        continue;
-                    if (countVerticalWithTwoFlag(x, y, "2", 1) || countHorizontalWithTwoFlag(x, y, "2", 1) || countMainDiagWithTwoFlag(x, y, "2", 1) || countSubDiagWithTwoFlag(x, y, "2", 1))
+                    for (int y = 0; y < TABLE_HEIGHT; y++)
                     {
-                        buttonList[y][x].Image = Properties.Resources.o;
-                        buttonList[y][x].Tag = "2";
-                        if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
+                        if (buttonList[y][x].Tag.ToString() != "0")  //Nếu ô đó đã đánh rồi thì không xử lý nữa
+                            continue;
+                        if (countVerticalWithTwoFlag(x, y, "2", 1) || countHorizontalWithTwoFlag(x, y, "2", 1) || countMainDiagWithTwoFlag(x, y, "2", 1) || countSubDiagWithTwoFlag(x, y, "2", 1))
                         {
-                            MessageBox.Show("LOSE");
-                            isEndGame = true;
+                            buttonList[y][x].Image = Properties.Resources.o;
+                            buttonList[y][x].Tag = "2";
+                            if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
+                            {
+                                MessageBox.Show("LOSE");
+                                isEndGame = true;
+                            }
+                            return true;
                         }
-                        return true;
                     }
                 }
+                return false;
             }
-            return false;
+            else if (number % 4 == 1)  //Lần lượt tìm nước 2 từ các phía tránh dồn về 1 phía
+            {
+                //Từ trái qua phải từ dưới lên trên
+                for (int x = 0; x < TABLE_WIDTH; x++)
+                {
+                    for (int y = TABLE_HEIGHT -1; y >= 0; y--)
+                    {
+                        if (buttonList[y][x].Tag.ToString() != "0")  //Nếu ô đó đã đánh rồi thì không xử lý nữa
+                            continue;
+                        if (countVerticalWithTwoFlag(x, y, "2", 1) || countHorizontalWithTwoFlag(x, y, "2", 1) || countMainDiagWithTwoFlag(x, y, "2", 1) || countSubDiagWithTwoFlag(x, y, "2", 1))
+                        {
+                            buttonList[y][x].Image = Properties.Resources.o;
+                            buttonList[y][x].Tag = "2";
+                            if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
+                            {
+                                MessageBox.Show("LOSE");
+                                isEndGame = true;
+                            }
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            else if (number % 4 == 2)  //Lần lượt tìm nước 2 từ các phía tránh dồn về 1 phía
+            {
+                //Từ phải qua trái từ dưới lên trên
+                for (int x = TABLE_WIDTH - 1; x >= 0 ; x--)
+                {
+                    for (int y = TABLE_HEIGHT - 1; y >= 0; y--)
+                    {
+                        if (buttonList[y][x].Tag.ToString() != "0")  //Nếu ô đó đã đánh rồi thì không xử lý nữa
+                            continue;
+                        if (countVerticalWithTwoFlag(x, y, "2", 1) || countHorizontalWithTwoFlag(x, y, "2", 1) || countMainDiagWithTwoFlag(x, y, "2", 1) || countSubDiagWithTwoFlag(x, y, "2", 1))
+                        {
+                            buttonList[y][x].Image = Properties.Resources.o;
+                            buttonList[y][x].Tag = "2";
+                            if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
+                            {
+                                MessageBox.Show("LOSE");
+                                isEndGame = true;
+                            }
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            } 
+            else
+            {
+                //Từ phải qua trái từ trên xuống dưới
+                for (int x = 0; x < TABLE_WIDTH; x++)
+                {
+                    for (int y = TABLE_HEIGHT - 1; y >= 0; y--)
+                    {
+                        if (buttonList[y][x].Tag.ToString() != "0")  //Nếu ô đó đã đánh rồi thì không xử lý nữa
+                            continue;
+                        if (countVerticalWithTwoFlag(x, y, "2", 1) || countHorizontalWithTwoFlag(x, y, "2", 1) || countMainDiagWithTwoFlag(x, y, "2", 1) || countSubDiagWithTwoFlag(x, y, "2", 1))
+                        {
+                            buttonList[y][x].Image = Properties.Resources.o;
+                            buttonList[y][x].Tag = "2";
+                            if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
+                            {
+                                MessageBox.Show("LOSE");
+                                isEndGame = true;
+                            }
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
         }
 
         /// <summary>
