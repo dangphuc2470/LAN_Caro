@@ -79,59 +79,29 @@ namespace LAN_Caro
 
 
             if (BotWinMove() == true)
-            {
-                MessageBox.Show("BotWINMove");
-
                 return;
-            }
+
             #region Kiểm tra người chơi có 4 nước cờ và chặn lại
-            if (BotBottomRight(x, y) == true)
-            {
-                MessageBox.Show("Block Player 4");
+            if (BotBottomRight(x, y))
                 return;
-            }
-            if (BotTopRight(x, y) == true)
-            {
-                MessageBox.Show("Block Player 4");
-
+            if (BotTopRight(x, y))
                 return;
-            }
-            if (BotLeft(x, y) == true)
-            {
-                MessageBox.Show("Block Player 4");
-
+            if (BotLeft(x, y))
                 return;
-            }
             #endregion
-            if (Bot4Move() == true)
-            {
-                MessageBox.Show("Bot4Move");
 
-                return;
-            }
-            if (BlockPlayer4Move() == true)
-            {
-                MessageBox.Show("BotBlock4Move");
 
+            if (Bot4Move())
                 return;
-            }
-
-            if (Bot3Move() == true)
-            {
-                MessageBox.Show("Bot3Move");
+            if (BlockPlayer4Move())
                 return;
-            }
-
-            if (BotNearWinMove() == true)
-            {
-                MessageBox.Show("Bot near win");
+            if (Bot3Move())
                 return;
-            }
-            if (Bot2Move() == true)
-            {
-                MessageBox.Show("Bot2Move");
+            if (BotNearWinMove())
                 return;
-            }
+            if (Bot2Move())
+                return;
+            //Nếu các nước trên không đi được thì sẽ đi random
             BotRandomMove(x, y);
         }
 
