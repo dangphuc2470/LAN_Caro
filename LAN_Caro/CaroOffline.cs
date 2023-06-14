@@ -80,36 +80,66 @@ namespace LAN_Caro
 
             if (BotWinMove() == true)
             {
-                MessageBox.Show("WinMove");
+                MessageBox.Show("BotWINMove");
+
                 return;
             }
+            #region Kiểm tra người chơi có 4 nước cờ và chặn lại
+            if (BotBottomRight(x, y) == true)
+            {
+                MessageBox.Show("Block Player 4");
+                return;
+            }
+            if (BotTopRight(x, y) == true)
+            {
+                MessageBox.Show("Block Player 4");
+
+                return;
+            }
+            if (BotLeft(x, y) == true)
+            {
+                MessageBox.Show("Block Player 4");
+
+                return;
+            }
+            #endregion
             if (Bot4Move() == true)
             {
-                MessageBox.Show("4move");
+                MessageBox.Show("Bot4Move");
+
                 return;
             }
-            else if (BotBottomRight(x, y) == true)
+            if (BlockPlayer4Move() == true)
             {
-                return;
-            }
-            else if (BotTopRight(x, y) == true)
-            {
+                MessageBox.Show("BotBlock4Move");
+
                 return;
             }
 
-            else if (BotLeft(x, y) == true)
+            if (Bot3Move() == true)
             {
+                MessageBox.Show("Bot3Move");
                 return;
             }
-            Task.Run(() =>
+
+            if (BotNearWinMove() == true)
             {
-                BotRandomMove(x, y);
-            });
+                MessageBox.Show("Bot near win");
+                return;
+            }
+            if (Bot2Move() == true)
+            {
+                MessageBox.Show("Bot2Move");
+                return;
+            }
+            BotRandomMove(x, y);
         }
 
 
+
+
         /// <summary>
-        /// Kiểm tra nếu có nước 4 rồi thì đánh
+        /// Kiểm tra nếu có nước 4 rồi thì đánh thành 5
         /// </summary>
         /// <returns></returns>
         private bool BotWinMove()
@@ -118,10 +148,10 @@ namespace LAN_Caro
             {
                 for (int y = 0; y < TABLE_HEIGHT; y++)
                 {
+                    if (buttonList[y][x].Tag.ToString() != "0")  //Nếu ô đó đã đánh rồi thì không xử lý nữa
+                        continue;
                     if (countVerticalWithTag(x, y, "2", 4) || countHorizontalWithTag(x, y, "2", 4) || countMainDiagWithTag(x, y, "2", 4) || countSubDiagWithTag(x, y, "2", 4))
                     {
-                        if (buttonList[y][x].Tag.ToString() == "1")
-                            continue;
                         buttonList[y][x].Image = Properties.Resources.o;
                         buttonList[y][x].Tag = "2";
                         if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
@@ -138,7 +168,7 @@ namespace LAN_Caro
         }
 
         /// <summary>
-        /// Kiểm tra nếu có nước 3 và hai bên không có nước đi của người chơi thì đánh
+        /// Kiểm tra nếu có nước 3 và hai hướng không có nước đi của người chơi thì đánh
         /// </summary>
         /// <returns></returns>
         private bool Bot4Move()
@@ -147,11 +177,10 @@ namespace LAN_Caro
             {
                 for (int y = 0; y < TABLE_HEIGHT; y++)
                 {
+                    if (buttonList[y][x].Tag.ToString() != "0")  //Nếu ô đó đã đánh rồi thì không xử lý nữa
+                        continue;
                     if (countVerticalWithTwoFlag(x, y, "2", 3) || countHorizontalWithTwoFlag(x, y, "2", 3) || countMainDiagWithTwoFlag(x, y, "2", 3) || countSubDiagWithTwoFlag(x, y, "2", 3))
                     {
-                        //Vì không hiểu sao đôi lúc dù đã đánh vào ô đó nhưng con bot vẫn tiếp tục đánh vào nên em đưa dòng if này để chặn lại
-                        if (buttonList[y][x].Tag.ToString() == "1")
-                            continue;
                         buttonList[y][x].Image = Properties.Resources.o;
                         buttonList[y][x].Tag = "2";
                         if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
@@ -165,6 +194,123 @@ namespace LAN_Caro
             }
             return false;
         }
+
+        /// <summary>
+        ///  Kiểm tra người chơi có nước 3 và hai hướng không có nước đi của bot thì đánh
+        /// </summary>
+        /// <returns></returns>
+        private bool BlockPlayer4Move()
+        {
+            for (int x = 0; x < TABLE_WIDTH; x++)
+            {
+                for (int y = 0; y < TABLE_HEIGHT; y++)
+                {
+                    if (buttonList[y][x].Tag.ToString() != "0")  //Nếu ô đó đã đánh rồi thì không xử lý nữa
+                        continue;
+                    if (countVerticalWithTwoFlag(x, y, "1", 3) || countHorizontalWithTwoFlag(x, y, "1", 3) || countMainDiagWithTwoFlag(x, y, "1", 3) || countSubDiagWithTwoFlag(x, y, "1", 3))
+                    {
+
+                        buttonList[y][x].Image = Properties.Resources.o;
+                        buttonList[y][x].Tag = "2";
+                        if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
+                        {
+                            MessageBox.Show("LOSE");
+                            isEndGame = true;
+                        }
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+
+        /// <summary>
+        /// Kiểm tra nếu có nước 2 và hai hướng không có nước đi của người chơi thì đánh
+        /// </summary>
+        /// <returns></returns>
+        private bool Bot3Move()
+        {
+            for (int x = 0; x < TABLE_WIDTH; x++)
+            {
+                for (int y = 0; y < TABLE_HEIGHT; y++)
+                {
+                    if (buttonList[y][x].Tag.ToString() != "0")  //Nếu ô đó đã đánh rồi thì không xử lý nữa
+                        continue;
+                    if (countVerticalWithTwoFlag(x, y, "2", 2) || countHorizontalWithTwoFlag(x, y, "2", 2) || countMainDiagWithTwoFlag(x, y, "2", 2) || countSubDiagWithTwoFlag(x, y, "2", 2))
+                    {
+                        buttonList[y][x].Image = Properties.Resources.o;
+                        buttonList[y][x].Tag = "2";
+                        if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
+                        {
+                            MessageBox.Show("LOSE");
+                            isEndGame = true;
+                        }
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+
+        /// <summary>
+        /// Tìm nước hai hướng không có nước đi của người chơi để đánh
+        /// </summary>
+        /// <returns></returns>
+        private bool Bot2Move()
+        {
+            for (int x = 0; x < TABLE_WIDTH; x++)
+            {
+                for (int y = 0; y < TABLE_HEIGHT; y++)
+                {
+                    if (buttonList[y][x].Tag.ToString() != "0")  //Nếu ô đó đã đánh rồi thì không xử lý nữa
+                        continue;
+                    if (countVerticalWithTwoFlag(x, y, "2", 1) || countHorizontalWithTwoFlag(x, y, "2", 1) || countMainDiagWithTwoFlag(x, y, "2", 1) || countSubDiagWithTwoFlag(x, y, "2", 1))
+                    {
+                        buttonList[y][x].Image = Properties.Resources.o;
+                        buttonList[y][x].Tag = "2";
+                        if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
+                        {
+                            MessageBox.Show("LOSE");
+                            isEndGame = true;
+                        }
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Kiểm tra nếu có nước 3 rồi thì đánh thành 4
+        /// </summary>
+        /// <returns></returns>
+        private bool BotNearWinMove()
+        {
+            for (int x = 0; x < TABLE_WIDTH; x++)
+            {
+                for (int y = 0; y < TABLE_HEIGHT; y++)
+                {
+                    if (buttonList[y][x].Tag.ToString() != "0")  //Nếu ô đó đã đánh rồi thì không xử lý nữa
+                        continue;
+                    if (countVerticalWithTag(x, y, "2", 3) || countHorizontalWithTag(x, y, "2", 3) || countMainDiagWithTag(x, y, "2", 3) || countSubDiagWithTag(x, y, "2", 3))
+                    {
+                        buttonList[y][x].Image = Properties.Resources.o;
+                        buttonList[y][x].Tag = "2";
+                        if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
+                        {
+                            MessageBox.Show("LOSE");
+                            isEndGame = true;
+                        }
+
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         private void BotRandomMove(int x, int y)
         {
             Random random = new Random();
@@ -184,7 +330,6 @@ namespace LAN_Caro
                     {
                         buttonList[y + j][x + i].Image = Properties.Resources.o;
                         buttonList[y + j][x + i].Tag = "2";
-                        //Sau đó kiếm tra thắng thua
                         if (countVertical(x + i, y + j) || countHorizontal(x + i, y + j) || countMainDiag(x + i, y + j) || countSubDiag(x + i, y + j))
                         {
                             MessageBox.Show("LOSE");
@@ -212,9 +357,8 @@ namespace LAN_Caro
                     if (buttonList[j][i].Tag.ToString() == "0")
                     {
                         //Tìm tất cả nước đi của player có thể thắng
-                        if (countVerticalWithTag(i, j, "1", 3) || countHorizontalWithTag(i, j, "1", 3) || countMainDiagWithTag(i, j, "1", 3) || countSubDiagWithTag(i, j, "1", 3))
+                        if (countVerticalWithTag(i, j, "1", 4) || countHorizontalWithTag(i, j, "1", 4) || countMainDiagWithTag(i, j, "1", 4) || countSubDiagWithTag(i, j, "1", 4))
                         {
-                            //MessageBox.Show("warining");
                             //Khi tìm thấy sẽ đánh vào
                             buttonList[j][i].Image = Properties.Resources.o;
                             buttonList[j][i].Tag = "2";
@@ -242,7 +386,7 @@ namespace LAN_Caro
                     if (buttonList[j][i].Tag.ToString() == "0")
                     {
                         //Tìm tất cả nước đi của player có thể thắng
-                        if (countVerticalWithTag(i, j, "1", 3) || countHorizontalWithTag(i, j, "1",3) || countMainDiagWithTag(i, j, "1",3) || countSubDiagWithTag(i, j, "1",3))
+                        if (countVerticalWithTag(i, j, "1", 4) || countHorizontalWithTag(i, j, "1", 4) || countMainDiagWithTag(i, j, "1", 4) || countSubDiagWithTag(i, j, "1", 4))
                         {
                             //Khi tìm thấy sẽ đánh vào
                             buttonList[j][i].Image = Properties.Resources.o;
@@ -270,7 +414,7 @@ namespace LAN_Caro
                     if (buttonList[j][i].Tag.ToString() == "0")
                     {
                         //Tìm tất cả nước đi của player có thể thắng
-                        if (countVerticalWithTag(i, j, "1", 3) || countHorizontalWithTag(i, j, "1", 3) || countMainDiagWithTag(i, j, "1", 3) || countSubDiagWithTag(i, j, "1", 3))
+                        if (countVerticalWithTag(i, j, "1", 4) || countHorizontalWithTag(i, j, "1", 4) || countMainDiagWithTag(i, j, "1", 4) || countSubDiagWithTag(i, j, "1", 4))
                         {
                             //Khi tìm thấy sẽ đánh vào
                             buttonList[j][i].Image = Properties.Resources.o;
@@ -464,8 +608,8 @@ namespace LAN_Caro
         #region Bot
         public bool countHorizontalWithTag(int x, int y, string thisButtonTag, int maxConsecutive)
         {
-           
-               
+
+
             int count = 0;
             for (int i = x - 1; i >= 0; i--)
             {
@@ -491,8 +635,8 @@ namespace LAN_Caro
         }
         public bool countVerticalWithTag(int x, int y, string thisButtonTag, int maxConsecutive)
         {
-           
-               
+
+
             int count = 0;
             for (int i = y - 1; i >= 0; i--)
             {
@@ -518,8 +662,8 @@ namespace LAN_Caro
         }
         public bool countMainDiagWithTag(int x, int y, string thisButtonTag, int maxConsecutive)
         {
-           
-               
+
+
             int count = 0;
             for (int i = x - 1, j = y - 1; i >= 0 && j >= 0; i--, j--)
             {
@@ -576,8 +720,8 @@ namespace LAN_Caro
         {
             bool flag1 = false;
             bool flag2 = false;
-           
-               
+
+
             int count = 0;
             for (int i = x - 1; i >= 0; i--)
             {
@@ -618,8 +762,6 @@ namespace LAN_Caro
         {
             bool flag1 = false;
             bool flag2 = false;
-           
-               
             int count = 0;
             for (int i = y - 1; i >= 0; i--)
             {
@@ -657,8 +799,8 @@ namespace LAN_Caro
         {
             bool flag1 = false;
             bool flag2 = false;
-           
-               
+
+
             int count = 0;
             for (int i = x - 1, j = y - 1; i >= 0 && j >= 0; i--, j--)
             {
@@ -695,8 +837,8 @@ namespace LAN_Caro
         {
             bool flag1 = false;
             bool flag2 = false;
-           
-               
+
+
             int count = 0;
             for (int i = x - 1, j = y + 1; i >= 0 && j < TABLE_HEIGHT; i--, j++)
             {
@@ -724,7 +866,7 @@ namespace LAN_Caro
                 else
                     break;
             }
-           if (count >= maxConsecutive && (flag1 == true && flag2 == true))
+            if (count >= maxConsecutive && (flag1 == true && flag2 == true))
                 return true;
 
             return false;
@@ -734,11 +876,11 @@ namespace LAN_Caro
 
 
 
-    /// <summary>
-    /// Restart
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+        /// <summary>
+        /// Restart
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btHost_Click(object sender, EventArgs e)
         {
             Task.Run(() =>
