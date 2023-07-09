@@ -73,6 +73,7 @@ namespace LAN_Caro
             label2 = new Label();
             label3 = new Label();
             ptbPlay = new PictureBox();
+            ptbLoading = new PictureBox();
             pnPause2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
             pnPause1.SuspendLayout();
@@ -83,6 +84,7 @@ namespace LAN_Caro
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ptbPlay).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ptbLoading).BeginInit();
             SuspendLayout();
             // 
             // pnTable
@@ -350,7 +352,7 @@ namespace LAN_Caro
             pnPause1.Controls.Add(lbMatchLog);
             pnPause1.Controls.Add(lbLeaveMatch);
             pnPause1.Controls.Add(lbExit);
-            pnPause1.Location = new Point(0, 205);
+            pnPause1.Location = new Point(136, 131);
             pnPause1.Name = "pnPause1";
             pnPause1.Size = new Size(452, 583);
             pnPause1.TabIndex = 19;
@@ -609,6 +611,15 @@ namespace LAN_Caro
             ptbPlay.TabStop = false;
             ptbPlay.Visible = false;
             // 
+            // ptbLoading
+            // 
+            ptbLoading.Image = Properties.Resources.game;
+            ptbLoading.Location = new Point(739, 17);
+            ptbLoading.Name = "ptbLoading";
+            ptbLoading.Size = new Size(150, 75);
+            ptbLoading.TabIndex = 44;
+            ptbLoading.TabStop = false;
+            // 
             // Caro
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -617,6 +628,7 @@ namespace LAN_Caro
             BackgroundImage = Properties.Resources.Picsart_23_06_07_08_41_09_453;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1480, 788);
+            Controls.Add(ptbLoading);
             Controls.Add(ptbPlay);
             Controls.Add(pnPause2);
             Controls.Add(pnPause1);
@@ -657,6 +669,7 @@ namespace LAN_Caro
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)ptbPlay).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ptbLoading).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -716,5 +729,6 @@ namespace LAN_Caro
         private Label label2;
         private Label label3;
         private PictureBox ptbPlay;
+        private PictureBox ptbLoading;
     }
 }

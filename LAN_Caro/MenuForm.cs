@@ -110,7 +110,14 @@ namespace LAN_Caro
         {
             pnStartMenu.Visible = false;
             pnMultiplayer.Visible = true;
-            Task.Run(() => { caro.tableManager.UpdateColor(caro.tableManager.borderColorNormal); });
+            Task.Run(() =>
+            {
+                caro.SetLoadingImage(Properties.Resources.loading);
+                Thread.Sleep(100);
+                caro.HideLoadingImage();
+                caro.tableManager.UpdateColor(caro.tableManager.borderColorNormal);
+            });
+
 
         }
 
@@ -126,8 +133,10 @@ namespace LAN_Caro
         {
             pnStartMenu.Visible = true;
             caro.Dispose();
+
             caro = new Caro();
             openChildForm(caro);
+
         }
 
         private void lbAbout_Click(object sender, EventArgs e)
