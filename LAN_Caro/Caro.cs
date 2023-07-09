@@ -3,6 +3,7 @@ using System.Drawing.Text;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
+using Image = System.Drawing.Image;
 
 namespace LAN_Caro
 {
@@ -70,7 +71,7 @@ namespace LAN_Caro
             if (isPause) return;
             tableManager.remainingTimeInSeconds--;
             lbTimer.Text = SecondToMinute(tableManager.remainingTimeInSeconds.ToString());
-           // MessageBox.Show(lbTimer.Text);
+            // MessageBox.Show(lbTimer.Text);
 
             if (lbTimer.Text == "0:00")
             {
@@ -90,10 +91,19 @@ namespace LAN_Caro
 
         public void ShowPausePanel_Click(object sender, EventArgs e)
         {
-
+            // Cập nhật giao diện người dùng trên thread chính
+            //ptbPlay.Size = new Size(1480, 788);
+            ptbPlay.Dock = DockStyle.Fill;
+            ptbPlay.Location = new Point(0, 0);
+            ptbPlay.Visible = true;
 
             if (pnPause2.Tag.ToString() == "0" && tableManager.button_IsLoading == false)
             {
+                //SetLoadingImage(Properties.Resources.menu);
+                //ptbLoading.BringToFront();
+                //ptbLoading.Visible = true;
+
+                //HideLoadingImage();
                 tableManager.DarkColor();
                 pnPause2.Dock = DockStyle.Right;
                 pnPause1.Dock = DockStyle.Left;
@@ -450,6 +460,19 @@ namespace LAN_Caro
         private void cbbIP_SelectionChangeCommitted(object sender, EventArgs e)
         {
             tbIPAdress.Text = cbbIP.SelectedItem.ToString().Substring(0, cbbIP.SelectedItem.ToString().IndexOf(" "));
+        }
+
+        public void SetLoadingImage(Image image)
+        {
+            ptbLoading.Image = image;
+            ptbLoading.Visible = true;
+            ptbLoading.Dock = DockStyle.Fill;
+            ptbLoading.BringToFront();
+        }
+
+        public void HideLoadingImage()
+        {
+            ptbLoading.Visible = false;
         }
     }
 }

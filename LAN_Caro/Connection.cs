@@ -1,3 +1,4 @@
+using LAN_Caro.Properties;
 using System.Data;
 using System.Net;
 using System.Net.Sockets;
@@ -105,14 +106,19 @@ namespace LAN_Caro
                             tableManager.caro1.Invoke(new Action(() =>
                             {
                                 // Cập nhật giao diện người dùng trên thread chính
-                                tableManager.ptbPlay.Size = new Size(1480, 788);
+                                //tableManager.ptbPlay.Size = new Size(1480, 788);
+                                tableManager.ptbPlay.Dock = DockStyle.Fill;
                                 tableManager.ptbPlay.Location = new Point(0, 0);
                                 tableManager.ptbPlay.Visible = true;
                             }));
-                            Thread.Sleep(2000); // Chờ đợi 2 giây
+                            Thread.Sleep(2000); //Sau khi hết animation thì chuyền sang ảnh menu để tránh việc các button phải load lại
                             tableManager.caro1.Invoke(new Action(() =>
                             {
-                                // Cập nhật giao diện người dùng trên thread chính
+                                tableManager.ptbPlay.Image = Properties.Resources.game;
+                            }));
+                            Thread.Sleep(1);
+                            tableManager.caro1.Invoke(new Action(() =>
+                            {
                                 tableManager.ptbPlay.Visible = false;
                             }));
                         });
@@ -351,26 +357,30 @@ namespace LAN_Caro
             btReadyHide();
             messageSend("Play");
             messageSend("//" + tableManager.tbServerName.Text);
+
             Task.Run(() =>
             {
-                // Chờ đợi 2 giây
                 tableManager.caro1.Invoke(new Action(() =>
                 {
                     // Cập nhật giao diện người dùng trên thread chính
-                    tableManager.ptbPlay.Size = new Size(1480, 788);
+                    //tableManager.ptbPlay.Size = new Size(1480, 788);
+                    tableManager.ptbPlay.Dock = DockStyle.Fill;
                     tableManager.ptbPlay.Location = new Point(0, 0);
                     tableManager.ptbPlay.Visible = true;
-
                 }));
-                Thread.Sleep(2000);
+                Thread.Sleep(2000); //Sau khi hết animation thì chuyền sang ảnh menu để tránh việc các button phải load lại
                 tableManager.caro1.Invoke(new Action(() =>
                 {
-                    // Cập nhật giao diện người dùng trên thread chính
+                    tableManager.ptbPlay.Image = Properties.Resources.game;
+                }));
+                Thread.Sleep(1);
+                tableManager.caro1.Invoke(new Action(() =>
+                {
                     tableManager.ptbPlay.Visible = false;
                     tableManager.StartTimer();
-
                 }));
             });
+
         }
 
     }
