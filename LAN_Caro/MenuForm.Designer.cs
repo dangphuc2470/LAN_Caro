@@ -85,9 +85,9 @@
             label1.ForeColor = Color.White;
             label1.Location = new Point(8, 2);
             label1.Name = "label1";
-            label1.Size = new Size(74, 15);
+            label1.Size = new Size(37, 15);
             label1.TabIndex = 25;
-            label1.Text = "v0.0.1 (BETA)";
+            label1.Text = "v0.0.3";
             // 
             // btPlaySingle
             // 
