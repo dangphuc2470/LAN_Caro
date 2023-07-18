@@ -93,15 +93,13 @@ namespace LAN_Caro
         {
             // Cập nhật giao diện người dùng trên thread chính
             //ptbPlay.Size = new Size(1480, 788);
-            ptbPlay.Dock = DockStyle.Fill;
-            ptbPlay.Location = new Point(0, 0);
-            ptbPlay.Visible = true;
+           
 
             if (pnPause2.Tag.ToString() == "0" && tableManager.button_IsLoading == false)
             {
-                //SetLoadingImage(Properties.Resources.menu);
-                //ptbLoading.BringToFront();
-                //ptbLoading.Visible = true;
+                //ptbPlay.Dock = DockStyle.Fill;
+                //ptbPlay.Location = new Point(0, 0);
+                //ptbPlay.Visible = true;
 
                 //HideLoadingImage();
                 tableManager.DarkColor();
