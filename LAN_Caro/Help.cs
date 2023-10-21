@@ -15,6 +15,7 @@ namespace LAN_Caro
         public Help()
         {
             InitializeComponent();
+            
         }
     }
 }
