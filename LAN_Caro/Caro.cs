@@ -8,6 +8,9 @@ using Image = System.Drawing.Image;
 namespace LAN_Caro
 {
     public partial class Caro : Form
+
+
+
     {
 
         public Table tableManager;
