@@ -14,7 +14,7 @@ namespace LAN_Caro
     public partial class CaroOffline : Form
     {
         public List<List<Button>> buttonList = new List<List<Button>>();
-        public static int SQUARE_SIZE = 40;
+        public static int SQUARE_SIZE;
         public static int TABLE_WIDTH = 37;
         public static int TABLE_HEIGHT = 16;
         private bool isEndGame = false;
@@ -23,10 +23,18 @@ namespace LAN_Caro
         public CaroOffline()
         {
             InitializeComponent();
+            Graphics graphics = CreateGraphics();
+            float dpiX = graphics.DpiX;
+            SQUARE_SIZE = Convert.ToInt32(26 * (dpiX / 96));
+            pnTable.Width = SQUARE_SIZE * (TABLE_WIDTH - 1);
+            pnTable.Height = SQUARE_SIZE * (TABLE_HEIGHT - 1) + SQUARE_SIZE;
+            graphics.Dispose();
+     
         }
 
         private void CaroOffline_Load(object sender, EventArgs e)
         {
+           
             Button lastButton = new Button() { Width = 0, Location = new Point(0, 0) };
             for (int i = 0; i < TABLE_HEIGHT; i++)
             {

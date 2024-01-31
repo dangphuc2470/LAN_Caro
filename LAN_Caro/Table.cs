@@ -7,7 +7,7 @@ namespace LAN_Caro
     {
         public int isClientPlayer = 1;
         public int isClientTurn;
-        public static int SQUARE_SIZE = 40;
+        public static int SQUARE_SIZE;
         public static int TABLE_WIDTH = 25;
         public static int TABLE_HEIGHT = 17;
         public int remainingTimeInSeconds;
@@ -66,6 +66,14 @@ namespace LAN_Caro
         #region Xử lí bàn cờ
         public void DrawTable()
         {
+            Graphics graphics = caro1.CreateGraphics();
+            float dpiX = graphics.DpiX;
+            SQUARE_SIZE = Convert.ToInt32(26 * (dpiX / 96));
+            pnTable.Width = SQUARE_SIZE * (TABLE_WIDTH - 1);
+            pnTable.Height = SQUARE_SIZE * (TABLE_HEIGHT - 1) + SQUARE_SIZE;
+            graphics.Dispose();
+
+
             Button lastButton = new Button() { Width = 0, Location = new Point(0, 0) };
             for (int i = 0; i < TABLE_HEIGHT; i++)
             {

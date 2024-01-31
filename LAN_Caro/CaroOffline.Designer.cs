@@ -35,17 +35,17 @@
             // pnTable
             // 
             pnTable.AutoScroll = true;
-            pnTable.BackColor = Color.Transparent;
+            pnTable.BackColor = Color.Black;
             pnTable.BackgroundImageLayout = ImageLayout.Stretch;
             pnTable.CornerRadius = 25;
-            pnTable.Location = new Point(28, 136);
+            pnTable.Location = new Point(22, 109);
+            pnTable.Margin = new Padding(2);
             pnTable.Name = "pnTable";
-            pnTable.Size = new Size(1440, 640);
+            pnTable.Size = new Size(1152, 512);
             pnTable.TabIndex = 1;
             // 
             // btHost
             // 
-            btHost.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btHost.BackColor = Color.Transparent;
             btHost.BackgroundColor = Color.Transparent;
             btHost.BackgroundImage = Properties.Resources.Picsart_23_06_12_21_54_09_715;
@@ -58,8 +58,9 @@
             btHost.Font = new Font("Impact", 25F, FontStyle.Regular, GraphicsUnit.Point);
             btHost.ForeColor = Color.White;
             btHost.Location = new Point(0, 0);
+            btHost.Margin = new Padding(2);
             btHost.Name = "btHost";
-            btHost.Size = new Size(355, 103);
+            btHost.Size = new Size(284, 82);
             btHost.TabIndex = 29;
             btHost.Text = "RESTART";
             btHost.TextColor = Color.White;
@@ -68,12 +69,13 @@
             // 
             // CaroOffline
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Picsart_23_06_07_08_41_09_453;
-            ClientSize = new Size(1480, 788);
+            ClientSize = new Size(1184, 630);
             Controls.Add(btHost);
             Controls.Add(pnTable);
+            Margin = new Padding(2);
             Name = "CaroOffline";
             Text = "CaroOffline";
             Load += CaroOffline_Load;

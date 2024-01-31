@@ -112,9 +112,7 @@ namespace LAN_Caro
             pnMultiplayer.Visible = true;
             Task.Run(() =>
             {
-                caro.SetLoadingImage(Properties.Resources.loading);
-                Thread.Sleep(100);
-                caro.HideLoadingImage();
+                
                 caro.tableManager.UpdateColor(caro.tableManager.borderColorNormal);
             });
 
