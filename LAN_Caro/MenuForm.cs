@@ -31,13 +31,17 @@ namespace LAN_Caro
             pnMultiplayer.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
-
         }
 
         public MenuForm()
         {
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
+            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string resourcesDirectory = Path.Combine(currentDirectory, "Resources");
+            string destinationDirectory = AppDomain.CurrentDomain.BaseDirectory; // Change this to your desired destination path
+            CopyFiles(resourcesDirectory, destinationDirectory);
+
             #region Format StartMenu Panel
 
             lbHelp.Parent = ptbBackround;
@@ -59,6 +63,33 @@ namespace LAN_Caro
             lbSetting.Visible = true;
             label1.Parent = ptbBackround;
             #endregion
+        }
+
+        static void CopyFiles(string sourceDirectory, string destinationDirectory)
+        {
+            // Check if the source directory exists
+            if (!Directory.Exists(sourceDirectory))
+            {
+                Console.WriteLine("Source directory does not exist.");
+                return;
+            }
+
+            // Check if the destination directory exists; if not, create it
+            if (!Directory.Exists(destinationDirectory))
+            {
+                Directory.CreateDirectory(destinationDirectory);
+            }
+
+            // Get all files in the source directory
+            string[] files = Directory.GetFiles(sourceDirectory);
+
+            // Copy each file to the destination directory
+            foreach (string file in files)
+            {
+                string fileName = Path.GetFileName(file);
+                string destinationPath = Path.Combine(destinationDirectory, fileName);
+                File.Copy(file, destinationPath, true);
+            }
         }
 
         #region MenuForm Event
@@ -111,10 +142,8 @@ namespace LAN_Caro
             pnStartMenu.Visible = false;
             pnMultiplayer.Visible = true;
             Task.Run(() =>
-            {
-                
-                caro.tableManager.UpdateColor(caro.tableManager.borderColorNormal);
-            });
+                caro.tableManager.UpdateColor(caro.tableManager.borderColorNormal)
+           );
 
 
         }
@@ -122,9 +151,18 @@ namespace LAN_Caro
 
         private void btPlayMM_Click(object sender, EventArgs e)
         {
-            CaroOffline caroOffline = new CaroOffline();
-            caroOffline.Show();
-            // openChildForm(caroOffline);
+            pnStartMenu.Visible = false;
+            pnMultiplayer.Visible = false;
+            pnSingleplayer.Visible = true;
+
+            CaroOffline childForm = new CaroOffline();
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            pnSingleplayer.Controls.Add(childForm);
+            pnSingleplayer.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
         }
 
         private void pnMultiplayer_ControlRemoved(object sender, ControlEventArgs e)
@@ -147,6 +185,12 @@ namespace LAN_Caro
         {
             Help help = new Help();
             help.Show();
+        }
+
+        private void pnSingleplayer_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            pnStartMenu.Visible = true;
+            pnSingleplayer.Visible = false;
         }
 
         /// <summary>

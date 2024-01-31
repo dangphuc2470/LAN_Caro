@@ -15,7 +15,7 @@ namespace LAN_Caro
         public bool button_IsLoading = true;
         public Color backColorNormal = Color.FromArgb(235, 240, 250);
         public Color backColorDark = Color.FromArgb(69, 70, 73);
-        public Color borderColorNormal = Color.Silver;
+        public Color borderColorNormal = Color.Gainsboro;
         public RichTextBox rtbLog;
         public PictureBox imgTurn;
         public TextBox tbIPAdress;

@@ -40,6 +40,7 @@
             btLan = new Addon_Custom_Button();
             ptbBackround = new PictureBox();
             pnMultiplayer = new Panel();
+            pnSingleplayer = new Panel();
             pnStartMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbBackround).BeginInit();
             SuspendLayout();
@@ -57,24 +58,27 @@
             pnStartMenu.Controls.Add(ptbBackround);
             pnStartMenu.Dock = DockStyle.Fill;
             pnStartMenu.Location = new Point(0, 0);
+            pnStartMenu.Margin = new Padding(2);
             pnStartMenu.Name = "pnStartMenu";
-            pnStartMenu.Size = new Size(1480, 788);
+            pnStartMenu.Size = new Size(1184, 631);
             pnStartMenu.TabIndex = 20;
             // 
             // panel2
             // 
             panel2.BackColor = Color.Gainsboro;
-            panel2.Location = new Point(799, 708);
+            panel2.Location = new Point(639, 566);
+            panel2.Margin = new Padding(2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(3, 48);
+            panel2.Size = new Size(2, 38);
             panel2.TabIndex = 23;
             // 
             // panel1
             // 
             panel1.BackColor = Color.Gainsboro;
-            panel1.Location = new Point(629, 708);
+            panel1.Location = new Point(503, 566);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(3, 48);
+            panel1.Size = new Size(2, 38);
             panel1.TabIndex = 22;
             // 
             // label1
@@ -83,9 +87,10 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(8, 2);
+            label1.Location = new Point(6, 2);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(37, 15);
+            label1.Size = new Size(29, 12);
             label1.TabIndex = 25;
             label1.Text = "v0.0.3";
             // 
@@ -103,9 +108,10 @@
             btPlaySingle.FlatStyle = FlatStyle.Flat;
             btPlaySingle.Font = new Font("Impact", 25F, FontStyle.Regular, GraphicsUnit.Point);
             btPlaySingle.ForeColor = Color.White;
-            btPlaySingle.Location = new Point(38, 578);
+            btPlaySingle.Location = new Point(30, 463);
+            btPlaySingle.Margin = new Padding(2);
             btPlaySingle.Name = "btPlaySingle";
-            btPlaySingle.Size = new Size(329, 86);
+            btPlaySingle.Size = new Size(263, 69);
             btPlaySingle.TabIndex = 20;
             btPlaySingle.Text = "PLAY";
             btPlaySingle.TextColor = Color.White;
@@ -120,9 +126,10 @@
             lbAbout.FlatStyle = FlatStyle.Flat;
             lbAbout.Font = new Font("Impact", 20F, FontStyle.Regular, GraphicsUnit.Point);
             lbAbout.ForeColor = Color.White;
-            lbAbout.Location = new Point(655, 708);
+            lbAbout.Location = new Point(524, 567);
+            lbAbout.Margin = new Padding(2, 0, 2, 0);
             lbAbout.Name = "lbAbout";
-            lbAbout.Size = new Size(124, 48);
+            lbAbout.Size = new Size(108, 42);
             lbAbout.TabIndex = 24;
             lbAbout.Text = "ABOUT";
             lbAbout.Click += lbAbout_Click;
@@ -135,9 +142,10 @@
             lbSetting.FlatStyle = FlatStyle.Flat;
             lbSetting.Font = new Font("Impact", 20F, FontStyle.Regular, GraphicsUnit.Point);
             lbSetting.ForeColor = Color.White;
-            lbSetting.Location = new Point(463, 708);
+            lbSetting.Location = new Point(370, 567);
+            lbSetting.Margin = new Padding(2, 0, 2, 0);
             lbSetting.Name = "lbSetting";
-            lbSetting.Size = new Size(149, 48);
+            lbSetting.Size = new Size(129, 42);
             lbSetting.TabIndex = 23;
             lbSetting.Text = "SETTING";
             // 
@@ -149,9 +157,10 @@
             lbHelp.FlatStyle = FlatStyle.Flat;
             lbHelp.Font = new Font("Impact", 20F, FontStyle.Regular, GraphicsUnit.Point);
             lbHelp.ForeColor = Color.White;
-            lbHelp.Location = new Point(822, 708);
+            lbHelp.Location = new Point(658, 567);
+            lbHelp.Margin = new Padding(2, 0, 2, 0);
             lbHelp.Name = "lbHelp";
-            lbHelp.Size = new Size(94, 48);
+            lbHelp.Size = new Size(81, 42);
             lbHelp.TabIndex = 22;
             lbHelp.Text = "HELP";
             lbHelp.Click += lbHelp_Click;
@@ -170,9 +179,10 @@
             btLan.FlatStyle = FlatStyle.Flat;
             btLan.Font = new Font("Impact", 25F, FontStyle.Regular, GraphicsUnit.Point);
             btLan.ForeColor = Color.White;
-            btLan.Location = new Point(38, 670);
+            btLan.Location = new Point(30, 537);
+            btLan.Margin = new Padding(2);
             btLan.Name = "btLan";
-            btLan.Size = new Size(329, 86);
+            btLan.Size = new Size(263, 69);
             btLan.TabIndex = 21;
             btLan.Text = "MULTIPLAYER";
             btLan.TextColor = Color.White;
@@ -184,8 +194,9 @@
             ptbBackround.Dock = DockStyle.Fill;
             ptbBackround.Image = Properties.Resources.backround;
             ptbBackround.Location = new Point(0, 0);
+            ptbBackround.Margin = new Padding(2);
             ptbBackround.Name = "ptbBackround";
-            ptbBackround.Size = new Size(1480, 788);
+            ptbBackround.Size = new Size(1184, 631);
             ptbBackround.SizeMode = PictureBoxSizeMode.StretchImage;
             ptbBackround.TabIndex = 0;
             ptbBackround.TabStop = false;
@@ -196,22 +207,38 @@
             pnMultiplayer.BackgroundImageLayout = ImageLayout.Stretch;
             pnMultiplayer.Dock = DockStyle.Fill;
             pnMultiplayer.Location = new Point(0, 0);
+            pnMultiplayer.Margin = new Padding(2);
             pnMultiplayer.Name = "pnMultiplayer";
-            pnMultiplayer.Size = new Size(1480, 788);
+            pnMultiplayer.Size = new Size(1184, 631);
             pnMultiplayer.TabIndex = 21;
             pnMultiplayer.Visible = false;
             pnMultiplayer.ControlRemoved += pnMultiplayer_ControlRemoved;
             // 
+            // pnSingleplayer
+            // 
+            pnSingleplayer.BackgroundImage = Properties.Resources.Picsart_23_06_07_08_41_09_453;
+            pnSingleplayer.BackgroundImageLayout = ImageLayout.Stretch;
+            pnSingleplayer.Dock = DockStyle.Fill;
+            pnSingleplayer.Location = new Point(0, 0);
+            pnSingleplayer.Margin = new Padding(2);
+            pnSingleplayer.Name = "pnSingleplayer";
+            pnSingleplayer.Size = new Size(1184, 631);
+            pnSingleplayer.TabIndex = 22;
+            pnSingleplayer.Visible = false;
+            pnSingleplayer.ControlRemoved += pnSingleplayer_ControlRemoved;
+            // 
             // MenuForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1480, 788);
+            ClientSize = new Size(1184, 631);
             Controls.Add(pnStartMenu);
             Controls.Add(pnMultiplayer);
+            Controls.Add(pnSingleplayer);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             KeyPreview = true;
+            Margin = new Padding(2);
             Name = "MenuForm";
             Text = "Paper & Pencil";
             ResizeEnd += MenuForm_SizeChanged;
@@ -236,5 +263,6 @@
         private Label label1;
         private Panel panel1;
         private Panel panel2;
+        private Panel pnSingleplayer;
     }
 }

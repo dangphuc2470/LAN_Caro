@@ -14,6 +14,7 @@ namespace LAN_Caro
     public partial class CaroOffline : Form
     {
         public List<List<Button>> buttonList = new List<List<Button>>();
+        public static int SCALE100_BUTTON_SIZE = 26;
         public static int SQUARE_SIZE;
         public static int TABLE_WIDTH = 37;
         public static int TABLE_HEIGHT = 16;
@@ -25,16 +26,18 @@ namespace LAN_Caro
             InitializeComponent();
             Graphics graphics = CreateGraphics();
             float dpiX = graphics.DpiX;
-            SQUARE_SIZE = Convert.ToInt32(26 * (dpiX / 96));
+            SQUARE_SIZE = Convert.ToInt32(SCALE100_BUTTON_SIZE * (dpiX / 96));
             pnTable.Width = SQUARE_SIZE * (TABLE_WIDTH - 1);
             pnTable.Height = SQUARE_SIZE * (TABLE_HEIGHT - 1) + SQUARE_SIZE;
+            int xLocation = (this.Width - pnTable.Width - SCALE100_BUTTON_SIZE) / 2;
+            pnTable.Location = new System.Drawing.Point(xLocation, pnTable.Location.Y);
             graphics.Dispose();
-     
+
         }
 
         private void CaroOffline_Load(object sender, EventArgs e)
         {
-           
+
             Button lastButton = new Button() { Width = 0, Location = new Point(0, 0) };
             for (int i = 0; i < TABLE_HEIGHT; i++)
             {
@@ -268,7 +271,7 @@ namespace LAN_Caro
                 //Từ trái qua phải từ dưới lên trên
                 for (int x = 0; x < TABLE_WIDTH; x++)
                 {
-                    for (int y = TABLE_HEIGHT -1; y >= 0; y--)
+                    for (int y = TABLE_HEIGHT - 1; y >= 0; y--)
                     {
                         if (buttonList[y][x].Tag.ToString() != "0")  //Nếu ô đó đã đánh rồi thì không xử lý nữa
                             continue;
@@ -290,7 +293,7 @@ namespace LAN_Caro
             else if (number % 4 == 2)  //Lần lượt tìm nước 2 từ các phía tránh dồn về 1 phía
             {
                 //Từ phải qua trái từ dưới lên trên
-                for (int x = TABLE_WIDTH - 1; x >= 0 ; x--)
+                for (int x = TABLE_WIDTH - 1; x >= 0; x--)
                 {
                     for (int y = TABLE_HEIGHT - 1; y >= 0; y--)
                     {
@@ -310,7 +313,7 @@ namespace LAN_Caro
                     }
                 }
                 return false;
-            } 
+            }
             else
             {
                 //Từ phải qua trái từ trên xuống dưới
@@ -999,6 +1002,11 @@ namespace LAN_Caro
                 }
             }
             return true;
+        }
+
+        private void btExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

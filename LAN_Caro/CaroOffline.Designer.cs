@@ -30,6 +30,7 @@
         {
             pnTable = new Addon_Round_Panel();
             btHost = new Addon_Custom_Button();
+            btExit = new Button();
             SuspendLayout();
             // 
             // pnTable
@@ -38,10 +39,10 @@
             pnTable.BackColor = Color.Black;
             pnTable.BackgroundImageLayout = ImageLayout.Stretch;
             pnTable.CornerRadius = 25;
-            pnTable.Location = new Point(22, 109);
+            pnTable.Location = new Point(30, 134);
             pnTable.Margin = new Padding(2);
             pnTable.Name = "pnTable";
-            pnTable.Size = new Size(1152, 512);
+            pnTable.Size = new Size(1440, 640);
             pnTable.TabIndex = 1;
             // 
             // btHost
@@ -60,19 +61,32 @@
             btHost.Location = new Point(0, 0);
             btHost.Margin = new Padding(2);
             btHost.Name = "btHost";
-            btHost.Size = new Size(284, 82);
+            btHost.Size = new Size(355, 102);
             btHost.TabIndex = 29;
             btHost.Text = "RESTART";
             btHost.TextColor = Color.White;
             btHost.UseVisualStyleBackColor = false;
             btHost.Click += btHost_Click;
             // 
+            // btExit
+            // 
+            btExit.Location = new Point(361, 0);
+            btExit.Margin = new Padding(4);
+            btExit.Name = "btExit";
+            btExit.Size = new Size(118, 102);
+            btExit.TabIndex = 30;
+            btExit.Text = "QUIT";
+            btExit.UseVisualStyleBackColor = true;
+            btExit.Click += btExit_Click;
+            // 
             // CaroOffline
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Picsart_23_06_07_08_41_09_453;
-            ClientSize = new Size(1184, 630);
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1480, 788);
+            Controls.Add(btExit);
             Controls.Add(btHost);
             Controls.Add(pnTable);
             Margin = new Padding(2);
@@ -86,5 +100,6 @@
 
         private Addon_Round_Panel pnTable;
         private Addon_Custom_Button btHost;
+        private Button btExit;
     }
 }
