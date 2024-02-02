@@ -18,7 +18,7 @@ This is a LAN Caro game implemented using WinForm, a graphical user interface fr
 
 ## How to Run
 
-1. Clone the repository to your local machine: `git clone https://github.com/your-username/lan-caro-game-winform.git`
+1. Clone the repository to your local machine: `git clone https://github.com/dangphuc2470/LAN_Caro.git`
 2. Open the solution file `LAN_Caro.sln` in Visual Studio.
 3. Build the solution to compile the project.
 4. Run the application from Visual Studio or locate the executable file in the output directory.
@@ -44,11 +44,22 @@ Note: To run the program, you need to install the .NET runtime first. You can do
 5. Enjoy the LAN Caro game!
 
 ## Screenshots
+<center><i>Main menu</i></center>
 
 ![Main menu](Screenshot/MainMenu.png)
-![SinglePlayer](Screenshot/SinglePlayer.png)
+
+<center><i>Singleplayer</i></center>
+
+![Singleplayer](Screenshot/SinglePlayer.png)
+
+<center><i>Multiplayer</i></center>
+
 ![Multiplayer](Screenshot/Multiplayer.png)
+
+<center><i>In-game menu</i></center>
+
 ![Game menu](Screenshot/Menu.png)
+
 
 ## Future Enhancements
 - AI opponent: Enhance the computer-controlled BOT by implementing AI algorithms instead of relying on extensive for loops and if-else statements.
