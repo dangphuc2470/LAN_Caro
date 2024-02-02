@@ -33,25 +33,24 @@ namespace LAN_Caro
         {
             components = new System.ComponentModel.Container();
             pnTable = new Addon_Round_Panel();
-            pnPause2 = new Addon_Transparent_Panel();
+            pnPause2 = new Panel();
+            lbMenu = new CustomLabel();
             lbChangeTurn = new CustomLabel();
+            lbResume = new CustomLabel();
             lbRandom = new CustomLabel();
+            lbOptions = new CustomLabel();
             lbPause = new CustomLabel();
+            lbSettings = new CustomLabel();
             lbRestart = new CustomLabel();
+            lbMatchLog = new CustomLabel();
             rtbLog = new RichTextBox();
+            lbLeaveMatch = new CustomLabel();
+            lbExit = new CustomLabel();
             tbIPAdress = new TextBox();
             imageList1 = new ImageList(components);
             imgTurn = new PictureBox();
             btShowPausePanel = new Addon_Custom_Button();
-            lbExit = new CustomLabel();
-            lbLeaveMatch = new CustomLabel();
-            lbMatchLog = new CustomLabel();
-            lbSettings = new CustomLabel();
-            lbOptions = new CustomLabel();
-            lbResume = new CustomLabel();
-            lbMenu = new CustomLabel();
             btReady = new Addon_Custom_Button();
-            pnPause1 = new Panel();
             timer = new System.Windows.Forms.Timer(components);
             ptbBackgroundTimer = new PictureBox();
             lbTimer = new CustomLabel();
@@ -76,7 +75,6 @@ namespace LAN_Caro
             ptbLoading = new PictureBox();
             pnPause2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
-            pnPause1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbBackgroundTimer).BeginInit();
             pnIPAddress.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -101,27 +99,46 @@ namespace LAN_Caro
             // 
             // pnPause2
             // 
+            pnPause2.BackColor = Color.FromArgb(180, 0, 0, 0);
+            pnPause2.Controls.Add(lbMenu);
             pnPause2.Controls.Add(lbChangeTurn);
+            pnPause2.Controls.Add(lbResume);
             pnPause2.Controls.Add(lbRandom);
+            pnPause2.Controls.Add(lbOptions);
             pnPause2.Controls.Add(lbPause);
+            pnPause2.Controls.Add(lbSettings);
             pnPause2.Controls.Add(lbRestart);
+            pnPause2.Controls.Add(lbMatchLog);
             pnPause2.Controls.Add(rtbLog);
-            pnPause2.Dock = DockStyle.Right;
-            pnPause2.Location = new Point(935, 0);
+            pnPause2.Controls.Add(lbLeaveMatch);
+            pnPause2.Controls.Add(lbExit);
+            pnPause2.Location = new Point(2000, 0);
             pnPause2.Margin = new Padding(2);
             pnPause2.Name = "pnPause2";
-            pnPause2.Size = new Size(249, 630);
+            pnPause2.Size = new Size(832, 630);
             pnPause2.TabIndex = 14;
             pnPause2.Tag = "0";
             pnPause2.Visible = false;
             pnPause2.VisibleChanged += pnPause_VisibleChanged;
+            // 
+            // lbMenu
+            // 
+            lbMenu.AutoSize = true;
+            lbMenu.BackColor = Color.Transparent;
+            lbMenu.ForeColor = Color.White;
+            lbMenu.Location = new Point(68, 101);
+            lbMenu.Margin = new Padding(2, 0, 2, 0);
+            lbMenu.Name = "lbMenu";
+            lbMenu.Size = new Size(51, 20);
+            lbMenu.TabIndex = 15;
+            lbMenu.Text = "MENU";
             // 
             // lbChangeTurn
             // 
             lbChangeTurn.AutoSize = true;
             lbChangeTurn.BackColor = Color.Transparent;
             lbChangeTurn.ForeColor = Color.White;
-            lbChangeTurn.Location = new Point(24, 352);
+            lbChangeTurn.Location = new Point(286, 382);
             lbChangeTurn.Margin = new Padding(2, 0, 2, 0);
             lbChangeTurn.Name = "lbChangeTurn";
             lbChangeTurn.Size = new Size(183, 20);
@@ -130,12 +147,25 @@ namespace LAN_Caro
             lbChangeTurn.Visible = false;
             lbChangeTurn.Click += lbChangeTurn_Click;
             // 
+            // lbResume
+            // 
+            lbResume.AutoSize = true;
+            lbResume.BackColor = Color.Transparent;
+            lbResume.ForeColor = Color.White;
+            lbResume.Location = new Point(77, 189);
+            lbResume.Margin = new Padding(2, 0, 2, 0);
+            lbResume.Name = "lbResume";
+            lbResume.Size = new Size(65, 20);
+            lbResume.TabIndex = 16;
+            lbResume.Text = "RESUME";
+            lbResume.Click += lbResume_Click;
+            // 
             // lbRandom
             // 
             lbRandom.AutoSize = true;
             lbRandom.BackColor = Color.Transparent;
             lbRandom.ForeColor = Color.White;
-            lbRandom.Location = new Point(24, 298);
+            lbRandom.Location = new Point(317, 328);
             lbRandom.Margin = new Padding(2, 0, 2, 0);
             lbRandom.Name = "lbRandom";
             lbRandom.Size = new Size(211, 20);
@@ -144,12 +174,25 @@ namespace LAN_Caro
             lbRandom.Visible = false;
             lbRandom.Click += lbRandom_Click;
             // 
+            // lbOptions
+            // 
+            lbOptions.AutoSize = true;
+            lbOptions.BackColor = Color.Transparent;
+            lbOptions.ForeColor = Color.White;
+            lbOptions.Location = new Point(77, 245);
+            lbOptions.Margin = new Padding(2, 0, 2, 0);
+            lbOptions.Name = "lbOptions";
+            lbOptions.Size = new Size(70, 20);
+            lbOptions.TabIndex = 17;
+            lbOptions.Text = "OPTIONS";
+            lbOptions.Click += lbOptions_Click;
+            // 
             // lbPause
             // 
             lbPause.AutoSize = true;
             lbPause.BackColor = Color.Transparent;
             lbPause.ForeColor = Color.White;
-            lbPause.Location = new Point(24, 240);
+            lbPause.Location = new Point(317, 270);
             lbPause.Margin = new Padding(2, 0, 2, 0);
             lbPause.Name = "lbPause";
             lbPause.Size = new Size(52, 20);
@@ -158,12 +201,25 @@ namespace LAN_Caro
             lbPause.Visible = false;
             lbPause.Click += lbPause_Click;
             // 
+            // lbSettings
+            // 
+            lbSettings.AutoSize = true;
+            lbSettings.BackColor = Color.Transparent;
+            lbSettings.ForeColor = Color.White;
+            lbSettings.Location = new Point(77, 301);
+            lbSettings.Margin = new Padding(2, 0, 2, 0);
+            lbSettings.Name = "lbSettings";
+            lbSettings.Size = new Size(74, 20);
+            lbSettings.TabIndex = 18;
+            lbSettings.Text = "SETTINGS";
+            lbSettings.Click += lbSettings_Click;
+            // 
             // lbRestart
             // 
             lbRestart.AutoSize = true;
             lbRestart.BackColor = Color.Transparent;
             lbRestart.ForeColor = Color.White;
-            lbRestart.Location = new Point(24, 184);
+            lbRestart.Location = new Point(317, 214);
             lbRestart.Margin = new Padding(2, 0, 2, 0);
             lbRestart.Name = "lbRestart";
             lbRestart.Size = new Size(67, 20);
@@ -173,13 +229,26 @@ namespace LAN_Caro
             lbRestart.VisibleChanged += lbRestart_VisibleChanged;
             lbRestart.Click += lbRestart_Click;
             // 
+            // lbMatchLog
+            // 
+            lbMatchLog.AutoSize = true;
+            lbMatchLog.BackColor = Color.Transparent;
+            lbMatchLog.ForeColor = Color.White;
+            lbMatchLog.Location = new Point(77, 357);
+            lbMatchLog.Margin = new Padding(2, 0, 2, 0);
+            lbMatchLog.Name = "lbMatchLog";
+            lbMatchLog.Size = new Size(89, 20);
+            lbMatchLog.TabIndex = 19;
+            lbMatchLog.Text = "MATCH LOG";
+            lbMatchLog.Click += lbMatchLog_Click;
+            // 
             // rtbLog
             // 
             rtbLog.BackColor = Color.FromArgb(70, 71, 74);
             rtbLog.BorderStyle = BorderStyle.None;
             rtbLog.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             rtbLog.ForeColor = Color.Transparent;
-            rtbLog.Location = new Point(-2, 43);
+            rtbLog.Location = new Point(317, 31);
             rtbLog.Margin = new Padding(2);
             rtbLog.Name = "rtbLog";
             rtbLog.ReadOnly = true;
@@ -188,6 +257,32 @@ namespace LAN_Caro
             rtbLog.Text = "";
             rtbLog.Visible = false;
             rtbLog.TextChanged += richTextBox1_TextChanged;
+            // 
+            // lbLeaveMatch
+            // 
+            lbLeaveMatch.AutoSize = true;
+            lbLeaveMatch.BackColor = Color.Transparent;
+            lbLeaveMatch.ForeColor = Color.White;
+            lbLeaveMatch.Location = new Point(77, 413);
+            lbLeaveMatch.Margin = new Padding(2, 0, 2, 0);
+            lbLeaveMatch.Name = "lbLeaveMatch";
+            lbLeaveMatch.Size = new Size(103, 20);
+            lbLeaveMatch.TabIndex = 20;
+            lbLeaveMatch.Text = "LEAVE MATCH";
+            lbLeaveMatch.Click += lbLeaveMatch_Click;
+            // 
+            // lbExit
+            // 
+            lbExit.AutoSize = true;
+            lbExit.BackColor = Color.Transparent;
+            lbExit.ForeColor = Color.White;
+            lbExit.Location = new Point(77, 469);
+            lbExit.Margin = new Padding(2, 0, 2, 0);
+            lbExit.Name = "lbExit";
+            lbExit.Size = new Size(126, 20);
+            lbExit.TabIndex = 21;
+            lbExit.Text = "EXIT TO DESKTOP";
+            lbExit.Click += lbExit_Click;
             // 
             // tbIPAdress
             // 
@@ -244,96 +339,6 @@ namespace LAN_Caro
             btShowPausePanel.UseVisualStyleBackColor = false;
             btShowPausePanel.Click += ShowPausePanel_Click;
             // 
-            // lbExit
-            // 
-            lbExit.AutoSize = true;
-            lbExit.BackColor = Color.Transparent;
-            lbExit.ForeColor = Color.White;
-            lbExit.Location = new Point(84, 470);
-            lbExit.Margin = new Padding(2, 0, 2, 0);
-            lbExit.Name = "lbExit";
-            lbExit.Size = new Size(126, 20);
-            lbExit.TabIndex = 21;
-            lbExit.Text = "EXIT TO DESKTOP";
-            lbExit.Click += lbExit_Click;
-            // 
-            // lbLeaveMatch
-            // 
-            lbLeaveMatch.AutoSize = true;
-            lbLeaveMatch.BackColor = Color.Transparent;
-            lbLeaveMatch.ForeColor = Color.White;
-            lbLeaveMatch.Location = new Point(84, 414);
-            lbLeaveMatch.Margin = new Padding(2, 0, 2, 0);
-            lbLeaveMatch.Name = "lbLeaveMatch";
-            lbLeaveMatch.Size = new Size(103, 20);
-            lbLeaveMatch.TabIndex = 20;
-            lbLeaveMatch.Text = "LEAVE MATCH";
-            lbLeaveMatch.Click += lbLeaveMatch_Click;
-            // 
-            // lbMatchLog
-            // 
-            lbMatchLog.AutoSize = true;
-            lbMatchLog.BackColor = Color.Transparent;
-            lbMatchLog.ForeColor = Color.White;
-            lbMatchLog.Location = new Point(84, 358);
-            lbMatchLog.Margin = new Padding(2, 0, 2, 0);
-            lbMatchLog.Name = "lbMatchLog";
-            lbMatchLog.Size = new Size(89, 20);
-            lbMatchLog.TabIndex = 19;
-            lbMatchLog.Text = "MATCH LOG";
-            lbMatchLog.Click += lbMatchLog_Click;
-            // 
-            // lbSettings
-            // 
-            lbSettings.AutoSize = true;
-            lbSettings.BackColor = Color.Transparent;
-            lbSettings.ForeColor = Color.White;
-            lbSettings.Location = new Point(84, 302);
-            lbSettings.Margin = new Padding(2, 0, 2, 0);
-            lbSettings.Name = "lbSettings";
-            lbSettings.Size = new Size(74, 20);
-            lbSettings.TabIndex = 18;
-            lbSettings.Text = "SETTINGS";
-            lbSettings.Click += lbSettings_Click;
-            // 
-            // lbOptions
-            // 
-            lbOptions.AutoSize = true;
-            lbOptions.BackColor = Color.Transparent;
-            lbOptions.ForeColor = Color.White;
-            lbOptions.Location = new Point(84, 246);
-            lbOptions.Margin = new Padding(2, 0, 2, 0);
-            lbOptions.Name = "lbOptions";
-            lbOptions.Size = new Size(70, 20);
-            lbOptions.TabIndex = 17;
-            lbOptions.Text = "OPTIONS";
-            lbOptions.Click += lbOptions_Click;
-            // 
-            // lbResume
-            // 
-            lbResume.AutoSize = true;
-            lbResume.BackColor = Color.Transparent;
-            lbResume.ForeColor = Color.White;
-            lbResume.Location = new Point(84, 190);
-            lbResume.Margin = new Padding(2, 0, 2, 0);
-            lbResume.Name = "lbResume";
-            lbResume.Size = new Size(65, 20);
-            lbResume.TabIndex = 16;
-            lbResume.Text = "RESUME";
-            lbResume.Click += lbResume_Click;
-            // 
-            // lbMenu
-            // 
-            lbMenu.AutoSize = true;
-            lbMenu.BackColor = Color.Transparent;
-            lbMenu.ForeColor = Color.White;
-            lbMenu.Location = new Point(75, 102);
-            lbMenu.Margin = new Padding(2, 0, 2, 0);
-            lbMenu.Name = "lbMenu";
-            lbMenu.Size = new Size(51, 20);
-            lbMenu.TabIndex = 15;
-            lbMenu.Text = "MENU";
-            // 
             // btReady
             // 
             btReady.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -359,23 +364,6 @@ namespace LAN_Caro
             btReady.UseVisualStyleBackColor = false;
             btReady.Click += btReady_Click;
             btReady.MouseHover += btReady_MouseHover;
-            // 
-            // pnPause1
-            // 
-            pnPause1.BackColor = Color.FromArgb(180, 0, 0, 0);
-            pnPause1.Controls.Add(lbMenu);
-            pnPause1.Controls.Add(lbResume);
-            pnPause1.Controls.Add(lbOptions);
-            pnPause1.Controls.Add(lbSettings);
-            pnPause1.Controls.Add(lbMatchLog);
-            pnPause1.Controls.Add(lbLeaveMatch);
-            pnPause1.Controls.Add(lbExit);
-            pnPause1.Location = new Point(109, 105);
-            pnPause1.Margin = new Padding(2);
-            pnPause1.Name = "pnPause1";
-            pnPause1.Size = new Size(362, 466);
-            pnPause1.TabIndex = 19;
-            pnPause1.Visible = false;
             // 
             // timer
             // 
@@ -641,7 +629,7 @@ namespace LAN_Caro
             // ptbPlay
             // 
             ptbPlay.Image = Properties.Resources.ezgif_1_c8277d09a9;
-            ptbPlay.Location = new Point(877, 612);
+            ptbPlay.Location = new Point(877, 644);
             ptbPlay.Margin = new Padding(2);
             ptbPlay.Name = "ptbPlay";
             ptbPlay.Size = new Size(307, 18);
@@ -672,7 +660,6 @@ namespace LAN_Caro
             Controls.Add(ptbLoading);
             Controls.Add(ptbPlay);
             Controls.Add(pnPause2);
-            Controls.Add(pnPause1);
             Controls.Add(btShowPausePanel);
             Controls.Add(pnTable);
             Controls.Add(btHost);
@@ -701,8 +688,6 @@ namespace LAN_Caro
             pnPause2.ResumeLayout(false);
             pnPause2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)imgTurn).EndInit();
-            pnPause1.ResumeLayout(false);
-            pnPause1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ptbBackgroundTimer).EndInit();
             pnIPAddress.ResumeLayout(false);
             pnIPAddress.PerformLayout();
@@ -725,7 +710,7 @@ namespace LAN_Caro
         private PictureBox imgTurn;
         private Addon_Custom_Button btShowPausePanel;
         private RichTextBox rtbLog;
-        private Addon_Transparent_Panel pnPause2;
+        private Panel pnPause2;
         private Addon_Custom_Button btShowPausePanelLabel;
         private CustomLabel lbExit;
         private CustomLabel lbLeaveMatch;
@@ -748,7 +733,6 @@ namespace LAN_Caro
         private CustomLabel customLabel3;
         private CustomLabel customLabel5;
         private CustomLabel customLabel4;
-        private Panel pnPause1;
         private Label lbTimer2;
         private System.Windows.Forms.Timer timer;
         private PictureBox ptbBackgroundTimer;

@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Drawing.Text;
 using System.Net.NetworkInformation;
+using System.Reflection.Emit;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 using Image = System.Drawing.Image;
@@ -29,9 +30,12 @@ namespace LAN_Caro
             lbTimer.Text = SecondToMinute(remainingTimeInSeconds.ToString());
             lbTimer.Parent = ptbBackgroundTimer;
             lblllMinSecond.Parent = ptbBackgroundTimer;
-            foreach (CustomLabel label in pnPause1.Controls.OfType<CustomLabel>())
+
+            foreach (CustomLabel label in pnPause2.Controls.OfType<CustomLabel>())
             {
-                if (label.Name == "lbMenu")
+                if (label.Name == "lbTesting2" || label.Name == "lbTesting1")
+                    continue;
+                else if (label.Name == "lbMenu")
                 {
                     label.UseCustomFont("Arbuz.ttf", 40, FontStyle.Bold);
                     label.ForeColor = Color.White;
@@ -44,19 +48,9 @@ namespace LAN_Caro
                 label.Tag = "0";
             }
 
-            foreach (CustomLabel label in pnPause2.Controls.OfType<CustomLabel>())
-            {
-                if (label.Name == "lbTesting2" || label.Name == "lbTesting1")
-                    continue;
-                label.MouseEnter += PauseLabel_MouseEnter;
-                label.MouseLeave += PauseLabel_MouseLeave;
-                label.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
-                label.ForeColor = Color.Silver;
-                label.Tag = "0";
-            }
-
             lbTimer.UseCustomFont("DS-DIGII.TTF", 35, FontStyle.Bold);
             lblllMinSecond.UseCustomFont("UI.ttf", 10, FontStyle.Bold);
+
             #endregion
             tableManager = new Table(pnTable, rtbLog, imgTurn, tbIPAdress, timer1, lbTimer, btReady,
                 remainingTimeInSeconds, timer, this, lbNameClient, lbNameServer, ptbPlay, lbResume);
@@ -93,7 +87,7 @@ namespace LAN_Caro
         {
             // Cập nhật giao diện người dùng trên thread chính
             //ptbPlay.Size = new Size(1480, 788);
-           
+
 
             if (pnPause2.Tag.ToString() == "0" && tableManager.button_IsLoading == false)
             {
@@ -102,11 +96,10 @@ namespace LAN_Caro
                 //ptbPlay.Visible = true;
 
                 //HideLoadingImage();
-                tableManager.DarkColor();
+                //tableManager.DarkColor();
                 pnPause2.Dock = DockStyle.Right;
-                pnPause1.Dock = DockStyle.Left;
-                pnPause2.Size = new Size(1022, 788);
-                pnPause1.Size = new Size(458, 788);
+                //pnPause1.Size = new Size(this.Width, 788);
+                pnPause2.Size = new Size(this.Width, 788);
                 pnPause2.Visible = true;
                 pnPause2.Tag = "1";
                 ResetColor(lbResume);
@@ -125,15 +118,7 @@ namespace LAN_Caro
 
 
         #region Pause Panel
-        public void LoadButtonColor()
-        {
-            //tableManager.ResetColor();
-            //Task.Run(() =>
-            //{
-            //    //tableManager.UpdateColor(tableManager.borderColorNormal);
-            //}
-            //);
-        }
+
 
         private void PauseLabel_MouseEnter(object sender, EventArgs e)
         {
@@ -207,7 +192,7 @@ namespace LAN_Caro
         /// 
         private void ResetColor(CustomLabel thisLabel = null)
         {
-            foreach (CustomLabel label in pnPause1.Controls.OfType<CustomLabel>())
+            foreach (CustomLabel label in pnPause2.Controls.OfType<CustomLabel>())
             {
                 if (label.Name == "lbMenu")
                     continue;
@@ -231,7 +216,7 @@ namespace LAN_Caro
             lbRandom.Visible = false;
             lbRestart.Visible = false;
             lbChangeTurn.Visible = false;
-            tableManager.DarkColor();
+            //tableManager.DarkColor();
 
         }
 
@@ -299,39 +284,25 @@ namespace LAN_Caro
 
         private void pnPause_VisibleChanged(object sender, EventArgs e)
         {
-            pnPause1.Visible = pnPause2.Visible;
             if (!pnPause2.Visible)
             {
-                foreach (CustomLabel label in pnPause1.Controls.OfType<CustomLabel>())
-                {
+                foreach (CustomLabel label in pnPause2.Controls.OfType<CustomLabel>())
                     label.UseDefaultFont();
-                }
-
                 lbTimer.UseCustomFont("DS-DIGII.TTF", 35, FontStyle.Bold);
                 lblllMinSecond.UseCustomFont("UI.ttf", 10, FontStyle.Bold);
-
             }
             else
             {
-                foreach (CustomLabel label in pnPause1.Controls.OfType<CustomLabel>())
+                foreach (CustomLabel label in pnPause2.Controls.OfType<CustomLabel>())
                 {
-                    if (label.Name == "lbMenu")
+                    if (label.Name == "lbTesting2" || label.Name == "lbTesting1")
+                        continue;
+                    else if (label.Name == "lbMenu")
                     {
                         label.UseCustomFont("Arbuz.ttf", 40, FontStyle.Bold);
                         label.ForeColor = Color.White;
                         continue;
                     }
-                    label.MouseEnter += PauseLabel_MouseEnter;
-                    label.MouseLeave += PauseLabel_MouseLeave;
-                    label.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
-                    label.ForeColor = Color.Silver;
-                    label.Tag = "0";
-                }
-
-                foreach (CustomLabel label in pnPause2.Controls.OfType<CustomLabel>())
-                {
-                    if (label.Name == "lbTesting2" || label.Name == "lbTesting1")
-                        continue;
                     label.MouseEnter += PauseLabel_MouseEnter;
                     label.MouseLeave += PauseLabel_MouseLeave;
                     label.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
