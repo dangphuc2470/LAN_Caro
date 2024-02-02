@@ -93,9 +93,10 @@ namespace LAN_Caro
             pnTable.BackColor = Color.Transparent;
             pnTable.BackgroundImageLayout = ImageLayout.Stretch;
             pnTable.CornerRadius = 25;
-            pnTable.Location = new Point(458, 86);
+            pnTable.Location = new Point(366, 69);
+            pnTable.Margin = new Padding(2);
             pnTable.Name = "pnTable";
-            pnTable.Size = new Size(960, 680);
+            pnTable.Size = new Size(768, 544);
             pnTable.TabIndex = 0;
             // 
             // pnPause2
@@ -106,9 +107,10 @@ namespace LAN_Caro
             pnPause2.Controls.Add(lbRestart);
             pnPause2.Controls.Add(rtbLog);
             pnPause2.Dock = DockStyle.Right;
-            pnPause2.Location = new Point(1169, 0);
+            pnPause2.Location = new Point(935, 0);
+            pnPause2.Margin = new Padding(2);
             pnPause2.Name = "pnPause2";
-            pnPause2.Size = new Size(311, 788);
+            pnPause2.Size = new Size(249, 630);
             pnPause2.TabIndex = 14;
             pnPause2.Tag = "0";
             pnPause2.Visible = false;
@@ -119,9 +121,10 @@ namespace LAN_Caro
             lbChangeTurn.AutoSize = true;
             lbChangeTurn.BackColor = Color.Transparent;
             lbChangeTurn.ForeColor = Color.White;
-            lbChangeTurn.Location = new Point(30, 440);
+            lbChangeTurn.Location = new Point(24, 352);
+            lbChangeTurn.Margin = new Padding(2, 0, 2, 0);
             lbChangeTurn.Name = "lbChangeTurn";
-            lbChangeTurn.Size = new Size(219, 25);
+            lbChangeTurn.Size = new Size(183, 20);
             lbChangeTurn.TabIndex = 26;
             lbChangeTurn.Text = "CHANGE TURN (FOR DEV)";
             lbChangeTurn.Visible = false;
@@ -132,9 +135,10 @@ namespace LAN_Caro
             lbRandom.AutoSize = true;
             lbRandom.BackColor = Color.Transparent;
             lbRandom.ForeColor = Color.White;
-            lbRandom.Location = new Point(30, 373);
+            lbRandom.Location = new Point(24, 298);
+            lbRandom.Margin = new Padding(2, 0, 2, 0);
             lbRandom.Name = "lbRandom";
-            lbRandom.Size = new Size(254, 25);
+            lbRandom.Size = new Size(211, 20);
             lbRandom.TabIndex = 24;
             lbRandom.Text = "RANDOM PATTERN (FOR DEV)";
             lbRandom.Visible = false;
@@ -145,9 +149,10 @@ namespace LAN_Caro
             lbPause.AutoSize = true;
             lbPause.BackColor = Color.Transparent;
             lbPause.ForeColor = Color.White;
-            lbPause.Location = new Point(30, 300);
+            lbPause.Location = new Point(24, 240);
+            lbPause.Margin = new Padding(2, 0, 2, 0);
             lbPause.Name = "lbPause";
-            lbPause.Size = new Size(64, 25);
+            lbPause.Size = new Size(52, 20);
             lbPause.TabIndex = 23;
             lbPause.Text = "PAUSE";
             lbPause.Visible = false;
@@ -158,9 +163,10 @@ namespace LAN_Caro
             lbRestart.AutoSize = true;
             lbRestart.BackColor = Color.Transparent;
             lbRestart.ForeColor = Color.White;
-            lbRestart.Location = new Point(30, 230);
+            lbRestart.Location = new Point(24, 184);
+            lbRestart.Margin = new Padding(2, 0, 2, 0);
             lbRestart.Name = "lbRestart";
-            lbRestart.Size = new Size(81, 25);
+            lbRestart.Size = new Size(67, 20);
             lbRestart.TabIndex = 22;
             lbRestart.Text = "RESTART";
             lbRestart.Visible = false;
@@ -173,10 +179,11 @@ namespace LAN_Caro
             rtbLog.BorderStyle = BorderStyle.None;
             rtbLog.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             rtbLog.ForeColor = Color.Transparent;
-            rtbLog.Location = new Point(-2, 54);
+            rtbLog.Location = new Point(-2, 43);
+            rtbLog.Margin = new Padding(2);
             rtbLog.Name = "rtbLog";
             rtbLog.ReadOnly = true;
-            rtbLog.Size = new Size(960, 680);
+            rtbLog.Size = new Size(768, 544);
             rtbLog.TabIndex = 13;
             rtbLog.Text = "";
             rtbLog.Visible = false;
@@ -189,9 +196,10 @@ namespace LAN_Caro
             tbIPAdress.BorderStyle = BorderStyle.None;
             tbIPAdress.Font = new Font("Impact", 14F, FontStyle.Bold, GraphicsUnit.Point);
             tbIPAdress.ForeColor = Color.White;
-            tbIPAdress.Location = new Point(34, 83);
+            tbIPAdress.Location = new Point(27, 66);
+            tbIPAdress.Margin = new Padding(2);
             tbIPAdress.Name = "tbIPAdress";
-            tbIPAdress.Size = new Size(230, 35);
+            tbIPAdress.Size = new Size(184, 29);
             tbIPAdress.TabIndex = 4;
             // 
             // imageList1
@@ -205,9 +213,10 @@ namespace LAN_Caro
             imgTurn.Image = Properties.Resources.x;
             imgTurn.ImageLocation = "";
             imgTurn.InitialImage = null;
-            imgTurn.Location = new Point(361, 311);
+            imgTurn.Location = new Point(289, 249);
+            imgTurn.Margin = new Padding(2);
             imgTurn.Name = "imgTurn";
-            imgTurn.Size = new Size(69, 55);
+            imgTurn.Size = new Size(55, 44);
             imgTurn.SizeMode = PictureBoxSizeMode.Zoom;
             imgTurn.TabIndex = 9;
             imgTurn.TabStop = false;
@@ -226,9 +235,10 @@ namespace LAN_Caro
             btShowPausePanel.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btShowPausePanel.ForeColor = Color.FromArgb(0, 28, 59);
             btShowPausePanel.Image = Properties.Resources.icons8_settings_24;
-            btShowPausePanel.Location = new Point(-8, 126);
+            btShowPausePanel.Location = new Point(-6, 101);
+            btShowPausePanel.Margin = new Padding(2);
             btShowPausePanel.Name = "btShowPausePanel";
-            btShowPausePanel.Size = new Size(83, 73);
+            btShowPausePanel.Size = new Size(66, 58);
             btShowPausePanel.TabIndex = 5;
             btShowPausePanel.TextColor = Color.FromArgb(0, 28, 59);
             btShowPausePanel.UseVisualStyleBackColor = false;
@@ -239,9 +249,10 @@ namespace LAN_Caro
             lbExit.AutoSize = true;
             lbExit.BackColor = Color.Transparent;
             lbExit.ForeColor = Color.White;
-            lbExit.Location = new Point(105, 588);
+            lbExit.Location = new Point(84, 470);
+            lbExit.Margin = new Padding(2, 0, 2, 0);
             lbExit.Name = "lbExit";
-            lbExit.Size = new Size(152, 25);
+            lbExit.Size = new Size(126, 20);
             lbExit.TabIndex = 21;
             lbExit.Text = "EXIT TO DESKTOP";
             lbExit.Click += lbExit_Click;
@@ -251,9 +262,10 @@ namespace LAN_Caro
             lbLeaveMatch.AutoSize = true;
             lbLeaveMatch.BackColor = Color.Transparent;
             lbLeaveMatch.ForeColor = Color.White;
-            lbLeaveMatch.Location = new Point(105, 518);
+            lbLeaveMatch.Location = new Point(84, 414);
+            lbLeaveMatch.Margin = new Padding(2, 0, 2, 0);
             lbLeaveMatch.Name = "lbLeaveMatch";
-            lbLeaveMatch.Size = new Size(124, 25);
+            lbLeaveMatch.Size = new Size(103, 20);
             lbLeaveMatch.TabIndex = 20;
             lbLeaveMatch.Text = "LEAVE MATCH";
             lbLeaveMatch.Click += lbLeaveMatch_Click;
@@ -263,9 +275,10 @@ namespace LAN_Caro
             lbMatchLog.AutoSize = true;
             lbMatchLog.BackColor = Color.Transparent;
             lbMatchLog.ForeColor = Color.White;
-            lbMatchLog.Location = new Point(105, 448);
+            lbMatchLog.Location = new Point(84, 358);
+            lbMatchLog.Margin = new Padding(2, 0, 2, 0);
             lbMatchLog.Name = "lbMatchLog";
-            lbMatchLog.Size = new Size(109, 25);
+            lbMatchLog.Size = new Size(89, 20);
             lbMatchLog.TabIndex = 19;
             lbMatchLog.Text = "MATCH LOG";
             lbMatchLog.Click += lbMatchLog_Click;
@@ -275,9 +288,10 @@ namespace LAN_Caro
             lbSettings.AutoSize = true;
             lbSettings.BackColor = Color.Transparent;
             lbSettings.ForeColor = Color.White;
-            lbSettings.Location = new Point(105, 378);
+            lbSettings.Location = new Point(84, 302);
+            lbSettings.Margin = new Padding(2, 0, 2, 0);
             lbSettings.Name = "lbSettings";
-            lbSettings.Size = new Size(89, 25);
+            lbSettings.Size = new Size(74, 20);
             lbSettings.TabIndex = 18;
             lbSettings.Text = "SETTINGS";
             lbSettings.Click += lbSettings_Click;
@@ -287,9 +301,10 @@ namespace LAN_Caro
             lbOptions.AutoSize = true;
             lbOptions.BackColor = Color.Transparent;
             lbOptions.ForeColor = Color.White;
-            lbOptions.Location = new Point(105, 308);
+            lbOptions.Location = new Point(84, 246);
+            lbOptions.Margin = new Padding(2, 0, 2, 0);
             lbOptions.Name = "lbOptions";
-            lbOptions.Size = new Size(87, 25);
+            lbOptions.Size = new Size(70, 20);
             lbOptions.TabIndex = 17;
             lbOptions.Text = "OPTIONS";
             lbOptions.Click += lbOptions_Click;
@@ -299,9 +314,10 @@ namespace LAN_Caro
             lbResume.AutoSize = true;
             lbResume.BackColor = Color.Transparent;
             lbResume.ForeColor = Color.White;
-            lbResume.Location = new Point(105, 238);
+            lbResume.Location = new Point(84, 190);
+            lbResume.Margin = new Padding(2, 0, 2, 0);
             lbResume.Name = "lbResume";
-            lbResume.Size = new Size(79, 25);
+            lbResume.Size = new Size(65, 20);
             lbResume.TabIndex = 16;
             lbResume.Text = "RESUME";
             lbResume.Click += lbResume_Click;
@@ -311,9 +327,10 @@ namespace LAN_Caro
             lbMenu.AutoSize = true;
             lbMenu.BackColor = Color.Transparent;
             lbMenu.ForeColor = Color.White;
-            lbMenu.Location = new Point(94, 128);
+            lbMenu.Location = new Point(75, 102);
+            lbMenu.Margin = new Padding(2, 0, 2, 0);
             lbMenu.Name = "lbMenu";
-            lbMenu.Size = new Size(62, 25);
+            lbMenu.Size = new Size(51, 20);
             lbMenu.TabIndex = 15;
             lbMenu.Text = "MENU";
             // 
@@ -331,9 +348,10 @@ namespace LAN_Caro
             btReady.FlatStyle = FlatStyle.Flat;
             btReady.Font = new Font("Impact", 25F, FontStyle.Regular, GraphicsUnit.Point);
             btReady.ForeColor = Color.Silver;
-            btReady.Location = new Point(12, 598);
+            btReady.Location = new Point(10, 478);
+            btReady.Margin = new Padding(2);
             btReady.Name = "btReady";
-            btReady.Size = new Size(329, 86);
+            btReady.Size = new Size(263, 69);
             btReady.TabIndex = 17;
             btReady.Tag = 0;
             btReady.Text = "READY";
@@ -352,9 +370,10 @@ namespace LAN_Caro
             pnPause1.Controls.Add(lbMatchLog);
             pnPause1.Controls.Add(lbLeaveMatch);
             pnPause1.Controls.Add(lbExit);
-            pnPause1.Location = new Point(136, 131);
+            pnPause1.Location = new Point(109, 105);
+            pnPause1.Margin = new Padding(2);
             pnPause1.Name = "pnPause1";
-            pnPause1.Size = new Size(452, 583);
+            pnPause1.Size = new Size(362, 466);
             pnPause1.TabIndex = 19;
             pnPause1.Visible = false;
             // 
@@ -369,8 +388,9 @@ namespace LAN_Caro
             ptbBackgroundTimer.BackgroundImageLayout = ImageLayout.Zoom;
             ptbBackgroundTimer.Image = Properties.Resources.Picsart_23_06_12_21_54_09_715;
             ptbBackgroundTimer.Location = new Point(0, 0);
+            ptbBackgroundTimer.Margin = new Padding(2);
             ptbBackgroundTimer.Name = "ptbBackgroundTimer";
-            ptbBackgroundTimer.Size = new Size(378, 125);
+            ptbBackgroundTimer.Size = new Size(302, 100);
             ptbBackgroundTimer.SizeMode = PictureBoxSizeMode.StretchImage;
             ptbBackgroundTimer.TabIndex = 25;
             ptbBackgroundTimer.TabStop = false;
@@ -380,9 +400,10 @@ namespace LAN_Caro
             lbTimer.AutoSize = true;
             lbTimer.BackColor = Color.Transparent;
             lbTimer.ForeColor = Color.FromArgb(253, 247, 250);
-            lbTimer.Location = new Point(136, 17);
+            lbTimer.Location = new Point(109, 14);
+            lbTimer.Margin = new Padding(2, 0, 2, 0);
             lbTimer.Name = "lbTimer";
-            lbTimer.Size = new Size(46, 25);
+            lbTimer.Size = new Size(36, 20);
             lbTimer.TabIndex = 26;
             lbTimer.Text = "1:00";
             // 
@@ -391,9 +412,10 @@ namespace LAN_Caro
             lblllMinSecond.AutoSize = true;
             lblllMinSecond.BackColor = Color.Transparent;
             lblllMinSecond.ForeColor = Color.FromArgb(253, 247, 250);
-            lblllMinSecond.Location = new Point(135, 86);
+            lblllMinSecond.Location = new Point(108, 69);
+            lblllMinSecond.Margin = new Padding(2, 0, 2, 0);
             lblllMinSecond.Name = "lblllMinSecond";
-            lblllMinSecond.Size = new Size(131, 25);
+            lblllMinSecond.Size = new Size(106, 20);
             lblllMinSecond.TabIndex = 27;
             lblllMinSecond.Text = "MIN           SEC";
             // 
@@ -411,9 +433,10 @@ namespace LAN_Caro
             btHost.FlatStyle = FlatStyle.Flat;
             btHost.Font = new Font("Impact", 25F, FontStyle.Regular, GraphicsUnit.Point);
             btHost.ForeColor = Color.White;
-            btHost.Location = new Point(12, 690);
+            btHost.Location = new Point(10, 552);
+            btHost.Margin = new Padding(2);
             btHost.Name = "btHost";
-            btHost.Size = new Size(329, 86);
+            btHost.Size = new Size(263, 69);
             btHost.TabIndex = 28;
             btHost.Text = "HOST";
             btHost.TextColor = Color.White;
@@ -434,9 +457,10 @@ namespace LAN_Caro
             btClient.FlatStyle = FlatStyle.Flat;
             btClient.Font = new Font("Impact", 25F, FontStyle.Regular, GraphicsUnit.Point);
             btClient.ForeColor = Color.White;
-            btClient.Location = new Point(12, 598);
+            btClient.Location = new Point(10, 478);
+            btClient.Margin = new Padding(2);
             btClient.Name = "btClient";
-            btClient.Size = new Size(329, 86);
+            btClient.Size = new Size(263, 69);
             btClient.TabIndex = 29;
             btClient.Text = "CLIENT";
             btClient.TextColor = Color.White;
@@ -449,9 +473,10 @@ namespace LAN_Caro
             lblllChooseRole.BackColor = Color.Transparent;
             lblllChooseRole.Font = new Font("Impact", 15F, FontStyle.Regular, GraphicsUnit.Point);
             lblllChooseRole.ForeColor = Color.Black;
-            lblllChooseRole.Location = new Point(12, 546);
+            lblllChooseRole.Location = new Point(10, 437);
+            lblllChooseRole.Margin = new Padding(2, 0, 2, 0);
             lblllChooseRole.Name = "lblllChooseRole";
-            lblllChooseRole.Size = new Size(244, 37);
+            lblllChooseRole.Size = new Size(206, 32);
             lblllChooseRole.TabIndex = 30;
             lblllChooseRole.Text = "CHOOSE YOUR ROLE:";
             // 
@@ -464,9 +489,10 @@ namespace LAN_Caro
             pnIPAddress.Controls.Add(panel3);
             pnIPAddress.Controls.Add(tbIPAdress);
             pnIPAddress.Controls.Add(cbbIP);
-            pnIPAddress.Location = new Point(350, -76);
+            pnIPAddress.Location = new Point(280, -61);
+            pnIPAddress.Margin = new Padding(2);
             pnIPAddress.Name = "pnIPAddress";
-            pnIPAddress.Size = new Size(340, 150);
+            pnIPAddress.Size = new Size(272, 120);
             pnIPAddress.TabIndex = 31;
             // 
             // labelShowOrInput
@@ -474,18 +500,20 @@ namespace LAN_Caro
             labelShowOrInput.AutoSize = true;
             labelShowOrInput.Font = new Font("Impact", 7F, FontStyle.Italic, GraphicsUnit.Point);
             labelShowOrInput.ForeColor = Color.White;
-            labelShowOrInput.Location = new Point(11, 127);
+            labelShowOrInput.Location = new Point(9, 102);
+            labelShowOrInput.Margin = new Padding(2, 0, 2, 0);
             labelShowOrInput.Name = "labelShowOrInput";
-            labelShowOrInput.Size = new Size(139, 18);
+            labelShowOrInput.Size = new Size(119, 16);
             labelShowOrInput.TabIndex = 6;
             labelShowOrInput.Text = "Enter server IP address";
             // 
             // panel3
             // 
             panel3.BackColor = Color.Silver;
-            panel3.Location = new Point(34, 120);
+            panel3.Location = new Point(27, 96);
+            panel3.Margin = new Padding(2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(230, 1);
+            panel3.Size = new Size(184, 1);
             panel3.TabIndex = 5;
             // 
             // cbbIP
@@ -494,9 +522,10 @@ namespace LAN_Caro
             cbbIP.FlatStyle = FlatStyle.Flat;
             cbbIP.ForeColor = Color.White;
             cbbIP.FormattingEnabled = true;
-            cbbIP.Location = new Point(34, 85);
+            cbbIP.Location = new Point(27, 68);
+            cbbIP.Margin = new Padding(2);
             cbbIP.Name = "cbbIP";
-            cbbIP.Size = new Size(258, 33);
+            cbbIP.Size = new Size(207, 28);
             cbbIP.TabIndex = 0;
             cbbIP.SelectionChangeCommitted += cbbIP_SelectionChangeCommitted;
             // 
@@ -505,9 +534,10 @@ namespace LAN_Caro
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.BackgroundImageLayout = ImageLayout.None;
             pictureBox1.Image = Properties.Resources._68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f323639323831302f323130343036312f34643839316563302d386637362d313165332d393230322d6637333934306431306632302e706e67;
-            pictureBox1.Location = new Point(189, 168);
+            pictureBox1.Location = new Point(151, 134);
+            pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(155, 131);
+            pictureBox1.Size = new Size(124, 105);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 32;
             pictureBox1.TabStop = false;
@@ -517,9 +547,10 @@ namespace LAN_Caro
             pictureBox2.BackColor = Color.Transparent;
             pictureBox2.BackgroundImageLayout = ImageLayout.None;
             pictureBox2.Image = Properties.Resources._68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f323639323831302f323130343036312f34643839316563302d386637362d313165332d393230322d6637333934306431306632302e706e67;
-            pictureBox2.Location = new Point(192, 373);
+            pictureBox2.Location = new Point(154, 298);
+            pictureBox2.Margin = new Padding(2);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(155, 131);
+            pictureBox2.Size = new Size(124, 105);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 33;
             pictureBox2.TabStop = false;
@@ -529,9 +560,10 @@ namespace LAN_Caro
             pictureBox3.BackColor = Color.Transparent;
             pictureBox3.BackgroundImageLayout = ImageLayout.None;
             pictureBox3.Image = Properties.Resources.xd;
-            pictureBox3.Location = new Point(319, 477);
+            pictureBox3.Location = new Point(255, 382);
+            pictureBox3.Margin = new Padding(2);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(25, 27);
+            pictureBox3.Size = new Size(20, 22);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox3.TabIndex = 36;
             pictureBox3.TabStop = false;
@@ -541,9 +573,10 @@ namespace LAN_Caro
             pictureBox4.BackColor = Color.Transparent;
             pictureBox4.BackgroundImageLayout = ImageLayout.None;
             pictureBox4.Image = Properties.Resources.od;
-            pictureBox4.Location = new Point(317, 267);
+            pictureBox4.Location = new Point(254, 214);
+            pictureBox4.Margin = new Padding(2);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(36, 27);
+            pictureBox4.Size = new Size(29, 22);
             pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox4.TabIndex = 37;
             pictureBox4.TabStop = false;
@@ -554,26 +587,29 @@ namespace LAN_Caro
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Impact", 11F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.FromArgb(64, 0, 64);
-            label1.Location = new Point(286, 326);
+            label1.Location = new Point(229, 261);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(58, 27);
+            label1.Size = new Size(49, 23);
             label1.TabIndex = 38;
             label1.Text = "TURN";
             // 
             // lbNameClient
             // 
             lbNameClient.BorderStyle = BorderStyle.None;
-            lbNameClient.Location = new Point(12, 275);
+            lbNameClient.Location = new Point(10, 220);
+            lbNameClient.Margin = new Padding(2);
             lbNameClient.Name = "lbNameClient";
-            lbNameClient.Size = new Size(150, 24);
+            lbNameClient.Size = new Size(120, 20);
             lbNameClient.TabIndex = 39;
             // 
             // lbNameServer
             // 
             lbNameServer.BorderStyle = BorderStyle.None;
-            lbNameServer.Location = new Point(12, 480);
+            lbNameServer.Location = new Point(10, 384);
+            lbNameServer.Margin = new Padding(2);
             lbNameServer.Name = "lbNameServer";
-            lbNameServer.Size = new Size(150, 24);
+            lbNameServer.Size = new Size(120, 20);
             lbNameServer.TabIndex = 40;
             // 
             // label2
@@ -582,9 +618,10 @@ namespace LAN_Caro
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Impact", 11F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = Color.FromArgb(64, 0, 64);
-            label2.Location = new Point(12, 242);
+            label2.Location = new Point(10, 194);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(69, 27);
+            label2.Size = new Size(60, 23);
             label2.TabIndex = 41;
             label2.Text = "CLIENT";
             // 
@@ -594,18 +631,20 @@ namespace LAN_Caro
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Impact", 11F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = Color.FromArgb(64, 0, 64);
-            label3.Location = new Point(12, 447);
+            label3.Location = new Point(10, 358);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(76, 27);
+            label3.Size = new Size(65, 23);
             label3.TabIndex = 42;
             label3.Text = "SERVER";
             // 
             // ptbPlay
             // 
             ptbPlay.Image = Properties.Resources.ezgif_1_c8277d09a9;
-            ptbPlay.Location = new Point(1096, 765);
+            ptbPlay.Location = new Point(877, 612);
+            ptbPlay.Margin = new Padding(2);
             ptbPlay.Name = "ptbPlay";
-            ptbPlay.Size = new Size(384, 23);
+            ptbPlay.Size = new Size(307, 18);
             ptbPlay.SizeMode = PictureBoxSizeMode.StretchImage;
             ptbPlay.TabIndex = 43;
             ptbPlay.TabStop = false;
@@ -614,20 +653,22 @@ namespace LAN_Caro
             // ptbLoading
             // 
             ptbLoading.Image = Properties.Resources.game;
-            ptbLoading.Location = new Point(739, 17);
+            ptbLoading.Location = new Point(576, -63);
+            ptbLoading.Margin = new Padding(2);
             ptbLoading.Name = "ptbLoading";
-            ptbLoading.Size = new Size(150, 75);
+            ptbLoading.Size = new Size(120, 60);
             ptbLoading.TabIndex = 44;
             ptbLoading.TabStop = false;
+            ptbLoading.Visible = false;
             // 
             // Caro
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(247, 249, 252);
             BackgroundImage = Properties.Resources.Picsart_23_06_07_08_41_09_453;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1480, 788);
+            ClientSize = new Size(1184, 630);
             Controls.Add(ptbLoading);
             Controls.Add(ptbPlay);
             Controls.Add(pnPause2);
@@ -653,6 +694,7 @@ namespace LAN_Caro
             Controls.Add(label3);
             Controls.Add(ptbBackgroundTimer);
             DoubleBuffered = true;
+            Margin = new Padding(2);
             Name = "Caro";
             Text = " ";
             Load += Caro_Load;
