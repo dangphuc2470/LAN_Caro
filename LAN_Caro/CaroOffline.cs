@@ -84,7 +84,7 @@ namespace LAN_Caro
             buttonList[y][x].Tag = "1";
             if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
             {
-                MessageBox.Show("WIN");
+                MessageBox.Show("Congratulations! You Win!", "Victory", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 isEndGame = true;
                 return;
             }
@@ -138,7 +138,7 @@ namespace LAN_Caro
                         buttonList[y][x].Tag = "2";
                         if (countVertical(x, y) || countHorizontal(x, y) || countMainDiag(x, y) || countSubDiag(x, y))
                         {
-                            MessageBox.Show("LOSE");
+                            MessageBox.Show("Sorry, You Lose.", "Defeat", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             isEndGame = true;
                         }
 

@@ -235,6 +235,16 @@ namespace LAN_Caro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap PausePanel {
+            get {
+                object obj = ResourceManager.GetObject("PausePanel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Picsart_23_06_07_08_41_09_453 {
             get {
                 object obj = ResourceManager.GetObject("Picsart_23-06-07_08-41-09-453", resourceCulture);

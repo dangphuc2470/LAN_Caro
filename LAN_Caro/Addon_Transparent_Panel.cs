@@ -18,7 +18,7 @@ class Addon_Transparent_Panel : Panel
 
     protected override void OnPaint(PaintEventArgs e)
     {
-        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(180, 0, 0, 0)), this.ClientRectangle);
+        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 0, 0)), this.ClientRectangle);
     }
 
     protected override void OnSizeChanged(EventArgs e)

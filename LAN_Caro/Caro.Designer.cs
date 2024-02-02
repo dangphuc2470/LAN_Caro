@@ -33,7 +33,7 @@ namespace LAN_Caro
         {
             components = new System.ComponentModel.Container();
             pnTable = new Addon_Round_Panel();
-            pnPause2 = new Panel();
+            pnPause2 = new Addon_Transparent_Panel();
             lbMenu = new CustomLabel();
             lbChangeTurn = new CustomLabel();
             lbResume = new CustomLabel();
@@ -73,6 +73,7 @@ namespace LAN_Caro
             label3 = new Label();
             ptbPlay = new PictureBox();
             ptbLoading = new PictureBox();
+            ptbPausePlaceholderImage = new PictureBox();
             pnPause2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)imgTurn).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ptbBackgroundTimer).BeginInit();
@@ -83,6 +84,7 @@ namespace LAN_Caro
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ptbPlay).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ptbLoading).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ptbPausePlaceholderImage).BeginInit();
             SuspendLayout();
             // 
             // pnTable
@@ -99,7 +101,7 @@ namespace LAN_Caro
             // 
             // pnPause2
             // 
-            pnPause2.BackColor = Color.FromArgb(180, 0, 0, 0);
+            pnPause2.BackColor = Color.Transparent;
             pnPause2.Controls.Add(lbMenu);
             pnPause2.Controls.Add(lbChangeTurn);
             pnPause2.Controls.Add(lbResume);
@@ -112,7 +114,7 @@ namespace LAN_Caro
             pnPause2.Controls.Add(rtbLog);
             pnPause2.Controls.Add(lbLeaveMatch);
             pnPause2.Controls.Add(lbExit);
-            pnPause2.Location = new Point(2000, 0);
+            pnPause2.Location = new Point(-1000, 0);
             pnPause2.Margin = new Padding(2);
             pnPause2.Name = "pnPause2";
             pnPause2.Size = new Size(832, 630);
@@ -137,8 +139,8 @@ namespace LAN_Caro
             // 
             lbChangeTurn.AutoSize = true;
             lbChangeTurn.BackColor = Color.Transparent;
-            lbChangeTurn.ForeColor = Color.White;
-            lbChangeTurn.Location = new Point(286, 382);
+            lbChangeTurn.ForeColor = Color.Black;
+            lbChangeTurn.Location = new Point(317, 382);
             lbChangeTurn.Margin = new Padding(2, 0, 2, 0);
             lbChangeTurn.Name = "lbChangeTurn";
             lbChangeTurn.Size = new Size(183, 20);
@@ -151,7 +153,7 @@ namespace LAN_Caro
             // 
             lbResume.AutoSize = true;
             lbResume.BackColor = Color.Transparent;
-            lbResume.ForeColor = Color.White;
+            lbResume.ForeColor = Color.Black;
             lbResume.Location = new Point(77, 189);
             lbResume.Margin = new Padding(2, 0, 2, 0);
             lbResume.Name = "lbResume";
@@ -164,7 +166,7 @@ namespace LAN_Caro
             // 
             lbRandom.AutoSize = true;
             lbRandom.BackColor = Color.Transparent;
-            lbRandom.ForeColor = Color.White;
+            lbRandom.ForeColor = Color.Black;
             lbRandom.Location = new Point(317, 328);
             lbRandom.Margin = new Padding(2, 0, 2, 0);
             lbRandom.Name = "lbRandom";
@@ -178,7 +180,7 @@ namespace LAN_Caro
             // 
             lbOptions.AutoSize = true;
             lbOptions.BackColor = Color.Transparent;
-            lbOptions.ForeColor = Color.White;
+            lbOptions.ForeColor = Color.Black;
             lbOptions.Location = new Point(77, 245);
             lbOptions.Margin = new Padding(2, 0, 2, 0);
             lbOptions.Name = "lbOptions";
@@ -191,7 +193,7 @@ namespace LAN_Caro
             // 
             lbPause.AutoSize = true;
             lbPause.BackColor = Color.Transparent;
-            lbPause.ForeColor = Color.White;
+            lbPause.ForeColor = Color.Black;
             lbPause.Location = new Point(317, 270);
             lbPause.Margin = new Padding(2, 0, 2, 0);
             lbPause.Name = "lbPause";
@@ -205,7 +207,7 @@ namespace LAN_Caro
             // 
             lbSettings.AutoSize = true;
             lbSettings.BackColor = Color.Transparent;
-            lbSettings.ForeColor = Color.White;
+            lbSettings.ForeColor = Color.Black;
             lbSettings.Location = new Point(77, 301);
             lbSettings.Margin = new Padding(2, 0, 2, 0);
             lbSettings.Name = "lbSettings";
@@ -218,7 +220,7 @@ namespace LAN_Caro
             // 
             lbRestart.AutoSize = true;
             lbRestart.BackColor = Color.Transparent;
-            lbRestart.ForeColor = Color.White;
+            lbRestart.ForeColor = Color.Black;
             lbRestart.Location = new Point(317, 214);
             lbRestart.Margin = new Padding(2, 0, 2, 0);
             lbRestart.Name = "lbRestart";
@@ -233,7 +235,7 @@ namespace LAN_Caro
             // 
             lbMatchLog.AutoSize = true;
             lbMatchLog.BackColor = Color.Transparent;
-            lbMatchLog.ForeColor = Color.White;
+            lbMatchLog.ForeColor = Color.Black;
             lbMatchLog.Location = new Point(77, 357);
             lbMatchLog.Margin = new Padding(2, 0, 2, 0);
             lbMatchLog.Name = "lbMatchLog";
@@ -244,15 +246,15 @@ namespace LAN_Caro
             // 
             // rtbLog
             // 
-            rtbLog.BackColor = Color.FromArgb(70, 71, 74);
+            rtbLog.BackColor = Color.FromArgb(237, 241, 250);
             rtbLog.BorderStyle = BorderStyle.None;
             rtbLog.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             rtbLog.ForeColor = Color.Transparent;
-            rtbLog.Location = new Point(317, 31);
+            rtbLog.Location = new Point(317, 63);
             rtbLog.Margin = new Padding(2);
             rtbLog.Name = "rtbLog";
             rtbLog.ReadOnly = true;
-            rtbLog.Size = new Size(768, 544);
+            rtbLog.Size = new Size(800, 523);
             rtbLog.TabIndex = 13;
             rtbLog.Text = "";
             rtbLog.Visible = false;
@@ -547,7 +549,7 @@ namespace LAN_Caro
             // 
             pictureBox3.BackColor = Color.Transparent;
             pictureBox3.BackgroundImageLayout = ImageLayout.None;
-            pictureBox3.Image = Properties.Resources.xd;
+            pictureBox3.Image = Properties.Resources.x;
             pictureBox3.Location = new Point(255, 382);
             pictureBox3.Margin = new Padding(2);
             pictureBox3.Name = "pictureBox3";
@@ -560,7 +562,7 @@ namespace LAN_Caro
             // 
             pictureBox4.BackColor = Color.Transparent;
             pictureBox4.BackgroundImageLayout = ImageLayout.None;
-            pictureBox4.Image = Properties.Resources.od;
+            pictureBox4.Image = Properties.Resources.o;
             pictureBox4.Location = new Point(254, 214);
             pictureBox4.Margin = new Padding(2);
             pictureBox4.Name = "pictureBox4";
@@ -640,6 +642,7 @@ namespace LAN_Caro
             // 
             // ptbLoading
             // 
+            ptbLoading.BackgroundImage = Properties.Resources.PausePanel;
             ptbLoading.Image = Properties.Resources.game;
             ptbLoading.Location = new Point(576, -63);
             ptbLoading.Margin = new Padding(2);
@@ -649,6 +652,17 @@ namespace LAN_Caro
             ptbLoading.TabStop = false;
             ptbLoading.Visible = false;
             // 
+            // ptbPausePlaceholderImage
+            // 
+            ptbPausePlaceholderImage.Image = Properties.Resources.Picsart_23_06_07_08_41_09_453;
+            ptbPausePlaceholderImage.Location = new Point(591, -23);
+            ptbPausePlaceholderImage.Name = "ptbPausePlaceholderImage";
+            ptbPausePlaceholderImage.Size = new Size(10, 10);
+            ptbPausePlaceholderImage.SizeMode = PictureBoxSizeMode.StretchImage;
+            ptbPausePlaceholderImage.TabIndex = 45;
+            ptbPausePlaceholderImage.TabStop = false;
+            ptbPausePlaceholderImage.Visible = false;
+            // 
             // Caro
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -657,6 +671,7 @@ namespace LAN_Caro
             BackgroundImage = Properties.Resources.Picsart_23_06_07_08_41_09_453;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1184, 630);
+            Controls.Add(ptbPausePlaceholderImage);
             Controls.Add(ptbLoading);
             Controls.Add(ptbPlay);
             Controls.Add(pnPause2);
@@ -697,6 +712,7 @@ namespace LAN_Caro
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)ptbPlay).EndInit();
             ((System.ComponentModel.ISupportInitialize)ptbLoading).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ptbPausePlaceholderImage).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -710,7 +726,6 @@ namespace LAN_Caro
         private PictureBox imgTurn;
         private Addon_Custom_Button btShowPausePanel;
         private RichTextBox rtbLog;
-        private Panel pnPause2;
         private Addon_Custom_Button btShowPausePanelLabel;
         private CustomLabel lbExit;
         private CustomLabel lbLeaveMatch;
@@ -756,5 +771,7 @@ namespace LAN_Caro
         private Label label3;
         private PictureBox ptbPlay;
         private PictureBox ptbLoading;
+        private PictureBox ptbPausePlaceholderImage;
+        private Addon_Transparent_Panel pnPause2;
     }
 }

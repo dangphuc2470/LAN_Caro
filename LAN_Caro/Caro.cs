@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Net.NetworkInformation;
 using System.Reflection.Emit;
@@ -16,6 +17,8 @@ namespace LAN_Caro
         ToolTip toolTip1;
         public int remainingTimeInSeconds;
         bool isPause = false;
+        public Color PausePanelLabelColor = Color.Black;
+        public Color PausePanelLabelColorHover = ColorTranslator.FromHtml("#F1A400");
         public Caro()
         {
             CheckForIllegalCrossThreadCalls = false;
@@ -38,13 +41,13 @@ namespace LAN_Caro
                 else if (label.Name == "lbMenu")
                 {
                     label.UseCustomFont("Arbuz.ttf", 40, FontStyle.Bold);
-                    label.ForeColor = Color.White;
+                    label.ForeColor = PausePanelLabelColorHover;
                     continue;
                 }
                 label.MouseEnter += PauseLabel_MouseEnter;
                 label.MouseLeave += PauseLabel_MouseLeave;
                 label.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
-                label.ForeColor = Color.Silver;
+                label.ForeColor = PausePanelLabelColor;
                 label.Tag = "0";
             }
 
@@ -91,21 +94,32 @@ namespace LAN_Caro
 
             if (pnPause2.Tag.ToString() == "0" && tableManager.button_IsLoading == false)
             {
+                ptbPausePlaceholderImage.Image = Properties.Resources.Picsart_23_06_07_08_41_09_453;
+                ptbPausePlaceholderImage.Size = new Size(this.Width, this.Height);
+                ptbPausePlaceholderImage.Location = new Point(0, 0);
+                ptbPausePlaceholderImage.Visible = true;
                 //ptbPlay.Dock = DockStyle.Fill;
                 //ptbPlay.Location = new Point(0, 0);
                 //ptbPlay.Visible = true;
 
                 //HideLoadingImage();
                 //tableManager.DarkColor();
-                pnPause2.Dock = DockStyle.Right;
+
+
+                //pnPause2.Dock = DockStyle.Fill;
                 //pnPause1.Size = new Size(this.Width, 788);
-                pnPause2.Size = new Size(this.Width, 788);
+                pnPause2.Size = new Size(this.Width, this.Height);
+                pnPause2.Location = new Point(0, 0);
+                pnPause2.Parent = ptbPausePlaceholderImage;
+                //MessageBox.Show("asd");
                 pnPause2.Visible = true;
+                pnPause2.BringToFront();
                 pnPause2.Tag = "1";
-                ResetColor(lbResume);
+                //ResetColor(lbResume);
             }
             else
             {
+
                 Resume();
             }
         }
@@ -123,14 +137,14 @@ namespace LAN_Caro
         private void PauseLabel_MouseEnter(object sender, EventArgs e)
         {
             CustomLabel label = (CustomLabel)sender;
-            label.ForeColor = Color.White;
+            label.ForeColor = PausePanelLabelColorHover;
         }
 
         private void PauseLabel_MouseLeave(object sender, EventArgs e)
         {
             CustomLabel label = (CustomLabel)sender;
             if (label.Tag == "0")
-                label.ForeColor = Color.Silver;
+                label.ForeColor = PausePanelLabelColor;
         }
 
 
@@ -141,11 +155,19 @@ namespace LAN_Caro
 
         private void Resume()
         {
+
             ResetColor();
             pnPause2.Visible = false;
             pnPause2.Tag = "0";
             ResetVisible();
-            tableManager.ResetColor();
+            Task.Run(() =>
+            {
+                ptbPausePlaceholderImage.Image = Properties.Resources.Picsart_23_06_07_08_41_09_453;
+                System.Threading.Thread.Sleep(10);
+                ptbPausePlaceholderImage.Visible = false;
+            });
+
+            //tableManager.ResetColor();
 
         }
 
@@ -167,6 +189,7 @@ namespace LAN_Caro
         {
             ResetVisible();
             ResetColor(lbMatchLog);
+            rtbLog.Parent = ptbPausePlaceholderImage;
             rtbLog.Visible = true;
         }
 
@@ -183,7 +206,7 @@ namespace LAN_Caro
 
         private void lbExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            System.Windows.Forms.Application.Exit();
         }
 
         /// <summary>
@@ -196,11 +219,11 @@ namespace LAN_Caro
             {
                 if (label.Name == "lbMenu")
                     continue;
-                label.ForeColor = Color.Silver;
+                label.ForeColor = PausePanelLabelColor;
                 label.Tag = "0";
                 if (thisLabel != null && thisLabel.Name != "lbResume")
                 {
-                    thisLabel.ForeColor = Color.White;
+                    thisLabel.ForeColor = PausePanelLabelColorHover;
                     thisLabel.Tag = "1";
                 }
             }
@@ -279,7 +302,7 @@ namespace LAN_Caro
         private void btReady_MouseHover(object sender, EventArgs e)
         {
             if (btReady.Tag.ToString() == "0")
-                toolTip1.Show("The other party is not ready at the moment or there is a connection problem...", btReady);
+                toolTip1.Show("The other player is not ready at the moment, or there is a connection problem.", btReady);
         }
 
         private void pnPause_VisibleChanged(object sender, EventArgs e)
@@ -300,13 +323,13 @@ namespace LAN_Caro
                     else if (label.Name == "lbMenu")
                     {
                         label.UseCustomFont("Arbuz.ttf", 40, FontStyle.Bold);
-                        label.ForeColor = Color.White;
+                        label.ForeColor = PausePanelLabelColorHover;
                         continue;
                     }
                     label.MouseEnter += PauseLabel_MouseEnter;
                     label.MouseLeave += PauseLabel_MouseLeave;
                     label.UseCustomFont("UI.ttf", 25, FontStyle.Bold);
-                    label.ForeColor = Color.Silver;
+                    label.ForeColor = PausePanelLabelColor;
                     label.Tag = "0";
                 }
                 lbTimer.BackColor = Color.Transparent;

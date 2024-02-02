@@ -54,8 +54,8 @@ namespace LAN_Caro
             this.remainingTimeInSeconds = remainingTimeInSeconds;
             PlayerList = new List<Player>()
             {
-                new Player("server", Properties.Resources.xd, Properties.Resources.xd),
-                new Player("client", Properties.Resources.od, Properties.Resources.od),
+                new Player("server", Properties.Resources.x, Properties.Resources.xd),
+                new Player("client", Properties.Resources.o, Properties.Resources.od),
             };
             isClientTurn = 0;
             this.timer = timer2;
@@ -149,6 +149,7 @@ namespace LAN_Caro
                 }));
 
                 isEndGame = true;
+                MessageBox.Show("Game over! Press ESC and choose OPTION to restart!");
             });
             
         }
@@ -187,6 +188,7 @@ namespace LAN_Caro
                 }));
 
                 isEndGame = true;
+                MessageBox.Show("Game over! Press ESC and choose OPTION to restart!");
 
             });
         }
@@ -460,50 +462,50 @@ namespace LAN_Caro
             return true;
         }
 
-        /// <summary>
-        /// Hiển thị màu button tối hơn (Hiển thị khi pnPause xuất hiện)
-        /// </summary>
-        /// <returns></returns>
-        public void DarkColor()
-        {
-            button_IsLoading = true;
-            for (int x = 0; x < TABLE_WIDTH; x++)
-            {
-                for (int y = 0; y < TABLE_HEIGHT; y++)
-                {
-                    buttonList[y][x].FlatAppearance.BorderColor = Color.FromArgb(69, 69, 69);
-                    buttonList[y][x].BackColor = backColorDark;
-                    if (buttonList[y][x].Image == PlayerList[1].Image)
-                        buttonList[y][x].Image = PlayerList[1].DarkImage;
-                    else if (buttonList[y][x].Image == PlayerList[0].Image)
-                        buttonList[y][x].Image = PlayerList[0].DarkImage;
+        ///// <summary>
+        ///// Hiển thị màu button tối hơn (Hiển thị khi pnPause xuất hiện)
+        ///// </summary>
+        ///// <returns></returns>
+        //public void DarkColor()
+        //{
+        //    button_IsLoading = true;
+        //    for (int x = 0; x < TABLE_WIDTH; x++)
+        //    {
+        //        for (int y = 0; y < TABLE_HEIGHT; y++)
+        //        {
+        //            buttonList[y][x].FlatAppearance.BorderColor = Color.FromArgb(69, 69, 69);
+        //            buttonList[y][x].BackColor = backColorDark;
+        //            if (buttonList[y][x].Image == PlayerList[1].Image)
+        //                buttonList[y][x].Image = PlayerList[1].DarkImage;
+        //            else if (buttonList[y][x].Image == PlayerList[0].Image)
+        //                buttonList[y][x].Image = PlayerList[0].DarkImage;
 
 
-                }
-            }
-            button_IsLoading = false;
-        }
+        //        }
+        //    }
+        //    button_IsLoading = false;
+        //}
 
-        /// <summary>
-        /// Đặt lại màu cho button ô cờ tuần tự (dùng khi resume)
-        /// </summary>
-        public void ResetColor()
-        {
-            button_IsLoading = true;
-            for (int x = 0; x < TABLE_WIDTH; x++)
-            {
-                for (int y = 0; y < TABLE_HEIGHT; y++)
-                {
-                    buttonList[y][x].FlatAppearance.BorderColor = Color.Silver;
-                    buttonList[y][x].BackColor = backColorNormal;  //Cần trùng màu với Update Color
-                    if (buttonList[y][x].Image == PlayerList[1].DarkImage)
-                        buttonList[y][x].Image = PlayerList[1].Image;
-                    else if (buttonList[y][x].Image == PlayerList[0].DarkImage)
-                        buttonList[y][x].Image = PlayerList[0].Image;
-                }
-            }
-            button_IsLoading = false;
-        }
+        ///// <summary>
+        ///// Đặt lại màu cho button ô cờ tuần tự (dùng khi resume)
+        ///// </summary>
+        //public void ResetColor()
+        //{
+        //    button_IsLoading = true;
+        //    for (int x = 0; x < TABLE_WIDTH; x++)
+        //    {
+        //        for (int y = 0; y < TABLE_HEIGHT; y++)
+        //        {
+        //            buttonList[y][x].FlatAppearance.BorderColor = Color.Silver;
+        //            buttonList[y][x].BackColor = backColorNormal;  //Cần trùng màu với Update Color
+        //            if (buttonList[y][x].Image == PlayerList[1].DarkImage)
+        //                buttonList[y][x].Image = PlayerList[1].Image;
+        //            else if (buttonList[y][x].Image == PlayerList[0].DarkImage)
+        //                buttonList[y][x].Image = PlayerList[0].Image;
+        //        }
+        //    }
+        //    button_IsLoading = false;
+        //}
 
         /// <summary>
         /// Reset bàn cờ
