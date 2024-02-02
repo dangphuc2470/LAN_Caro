@@ -1,6 +1,6 @@
 # LAN Caro Game (WinForm) | UIT - NT106.N21 Project - 05/2023
 
-This is a LAN Caro game implemented using WinForm, a graphical user interface framework provided by Microsoft for creating Windows desktop applications. The LAN Caro game allows two players to compete against each other over a local area network (LAN) or play against a computer-controlled bot in single-player mode.
+This is an implementation of the classic Caro (Gomoku) game using WinForm, a graphical user interface framework provided by Microsoft for creating Windows desktop applications. The LAN Caro game enables two players to compete against each other over a local area network (LAN) or play against a computer-controlled bot in single-player mode.
 
 ## Features
 - Bot opponent: Play against a computer-controlled bot.
